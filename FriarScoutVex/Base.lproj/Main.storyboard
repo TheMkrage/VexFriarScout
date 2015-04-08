@@ -102,6 +102,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Log In" id="Oiz-gy-HpC"/>
+                    <connections>
+                        <outlet property="passwordTextField" destination="lQs-NM-OxD" id="rv2-ta-HQf"/>
+                        <outlet property="usernameTextField" destination="jPt-Im-aR0" id="2S8-vh-qfr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,11 +158,21 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3R2-oz-lyC" customClass="AKPickerView" customModule="FriarScoutVex" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="54" width="584" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bn9-Ix-S1K"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="3R2-oz-lyC" firstAttribute="top" secondItem="ytg-s7-2Ev" secondAttribute="top" constant="54" id="HOg-rd-ebh"/>
                                     <constraint firstItem="0PA-a4-l8K" firstAttribute="top" secondItem="ytg-s7-2Ev" secondAttribute="topMargin" id="ITc-sN-Erx"/>
                                     <constraint firstItem="0PA-a4-l8K" firstAttribute="centerX" secondItem="ytg-s7-2Ev" secondAttribute="centerX" id="Q0m-ac-QQU"/>
+                                    <constraint firstAttribute="centerX" secondItem="3R2-oz-lyC" secondAttribute="centerX" id="T9Q-pO-xGz"/>
                                     <constraint firstAttribute="trailing" secondItem="0PA-a4-l8K" secondAttribute="trailing" constant="267" id="X3f-n4-Wds"/>
+                                    <constraint firstAttribute="trailing" secondItem="3R2-oz-lyC" secondAttribute="trailing" constant="8" id="aow-Zo-ED5"/>
                                     <constraint firstAttribute="bottom" secondItem="0PA-a4-l8K" secondAttribute="bottom" constant="507" id="sBM-VE-YBb"/>
                                 </constraints>
                             </scrollView>
@@ -173,6 +187,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="pickerView" destination="3R2-oz-lyC" id="cj4-gq-NZA"/>
                         <outlet property="scrollView" destination="ytg-s7-2Ev" id="N4D-2O-BSX"/>
                     </connections>
                 </viewController>
