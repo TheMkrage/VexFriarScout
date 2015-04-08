@@ -13,6 +13,9 @@
 		7EC81E441AD30078008F0639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E431AD30078008F0639 /* Images.xcassets */; };
 		7EC81E471AD30078008F0639 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E451AD30078008F0639 /* LaunchScreen.xib */; };
 		7EC81E531AD30078008F0639 /* FriarScoutVexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E521AD30078008F0639 /* FriarScoutVexTests.swift */; };
+		7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
+		7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
+		7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,8 @@
 		7EC81E4C1AD30078008F0639 /* FriarScoutVexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FriarScoutVexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E511AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC81E521AD30078008F0639 /* FriarScoutVexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriarScoutVexTests.swift; sourceTree = "<group>"; };
+		7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
+		7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,7 @@
 		7EC81E2E1AD30078008F0639 = {
 			isa = PBXGroup;
 			children = (
+				7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */,
 				7EC81E391AD30078008F0639 /* FriarScoutVex */,
 				7EC81E4F1AD30078008F0639 /* FriarScoutVexTests */,
 				7EC81E381AD30078008F0639 /* Products */,
@@ -79,6 +85,7 @@
 			children = (
 				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
 				7EC81E3E1AD30078008F0639 /* ViewController.swift */,
+				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
 				7EC81E401AD30078008F0639 /* Main.storyboard */,
 				7EC81E431AD30078008F0639 /* Images.xcassets */,
 				7EC81E451AD30078008F0639 /* LaunchScreen.xib */,
@@ -194,6 +201,7 @@
 			files = (
 				7EC81E421AD30078008F0639 /* Main.storyboard in Resources */,
 				7EC81E471AD30078008F0639 /* LaunchScreen.xib in Resources */,
+				7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */,
 				7EC81E441AD30078008F0639 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC81E3F1AD30078008F0639 /* ViewController.swift in Sources */,
+				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
