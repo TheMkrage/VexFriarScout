@@ -11,6 +11,7 @@
             <string>BebasNeue</string>
             <string>BebasNeue</string>
             <string>BebasNeue</string>
+            <string>BebasNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -224,9 +225,20 @@
                                             <action selector="registerButton:" destination="KH2-MF-pmi" eventType="touchUpInside" id="ST3-Bk-dxe"/>
                                         </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-uR-r8H">
+                                        <rect key="frame" x="8" y="383" width="584" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="oyh-Gd-mUK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="gS1-Yw-sKw" firstAttribute="top" secondItem="cQe-Qi-VKr" secondAttribute="bottom" constant="17" id="E9R-ov-1BC"/>
+                                    <constraint firstItem="aSZ-uR-r8H" firstAttribute="centerX" secondItem="vaf-U3-jp1" secondAttribute="centerX" id="Egu-nA-5dD"/>
+                                    <constraint firstItem="aSZ-uR-r8H" firstAttribute="top" secondItem="vaf-U3-jp1" secondAttribute="bottom" constant="8" symbolic="YES" id="OtA-M3-sVt"/>
                                     <constraint firstItem="1l0-aP-hvx" firstAttribute="leading" secondItem="7TR-jM-Cjy" secondAttribute="leading" id="RrQ-wb-zbm"/>
                                     <constraint firstAttribute="trailing" secondItem="7TR-jM-Cjy" secondAttribute="trailing" constant="186" id="SCl-tb-u8u"/>
                                     <constraint firstItem="aaN-37-Sek" firstAttribute="leading" secondItem="ytg-s7-2Ev" secondAttribute="leading" constant="221" id="SxZ-UZ-cre"/>
@@ -246,6 +258,7 @@
                                     <constraint firstItem="cQe-Qi-VKr" firstAttribute="trailing" secondItem="xrx-ms-MAM" secondAttribute="trailing" id="s7T-Oo-3Oe"/>
                                     <constraint firstItem="vaf-U3-jp1" firstAttribute="top" secondItem="aaN-37-Sek" secondAttribute="bottom" constant="20" id="uEj-Mj-n0D"/>
                                     <constraint firstItem="cQe-Qi-VKr" firstAttribute="top" secondItem="xrx-ms-MAM" secondAttribute="bottom" constant="22" id="wGy-J0-otd"/>
+                                    <constraint firstItem="aSZ-uR-r8H" firstAttribute="leading" secondItem="ytg-s7-2Ev" secondAttribute="leadingMargin" id="zYK-Gm-LOM"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -260,6 +273,7 @@
                     </view>
                     <connections>
                         <outlet property="eMailTextField" destination="xrx-ms-MAM" id="yAR-z6-0Fg"/>
+                        <outlet property="errorLabel" destination="aSZ-uR-r8H" id="X3a-Ff-j7z"/>
                         <outlet property="firstNameTextField" destination="7TR-jM-Cjy" id="1tF-0h-GlX"/>
                         <outlet property="lastNameTextField" destination="1l0-aP-hvx" id="JSb-hN-veV"/>
                         <outlet property="passwordTextField" destination="cQe-Qi-VKr" id="MRB-kL-OMQ"/>

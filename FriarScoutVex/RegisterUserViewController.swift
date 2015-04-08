@@ -18,6 +18,7 @@ class RegisterUserViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var reEnterPasswordTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
+    @IBOutlet var errorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
@@ -29,7 +30,14 @@ class RegisterUserViewController: UIViewController {
     @IBAction func registerButton(sender: UIButton) {
         //make sure passwords match
         if(self.passwordTextField.text != self.reEnterPasswordTextField.text) {
+            self.errorLabel.text = "PASSWORDS DO NOT MATCH!"
+            self.errorLabel.hidden = false;
             println("NOPE")
+            return
+        //checks if any fields are blank
+        }else if(self.firstNameTextField.text.isEmpty || self.lastNameTextField.text.isEmpty || self.eMailTextField.text.isEmpty || self.passwordTextField.text.isEmpty || self.teamTextField.text.isEmpty) {
+            self.errorLabel.text = "A FIELD WAS LEFT BLANK!"
+            self.errorLabel.hidden = false;
             return
         }
         
@@ -37,7 +45,23 @@ class RegisterUserViewController: UIViewController {
         ref.createUser(self.eMailTextField.text, password: self.passwordTextField.text, withCompletionBlock: { (error: NSError!) -> Void in
             if error != nil {
                 println(error.description)
-                // Something went wrong. :(
+                if let errorCode = FAuthenticationError(rawValue: error.code) {
+                    switch (errorCode) {
+                    case .InvalidEmail:
+                        self.errorLabel.text = "INVALID EMAIL!"
+                        self.errorLabel.hidden = false;
+                    case .InvalidPassword:
+                        self.errorLabel.text = "INVALID PASSOWRD!"
+                        self.errorLabel.hidden = false;
+                    case .EmailTaken:
+                        self.errorLabel.text = "Email is Taken!"
+                        self.errorLabel.hidden = false;
+                        
+                    default:
+                        self.errorLabel.text = "UNKNOWN ERROR!"
+                        self.errorLabel.hidden = false;
+                    }
+                }
             } else {
                 // Create a new user dictionary accessing the user's info
                 // provided by the authData parameter
