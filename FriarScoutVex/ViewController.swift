@@ -19,18 +19,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //set the title to BebasNeue
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
         
+        //set the delegates
         self.usernameTextField.delegate = self;
         self.passwordTextField.delegate = self;
+        
+        //set password field to password characters
+        self.passwordTextField.secureTextEntry = true;
     }
+    
+    //when the user taps whitespace, close all keyboards
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true);
     }
+    @IBAction func loginButton(sender: UIButton) {
+        
+        var ref = Firebase(url:"https://docs-examples.firebaseio.com/")
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    //when the user hits the return key, close all keyboards
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         self.view.endEditing(true)
         return false

@@ -9,51 +9,58 @@
 import UIKit
 
 
-class RegisterUserViewController: UIViewController, AKPickerViewDataSource, AKPickerViewDelegate {
+class RegisterUserViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
-    
-    @IBOutlet var pickerView: AKPickerView!
-    
-    let titles = ["Tokyo", "Kanagawa", "Osaka", "Aichi", "Saitama", "Chiba", "Hyogo", "Hokkaido", "Fukuoka", "Shizuoka"]
-    
-
-
+    //All the Text Fields
+    @IBOutlet var firstNameTextField: UITextField!
+    @IBOutlet var teamTextField: UITextField!
+    @IBOutlet var eMailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var reEnterPasswordTextField: UITextField!
+    @IBOutlet var lastNameTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
         
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
-        
-        self.pickerView.font = UIFont(name: "BebasNeue", size: 20)!
-        self.pickerView.highlightedFont = UIFont(name: "BebasNeue", size: 20)!
-        self.pickerView.interitemSpacing = 20.0
-        self.pickerView.pickerViewStyle = .Flat
-        self.pickerView.reloadData()
-
+        //set title
+        self.title = "Register"
     }
+    
+    @IBAction func registerButton(sender: UIButton) {
+        //make sure passwords match
+        if(self.passwordTextField.text != self.reEnterPasswordTextField.text) {
+            println("NOPE")
+            return
+        }
+        
+        let ref = Firebase(url: "https://vexscoutaccounts.firebaseio.com/")
+        ref.createUser(self.eMailTextField.text, password: self.passwordTextField.text, withCompletionBlock: { (error: NSError!) -> Void in
+            if error != nil {
+                println(error.description)
+                // Something went wrong. :(
+            } else {
+                // Create a new user dictionary accessing the user's info
+                // provided by the authData parameter
+                let newUser = [
+                    "first name" : self.firstNameTextField.text,
+                    "last name" : self.lastNameTextField.text,
+                    "team" :self.teamTextField.text,
+                    "email": self.eMailTextField.text
+                ]
+                // Create a child path with a key set to the uid underneath the "users" node
+                ref.childByAppendingPath("users")
+                    .childByAppendingPath("\(self.firstNameTextField.text) \(self.lastNameTextField.text)").setValue(newUser)
+            }
+
+        });
+        
+        
+    }
+    
 
     override func viewDidLayoutSubviews() {
         self.scrollView.contentSize.height = 1000;
         self.scrollView.contentSize.width = self.view.frame.size.width;
 
-    }
-    
-   
-    
-    // MARK: - AKPickerViewDataSource
-    
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.titles.count
-    }
-    
-    /*
-    Image Support
-    -------------
-    Please comment '-pickerView:titleForItem:' entirely and
-    uncomment '-pickerView:imageForItem:' to see how it works.
-    */
-    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> NSString {
-        return self.titles[item]
     }
 }
