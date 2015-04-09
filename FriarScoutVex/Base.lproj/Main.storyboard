@@ -12,6 +12,10 @@
             <string>BebasNeue</string>
             <string>BebasNeue</string>
             <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -140,12 +144,88 @@
                     <view key="view" contentMode="scaleToFill" id="LqT-SX-0Sh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-Sc-JjP">
+                                <rect key="frame" x="209" y="83" width="182" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="182" id="6qh-aH-9wO"/>
+                                    <constraint firstAttribute="height" constant="44" id="nBS-Eg-ghF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="Match Scout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
+                                <rect key="frame" x="209" y="135" width="182" height="51"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="Pit Scout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cE-7S-qDY">
+                                <rect key="frame" x="209" y="194" width="182" height="51"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="Team List">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="lSf-ve-X7J" kind="show" id="C8D-cF-UL2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-up-UIy">
+                                <rect key="frame" x="209" y="253" width="182" height="51"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="Competition List">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="B0u-Qk-OXI"/>
+                            <constraint firstAttribute="centerX" secondItem="nlK-rz-tSC" secondAttribute="centerX" id="Jt8-VI-PGe"/>
+                            <constraint firstAttribute="centerX" secondItem="0cE-7S-qDY" secondAttribute="centerX" id="MdG-74-zZs"/>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="8" symbolic="YES" id="N6w-uF-SL8"/>
+                            <constraint firstItem="nlK-rz-tSC" firstAttribute="top" secondItem="Efl-Sc-JjP" secondAttribute="bottom" constant="8" symbolic="YES" id="Oix-G5-71W"/>
+                            <constraint firstAttribute="centerX" secondItem="Efl-Sc-JjP" secondAttribute="centerX" id="VyX-xR-DJz"/>
+                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="WzZ-Na-5eU"/>
+                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="top" secondItem="5mA-kj-eNn" secondAttribute="bottom" constant="63" id="bEO-Um-cZN"/>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="leading" secondItem="nGc-up-UIy" secondAttribute="leading" id="gx7-ec-PeS"/>
+                            <constraint firstAttribute="centerX" secondItem="nGc-up-UIy" secondAttribute="centerX" id="p7h-WR-zQs"/>
+                            <constraint firstItem="nGc-up-UIy" firstAttribute="top" secondItem="0cE-7S-qDY" secondAttribute="bottom" constant="8" symbolic="YES" id="vhu-5J-imW"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcr-lV-fvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1881" y="-159"/>
+        </scene>
+        <!--Team List Table View Controller-->
+        <scene sceneID="LQx-ho-w0y">
+            <objects>
+                <tableViewController id="lSf-ve-X7J" customClass="TeamListTableViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="PFC-f5-0dd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamList" rowHeight="62" id="fs4-0O-agh">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fs4-0O-agh" id="JbW-IA-0rl">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lSf-ve-X7J" id="Xp1-dC-sfL"/>
+                            <outlet property="delegate" destination="lSf-ve-X7J" id="HV2-k3-BCj"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPx-es-Ngw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2402" y="530"/>
         </scene>
         <!--Register User View Controller-->
         <scene sceneID="Jc8-Lb-VAO">
