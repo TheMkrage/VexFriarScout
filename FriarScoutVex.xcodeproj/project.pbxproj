@@ -14,6 +14,7 @@
 		7EC2991F1AD5927800A7E008 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2991E1AD5927800A7E008 /* CFNetwork.framework */; };
 		7EC299211AD5928300A7E008 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299201AD5928300A7E008 /* Security.framework */; };
 		7EC299231AD5928D00A7E008 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299221AD5928D00A7E008 /* SystemConfiguration.framework */; };
+		7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */; };
 		7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3C1AD30078008F0639 /* AppDelegate.swift */; };
 		7EC81E3F1AD30078008F0639 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3E1AD30078008F0639 /* ViewController.swift */; };
 		7EC81E421AD30078008F0639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E401AD30078008F0639 /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		7EC299201AD5928300A7E008 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7EC299221AD5928D00A7E008 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7EC299241AD592D500A7E008 /* FriarScoutVex-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FriarScoutVex-Bridging-Header.h"; sourceTree = "<group>"; };
+		7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		7EC81E371AD30078008F0639 /* FriarScoutVex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriarScoutVex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E3B1AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC81E3C1AD30078008F0639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
 				7EC81E3E1AD30078008F0639 /* ViewController.swift */,
 				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
+				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EC81E401AD30078008F0639 /* Main.storyboard */,
 				7EC81E431AD30078008F0639 /* Images.xcassets */,
 				7EC81E451AD30078008F0639 /* LaunchScreen.xib */,
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC81E3F1AD30078008F0639 /* ViewController.swift in Sources */,
+				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
 				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
 				7EC299171AD5888E00A7E008 /* AKPickerView.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
