@@ -38,6 +38,8 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextField.delegate = self
         self.reEnterPasswordTextField.delegate = self
         self.teamTextField.delegate = self
+        // Keyboard for Email
+        self.eMailTextField.keyboardType = UIKeyboardType.EmailAddress
         // Set Buttons to next and done instead of return
         self.firstNameTextField.returnKeyType = .Next
         self.lastNameTextField.returnKeyType = .Next
@@ -111,7 +113,7 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
                         ref.childByAppendingPath("users")
                             .childByAppendingPath(authData.uid).setValue(newUser)
                         // Create the MainMenuViewController that is about to be shown
-                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MainMenu") as MainMenuViewController
+                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MainMenu") as! MainMenuViewController
                         // Set the title of the menuViewController
                         vc.title = "HELLO \(self.firstNameTextField.text)"
                         // Present Main Menu
@@ -128,7 +130,7 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
     }
     
     // When the user taps whitespace, close all keyboards
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true);
     }
     
@@ -139,7 +141,7 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
     // if password -> reenter password
     // if reenter -> team
     // if team -> creatAndAuth()
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField.isEqual(self.firstNameTextField) {
             self.lastNameTextField.becomeFirstResponder()
         } else if textField.isEqual(self.lastNameTextField) {

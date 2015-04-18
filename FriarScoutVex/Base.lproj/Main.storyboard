@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ihU-0x-zpf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ihU-0x-zpf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -145,26 +145,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-Sc-JjP">
-                                <rect key="frame" x="209" y="83" width="182" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="182" id="6qh-aH-9wO"/>
-                                    <constraint firstAttribute="height" constant="44" id="nBS-Eg-ghF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
-                                <state key="normal" title="Match Scout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
-                                <rect key="frame" x="209" y="135" width="182" height="51"/>
+                                <rect key="frame" x="209" y="142" width="182" height="51"/>
                                 <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
-                                <state key="normal" title="Pit Scout">
+                                <state key="normal" title="My Team">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cE-7S-qDY">
-                                <rect key="frame" x="209" y="194" width="182" height="51"/>
+                                <rect key="frame" x="209" y="201" width="182" height="51"/>
                                 <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
                                 <state key="normal" title="Team List">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -174,26 +163,36 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-up-UIy">
-                                <rect key="frame" x="209" y="253" width="182" height="51"/>
+                                <rect key="frame" x="209" y="260" width="182" height="51"/>
                                 <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
                                 <state key="normal" title="Competition List">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-Sc-JjP">
+                                <rect key="frame" x="209" y="83" width="182" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="182" id="SW0-sg-lfW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="Top">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0cE-7S-qDY" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="B0u-Qk-OXI"/>
-                            <constraint firstAttribute="centerX" secondItem="nlK-rz-tSC" secondAttribute="centerX" id="Jt8-VI-PGe"/>
-                            <constraint firstAttribute="centerX" secondItem="0cE-7S-qDY" secondAttribute="centerX" id="MdG-74-zZs"/>
-                            <constraint firstItem="0cE-7S-qDY" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="8" symbolic="YES" id="N6w-uF-SL8"/>
-                            <constraint firstItem="nlK-rz-tSC" firstAttribute="top" secondItem="Efl-Sc-JjP" secondAttribute="bottom" constant="8" symbolic="YES" id="Oix-G5-71W"/>
-                            <constraint firstAttribute="centerX" secondItem="Efl-Sc-JjP" secondAttribute="centerX" id="VyX-xR-DJz"/>
-                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="WzZ-Na-5eU"/>
-                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="top" secondItem="5mA-kj-eNn" secondAttribute="bottom" constant="63" id="bEO-Um-cZN"/>
-                            <constraint firstItem="0cE-7S-qDY" firstAttribute="leading" secondItem="nGc-up-UIy" secondAttribute="leading" id="gx7-ec-PeS"/>
-                            <constraint firstAttribute="centerX" secondItem="nGc-up-UIy" secondAttribute="centerX" id="p7h-WR-zQs"/>
-                            <constraint firstItem="nGc-up-UIy" firstAttribute="top" secondItem="0cE-7S-qDY" secondAttribute="bottom" constant="8" symbolic="YES" id="vhu-5J-imW"/>
+                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="4VE-VW-Tzq"/>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="trailing" secondItem="nlK-rz-tSC" secondAttribute="trailing" id="8HA-Ga-RAc"/>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="8" symbolic="YES" id="GeT-oX-516"/>
+                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="trailing" secondItem="nlK-rz-tSC" secondAttribute="trailing" id="HCQ-mV-5zS"/>
+                            <constraint firstItem="Efl-Sc-JjP" firstAttribute="top" secondItem="5mA-kj-eNn" secondAttribute="bottom" constant="63" id="I9s-Uy-RrM"/>
+                            <constraint firstItem="nGc-up-UIy" firstAttribute="top" secondItem="0cE-7S-qDY" secondAttribute="bottom" constant="8" symbolic="YES" id="OdD-zM-SBd"/>
+                            <constraint firstItem="0cE-7S-qDY" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="leading" id="Pdv-pu-YfC"/>
+                            <constraint firstItem="nGc-up-UIy" firstAttribute="centerX" secondItem="LqT-SX-0Sh" secondAttribute="centerX" id="V2q-9e-KOy"/>
+                            <constraint firstItem="nGc-up-UIy" firstAttribute="leading" secondItem="0cE-7S-qDY" secondAttribute="leading" id="YoU-wx-72O"/>
+                            <constraint firstItem="nGc-up-UIy" firstAttribute="trailing" secondItem="0cE-7S-qDY" secondAttribute="trailing" id="c9H-Fq-TnH"/>
+                            <constraint firstItem="nlK-rz-tSC" firstAttribute="top" secondItem="Efl-Sc-JjP" secondAttribute="bottom" constant="8" symbolic="YES" id="wuQ-Ma-d5K"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -226,6 +225,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPx-es-Ngw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2402" y="530"/>
+        </scene>
+        <!--Competitions-->
+        <scene sceneID="Nii-i8-jL0">
+            <objects>
+                <viewController id="nQt-oB-jmd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dme-fM-Q2D"/>
+                        <viewControllerLayoutGuide type="bottom" id="c2n-1E-0gX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o66-uV-pdg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Competitions" id="JM2-VF-7OU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eDx-9Y-ggv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3971" y="861"/>
+        </scene>
+        <!--Overview-->
+        <scene sceneID="hHD-aq-aC6">
+            <objects>
+                <viewController id="Iay-C7-7Vt" customClass="TeamProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rfE-OO-grD"/>
+                        <viewControllerLayoutGuide type="bottom" id="pXE-hS-66M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ObS-rH-9iK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-WE-6iI">
+                                <rect key="frame" x="82" y="232" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Overview" id="xgj-Yl-XM8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSQ-Qa-fwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3972" y="199"/>
         </scene>
         <!--Register User View Controller-->
         <scene sceneID="Jc8-Lb-VAO">

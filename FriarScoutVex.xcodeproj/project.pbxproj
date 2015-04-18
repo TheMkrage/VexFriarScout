@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EC299171AD5888E00A7E008 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC299161AD5888E00A7E008 /* AKPickerView.swift */; };
+		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299181AD5920200A7E008 /* Firebase.framework */; };
 		7EC2991B1AD5925500A7E008 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2991A1AD5925500A7E008 /* libc++.dylib */; };
 		7EC2991D1AD5926E00A7E008 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2991C1AD5926E00A7E008 /* libicucore.dylib */; };
@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7EC299161AD5888E00A7E008 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
+		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EC299181AD5920200A7E008 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7EC2991A1AD5925500A7E008 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7EC2991C1AD5926E00A7E008 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -120,6 +120,7 @@
 				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */,
+				7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */,
 				7EC81E401AD30078008F0639 /* Main.storyboard */,
 				7EC81E431AD30078008F0639 /* Images.xcassets */,
 				7EC81E451AD30078008F0639 /* LaunchScreen.xib */,
@@ -131,7 +132,6 @@
 		7EC81E3A1AD30078008F0639 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7EC299161AD5888E00A7E008 /* AKPickerView.swift */,
 				7EC81E3B1AD30078008F0639 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,7 +260,7 @@
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
-				7EC299171AD5888E00A7E008 /* AKPickerView.swift in Sources */,
+				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,11 +385,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FriarScoutVex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,11 +405,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FriarScoutVex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
