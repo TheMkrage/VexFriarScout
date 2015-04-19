@@ -221,56 +221,39 @@
                             <outlet property="delegate" destination="lSf-ve-X7J" id="HV2-k3-BCj"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="Mr9-0N-bVb" id="PBh-em-TO1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPx-es-Ngw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Mr9-0N-bVb">
+                    <connections>
+                        <outlet property="delegate" destination="lSf-ve-X7J" id="GIH-JN-slk"/>
+                        <outlet property="searchContentsController" destination="lSf-ve-X7J" id="Teo-Dy-74l"/>
+                        <outlet property="searchResultsDataSource" destination="lSf-ve-X7J" id="TGQ-ub-8WU"/>
+                        <outlet property="searchResultsDelegate" destination="lSf-ve-X7J" id="sV5-UK-lj5"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2402" y="530"/>
         </scene>
-        <!--Competitions-->
-        <scene sceneID="Nii-i8-jL0">
+        <!--Team Profile View Controller-->
+        <scene sceneID="4vz-Bg-ktl">
             <objects>
-                <viewController id="nQt-oB-jmd" sceneMemberID="viewController">
+                <viewController id="2Wd-Tk-oDG" customClass="TeamProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dme-fM-Q2D"/>
-                        <viewControllerLayoutGuide type="bottom" id="c2n-1E-0gX"/>
+                        <viewControllerLayoutGuide type="top" id="dxY-yp-ld3"/>
+                        <viewControllerLayoutGuide type="bottom" id="LTV-l6-xyP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="o66-uV-pdg">
+                    <view key="view" contentMode="scaleToFill" id="hSW-uF-fUh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Competitions" id="JM2-VF-7OU"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eDx-9Y-ggv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gr-Lc-M72" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3971" y="861"/>
-        </scene>
-        <!--Overview-->
-        <scene sceneID="hHD-aq-aC6">
-            <objects>
-                <viewController id="Iay-C7-7Vt" customClass="TeamProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rfE-OO-grD"/>
-                        <viewControllerLayoutGuide type="bottom" id="pXE-hS-66M"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ObS-rH-9iK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxj-WE-6iI">
-                                <rect key="frame" x="82" y="232" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Overview" id="xgj-Yl-XM8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CSQ-Qa-fwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3972" y="199"/>
+            <point key="canvasLocation" x="3173" y="530"/>
         </scene>
         <!--Register User View Controller-->
         <scene sceneID="Jc8-Lb-VAO">
