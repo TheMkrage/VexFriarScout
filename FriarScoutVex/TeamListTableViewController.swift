@@ -17,11 +17,14 @@ class TeamListTableViewController: UITableViewController, UITableViewDataSource,
         var unsortedTeams = NSMutableArray()
         // Connect and order by key to place in array
         let ref = Firebase(url: "https://vexscout.firebaseio.com/teams")
+        println("Starting Search")
         // Add all the values to an array
-        ref.queryLimitedToFirst(50).observeEventType(.ChildAdded, withBlock: { snapshot -> Void in
+        ref.queryStartingAtValue("101").queryEndingAtValue("101~").observeEventType(.ChildAdded, withBlock: { snapshot -> Void in
             self.teams.addObject(snapshot.key as NSString)
             self.tableView.reloadData()
             println("adding \(snapshot.key)");
+            }, withCancelBlock: { error in
+                println(error.description)
         })
     }
     
@@ -77,7 +80,7 @@ class TeamListTableViewController: UITableViewController, UITableViewDataSource,
         let ref = Firebase(url: "https://vexscout.firebaseio.com/teams")
         // Add all the values to an array
         self.teams = NSMutableArray();
-        var lim = UInt(searchText.toInt()!)
+        var lim = UInt(2)
         ref.queryLimitedToFirst(lim).observeEventType(.ChildAdded, withBlock: { snapshot -> Void in
             self.teams.addObject(snapshot.key as NSString)
             self.tableView.reloadData()
