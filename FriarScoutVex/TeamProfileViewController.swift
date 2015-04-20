@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamProfileViewController: UIViewController /*UITableViewDataSource, UITableViewDelegate */{
+class TeamProfileViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var competitionsTable: UITableView!
 
     var competitions: NSMutableArray!
@@ -21,7 +21,8 @@ class TeamProfileViewController: UIViewController /*UITableViewDataSource, UITab
             let enumerator = snapshot.children
             while let rest = enumerator.nextObject() as? FDataSnapshot {
             println(rest.value["name"])
-                self.competitions.addObject(rest.value["name"])
+                self.competitions.addObject(rest.value["name"]as! String)
+                self.competitionsTable.reloadData()
             }
         
         })
@@ -29,8 +30,9 @@ class TeamProfileViewController: UIViewController /*UITableViewDataSource, UITab
     override func viewDidLoad() {
         
         //set delegates and datasources
-        //self.competitionsTable.delegate = self
-        //self.competitionsTable.dataSource = self
+        self.competitionsTable.delegate = self
+        self.competitionsTable.dataSource = self
+        
     }
     
     //TABLE STUFF
@@ -38,11 +40,14 @@ class TeamProfileViewController: UIViewController /*UITableViewDataSource, UITab
         return 1
     }
     
-    /*func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(teams != nil) {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !(self.competitions != nil) {
             return 0
         }
         return competitions.count
+    }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Competitions"
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -52,19 +57,19 @@ class TeamProfileViewController: UIViewController /*UITableViewDataSource, UITab
         
         // Creates cell and sets title to team num
         var cell = UITableViewCell()
-        cell.textLabel?.text = self.teams.objectAtIndex(indexPath.row) as? String
+        cell.textLabel?.text = self.competitions.objectAtIndex(indexPath.row) as? String
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfileTab") as! UITabBarController
+        /*let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfileTab") as! UITabBarController
         // Set the title of the menuViewController
         vc.title = "HELLO \(sorted.objectAtIndex(indexPath.row))"
         // Destintation ViewController, set team
         let dest: TeamProfileViewController = vc.viewControllers?.first as! TeamProfileViewController
         dest.team = sorted.objectAtIndex(indexPath.row)as! String
         // Present Profile
-        self.showViewController(vc as UITabBarController, sender: vc)
-    }*/
+        self.showViewController(vc as UITabBarController, sender: vc)*/
+    }
 
 }
