@@ -12,22 +12,32 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     @IBOutlet var competitionsTable: UITableView!
 
     var competitions: NSMutableArray!
+    var dates: NSMutableArray!
+    var loc: NSMutableArray!
+    
     var team: NSString! = ""
     override func viewWillAppear(animated: Bool) {
-        competitions = NSMutableArray();
+        competitions = NSMutableArray()
+        self.dates = NSMutableArray()
+        self.loc = NSMutableArray()
         let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team)/comps")
         ref.observeSingleEventOfType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
             println("Begin!")
             let enumerator = snapshot.children
             while let rest = enumerator.nextObject() as? FDataSnapshot {
-            println(rest.value["name"])
-                self.competitions.addObject(rest.value["name"]as! String)
-                self.competitionsTable.reloadData()
+            println(rest.value["date"])
+                
+            self.competitions.addObject(rest.value["name"]as! String)
+            self.dates.addObject(rest.value["date"]as! String)
+        self.loc.addObject(rest.value["loc"]as! String)
+                
+            self.competitionsTable.reloadData()
             }
         
         })
     }
     override func viewDidLoad() {
+        
         
         //set delegates and datasources
         self.competitionsTable.delegate = self
@@ -56,8 +66,11 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
         //sorted = self.sortArray(teams)
         
         // Creates cell and sets title to team num
-        var cell = UITableViewCell()
-        cell.textLabel?.text = self.competitions.objectAtIndex(indexPath.row) as? String
+        var cell = tableView.dequeueReusableCellWithIdentifier("CompetitionCell") as! CompetitionTableCell
+        cell.nameLabel.text = self.competitions.objectAtIndex(indexPath.row) as? String
+         cell.dateLabel.text = self.dates.objectAtIndex(indexPath.row) as? String
+         cell.LocationLabel.text = self.loc.objectAtIndex(indexPath.row)as? String
+        
         return cell
     }
     

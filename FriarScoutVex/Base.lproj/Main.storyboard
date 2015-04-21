@@ -16,6 +16,8 @@
             <string>BebasNeue</string>
             <string>BebasNeue</string>
             <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -227,19 +229,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeX-AC-y8w">
-                                <rect key="frame" x="0.0" y="378" width="600" height="222"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Nqa-Jr-BoR">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nqa-Jr-BoR" id="JIJ-eU-EYb">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIF-bv-RuG">
                                 <rect key="frame" x="16" y="28" width="63" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -252,28 +241,73 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competitions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oB3-UI-HBB">
-                                <rect key="frame" x="249" y="349" width="103" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOn-5c-8Pv">
+                                <rect key="frame" x="236" y="127" width="128" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="MAz-W6-V52"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="26"/>
+                                <state key="normal" title="More Stats">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MXb-U4-ynn" kind="show" id="zwJ-fM-ISj"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeX-AC-y8w">
+                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompetitionCell" rowHeight="67" id="Nqa-Jr-BoR" customClass="CompetitionTableCell" customModule="FriarScoutVex" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nqa-Jr-BoR" id="JIJ-eU-EYb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015 VEX Robotics World Championship High School Division Presented by The Northrop Grumman Foundation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDQ-8Y-9Pc">
+                                                    <rect key="frame" x="8" y="0.0" width="724" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4/20/15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu1-04-CWC">
+                                                    <rect key="frame" x="8" y="29" width="197" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Compton, California" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9T-aL-RjQ">
+                                                    <rect key="frame" x="213" y="29" width="311" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="LocationLabel" destination="h9T-aL-RjQ" id="ksx-zi-uQ9"/>
+                                            <outlet property="dateLabel" destination="cu1-04-CWC" id="1yW-KC-bMU"/>
+                                            <outlet property="nameLabel" destination="hDQ-8Y-9Pc" id="Btd-uh-3EU"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IeX-AC-y8w" firstAttribute="top" secondItem="oB3-UI-HBB" secondAttribute="bottom" constant="8" symbolic="YES" id="0Vk-KV-ZB2"/>
-                            <constraint firstAttribute="trailing" secondItem="IeX-AC-y8w" secondAttribute="trailing" id="7za-Wk-fEC"/>
-                            <constraint firstItem="ZLg-cP-EJS" firstAttribute="centerX" secondItem="vIF-bv-RuG" secondAttribute="centerX" id="95R-5L-WmL"/>
-                            <constraint firstItem="IeX-AC-y8w" firstAttribute="centerX" secondItem="oB3-UI-HBB" secondAttribute="centerX" id="IRP-XP-9sS"/>
-                            <constraint firstItem="IeX-AC-y8w" firstAttribute="bottom" secondItem="LTV-l6-xyP" secondAttribute="top" id="Lab-be-f2e"/>
-                            <constraint firstItem="ZLg-cP-EJS" firstAttribute="top" secondItem="vIF-bv-RuG" secondAttribute="bottom" constant="8" symbolic="YES" id="Og5-Dn-f1b"/>
-                            <constraint firstItem="vIF-bv-RuG" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="8" symbolic="YES" id="a68-HD-h4X"/>
-                            <constraint firstItem="vIF-bv-RuG" firstAttribute="leading" secondItem="hSW-uF-fUh" secondAttribute="leadingMargin" id="k8S-3b-h3Q"/>
-                            <constraint firstItem="oB3-UI-HBB" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="329" id="mJD-bg-B1C"/>
-                            <constraint firstItem="IeX-AC-y8w" firstAttribute="leading" secondItem="hSW-uF-fUh" secondAttribute="leading" id="y5F-Xd-IsQ"/>
-                            <constraint firstAttribute="centerX" secondItem="IeX-AC-y8w" secondAttribute="centerX" id="yy2-Ky-a2Y"/>
+                            <constraint firstItem="IeX-AC-y8w" firstAttribute="top" secondItem="vOn-5c-8Pv" secondAttribute="bottom" constant="17" id="0QG-GJ-v9C"/>
+                            <constraint firstItem="IeX-AC-y8w" firstAttribute="bottom" secondItem="LTV-l6-xyP" secondAttribute="top" id="149-6O-Xqm"/>
+                            <constraint firstItem="ZLg-cP-EJS" firstAttribute="top" secondItem="vIF-bv-RuG" secondAttribute="bottom" constant="8" symbolic="YES" id="6zJ-uF-Abo"/>
+                            <constraint firstItem="vIF-bv-RuG" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="8" symbolic="YES" id="Lh8-Fo-Vmi"/>
+                            <constraint firstItem="IeX-AC-y8w" firstAttribute="centerX" secondItem="vOn-5c-8Pv" secondAttribute="centerX" id="Vi2-Yn-8u9"/>
+                            <constraint firstAttribute="trailing" secondItem="IeX-AC-y8w" secondAttribute="trailing" id="ZV4-bj-CNc"/>
+                            <constraint firstItem="IeX-AC-y8w" firstAttribute="leading" secondItem="hSW-uF-fUh" secondAttribute="leading" id="h6I-9m-TPe"/>
+                            <constraint firstItem="vOn-5c-8Pv" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="107" id="uAZ-AW-wLt"/>
+                            <constraint firstItem="vIF-bv-RuG" firstAttribute="centerX" secondItem="ZLg-cP-EJS" secondAttribute="centerX" id="vMj-Z7-fpj"/>
+                            <constraint firstItem="vIF-bv-RuG" firstAttribute="leading" secondItem="hSW-uF-fUh" secondAttribute="leadingMargin" id="xkP-ll-dHa"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="competitionsTable" destination="IeX-AC-y8w" id="4wT-Gd-tLS"/>
                     </connections>
@@ -281,6 +315,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gr-Lc-M72" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2515" y="485"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zzq-Vp-r4U">
+            <objects>
+                <viewController id="MXb-U4-ynn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yVP-L1-gND"/>
+                        <viewControllerLayoutGuide type="bottom" id="rAU-0k-pNX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eW2-Kd-k2K">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gyQ-cF-nFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3199" y="485"/>
         </scene>
         <!--Register User View Controller-->
         <scene sceneID="Jc8-Lb-VAO">
