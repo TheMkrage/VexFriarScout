@@ -16,7 +16,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var errorLabel: UILabel!
     // Check Box used to remember login info
-    @IBOutlet var rememberMeCheckBox: UIButton!
+    @IBOutlet var rememberMeCheckBox: UICheckBoxButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         // Return -> Done or Next
         self.usernameTextField.returnKeyType = UIReturnKeyType.Next
         self.passwordTextField.returnKeyType = UIReturnKeyType.Done
+        // Check For RememberMe
+        retrieveRememberMeValues()
+    }
+    
+    func retrieveRememberMeValues() {
+        // If there is a valid string value in username (this assumes password is the same) then set those string to the fields
+        /*if (NSUserDefaults.valueForKey("username") != nil) {
+            self.usernameTextField.text = NSUserDefaults.valueForKey("username") as! String
+            self.passwordTextField.text = NSUserDefaults.valueForKey("password") as! String
+           self.rememberMeCheckBox.setTicked()
+        }*/
     }
     
     // When the user taps whitespace, close all keyboards
@@ -54,6 +65,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 self.errorLabel.hidden = false;
                 return
             }
+            // If there is an error
             if error != nil {
                 if let errorCode = FAuthenticationError(rawValue: error.code) {
                     switch (errorCode) {
@@ -84,8 +96,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         } // End of auth
     }// End of login
     
-    // End all editing and clear fields when view is left
+    // Check if Remember Me is checked and save/delete values accordingly. Then, end all editing and clear fields when view is left
     override func viewWillDisappear(animated: Bool) {
+        // If CheckBox isChecked, save values for username and password, if not save blank strings
+        if self.rememberMeCheckBox.isChecked {
+            NSUserDefaults.setValue(self.usernameTextField.text, forKey: "username")
+            NSUserDefaults.setValue(self.passwordTextField.text, forKey: "password")
+            // Figure out how to synchronize plz and how to make warnings
+        }else {
+            NSUserDefaults.setValue("", forKey: "username")
+            NSUserDefaults.setValue("", forKey: "password")
+        }
         self.view.endEditing(true)
         self.clearAllFields()
     }

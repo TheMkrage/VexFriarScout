@@ -28,6 +28,8 @@
 		7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
 		7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
 		7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */; };
+		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
+		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		7EC81E521AD30078008F0639 /* FriarScoutVexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriarScoutVexTests.swift; sourceTree = "<group>"; };
 		7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
 		7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
+		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
+		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
+				7EE78C961AED791F001ED13F /* More Stats */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
 				7EBFFB8D1AED66CB003597FE /* Login */,
 			);
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */,
+				7EE78C941AED789B001ED13F /* MatchTableCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -187,9 +193,10 @@
 				7EBFFB8C1AED66BA003597FE /* ViewControllers */,
 				7EBFFB8F1AED671C003597FE /* TableCells */,
 				7EBFFB911AED6750003597FE /* Interface */,
+				7EBFFB921AED68A1003597FE /* Views */,
+				7EE78C971AED7FE4001ED13F /* Model */,
 				7EBFFB901AED673A003597FE /* Depracated */,
 				7EC81E3A1AD30078008F0639 /* Supporting Files */,
-				7EBFFB921AED68A1003597FE /* Views */,
 			);
 			path = FriarScoutVex;
 			sourceTree = "<group>";
@@ -217,6 +224,21 @@
 				7EC81E511AD30078008F0639 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EE78C961AED791F001ED13F /* More Stats */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "More Stats";
+			sourceTree = "<group>";
+		};
+		7EE78C971AED7FE4001ED13F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7EE78C981AED7FF8001ED13F /* Match.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,7 +349,9 @@
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
+				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,
 				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
+				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
 				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
 			);

@@ -15,11 +15,25 @@ class UICheckBoxButton: UIButton {
     // Bool to return if the checkbox should be checked or not
     var isChecked: Bool = false
     
+    
+    func setTicked() {
+        isChecked = true
+        update()
+    }
+    
+    func setUnticked() {
+        isChecked = false
+        update()
+    }
+    
     func toggle() {
         isChecked = !isChecked
         update()
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        toggle()
+    }
     // Sets isChecked to the visual checkbox
     func update() {
         if isChecked {
