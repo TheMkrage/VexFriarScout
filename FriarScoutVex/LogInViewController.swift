@@ -15,15 +15,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var errorLabel: UILabel!
+    // Check Box used to remember login info
+    @IBOutlet var rememberMeCheckBox: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the title to BebasNeue (it is now set for good)
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
+         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
         // Set the delegates
         self.usernameTextField.delegate = self
         self.passwordTextField.delegate = self
-        //email keyboard
+        // Email keyboard
         self.usernameTextField.keyboardType = UIKeyboardType.EmailAddress
         // Set password field to password characters
         self.passwordTextField.secureTextEntry = true
@@ -82,6 +84,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         } // End of auth
     }// End of login
     
+    // End all editing and clear fields when view is left
     override func viewWillDisappear(animated: Bool) {
         self.view.endEditing(true)
         self.clearAllFields()

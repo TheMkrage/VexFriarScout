@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */; };
+		7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */; };
 		7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */; };
 		7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299181AD5920200A7E008 /* Firebase.framework */; };
 		7EC2991B1AD5925500A7E008 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2991A1AD5925500A7E008 /* libc++.dylib */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
+		7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICheckBoxButton.swift; sourceTree = "<group>"; };
 		7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionForTeamProfile.swift; sourceTree = "<group>"; };
 		7EC299181AD5920200A7E008 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7EC2991A1AD5925500A7E008 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -90,6 +92,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EBFFB8C1AED66BA003597FE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
+				7EBFFB8E1AED66EF003597FE /* Profiles */,
+				7EBFFB8D1AED66CB003597FE /* Login */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7EBFFB8D1AED66CB003597FE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7EC81E3E1AD30078008F0639 /* LogInViewController.swift */,
+				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		7EBFFB8E1AED66EF003597FE /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */,
+				7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */,
+			);
+			name = Profiles;
+			sourceTree = "<group>";
+		};
+		7EBFFB8F1AED671C003597FE /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */,
+			);
+			name = TableCells;
+			sourceTree = "<group>";
+		};
+		7EBFFB901AED673A003597FE /* Depracated */ = {
+			isa = PBXGroup;
+			children = (
+				7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */,
+			);
+			name = Depracated;
+			sourceTree = "<group>";
+		};
+		7EBFFB911AED6750003597FE /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7EC81E401AD30078008F0639 /* Main.storyboard */,
+				7EC81E431AD30078008F0639 /* Images.xcassets */,
+				7EC81E451AD30078008F0639 /* LaunchScreen.xib */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		7EBFFB921AED68A1003597FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		7EC81E2E1AD30078008F0639 = {
 			isa = PBXGroup;
 			children = (
@@ -98,8 +162,8 @@
 				7EC2991E1AD5927800A7E008 /* CFNetwork.framework */,
 				7EC2991C1AD5926E00A7E008 /* libicucore.dylib */,
 				7EC2991A1AD5925500A7E008 /* libc++.dylib */,
-				7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */,
 				7EC299181AD5920200A7E008 /* Firebase.framework */,
+				7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */,
 				7EC81E391AD30078008F0639 /* FriarScoutVex */,
 				7EC81E4F1AD30078008F0639 /* FriarScoutVexTests */,
 				7EC81E381AD30078008F0639 /* Products */,
@@ -120,17 +184,12 @@
 			isa = PBXGroup;
 			children = (
 				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
-				7EC81E3E1AD30078008F0639 /* LogInViewController.swift */,
-				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
-				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
-				7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */,
-				7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */,
-				7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */,
-				7EC81E401AD30078008F0639 /* Main.storyboard */,
-				7EC81E431AD30078008F0639 /* Images.xcassets */,
-				7EC81E451AD30078008F0639 /* LaunchScreen.xib */,
+				7EBFFB8C1AED66BA003597FE /* ViewControllers */,
+				7EBFFB8F1AED671C003597FE /* TableCells */,
+				7EBFFB911AED6750003597FE /* Interface */,
+				7EBFFB901AED673A003597FE /* Depracated */,
 				7EC81E3A1AD30078008F0639 /* Supporting Files */,
-				7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */,
+				7EBFFB921AED68A1003597FE /* Views */,
 			);
 			path = FriarScoutVex;
 			sourceTree = "<group>";
@@ -265,6 +324,7 @@
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */,
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
+				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
 				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
