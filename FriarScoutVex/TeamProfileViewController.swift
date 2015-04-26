@@ -51,6 +51,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // In case competitions
         if !(self.competitions != nil) {
             return 0
         }
@@ -75,14 +76,14 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfileTab") as! UITabBarController
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
         // Set the title of the menuViewController
-        vc.title = "HELLO \(sorted.objectAtIndex(indexPath.row))"
+        vc.title = "\(competitions.objectAtIndex(indexPath.row))"
         // Destintation ViewController, set team
-        let dest: TeamProfileViewController = vc.viewControllers?.first as! TeamProfileViewController
-        dest.team = sorted.objectAtIndex(indexPath.row)as! String
+        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
+        dest.competition = competitions.objectAtIndex(indexPath.row)as! String
         // Present Profile
-        self.showViewController(vc as UITabBarController, sender: vc)*/
+        self.showViewController(vc as UIViewController, sender: vc)
     }
 
 }

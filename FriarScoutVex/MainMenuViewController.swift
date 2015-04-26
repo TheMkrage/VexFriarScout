@@ -19,6 +19,11 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
         self.moveToTeamProfile(self.TeamTextField.text)
     }
     
+    // End editing if user taps off textfield
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
     func moveToTeamProfile(team: String!) {
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! TeamProfileViewController

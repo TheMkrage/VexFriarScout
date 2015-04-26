@@ -9,7 +9,7 @@
 import UIKit
 
 // Login screen viewcontroller
-class ViewController: UIViewController, UITextFieldDelegate {
+class LogInViewController: UIViewController, UITextFieldDelegate {
     
     // TextFields and Label used to display errors
     @IBOutlet var passwordTextField: UITextField!
