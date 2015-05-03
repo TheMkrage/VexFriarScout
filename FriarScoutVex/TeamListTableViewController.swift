@@ -5,7 +5,7 @@
 //  Created by Matthew Krager on 4/8/15.
 //  Copyright (c) 2015 Matthew Krager. All rights reserved.
 //
-
+/*
 import UIKit
 
 class TeamListTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
@@ -114,4 +114,4 @@ class TeamListTableViewController: UITableViewController, UITableViewDataSource,
         println(sortedArray)
         return sortedArray
     }
-}
+}*/

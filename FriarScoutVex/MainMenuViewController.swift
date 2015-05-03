@@ -27,7 +27,9 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
     func moveToTeamProfile(team: String!) {
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! TeamProfileViewController
-        vc.team = self.TeamTextField.text
+        var team: Team! = Team()
+        team.num = self.TeamTextField.text
+        vc.team = team
         // Set the title of the menuViewController
         vc.title = "Team \(self.TeamTextField.text)"
         // Present Main Menu

@@ -15,12 +15,12 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     var dates: NSMutableArray!
     var loc: NSMutableArray!
     
-    var team: NSString! = ""
+    var team: Team! = Team()
     override func viewWillAppear(animated: Bool) {
         competitions = NSMutableArray()
         self.dates = NSMutableArray()
         self.loc = NSMutableArray()
-        let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team)/comps")
+        let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps")
         ref.observeSingleEventOfType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
             println("Begin!")
             let enumerator = snapshot.children
@@ -76,12 +76,16 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompetitionProfile") as! CompetitionForTeamProfile
         // Set the title of the menuViewController
         vc.title = "\(competitions.objectAtIndex(indexPath.row))"
         // Destintation ViewController, set team
-        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
-        dest.competition = competitions.objectAtIndex(indexPath.row)as! String
+        var comp:Competition! = Competition()
+        comp.name = competitions.objectAtIndex(indexPath.row) as! String
+        var t: Team! = Team()
+        team.num = self.title
+        vc.team = team
+        vc.competition = comp
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
     }

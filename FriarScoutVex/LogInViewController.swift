@@ -38,11 +38,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     func retrieveRememberMeValues() {
         // If there is a valid string value in username (this assumes password is the same) then set those string to the fields
-        /*if (NSUserDefaults.valueForKey("username") != nil) {
-            self.usernameTextField.text = NSUserDefaults.valueForKey("username") as! String
-            self.passwordTextField.text = NSUserDefaults.valueForKey("password") as! String
-           self.rememberMeCheckBox.setTicked()
-        }*/
+        if (NSUserDefaults.standardUserDefaults().stringForKey("username") != nil) {
+            self.usernameTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("username")
+            self.passwordTextField.text = NSUserDefaults.standardUserDefaults().stringForKey("password")
+            if self.usernameTextField.text.isEmpty {
+                self.rememberMeCheckBox.setUnticked()
+            }else {
+                self.rememberMeCheckBox.setTicked()
+            }
+        }
     }
     
     // When the user taps whitespace, close all keyboards
@@ -100,12 +104,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewWillDisappear(animated: Bool) {
         // If CheckBox isChecked, save values for username and password, if not save blank strings
         if self.rememberMeCheckBox.isChecked {
-            NSUserDefaults.setValue(self.usernameTextField.text, forKey: "username")
-            NSUserDefaults.setValue(self.passwordTextField.text, forKey: "password")
+            NSUserDefaults.standardUserDefaults().setObject(self.usernameTextField.text, forKey: "username")
+            NSUserDefaults.standardUserDefaults().setObject(self.passwordTextField.text, forKey: "password")
             // Figure out how to synchronize plz and how to make warnings
         }else {
-            NSUserDefaults.setValue("", forKey: "username")
-            NSUserDefaults.setValue("", forKey: "password")
+            NSUserDefaults.standardUserDefaults().setObject("", forKey: "username")
+            NSUserDefaults.standardUserDefaults().setObject("", forKey: "password")
         }
         self.view.endEditing(true)
         self.clearAllFields()

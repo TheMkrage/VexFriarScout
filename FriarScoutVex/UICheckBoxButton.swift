@@ -10,8 +10,8 @@ import UIKit
 
 class UICheckBoxButton: UIButton {
     // Two hexadecimal values used for a blank square (unticked) and a checked square (ticked)
-    let tickedString: String! = "u2611"
-    let untickedString: String! = "u2610"
+    let tickedString: String! = "\u{2611}"
+    let untickedString: String! = "\u{2610}"
     // Bool to return if the checkbox should be checked or not
     var isChecked: Bool = false
     
