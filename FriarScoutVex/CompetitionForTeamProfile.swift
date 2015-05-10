@@ -14,12 +14,21 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     var matches: NSMutableArray!
     @IBOutlet var matchesTable: UITableView!
     
+    @IBOutlet var averageLabel: UILabel!
+    @IBOutlet var lowestScoreLabel: UILabel!
+    @IBOutlet var highestScoreLabel: UILabel!
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
         matches = comp.matches
         println(matches)
         self.matchesTable.reloadData()
+        self.highestScoreLabel.text = "\(comp.highestScore)"
+        self.lowestScoreLabel.text = "\(comp.lowestScore)"
+        if comp.matchCount != 0 {
+            self.averageLabel.text = "\(comp.sumOfMatches/comp.matchCount)"
+        }
+       
         /*let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps/\(competition.name)/matches")
         ref.queryOrderedByValue().observeEventType(.ChildAdded, withBlock: { (snapshot :FDataSnapshot!) -> Void in
             println("here:\(snapshot)")

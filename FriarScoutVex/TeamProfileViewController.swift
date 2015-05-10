@@ -15,6 +15,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     var highestScore: NSInteger = 0
     var matchCount: NSInteger = 0
     var sumOfMatches: NSInteger = 0
+    var lowestScore: NSInteger = 100000000
     @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
     var team: Team! = Team()
@@ -50,7 +51,6 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                         
                         while let rest2 = enum2.nextObject() as? FDataSnapshot {
                             var m: Match = Match()
-                            println(rest2.value)
                             m.red1 = rest2.value["rteam 0"] as! String
                             m.red2 = rest2.value["rteam 1"] as! String
                             if let y = rest2.value["rteam 2"]   as? String {
@@ -69,23 +69,59 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                             m.blueScore = "\(y)"
                             
                             if m.colorTeamIsOn(self.team.num).isEqualToString("red") {
-                                self.sumOfMatches += rest2.value["rscore"] as! Int
+                                let score:Int =  rest2.value["rscore"] as! Int
+                                self.sumOfMatches += score
+                                comp.sumOfMatches += score
+                                println("score \(score)")
                                 if m.redScore.toInt() > self.highestScore {
                                     self.highestScore = m.redScore.toInt()!
+                                }else if m.redScore.toInt() < self.lowestScore {
+                                    self.lowestScore = m.redScore.toInt()!
+                                }
+                                
+                                if m.redScore.toInt() > comp.highestScore {
+                                    comp.highestScore = m.redScore.toInt()!
+                                }else if m.redScore.toInt() < comp.lowestScore {
+                                    comp.lowestScore = m.redScore.toInt()!
                                 }
                             }else if m.colorTeamIsOn(self.team.num).isEqualToString("blue") {
-                                self.sumOfMatches += rest2.value["bscore"] as! Int
+                                let score:Int = rest2.value["bscore"] as! Int
+                                self.sumOfMatches += score
+                                comp.sumOfMatches += score
+                                println("score:\(score)")
+                                // Once For Team
                                 if m.blueScore.toInt() > self.highestScore {
                                     self.highestScore = m.blueScore.toInt()!
                                 }
+                                if m.blueScore.toInt() < self.lowestScore {
+                                    self.lowestScore = m.blueScore.toInt()!
+                                }
+                                
+                                // And Once For Comp
+                                if m.blueScore.toInt() > comp.highestScore {
+                                    comp.highestScore = m.blueScore.toInt()!
+                                }
+                                if m.blueScore.toInt() < comp.lowestScore {
+                                    comp.lowestScore = m.blueScore.toInt()!
+                                }
+                            }else {
+                                println("ERROR")
                             }
+                            comp.matchCount++
+                            println(comp.name)
+                            println(comp.matchCount)
+                            println(comp.sumOfMatches)
                             self.matchCount++
                             comp.matches.addObject(m)
                         }
                     }
                     self.competitions.addObject(comp)
                     self.highestScoreLabel.text = "\(self.highestScore)"
-                    self.averageLabel.text = "\(self.sumOfMatches/self.matchCount)"
+                    self.lowScoreLabel.text = "\(self.lowestScore)"
+                    if  self.matchCount != 0 {
+                        let x = "\(self.sumOfMatches/self.matchCount)"
+                        self.averageLabel.text = x;
+                    }
                     self.competitionsTable.reloadData()
                     
                     
