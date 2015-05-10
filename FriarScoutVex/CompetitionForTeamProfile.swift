@@ -9,7 +9,7 @@
 import UIKit
 
 class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var competition: Competition!
+    var comp: Competition!
     var team: Team!
     var matches: NSMutableArray!
     @IBOutlet var matchesTable: UITableView!
@@ -17,8 +17,10 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
-        matches = NSMutableArray()
-        let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps/\(competition.name)/matches")
+        matches = comp.matches
+        println(matches)
+        self.matchesTable.reloadData()
+        /*let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps/\(competition.name)/matches")
         ref.queryOrderedByValue().observeEventType(.ChildAdded, withBlock: { (snapshot :FDataSnapshot!) -> Void in
             println("here:\(snapshot)")
             var m: Match = Match()
@@ -40,7 +42,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
             m.blueScore = "\(y)"
             self.matches.addObject(m)
             self.matchesTable.reloadData()
-        })
+        })*/
     }
     
     
@@ -57,7 +59,9 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
         
+        
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
+        println("hdgs\(m)")
         cell.matchNameLabel.text = m.name
         cell.redTeam1Label.text = m.red1
         cell.redTeam2Label.text = m.red2

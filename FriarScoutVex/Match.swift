@@ -19,4 +19,12 @@ class Match: NSObject {
     var redScore: String = ""
     var blueScore: String = ""
     
+    func colorTeamIsOn(team: String!) -> NSString! {
+        if team == red1 || team == red2 || team == red3 {
+            return "red"
+        }else if team == blue1 || team == blue2 || team == blue3 {
+            return "blue"
+        }
+        return "none"
+    }
 }

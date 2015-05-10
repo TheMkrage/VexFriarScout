@@ -14,6 +14,7 @@ class Competition: NSObject {
     var loc: String! = ""
     var season: String! = ""
     var gotTo: String! = ""
+    var highestScore: String! = ""
     var matches: NSMutableArray! = NSMutableArray()
     var awards: NSMutableArray! = NSMutableArray()
 }
