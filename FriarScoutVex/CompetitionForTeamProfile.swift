@@ -17,6 +17,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
+    @IBOutlet var spPointsLabel: UILabel!
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
@@ -28,30 +29,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         if comp.matchCount != 0 {
             self.averageLabel.text = "\(comp.sumOfMatches/comp.matchCount)"
         }
-       
-        /*let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps/\(competition.name)/matches")
-        ref.queryOrderedByValue().observeEventType(.ChildAdded, withBlock: { (snapshot :FDataSnapshot!) -> Void in
-            println("here:\(snapshot)")
-            var m: Match = Match()
-            m.red1 = snapshot.value["rteam 0"] as! String
-            m.red2 = snapshot.value["rteam 1"] as! String
-            if let y = snapshot.value["rteam 2"]   as? String {
-                m.red3 =  snapshot.value["rteam 2"]  as! String
-            }
-            m.blue1 = snapshot.value["bteam 0"] as! String
-            m.blue2 = snapshot.value["bteam 1"] as! String
-            if let y = snapshot.value["bteam 2"]   as? String {
-                
-                m.blue3 =  snapshot.value["bteam 2"]  as! String
-            }
-            m.name = snapshot.value["num"] as! String
-            let x =  snapshot.value["rscore"] as! Int!
-            m.redScore = "\(x)"
-            let y = snapshot.value["bscore"]as! Int!
-            m.blueScore = "\(y)"
-            self.matches.addObject(m)
-            self.matchesTable.reloadData()
-        })*/
     }
     
     

@@ -19,6 +19,7 @@ class Match: NSObject {
     var redScore: String = ""
     var blueScore: String = ""
     
+    // Return a string with the color depending on if a team was on the red or blue team, returns none if team was not in match
     func colorTeamIsOn(team: String!) -> NSString! {
         if team == red1 || team == red2 || team == red3 {
             return "red"
@@ -26,5 +27,24 @@ class Match: NSObject {
             return "blue"
         }
         return "none"
+    }
+    // Determines if Team team won the match or not, defaults to false if team was not present in match
+    func didTeamWin(team: String!) -> Bool {
+        if colorTeamIsOn(team).isEqualToString("red") {
+            if redScore.toInt() > blueScore.toInt() {
+                return true
+            }
+        }else if colorTeamIsOn(team).isEqualToString("blue") {
+            if blueScore.toInt() > redScore.toInt() {
+                return true
+            }
+        }
+        return false
+    }
+    func isQualsMatch() -> Bool {
+        if name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+            return true
+        }
+        return false
     }
 }

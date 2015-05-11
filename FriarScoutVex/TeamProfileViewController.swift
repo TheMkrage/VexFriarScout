@@ -16,11 +16,15 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     var matchCount: NSInteger = 0
     var sumOfMatches: NSInteger = 0
     var lowestScore: NSInteger = 100000000
+    var spPointsSum: NSInteger = 0
+    var compCount: NSInteger = 0
+    
+    @IBOutlet var spAvgLabel: UILabel!
     @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
     var team: Team! = Team()
     override func viewWillAppear(animated: Bool) {
-            }
+    }
     override func viewDidLoad() {
         self.loadCompetitions()
         
@@ -36,6 +40,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
         let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps")
         ref.observeSingleEventOfType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
             println("Begin!")
+            // Cycle through each competition
             let enumerator = snapshot.children
             while let rest = enumerator.nextObject() as? FDataSnapshot {
                 var comp: Competition = Competition()
@@ -48,7 +53,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                 ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
                     if snapshot.exists() {
                         let enum2 = snapshot.children
-                        
+                        // Cycle through each Match
                         while let rest2 = enum2.nextObject() as? FDataSnapshot {
                             var m: Match = Match()
                             m.red1 = rest2.value["rteam 0"] as! String
@@ -68,36 +73,76 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                             let y = rest2.value["bscore"]as! Int!
                             m.blueScore = "\(y)"
                             
-                            if m.colorTeamIsOn(self.team.num).isEqualToString("red") {
+                            // Find Team Color and Act Accordingly
+                            let teamColor:NSString! = m.colorTeamIsOn(self.team.num)
+                            if teamColor.isEqualToString("red") {
                                 let score:Int =  rest2.value["rscore"] as! Int
                                 self.sumOfMatches += score
                                 comp.sumOfMatches += score
-                                println("score \(score)")
+                                // Find SP Points
+                                if m.isQualsMatch() {
+                                    comp.qualsCount++
+                                    // if Team Won
+                                    if m.didTeamWin(self.team.num) {
+                                        // If the other alliance was a no-show, add red's score, else add the opponents score
+                                        if m.blueScore.toInt() == 0 {
+                                            self.spPointsSum += m.redScore.toInt()!
+                                            comp.spPointsSum += m.redScore.toInt()!
+                                        }else {
+                                            self.spPointsSum += m.blueScore.toInt()!
+                                            comp.spPointsSum += m.blueScore.toInt()!
+                                        }
+                                    }else {
+                                        self.spPointsSum += m.redScore.toInt()!
+                                        comp.spPointsSum += m.redScore.toInt()!
+                                    }
+                                }else {
+                                    comp.elimCount++
+                                }
+                                // Check Highscore and Lowscores for team and comp
                                 if m.redScore.toInt() > self.highestScore {
                                     self.highestScore = m.redScore.toInt()!
                                 }else if m.redScore.toInt() < self.lowestScore {
                                     self.lowestScore = m.redScore.toInt()!
                                 }
-                                
                                 if m.redScore.toInt() > comp.highestScore {
                                     comp.highestScore = m.redScore.toInt()!
                                 }else if m.redScore.toInt() < comp.lowestScore {
                                     comp.lowestScore = m.redScore.toInt()!
                                 }
-                            }else if m.colorTeamIsOn(self.team.num).isEqualToString("blue") {
+                            }else if teamColor.isEqualToString("blue") {
                                 let score:Int = rest2.value["bscore"] as! Int
                                 self.sumOfMatches += score
                                 comp.sumOfMatches += score
                                 println("score:\(score)")
-                                // Once For Team
+                                // Find SP Points
+                                if m.isQualsMatch() {
+                                    comp.qualsCount++
+                                    // if Team Won
+                                    if m.didTeamWin(self.team.num) {
+                                        // If the other alliance was a no-show, add red's score, else add the opponents score
+                                        if m.redScore.toInt() == 0 {
+                                            self.spPointsSum += m.blueScore.toInt()!
+                                            comp.spPointsSum += m.blueScore.toInt()!
+                                        }else {
+                                            self.spPointsSum += m.redScore.toInt()!
+                                            comp.spPointsSum += m.redScore.toInt()!
+                                        }
+                                    }else {
+                                        self.spPointsSum += m.blueScore.toInt()!
+                                        comp.spPointsSum += m.blueScore.toInt()!
+                                    }
+                                }else {
+                                    comp.elimCount++
+                                }
+
+                                // Check Highscore and Lowscores for team and comp
                                 if m.blueScore.toInt() > self.highestScore {
                                     self.highestScore = m.blueScore.toInt()!
                                 }
                                 if m.blueScore.toInt() < self.lowestScore {
                                     self.lowestScore = m.blueScore.toInt()!
                                 }
-                                
-                                // And Once For Comp
                                 if m.blueScore.toInt() > comp.highestScore {
                                     comp.highestScore = m.blueScore.toInt()!
                                 }
@@ -115,6 +160,12 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                             comp.matches.addObject(m)
                         }
                     }
+                    self.compCount++
+                    var sumOfspAvgs: NSInteger = 0
+                    for c in self.competitions {
+                        sumOfspAvgs += (c as! Competition).getSPAverage()
+                    }
+                    self.spAvgLabel.text = "\(sumOfspAvgs/self.compCount)"
                     self.competitions.addObject(comp)
                     self.highestScoreLabel.text = "\(self.highestScore)"
                     self.lowScoreLabel.text = "\(self.lowestScore)"
@@ -123,12 +174,10 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                         self.averageLabel.text = x;
                     }
                     self.competitionsTable.reloadData()
-                    
-                    
                 })
             }
         })
-
+        
     }
     
     //TABLE STUFF
@@ -155,8 +204,8 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("CompetitionCell") as! CompetitionTableCell
         cell.nameLabel.text = (self.competitions.objectAtIndex(indexPath.row) as! Competition).name as String
-         cell.dateLabel.text = (self.competitions.objectAtIndex(indexPath.row) as! Competition).date as String
-         cell.LocationLabel.text = (self.competitions.objectAtIndex(indexPath.row) as! Competition).loc as String
+        cell.dateLabel.text = (self.competitions.objectAtIndex(indexPath.row) as! Competition).date as String
+        cell.LocationLabel.text = (self.competitions.objectAtIndex(indexPath.row) as! Competition).loc as String
         
         return cell
     }
@@ -175,5 +224,5 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
     }
-
+    
 }

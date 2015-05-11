@@ -450,10 +450,24 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SP Avg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRH-l7-jrf">
+                                <rect key="frame" x="223" y="28" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjy-wO-pkd">
+                                <rect key="frame" x="237" y="57" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tyt-eG-eMc" firstAttribute="leading" secondItem="8Ac-Pi-7o1" secondAttribute="trailing" constant="8" symbolic="YES" id="0nd-3m-Y1x"/>
+                            <constraint firstItem="gRH-l7-jrf" firstAttribute="baseline" secondItem="tyt-eG-eMc" secondAttribute="baseline" id="2tf-GC-Oip"/>
+                            <constraint firstItem="pjy-wO-pkd" firstAttribute="baseline" secondItem="k1z-AU-FHd" secondAttribute="baseline" id="5Wt-vP-2FK"/>
                             <constraint firstAttribute="trailing" secondItem="kZw-Bl-C5H" secondAttribute="trailing" id="9v3-F6-E1X"/>
                             <constraint firstItem="nZ6-Fh-8Aw" firstAttribute="centerX" secondItem="Zg8-Cq-AOW" secondAttribute="centerX" id="A6t-8V-BS7"/>
                             <constraint firstItem="8Ac-Pi-7o1" firstAttribute="baseline" secondItem="tyt-eG-eMc" secondAttribute="baseline" id="B9c-ZH-Y7x"/>
@@ -465,6 +479,8 @@
                             <constraint firstItem="Wv4-AU-bsd" firstAttribute="top" secondItem="Hfe-NL-NRQ" secondAttribute="bottom" constant="73" id="MYH-y1-AMU"/>
                             <constraint firstItem="aFo-Is-hlZ" firstAttribute="top" secondItem="DBC-Br-SJR" secondAttribute="topMargin" constant="34" id="MaV-pb-cp1"/>
                             <constraint firstItem="k1z-AU-FHd" firstAttribute="centerX" secondItem="tyt-eG-eMc" secondAttribute="centerX" id="NCK-1X-A5B"/>
+                            <constraint firstItem="gRH-l7-jrf" firstAttribute="leading" secondItem="tyt-eG-eMc" secondAttribute="trailing" constant="8" symbolic="YES" id="Zsi-eO-Uc3"/>
+                            <constraint firstItem="gRH-l7-jrf" firstAttribute="centerX" secondItem="pjy-wO-pkd" secondAttribute="centerX" id="aaE-8a-LLo"/>
                             <constraint firstItem="8Ac-Pi-7o1" firstAttribute="centerX" secondItem="q8o-Nn-IPy" secondAttribute="centerX" id="fZZ-5e-2ec"/>
                             <constraint firstItem="Zg8-Cq-AOW" firstAttribute="leading" secondItem="aFo-Is-hlZ" secondAttribute="trailing" constant="23" id="hkG-C5-3lY"/>
                             <constraint firstItem="kZw-Bl-C5H" firstAttribute="top" secondItem="Wv4-AU-bsd" secondAttribute="bottom" constant="51" id="idL-WF-ECI"/>
@@ -480,6 +496,7 @@
                         <outlet property="highestScoreLabel" destination="nZ6-Fh-8Aw" id="yQw-mb-ZRl"/>
                         <outlet property="lowestScoreLabel" destination="q8o-Nn-IPy" id="N0n-Qx-xWh"/>
                         <outlet property="matchesTable" destination="kZw-Bl-C5H" id="W5U-q3-ulD"/>
+                        <outlet property="spPointsLabel" destination="pjy-wO-pkd" id="MIu-I9-Xpp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XF-oN-e9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -601,6 +618,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SP Avg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76u-Z3-8Pk">
+                                <rect key="frame" x="223" y="28" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVR-wp-Qhk">
+                                <rect key="frame" x="237" y="57" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -612,7 +641,9 @@
                             <constraint firstItem="vIF-bv-RuG" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="8" symbolic="YES" id="Lh8-Fo-Vmi"/>
                             <constraint firstItem="4eP-2X-uem" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="8" id="Pem-TU-y08"/>
                             <constraint firstItem="IeX-AC-y8w" firstAttribute="top" secondItem="zRg-sO-ks7" secondAttribute="bottom" constant="110" id="Rmj-0X-n8n"/>
+                            <constraint firstItem="76u-Z3-8Pk" firstAttribute="leading" secondItem="vuL-nA-aUd" secondAttribute="trailing" constant="8" symbolic="YES" id="TuP-MA-8dO"/>
                             <constraint firstItem="IeX-AC-y8w" firstAttribute="centerX" secondItem="vOn-5c-8Pv" secondAttribute="centerX" id="Vi2-Yn-8u9"/>
+                            <constraint firstItem="MVR-wp-Qhk" firstAttribute="baseline" secondItem="7wv-AS-B4Z" secondAttribute="baseline" id="XQc-xZ-f1A"/>
                             <constraint firstItem="4eP-2X-uem" firstAttribute="leading" secondItem="vIF-bv-RuG" secondAttribute="trailing" constant="8" id="Z8f-tp-fIS"/>
                             <constraint firstItem="7wv-AS-B4Z" firstAttribute="leading" secondItem="zRg-sO-ks7" secondAttribute="trailing" constant="41" id="ZAe-19-KZq"/>
                             <constraint firstAttribute="trailing" secondItem="IeX-AC-y8w" secondAttribute="trailing" id="ZV4-bj-CNc"/>
@@ -623,15 +654,18 @@
                             <constraint firstItem="vIF-bv-RuG" firstAttribute="centerX" secondItem="ZLg-cP-EJS" secondAttribute="centerX" id="vMj-Z7-fpj"/>
                             <constraint firstItem="vuL-nA-aUd" firstAttribute="top" secondItem="dxY-yp-ld3" secondAttribute="bottom" constant="8" id="wXN-H7-aN3"/>
                             <constraint firstItem="vOn-5c-8Pv" firstAttribute="top" secondItem="7wv-AS-B4Z" secondAttribute="bottom" constant="49" id="wv2-7Z-waY"/>
+                            <constraint firstItem="76u-Z3-8Pk" firstAttribute="centerX" secondItem="MVR-wp-Qhk" secondAttribute="centerX" id="x4X-Ho-Ft7"/>
+                            <constraint firstItem="76u-Z3-8Pk" firstAttribute="baseline" secondItem="vuL-nA-aUd" secondAttribute="baseline" id="xNr-rH-otI"/>
                             <constraint firstItem="vIF-bv-RuG" firstAttribute="leading" secondItem="hSW-uF-fUh" secondAttribute="leadingMargin" id="xkP-ll-dHa"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
-                        <outlet property="averageLabel" destination="7wv-AS-B4Z" id="AIa-LN-UMF"/>
+                        <outlet property="averageLabel" destination="7wv-AS-B4Z" id="x30-fb-Euf"/>
                         <outlet property="competitionsTable" destination="IeX-AC-y8w" id="4wT-Gd-tLS"/>
                         <outlet property="highestScoreLabel" destination="ZLg-cP-EJS" id="fjL-EP-sMS"/>
                         <outlet property="lowScoreLabel" destination="zRg-sO-ks7" id="0J0-ih-AMU"/>
+                        <outlet property="spAvgLabel" destination="MVR-wp-Qhk" id="xsJ-oc-Qjr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gr-Lc-M72" userLabel="First Responder" sceneMemberID="firstResponder"/>
