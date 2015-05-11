@@ -96,6 +96,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                                         self.spPointsSum += m.redScore.toInt()!
                                         comp.spPointsSum += m.redScore.toInt()!
                                     }
+                                    println(comp.spPointsSum)
                                 }else {
                                     comp.elimCount++
                                 }
@@ -114,7 +115,6 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                                 let score:Int = rest2.value["bscore"] as! Int
                                 self.sumOfMatches += score
                                 comp.sumOfMatches += score
-                                println("score:\(score)")
                                 // Find SP Points
                                 if m.isQualsMatch() {
                                     comp.qualsCount++
@@ -128,10 +128,12 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                                             self.spPointsSum += m.redScore.toInt()!
                                             comp.spPointsSum += m.redScore.toInt()!
                                         }
+                                      
                                     }else {
                                         self.spPointsSum += m.blueScore.toInt()!
                                         comp.spPointsSum += m.blueScore.toInt()!
                                     }
+                                    println(comp.spPointsSum)
                                 }else {
                                     comp.elimCount++
                                 }
@@ -154,8 +156,6 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
                             }
                             comp.matchCount++
                             println(comp.name)
-                            println(comp.matchCount)
-                            println(comp.sumOfMatches)
                             self.matchCount++
                             comp.matches.addObject(m)
                         }
@@ -211,6 +211,20 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+        // Set the title of the menuViewController
+        vc.title = "\(competitions.objectAtIndex(indexPath.row).name as String)"
+        // Destintation ViewController, set team
+        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
+        var comp:Competition! = Competition()
+        comp = competitions.objectAtIndex(indexPath.row) as! Competition
+        var t: Team! = Team()
+        team.num = self.title
+        dest.team = team
+        dest.comp = comp
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+        /*
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompetitionProfile") as! CompetitionForTeamProfile
         // Set the title of the menuViewController
         vc.title = "\(competitions.objectAtIndex(indexPath.row).name as String)"
@@ -222,7 +236,7 @@ class TeamProfileViewController: UIViewController,UITableViewDataSource, UITable
         vc.team = team
         vc.comp = comp
         // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)
+        self.showViewController(vc as UIViewController, sender: vc)*/
     }
     
 }

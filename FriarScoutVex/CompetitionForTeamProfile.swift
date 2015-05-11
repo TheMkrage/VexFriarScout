@@ -24,6 +24,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         matches = comp.matches
         println(matches)
         self.matchesTable.reloadData()
+        self.spPointsLabel.text = "\(comp.getSPAverage())"
         self.highestScoreLabel.text = "\(comp.highestScore)"
         self.lowestScoreLabel.text = "\(comp.lowestScore)"
         if comp.matchCount != 0 {

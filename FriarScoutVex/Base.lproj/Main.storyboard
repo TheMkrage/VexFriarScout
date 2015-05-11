@@ -250,7 +250,7 @@
         <!--CompetitionProfile-->
         <scene sceneID="h81-4U-PkS">
             <objects>
-                <viewController storyboardIdentifier="CompetitionProfile" title="CompetitionProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lYe-rk-uhw" customClass="CompetitionForTeamProfile" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CompetitionProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lYe-rk-uhw" customClass="CompetitionForTeamProfile" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hfe-NL-NRQ"/>
                         <viewControllerLayoutGuide type="bottom" id="fI5-5y-Wiq"/>
@@ -273,7 +273,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kZw-Bl-C5H">
-                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
+                                <rect key="frame" x="0.0" y="188" width="600" height="363"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MatchCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MatchCell" rowHeight="88" id="Uod-Lm-4pn" customClass="MatchTableCell" customModule="FriarScoutVex" customModuleProvider="target">
@@ -491,6 +491,7 @@
                             <constraint firstItem="nZ6-Fh-8Aw" firstAttribute="baseline" secondItem="q8o-Nn-IPy" secondAttribute="baseline" id="zpf-lx-1qa"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Matches" id="iP0-b5-j9O"/>
                     <connections>
                         <outlet property="averageLabel" destination="k1z-AU-FHd" id="b5I-L8-IJy"/>
                         <outlet property="highestScoreLabel" destination="nZ6-Fh-8Aw" id="yQw-mb-ZRl"/>
@@ -501,12 +502,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XF-oN-e9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2804" y="78"/>
+            <point key="canvasLocation" x="3777" y="-686"/>
         </scene>
-        <!--Team Profile View Controller-->
+        <!--View Controller-->
+        <scene sceneID="fCU-Xp-Oy6">
+            <objects>
+                <viewController id="XNe-ni-YGm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fAO-ZL-9db"/>
+                        <viewControllerLayoutGuide type="bottom" id="OiQ-H4-QY2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MGi-cu-Kl2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZDz-WX-sfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3779" y="648"/>
+        </scene>
+        <!--Competitions-->
         <scene sceneID="4vz-Bg-ktl">
             <objects>
-                <viewController storyboardIdentifier="TeamProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wd-Tk-oDG" customClass="TeamProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wd-Tk-oDG" customClass="TeamProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dxY-yp-ld3"/>
                         <viewControllerLayoutGuide type="bottom" id="LTV-l6-xyP"/>
@@ -541,7 +560,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IeX-AC-y8w">
-                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
+                                <rect key="frame" x="0.0" y="188" width="600" height="363"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompetitionCell" rowHeight="67" id="Nqa-Jr-BoR" customClass="CompetitionTableCell" customModule="FriarScoutVex" customModuleProvider="target">
@@ -660,6 +679,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="Competitions" id="mDx-J9-i43"/>
                     <connections>
                         <outlet property="averageLabel" destination="7wv-AS-B4Z" id="x30-fb-Euf"/>
                         <outlet property="competitionsTable" destination="IeX-AC-y8w" id="4wT-Gd-tLS"/>
@@ -670,7 +690,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gr-Lc-M72" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525" y="767"/>
+            <point key="canvasLocation" x="3777" y="1320"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zzq-Vp-r4U">
@@ -688,7 +708,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gyQ-cF-nFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3209" y="757"/>
+            <point key="canvasLocation" x="4461" y="1310"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="lys-JS-owL">
+            <objects>
+                <tabBarController storyboardIdentifier="TeamProfile" id="Ac1-qS-EvT" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="fI5-nH-jLh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="2Wd-Tk-oDG" kind="relationship" relationship="viewControllers" id="L3j-Eu-kex"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IEm-Xg-Qfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2956" y="1310"/>
         </scene>
         <!--Register User View Controller-->
         <scene sceneID="Jc8-Lb-VAO">
@@ -850,7 +888,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWU-b4-6Lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3209" y="60"/>
+            <point key="canvasLocation" x="4578" y="-692"/>
+        </scene>
+        <!--CompetitionProfile-->
+        <scene sceneID="Q6I-O2-FUj">
+            <objects>
+                <tabBarController storyboardIdentifier="CompeitionProfile" title="CompetitionProfile" id="f0G-Mc-U0z" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ObW-v4-iBO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="lYe-rk-uhw" kind="relationship" relationship="viewControllers" id="doc-AO-LFz"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RAc-hZ-ZMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2956" y="-308"/>
         </scene>
     </scenes>
 </document>

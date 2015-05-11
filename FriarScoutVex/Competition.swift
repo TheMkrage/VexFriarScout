@@ -29,8 +29,8 @@ class Competition: NSObject {
     var lowestScore: NSInteger = 100000
 
     func getSPAverage() -> NSInteger {
-        if self.matchCount != 0 {
-            return self.spPointsSum/self.matchCount
+        if self.qualsCount != 0 {
+            return self.spPointsSum/self.qualsCount
         }
         return 0;
     }

@@ -26,6 +26,17 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
     
     func moveToTeamProfile(team: String!) {
         
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        // Destintation ViewController, set team
+        let dest: TeamProfileViewController = vc.viewControllers?.first as! TeamProfileViewController
+        var team: Team! = Team()
+        team.num = self.TeamTextField.text
+        dest.team = team
+        // Set the title of the menuViewController
+        vc.title = "Team \(self.TeamTextField.text)"
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+        /*
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! TeamProfileViewController
         var team: Team! = Team()
         team.num = self.TeamTextField.text
@@ -33,7 +44,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
         // Set the title of the menuViewController
         vc.title = "Team \(self.TeamTextField.text)"
         // Present Main Menu
-        self.showViewController(vc as UIViewController, sender: vc)
+        self.showViewController(vc as UIViewController, sender: vc)*/
         
     }
     
