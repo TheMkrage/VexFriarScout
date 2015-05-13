@@ -28,7 +28,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
         // Destintation ViewController, set team
-        let dest: TeamProfileViewController = vc.viewControllers?.first as! TeamProfileViewController
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
         var team: Team! = Team()
         team.num = self.TeamTextField.text
         dest.team = team

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */; };
+		7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFE57A1B02E9A700E804BC /* Award.swift */; };
 		7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */; };
 		7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */; };
 		7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299181AD5920200A7E008 /* Firebase.framework */; };
@@ -31,6 +32,7 @@
 		7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
 		7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */; };
 		7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */; };
+		7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,7 @@
 /* Begin PBXFileReference section */
 		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
+		7EBFE57A1B02E9A700E804BC /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICheckBoxButton.swift; sourceTree = "<group>"; };
 		7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionForTeamProfile.swift; sourceTree = "<group>"; };
 		7EC299181AD5920200A7E008 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
 		7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
 		7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewTeamProfileViewController.swift; sourceTree = "<group>"; };
+		7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasTeamViewController.swift; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,6 +241,7 @@
 			children = (
 				7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */,
 				7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */,
+				7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */,
 			);
 			name = "Team Profile";
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				7EE78C981AED7FF8001ED13F /* Match.swift */,
 				7EC2DE151AF6C0A4002071AC /* Team.swift */,
 				7EC2DE171AF6C0AF002071AC /* Competition.swift */,
+				7EBFE57A1B02E9A700E804BC /* Award.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -371,7 +377,9 @@
 				7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */,
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */,
+				7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */,
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
+				7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */,
 				7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */,
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
