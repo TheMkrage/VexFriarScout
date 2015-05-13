@@ -8,14 +8,17 @@
 
 import UIKit
 
-class OverviewTeamProfileViewController: HasTeamViewController {
+class OverviewTeamProfileViewController: HasTeamViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numLabel: UILabel!
     @IBOutlet var compCountLabel: UILabel!
     @IBOutlet var awardCountLabel: UILabel!
+    @IBOutlet var awardTable: UITableView!
     override func viewDidLoad() {
+        self.awardTable.delegate = self
+        self.awardTable.dataSource = self
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
         x.team = self.team as Team!
@@ -37,8 +40,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
             self.numLabel.text = self.team.num
 
         })
-        // Awards
-        let refAward = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/awards")
         // Competitions
         let refComp = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num)/comps")
         refComp.observeSingleEventOfType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
@@ -52,7 +53,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 comp.date = rest.value["date"]as! String
                 comp.loc = rest.value["loc"]as! String
                 comp.season = rest.value["season"] as! String
-                
+                // Matches
                 let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num)/comps/Skyrise/\(comp.name)/matches")
                 ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
                     if snapshot.exists() {
@@ -164,14 +165,63 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             comp.matches.addObject(m)
                         }
                     }
+                    // Awards
+                    let refAward = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num)/comps/Skyrise/\(comp.name)/awards")
+                    refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
+                        let x = NSNumber(unsignedLong: snapshot.childrenCount) as NSInteger
+                        for var i = 0; i < x; i++ {
+                            var a: Award = Award();
+                        
+                            a.award = snapshot.value[i] as! String!
+                            a.comp = comp.name
+                            a.team = self.team
+                            
+                            self.team.awards.addObject(a)
+                            self.team.awardCount++
+                            println("INT HERE \(self.team.awardCount)")
+                            self.awardTable.reloadData()
+                            self.awardCountLabel.text = "\(self.team.awardCount)"
+                        }
+                    })
                     self.team.compCount++
                     self.compCountLabel.text = "\(self.team.compCount)"
+                    
+                    println("HERE YOU GO: \(self.team.awardCount)")
+                    
                     self.team.competitions.addObject(comp)
                                        
                 })
             }
         })
         
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Awards"
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Creates cell and sets title to team num
+        var cell = tableView.dequeueReusableCellWithIdentifier("AwardCell") as! AwardCell
+        
+        var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
+        cell.awardNameLabel.text = a.award
+        cell.compNameLabel.text = a.comp
+        println(a.award)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.team.awards.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
 
 }
