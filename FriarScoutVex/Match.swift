@@ -28,6 +28,14 @@ class Match: NSObject {
         }
         return "none"
     }
+    // Determines if Team team tied the match or not, defaults to false if team was not present in match
+    func didTeamTie(team: String!) -> Bool {
+        if redScore.toInt() == blueScore.toInt() {
+            return true
+        }
+        return false
+    }
+    
     // Determines if Team team won the match or not, defaults to false if team was not present in match
     func didTeamWin(team: String!) -> Bool {
         if colorTeamIsOn(team).isEqualToString("red") {
@@ -46,5 +54,14 @@ class Match: NSObject {
             return true
         }
         return false
+    }
+    
+    func scoreForTeam(team: String) -> NSInteger {
+        if colorTeamIsOn(team).isEqualToString("red") {
+            return redScore.toInt()!
+        }else if colorTeamIsOn(team).isEqualToString("blue") {
+            return blueScore.toInt()!
+        }
+        return 0
     }
 }

@@ -10,11 +10,7 @@ import UIKit
 
 class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var competitionsTable: UITableView!
-    @IBOutlet var highestScoreLabel: UILabel!
     
-    @IBOutlet var spAvgLabel: UILabel!
-    @IBOutlet var averageLabel: UILabel!
-    @IBOutlet var lowScoreLabel: UILabel!
     
     override func viewWillAppear(animated: Bool) {
         self.competitionsTable.reloadData()
@@ -25,20 +21,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         self.competitionsTable.delegate = self
         self.competitionsTable.dataSource = self
         
-        var sumOfspAvgs: NSInteger = 0
-        for c in self.team.competitions {
-            sumOfspAvgs += (c as! Competition).getSPAverage()
-        }
-        self.spAvgLabel.text = "\(sumOfspAvgs/self.team.compCount)"
-        self.highestScoreLabel.text = "\(self.team.highestScore)"
-        self.lowScoreLabel.text = "\(self.team.lowestScore)"
-        if  self.team.matchCount != 0 {
-            let x = "\(self.team.sumOfMatches/self.team.matchCount)"
-            self.averageLabel.text = x;
-        }
-
-        
-    }
+           }
     
     //TABLE STUFF
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

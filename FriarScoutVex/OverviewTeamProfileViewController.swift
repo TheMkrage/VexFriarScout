@@ -8,20 +8,24 @@
 
 import UIKit
 
-class OverviewTeamProfileViewController: HasTeamViewController, UITableViewDataSource, UITableViewDelegate {
+class OverviewTeamProfileViewController: HasTeamViewController {
 
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numLabel: UILabel!
     @IBOutlet var compCountLabel: UILabel!
     @IBOutlet var awardCountLabel: UILabel!
-    @IBOutlet var awardTable: UITableView!
+    @IBOutlet var highestScoreLabel: UILabel!
+    
+    @IBOutlet var spAvgLabel: UILabel!
+    @IBOutlet var averageLabel: UILabel!
+    @IBOutlet var lowScoreLabel: UILabel!
     override func viewDidLoad() {
-        self.awardTable.delegate = self
-        self.awardTable.dataSource = self
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
         x.team = self.team as Team!
+        var y:HasTeamViewController = self.tabBarController?.viewControllers![2] as! HasTeamViewController!
+        y.team = self.team as Team!
         
         }
     
@@ -78,12 +82,40 @@ class OverviewTeamProfileViewController: HasTeamViewController, UITableViewDataS
                             let y = rest2.value["bscore"]as! Int!
                             m.blueScore = "\(y)"
                             
+                            // Win Loss Counters
+                            if m.didTeamTie(self.team.num) {
+                                self.team.tieMatchCount++
+                                self.team.tieMatchScoreSum += m.scoreForTeam(self.team.num)
+                            }else if m.didTeamWin(self.team.num) {
+                                self.team.winMatchCount++
+                                self.team.winMatchScoreSum += m.scoreForTeam(self.team.num)
+                            }else {
+                                self.team.lostMatchCount++
+                                self.team.lostMatchScoreSum += 
+                                m.scoreForTeam(self.team.num)
+                            }
+                            // Now For Quals Matches
+                            if m.isQualsMatch() {
+                                // Win Loss Counters
+                                if m.didTeamTie(self.team.num) {
+                                    self.team.tieMatchQualsCount++
+                                    self.team.tieMatchQualsSum += m.scoreForTeam(self.team.num)
+                                }else if m.didTeamWin(self.team.num) {
+                                    self.team.winMatchQualsCount++
+                                    self.team.winMatchQualsSum += m.scoreForTeam(self.team.num)
+                                }else {
+                                    self.team.lostMatchQualsCount++
+                                    self.team.lostMatchQualsSum +=
+                                        m.scoreForTeam(self.team.num)
+                                }
+                            }
                             // Find Team Color and Act Accordingly
                             let teamColor:NSString! = m.colorTeamIsOn(self.team.num)
                             if teamColor.isEqualToString("red") {
                                 let score:Int =  rest2.value["rscore"] as! Int
                                 self.team.sumOfMatches += score
                                 comp.sumOfMatches += score
+                               
                                 // Find SP Points
                                 if m.isQualsMatch() {
                                     comp.qualsCount++
@@ -179,7 +211,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UITableViewDataS
                             self.team.awards.addObject(a)
                             self.team.awardCount++
                             println("INT HERE \(self.team.awardCount)")
-                            self.awardTable.reloadData()
+                            
                             self.awardCountLabel.text = "\(self.team.awardCount)"
                         }
                     })
@@ -189,39 +221,31 @@ class OverviewTeamProfileViewController: HasTeamViewController, UITableViewDataS
                     println("HERE YOU GO: \(self.team.awardCount)")
                     
                     self.team.competitions.addObject(comp)
+                    self.updateLabels()
                                        
                 })
             }
+            self.updateLabels()
         })
         
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Awards"
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Creates cell and sets title to team num
-        var cell = tableView.dequeueReusableCellWithIdentifier("AwardCell") as! AwardCell
-        
-        var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
-        cell.awardNameLabel.text = a.award
-        cell.compNameLabel.text = a.comp
-        println(a.award)
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.team.awards.count
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
+   
+    func updateLabels() {
+        var sumOfspAvgs: NSInteger = 0
+        for c in self.team.competitions {
+            sumOfspAvgs += (c as! Competition).getSPAverage()
+        }
 
+        if self.team.compCount != 0 {
+            self.spAvgLabel.text = "\(sumOfspAvgs/self.team.compCount)"
+        }
+        self.highestScoreLabel.text = "\(self.team.highestScore)"
+        self.lowScoreLabel.text = "\(self.team.lowestScore)"
+        if  self.team.matchCount != 0 {
+            let x = "\(self.team.sumOfMatches/self.team.matchCount)"
+            self.averageLabel.text = x;
+        }
+    }
+    
 }

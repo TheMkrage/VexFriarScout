@@ -17,6 +17,21 @@ class Team: NSObject {
     var awards: NSMutableArray! = NSMutableArray()
     
     var highestScore: NSInteger = 0
+    var lostMatchCount: NSInteger = 0
+    var lostMatchScoreSum: NSInteger = 0
+    var winMatchScoreSum: NSInteger = 0
+    var tieMatchScoreSum: NSInteger = 0
+    var tieMatchCount: NSInteger = 0
+    
+    var lostMatchQualsCount: NSInteger = 0
+    var lostMatchQualsSum: NSInteger = 0
+    var winMatchQualsCount: NSInteger = 0
+    var winMatchQualsSum: NSInteger = 0
+    var tieMatchQualsSum: NSInteger = 0
+    var tieMatchQualsCount: NSInteger = 0
+
+    
+    var winMatchCount: NSInteger = 0
     var matchCount: NSInteger = 0
     var sumOfMatches: NSInteger = 0
     var lowestScore: NSInteger = 100000000
