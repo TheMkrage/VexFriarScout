@@ -14,14 +14,23 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     @IBOutlet var winningsLabel: UILabel!
     @IBOutlet var lostAverageLabel: UILabel!
     @IBOutlet var lostInQualsAverageLabel: UILabel!
+    @IBOutlet var winningsQualLabel: UILabel!
+    @IBOutlet var lossesQualLabel: UILabel!
+    @IBOutlet var tieQualLabel: UILabel!
     @IBOutlet var awardsTable: UITableView!
    
     override func viewDidLoad() {
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
+        // Overall Record
         self.tieLabel.text = "\(self.team.tieMatchCount)"
         self.winningsLabel.text = "\(self.team.winMatchCount) -"
         self.lossesLabel.text = "\(self.team.lostMatchCount) -"
+        // Qual Record
+        self.tieQualLabel.text = "\(self.team.tieMatchQualsCount)"
+        self.winningsQualLabel.text = "\(self.team.winMatchQualsCount) -"
+        self.lossesQualLabel.text = "\(self.team.lostMatchQualsCount) -"
+        
         if self.team.lostMatchCount != 0 {
             self.lostAverageLabel.text = "\(self.team.lostMatchScoreSum/self.team.lostMatchCount)"
         }
@@ -39,7 +48,19 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+        // Set the title of the menuViewController
+        vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
+        // Destintation ViewController, set team
+        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
+        var comp:Competition! = Competition()
+        comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
+        var t: Team! = Team()
+        team.num = self.title
+        dest.team = team
+        dest.comp = comp
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
         
     }
     

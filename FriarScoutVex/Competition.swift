@@ -34,4 +34,34 @@ class Competition: NSObject {
         }
         return 0;
     }
+    
+    func orderMatches() {
+        var tempArray: NSMutableArray! = NSMutableArray()
+        
+        for var i = 1; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        for var i = 1; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("QF", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        for var i = 1; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("SF", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        for var i = 1; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("Final", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        self.matches = tempArray;
+    }
 }

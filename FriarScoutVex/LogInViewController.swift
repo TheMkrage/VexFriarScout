@@ -90,8 +90,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 var vc  = self.storyboard?.instantiateViewControllerWithIdentifier("MainMenu") as! MainMenuViewController
                 // Connect and get first name of accounts being used, set title of Main Menu
                 ref.childByAppendingPath("users").childByAppendingPath(authData.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    let name = snapshot.value["first name"] as! NSString
-                    vc.title = "Hello \(name)"
+                    var user: UserProfile = UserProfile()
+                    user.first = snapshot.value["first name"] as! String!
+                    user.last = snapshot.value["last name"] as! String!
+                    user.team = snapshot.value["team"] as! String!
+                    user.uid = snapshot.value["uid"] as! String!
+                    vc.title = "Hello \(user.first)"
+                    vc.userProfile = user
                 })
                 // Present
                 println(vc)

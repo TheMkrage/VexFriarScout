@@ -10,6 +10,7 @@ import UIKit
 
 
 class MainMenuViewController: UIViewController, UITextFieldDelegate {
+    var userProfile: UserProfile = UserProfile()
     @IBOutlet var TeamTextField: UITextField!
     
     override func viewDidLoad() {
@@ -24,16 +25,20 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
+    @IBAction func myTeamButton(sender: AnyObject) {
+       self.moveToTeamProfile(self.userProfile.team)
+    }
     func moveToTeamProfile(team: String!) {
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
         // Destintation ViewController, set team
         let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
-        var team: Team! = Team()
-        team.num = self.TeamTextField.text
-        dest.team = team
+        var team2: Team! = Team()
+        team2.num = team
+        
+        dest.team = team2
         // Set the title of the menuViewController
-        vc.title = "Team \(self.TeamTextField.text)"
+        vc.title = "Team \(team)"
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
         /*

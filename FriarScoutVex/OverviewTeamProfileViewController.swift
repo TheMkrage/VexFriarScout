@@ -193,6 +193,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             }
                             comp.matchCount++
                             println(comp.name)
+                            
                             self.team.matchCount++
                             comp.matches.addObject(m)
                         }
@@ -219,7 +220,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                     self.compCountLabel.text = "\(self.team.compCount)"
                     
                     println("HERE YOU GO: \(self.team.awardCount)")
-                    
+                    comp.orderMatches()
                     self.team.competitions.addObject(comp)
                     self.updateLabels()
                                        

@@ -40,6 +40,10 @@
             <string>BebasNeue</string>
             <string>BebasNeue</string>
             <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
+            <string>BebasNeue</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -195,13 +199,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
-                                <rect key="frame" x="209" y="142" width="182" height="51"/>
-                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
-                                <state key="normal" title="My Team">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-up-UIy">
                                 <rect key="frame" x="209" y="260" width="182" height="51"/>
                                 <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
@@ -240,6 +237,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
+                                <rect key="frame" x="209" y="142" width="182" height="51"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="My Team">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myTeamButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="5Ed-VK-M7r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -802,7 +809,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4Dq-XE-4j6">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4Dq-XE-4j6">
                                 <rect key="frame" x="0.0" y="223" width="600" height="328"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -893,6 +900,30 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quals Ranking:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yK0-yF-aSH">
+                                <rect key="frame" x="16" y="124" width="118" height="29"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 -" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWa-O5-E9v">
+                                <rect key="frame" x="160" y="124" width="30" height="29"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-jW-Nwt">
+                                <rect key="frame" x="217" y="124" width="20" height="29"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYO-3C-iae">
+                                <rect key="frame" x="189" y="124" width="26" height="29"/>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -905,16 +936,25 @@
                             <constraint firstItem="clT-ms-ZEk" firstAttribute="top" secondItem="lHI-nz-Mhp" secondAttribute="bottom" constant="4" id="AUT-rz-GzU"/>
                             <constraint firstItem="EP7-Vd-JVr" firstAttribute="leading" secondItem="Ai7-Ha-S0w" secondAttribute="trailing" constant="8" id="Amv-aZ-nxM"/>
                             <constraint firstItem="lHI-nz-Mhp" firstAttribute="top" secondItem="2LH-qm-O8x" secondAttribute="bottom" constant="41" id="Bs1-2j-qJp"/>
+                            <constraint firstItem="kYO-3C-iae" firstAttribute="leading" secondItem="clT-ms-ZEk" secondAttribute="leading" id="FJ5-Bw-ij7"/>
                             <constraint firstItem="eln-UN-4Vs" firstAttribute="top" secondItem="Urq-cO-WL2" secondAttribute="bottom" constant="4" id="HNq-a8-bp0"/>
                             <constraint firstItem="duZ-Du-a1k" firstAttribute="top" secondItem="4Dq-XE-4j6" secondAttribute="bottom" id="JnB-yG-CUH"/>
                             <constraint firstItem="hsh-a0-Loc" firstAttribute="leading" secondItem="AP7-Sb-pE6" secondAttribute="leading" constant="16" id="Le4-K5-XO9"/>
                             <constraint firstItem="eln-UN-4Vs" firstAttribute="leading" secondItem="AP7-Sb-pE6" secondAttribute="leading" constant="16" id="LxS-dW-z1H"/>
+                            <constraint firstItem="yK0-yF-aSH" firstAttribute="baseline" secondItem="oWa-O5-E9v" secondAttribute="baseline" id="Obk-z1-3ll"/>
+                            <constraint firstItem="kYO-3C-iae" firstAttribute="baseline" secondItem="oWa-O5-E9v" secondAttribute="baseline" id="PEd-7S-9GY"/>
+                            <constraint firstItem="yK0-yF-aSH" firstAttribute="leading" secondItem="Ai7-Ha-S0w" secondAttribute="leading" id="W7S-82-e1l"/>
                             <constraint firstItem="Urq-cO-WL2" firstAttribute="top" secondItem="2LH-qm-O8x" secondAttribute="bottom" constant="4" id="eYW-cq-wAP"/>
+                            <constraint firstItem="4Dq-XE-4j6" firstAttribute="top" secondItem="yK0-yF-aSH" secondAttribute="bottom" constant="70" id="gfw-gV-bpQ"/>
                             <constraint firstAttribute="trailing" secondItem="4Dq-XE-4j6" secondAttribute="trailing" id="hMS-cP-gqP"/>
                             <constraint firstItem="4Dq-XE-4j6" firstAttribute="leading" secondItem="AP7-Sb-pE6" secondAttribute="leading" id="hVo-n6-SRo"/>
+                            <constraint firstItem="oWa-O5-E9v" firstAttribute="leading" secondItem="EP7-Vd-JVr" secondAttribute="leading" id="jZN-no-jNZ"/>
                             <constraint firstItem="Ai7-Ha-S0w" firstAttribute="top" secondItem="eln-UN-4Vs" secondAttribute="bottom" constant="8" id="jjN-M3-bjY"/>
                             <constraint firstItem="lHI-nz-Mhp" firstAttribute="leading" secondItem="eln-UN-4Vs" secondAttribute="trailing" constant="8" id="kjI-7i-VTh"/>
+                            <constraint firstItem="kYO-3C-iae" firstAttribute="baseline" secondItem="iNH-jW-Nwt" secondAttribute="baseline" id="li7-Zr-GpZ"/>
+                            <constraint firstItem="yK0-yF-aSH" firstAttribute="top" secondItem="Ai7-Ha-S0w" secondAttribute="bottom" constant="1" id="neL-WZ-hrY"/>
                             <constraint firstItem="DvP-UK-SXg" firstAttribute="top" secondItem="2LH-qm-O8x" secondAttribute="bottom" constant="74" id="oe8-rY-oGJ"/>
+                            <constraint firstItem="iNH-jW-Nwt" firstAttribute="leading" secondItem="DvP-UK-SXg" secondAttribute="leading" id="xaa-Zk-uPX"/>
                             <constraint firstItem="Ai7-Ha-S0w" firstAttribute="leading" secondItem="AP7-Sb-pE6" secondAttribute="leading" constant="16" id="z1n-Wx-zZa"/>
                             <constraint firstItem="clT-ms-ZEk" firstAttribute="leading" secondItem="Ai7-Ha-S0w" secondAttribute="trailing" constant="37" id="z7r-B9-ZNM"/>
                         </constraints>
@@ -923,10 +963,13 @@
                     <connections>
                         <outlet property="awardsTable" destination="4Dq-XE-4j6" id="3L7-sv-Wws"/>
                         <outlet property="lossesLabel" destination="clT-ms-ZEk" id="9Ud-k5-Lk0"/>
+                        <outlet property="lossesQualLabel" destination="kYO-3C-iae" id="JQ7-rA-9EJ"/>
                         <outlet property="lostAverageLabel" destination="Urq-cO-WL2" id="pie-8a-bnF"/>
                         <outlet property="lostInQualsAverageLabel" destination="lHI-nz-Mhp" id="AHZ-EZ-lXr"/>
                         <outlet property="tieLabel" destination="DvP-UK-SXg" id="NhW-Tj-ycS"/>
+                        <outlet property="tieQualLabel" destination="iNH-jW-Nwt" id="Dzn-sL-Zlc"/>
                         <outlet property="winningsLabel" destination="EP7-Vd-JVr" id="5Q9-BF-gir"/>
+                        <outlet property="winningsQualLabel" destination="oWa-O5-E9v" id="JPr-Sg-xFD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKa-lw-eUX" userLabel="First Responder" sceneMemberID="firstResponder"/>

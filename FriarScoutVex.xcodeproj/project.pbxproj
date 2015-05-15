@@ -37,6 +37,7 @@
 		7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
+		7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEA292C1B05A1A50057DD1D /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasTeamViewController.swift; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		7EEA292C1B05A1A50057DD1D /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +276,7 @@
 				7EC2DE151AF6C0A4002071AC /* Team.swift */,
 				7EC2DE171AF6C0AF002071AC /* Competition.swift */,
 				7EBFE57A1B02E9A700E804BC /* Award.swift */,
+				7EEA292C1B05A1A50057DD1D /* UserProfile.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,
 				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
 				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
+				7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */,
 				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
