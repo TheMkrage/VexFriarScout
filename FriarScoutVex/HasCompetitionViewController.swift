@@ -1,5 +1,5 @@
 //
-//  AwardsCompetitionProfileViewController.swift
+//  HasCompetitionViewController.swift
 //  FriarScoutVex
 //
 //  Created by Matthew Krager on 5/17/15.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class AwardsCompetitionProfileViewController: HasCompetitionViewController {
-
+class HasCompetitionViewController: UIViewController {
+    var comp:Competition = Competition()
 }

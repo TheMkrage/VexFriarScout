@@ -11,5 +11,5 @@ import UIKit
 class Award: UIViewController {
     var team: Team! = Team()
     var award: String! = ""
-    var comp: String!
+    var comp: String! = ""
 }

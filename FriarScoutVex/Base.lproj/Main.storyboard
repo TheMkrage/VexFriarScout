@@ -272,48 +272,67 @@
             </objects>
             <point key="canvasLocation" x="1881" y="-159"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="AqK-5w-NGo">
+        <!--Awards-->
+        <scene sceneID="B19-M0-alK">
             <objects>
-                <viewController id="ho2-2c-myG" sceneMemberID="viewController">
+                <viewController id="OSP-Sj-3Wh" customClass="AwardsCompetitionProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L1b-lq-05e"/>
-                        <viewControllerLayoutGuide type="bottom" id="0qy-HQ-Glo"/>
+                        <viewControllerLayoutGuide type="top" id="8t4-l3-c07"/>
+                        <viewControllerLayoutGuide type="bottom" id="em3-tW-oh8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6Vg-PQ-XYG">
+                    <view key="view" contentMode="scaleToFill" id="Jpy-sF-odt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="JcE-2A-BDT"/>
+                    <tabBarItem key="tabBarItem" title="Awards" id="eYE-ey-DdI"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W6p-4b-FoZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="18m-dr-kfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3833" y="-1603"/>
+            <point key="canvasLocation" x="3807" y="-1423"/>
         </scene>
-        <!--Item 1-->
-        <scene sceneID="ozY-Yu-4wp">
+        <!--Overview-->
+        <scene sceneID="11A-A2-qxV">
             <objects>
-                <viewController id="WWA-QM-0dm" sceneMemberID="viewController">
+                <viewController id="sub-0Y-Umi" customClass="OverviewCompetitionProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mJV-mE-iBi"/>
-                        <viewControllerLayoutGuide type="bottom" id="AlK-IZ-veb"/>
+                        <viewControllerLayoutGuide type="top" id="rsv-oQ-X4R"/>
+                        <viewControllerLayoutGuide type="bottom" id="XIg-dn-fW5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1Ya-LJ-OyY">
+                    <view key="view" contentMode="scaleToFill" id="SvV-YK-igK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="dYj-DG-zPq"/>
+                    <tabBarItem key="tabBarItem" title="Overview" id="1VO-Lf-e8v"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dos-jD-PcZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WGT-f0-SNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3836" y="-2259"/>
+            <point key="canvasLocation" x="3818" y="-2867"/>
+        </scene>
+        <!--Matches-->
+        <scene sceneID="li0-sw-ULv">
+            <objects>
+                <viewController id="kl0-Jz-2RV" customClass="MatchesCompetitionProfileViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1jk-fH-ihQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="aYh-uS-O5v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gDV-S4-9qk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Matches" id="9SG-28-2ZN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdn-Qn-pf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3811" y="-2167"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="DRG-Xh-mJj">
             <objects>
-                <tabBarController id="37U-wN-T5h" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CompFullProfile" id="37U-wN-T5h" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="xNO-Bq-tRv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -321,13 +340,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WWA-QM-0dm" kind="relationship" relationship="viewControllers" id="PzT-Pw-bh6"/>
-                        <segue destination="ho2-2c-myG" kind="relationship" relationship="viewControllers" id="8Yi-dQ-GOP"/>
+                        <segue destination="sub-0Y-Umi" kind="relationship" relationship="viewControllers" id="wnC-C5-tFB"/>
+                        <segue destination="kl0-Jz-2RV" kind="relationship" relationship="viewControllers" id="BTX-rK-xhX"/>
+                        <segue destination="OSP-Sj-3Wh" kind="relationship" relationship="viewControllers" id="MHE-Gb-XEQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D28-GF-zrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3020" y="-1929"/>
+            <point key="canvasLocation" x="3122" y="-2114"/>
         </scene>
         <!--CompetitionProfile-->
         <scene sceneID="h81-4U-PkS">
@@ -540,6 +560,9 @@
                                 <state key="normal" title="View Full Competition">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showFullComp:" destination="lYe-rk-uhw" eventType="touchUpInside" id="f27-mQ-nXa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -749,7 +772,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDz-WX-sfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3662" y="545"/>
+            <point key="canvasLocation" x="3818" y="512"/>
         </scene>
         <!--Competitions-->
         <scene sceneID="4vz-Bg-ktl">

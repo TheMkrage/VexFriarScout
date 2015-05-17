@@ -42,6 +42,18 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    @IBAction func showFullComp(sender: AnyObject) {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+        // Set the title of the menuViewController
+        vc.title = "\(self.comp.name)"
+        // Destintation ViewController, set team
+        let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+        dest.name = self.comp.name
+        dest.season = self.comp.season
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
