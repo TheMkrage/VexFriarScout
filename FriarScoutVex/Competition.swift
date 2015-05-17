@@ -27,7 +27,7 @@ class Competition: NSObject {
     
     var highestScore: NSInteger = 0
     var lowestScore: NSInteger = 100000
-
+    
     func getSPAverage() -> NSInteger {
         if self.qualsCount != 0 {
             return self.spPointsSum/self.qualsCount
@@ -38,30 +38,46 @@ class Competition: NSObject {
     func orderMatches() {
         var tempArray: NSMutableArray! = NSMutableArray()
         
-        for var i = 1; i < matches.count; i++ {
-            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match
             if m.name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
                 tempArray.addObject(m)
             }
         }
-        for var i = 1; i < matches.count; i++ {
+        // Sort
+        for (var i = 0; i < tempArray.count; i++) {
+            var m: Match! = tempArray.objectAtIndex(i) as! Match
+            for (var y = i; y > -1; y--) {
+                if (getMatchNum(m.name) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+                tempArray.removeObjectAtIndex(y + 1)
+                    tempArray.insertObject(m, atIndex: y)
+                }
+            }
+        }
+        // QF
+        for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
             if m.name.rangeOfString("QF", options: nil, range: nil, locale: nil) != nil {
                 tempArray.addObject(m)
             }
         }
-        for var i = 1; i < matches.count; i++ {
+        for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
             if m.name.rangeOfString("SF", options: nil, range: nil, locale: nil) != nil {
                 tempArray.addObject(m)
             }
         }
-        for var i = 1; i < matches.count; i++ {
+        for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
             if m.name.rangeOfString("Final", options: nil, range: nil, locale: nil) != nil {
                 tempArray.addObject(m)
             }
         }
         self.matches = tempArray;
+    }
+    
+    func getMatchNum(str: String!) -> NSInteger {
+        var temp = split(str) {$0 == " "}
+        return temp[1].toInt()!
     }
 }
