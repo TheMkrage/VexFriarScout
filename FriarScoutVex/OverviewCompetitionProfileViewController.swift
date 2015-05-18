@@ -79,6 +79,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
                         self.comp.matches.addObject(m)
                     }
                 }
+                self.comp.orderMatches()
                 // Awards
                 let refAward = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/awards")
                 refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in

@@ -11,22 +11,17 @@ import UIKit
 class MatchesCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
     var matches: NSMutableArray!
     @IBOutlet var matchesTable: UITableView!
-    @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
-    @IBOutlet var spPointsLabel: UILabel!
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
         matches = comp.matches
         println(matches)
         self.matchesTable.reloadData()
-        self.spPointsLabel.text = "\(comp.getSPAverage())"
-        self.highestScoreLabel.text = "\(comp.highestScore)"
-        self.lowestScoreLabel.text = "\(comp.lowestScore)"
-        if comp.matchCount != 0 {
-            self.averageLabel.text = "\(comp.sumOfMatches/comp.matchCount)"
-        }
+        /*self.highestScoreLabel.text = "\(comp.highestScore)"
+        self.lowestScoreLabel.text = "\(comp.lowestScore)"*/
+        
     }
     
     

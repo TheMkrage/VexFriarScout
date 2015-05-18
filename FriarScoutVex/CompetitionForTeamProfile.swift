@@ -18,9 +18,13 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
     @IBOutlet var spPointsLabel: UILabel!
+    
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
+        
+        
+
         matches = comp.matches
         println(matches)
         self.matchesTable.reloadData()
@@ -34,7 +38,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "matches"
+        return "Matches"
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -57,8 +61,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
-        
-        
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
         println("hdgs\(m)")
         cell.matchNameLabel.text = m.name
