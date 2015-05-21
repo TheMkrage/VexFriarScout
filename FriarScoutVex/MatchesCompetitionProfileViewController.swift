@@ -19,14 +19,14 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         matches = comp.matches
         println(matches)
         self.matchesTable.reloadData()
-        /*self.highestScoreLabel.text = "\(comp.highestScore)"
-        self.lowestScoreLabel.text = "\(comp.lowestScore)"*/
+        self.highestScoreLabel.text = "\(comp.highestScore)"
+        self.lowestScoreLabel.text = "\(comp.lowestScore)"
         
     }
     
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "matches"
+        return "Matches"
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

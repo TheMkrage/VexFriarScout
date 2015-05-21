@@ -28,6 +28,8 @@ class Competition: NSObject {
     var highestScore: NSInteger = 0
     var lowestScore: NSInteger = 100000
     
+    var teams: NSMutableArray! = NSMutableArray()
+    
     func getSPAverage() -> NSInteger {
         if self.qualsCount != 0 {
             return self.spPointsSum/self.qualsCount
@@ -79,5 +81,33 @@ class Competition: NSObject {
     func getMatchNum(str: String!) -> NSInteger {
         var temp = split(str) {$0 == " "}
         return temp[1].toInt()!
+    }
+    
+    // To be used when finding rankings,
+    func addMatchToTeam(str: NSString!, m: Match!) {
+        self.makeSureTeamExists(str)
+        for (var i = 0; i < self.teams.count; i++) {
+            var t: Team! = teams.objectAtIndex(i) as! Team
+            // If this is our team
+            if str.isEqualToString(t.num) {
+                (teams.objectAtIndex(i) as! Team).matches.addObject(m)
+            }
+        }
+    }
+    
+    func makeSureTeamExists(str: NSString!) {
+        var found: Bool = false
+        for (var i = 0; i < self.teams.count; i++) {
+            var t: Team! = teams.objectAtIndex(i) as! Team
+            // If this is our team
+            if str.isEqualToString(t.num) {
+                found = true
+            }
+        }
+        if !found {
+            var t: Team! = Team()
+            t.num = str as String!
+            self.teams.addObject(t)
+        }
     }
 }

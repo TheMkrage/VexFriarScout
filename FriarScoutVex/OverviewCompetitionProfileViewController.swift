@@ -12,6 +12,11 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
     var name: String! = ""
     var season: String! = ""
     
+    var rankings: NSMutableArray! = NSMutableArray()
+    
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var locLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     override func viewDidLoad() {
         self.loadComp()
         var x:HasCompetitionViewController = self.tabBarController?.viewControllers![1] as! HasCompetitionViewController!
@@ -28,6 +33,9 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
             self.comp.date = snapshot.value["date"]as! String
             self.comp.loc = snapshot.value["loc"]as! String
             self.comp.season = snapshot.value["season"] as! String
+            self.nameLabel.text = self.comp.name
+            self.locLabel.text = self.comp.loc
+            self.dateLabel.text = self.comp.date
             // Matches
             let ref = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/matches")
             ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
@@ -70,14 +78,19 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
                             self.comp.lowestScore = m.redScore.toInt()!
                         }
                         
-                        
+                        // Add Matches to each teams (for rankings calculations)
+                        self.comp.addMatchToTeam(m.red1, m: m)
+                        self.comp.addMatchToTeam(m.red2, m: m)
+                        self.comp.addMatchToTeam(m.blue1, m: m)
+                        self.comp.addMatchToTeam(m.blue2, m: m)
                         
                         self.comp.matchCount++
                         println(self.comp.name)
                         
-                        
+                        println("ADDING MATCHES")
                         self.comp.matches.addObject(m)
                     }
+                    self.calculateRankings()
                 }
                 self.comp.orderMatches()
                 // Awards
@@ -95,6 +108,27 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
                     }
                 })
             })
+            //println("RANKINGS!")
         })
     }
+    
+    func calculateRankings() {
+        var tempArray: NSMutableArray! = self.comp.teams
+        for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            for (var y = i; y > -1; y--) {
+                if (t.calculateWins() < (tempArray.objectAtIndex(y) as! Team).calculateWins() ) {
+                    tempArray.removeObjectAtIndex(y + 1)
+                    tempArray.insertObject(t, atIndex: y)
+                }
+            }
+        }
+        for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            println(t.num)
+        }
+        
+
+    }
+
 }

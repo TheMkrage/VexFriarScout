@@ -48,7 +48,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+        /*let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
         // Set the title of the menuViewController
         vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
         // Destintation ViewController, set team
@@ -60,7 +60,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         dest.team = team
         dest.comp = comp
         // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)
+        self.showViewController(vc as UIViewController, sender: vc)*/
         
     }
     
