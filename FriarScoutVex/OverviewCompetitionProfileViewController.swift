@@ -114,10 +114,31 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
     
     func calculateRankings() {
         var tempArray: NSMutableArray! = self.comp.teams
+        // Sort by Wins
         for (var i = 0; i < tempArray.count; i++) {
             var t: Team! = tempArray.objectAtIndex(i) as! Team
             for (var y = i; y > -1; y--) {
-                if (t.calculateWins() < (tempArray.objectAtIndex(y) as! Team).calculateWins() ) {
+                if (t.calculateWins() > (tempArray.objectAtIndex(y) as! Team).calculateWins() ) {
+                    tempArray.removeObjectAtIndex(y + 1)
+                    tempArray.insertObject(t, atIndex: y)
+                }
+            }
+        }
+        // Sort by Ties if same num of wins
+        for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            for (var y = i; y > -1; y--) {
+                if (t.calculateTies() > (tempArray.objectAtIndex(y) as! Team).calculateTies() && t.calculateWins() == (tempArray.objectAtIndex(y) as! Team).calculateWins()) {
+                    tempArray.removeObjectAtIndex(y + 1)
+                    tempArray.insertObject(t, atIndex: y)
+                }
+            }
+        }
+        // Sort by SP Points finally!
+        for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            for (var y = i; y > -1; y--) {
+                if (t.calculateTies() == (tempArray.objectAtIndex(y) as! Team).calculateTies() && t.calculateWins() == (tempArray.objectAtIndex(y) as! Team).calculateWins()) && t.calculateSP() > (tempArray.objectAtIndex(y) as! Team).calculateSP(){
                     tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(t, atIndex: y)
                 }
@@ -125,7 +146,9 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
         }
         for (var i = 0; i < tempArray.count; i++) {
             var t: Team! = tempArray.objectAtIndex(i) as! Team
-            println(t.num)
+            println("\(t.num) \t \(t.calculateWins()) / \(t.calculateTies()) / SP: \(t.calculateSP())  ")
+            //println()
+            
         }
         
 

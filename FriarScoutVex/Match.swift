@@ -64,4 +64,13 @@ class Match: NSObject {
         }
         return 0
     }
+    
+    func scoreForOpposingTeam(team: String) -> NSInteger {
+        if colorTeamIsOn(team).isEqualToString("red") {
+            return blueScore.toInt()!
+        }else if colorTeamIsOn(team).isEqualToString("blue") {
+            return redScore.toInt()!
+        }
+        return 0
+    }
 }

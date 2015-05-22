@@ -24,6 +24,7 @@
 		7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */; };
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
+		7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */; };
 		7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3C1AD30078008F0639 /* AppDelegate.swift */; };
 		7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3E1AD30078008F0639 /* LogInViewController.swift */; };
 		7EC81E421AD30078008F0639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E401AD30078008F0639 /* Main.storyboard */; };
@@ -73,6 +74,7 @@
 		7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamListTableViewController.swift; sourceTree = "<group>"; };
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
+		7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingTableCell.swift; sourceTree = "<group>"; };
 		7EC81E371AD30078008F0639 /* FriarScoutVex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriarScoutVex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E3B1AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC81E3C1AD30078008F0639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */,
 				7EE78C941AED789B001ED13F /* MatchTableCell.swift */,
 				7EBFE57C1B02F59600E804BC /* AwardCell.swift */,
+				7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				7ECAEBDE1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift in Sources */,
 				7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */,
 				7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */,
+				7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */,
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */,
 				7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */,
