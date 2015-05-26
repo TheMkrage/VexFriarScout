@@ -12,7 +12,8 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
     @IBOutlet var awardTable: UITableView!
     
     override func viewDidLoad() {
-        
+        self.awardTable.delegate = self
+        self.awardTable.dataSource = self;
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

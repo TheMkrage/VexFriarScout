@@ -40,53 +40,100 @@ class Team: NSObject {
     var spPointsSum: NSInteger = 0
     var compCount: NSInteger = 0
     var awardCount: NSInteger = 0
+    var qualCount: NSInteger = 0
     
     // For use with comp overview
     var matches:NSMutableArray! = NSMutableArray()
     
-    func calculateWins() -> NSInteger {
-        var x:NSInteger = 0
+    var wp: NSInteger = 0
+    
+    func calculateQualCount() {
         for var i = 0; i < self.matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
-            if m.didTeamTie(self.num) {
-                //PREVENT TIES AND LOSSES
-            }else if m.didTeamWin(self.num) && m.isQualsMatch() {
-                println("\(self.num) \(m.name)")
-                x++
-            }
-        }
-        return x
-    }
-    func calculateTies() -> NSInteger {
-        var x:NSInteger = 0
-        for var i = 0; i < self.matches.count; i++ {
-            var m: Match! = matches.objectAtIndex(i) as! Match
-            if m.didTeamTie(self.num) {
-                x++
-            }
-        }
-        return x
-    }
-    func calculateSP() -> NSInteger {
-        var sp = 0
-        for var i = 0; i < self.matches.count; i++ {
-            var m: Match! = matches.objectAtIndex(i) as! Match
-            // Find SP Points
             if m.isQualsMatch() {
-                // if Team Won
-                if m.didTeamWin(self.num) {
-                    // If the other alliance was a no-show, add red's score, else add the opponents score
+                self.qualCount++
+            }
+        }
+    }
+    
+    func calculateStats(var max:NSInteger) {
+        var curQualCount: NSInteger = 0
+        self.orderMatches()
+        for var i = 0; i < self.matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match
+            println("\(m.name) \(self.num) \(curQualCount) \(max)")
+            
+           // println("HOWDY max:\(max) cur: \(curQualCount)")
+            if m.isQualsMatch() && curQualCount < max{
+                //println("WORKED MATCH \(curQualCount)")
+                self.qualCount++
+                curQualCount++
+                if m.didTeamTie(self.num) {
+                    self.spPointsSum += m.scoreForTeam(self.num)
+                    self.tieMatchQualsCount++
+                    self.wp++
+                }else if m.didTeamWin(self.num) {
+                    self.winMatchQualsCount++
+                    self.wp += 2
                     if m.scoreForOpposingTeam(self.num) == 0 {
-                        sp += m.scoreForTeam(self.num)
+                        self.spPointsSum += m.scoreForTeam(self.num)
                         
                     }else {
-                        sp += m.scoreForOpposingTeam(self.num)
+                        self.spPointsSum += m.scoreForOpposingTeam(self.num)
                     }
-                }else {
-                    sp += m.scoreForTeam(self.num)
+                    
+                }else if !m.didTeamWin(self.num){
+                    self.lostMatchQualsCount++
+                    self.spPointsSum += m.scoreForTeam(self.num)
+                    
                 }
             }
         }
-        return sp
+    }
+    
+    func orderMatches() {
+        var tempArray: NSMutableArray! = NSMutableArray()
+        
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match
+            if m.name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        // Sort
+        for (var i = 0; i < tempArray.count; i++) {
+            var m: Match! = tempArray.objectAtIndex(i) as! Match
+            for (var y = i; y > -1; y--) {
+                if (getMatchNum(m.name) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+                    tempArray.removeObjectAtIndex(y + 1)
+                    tempArray.insertObject(m, atIndex: y)
+                }
+            }
+        }
+        // QF
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("QF", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("SF", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if m.name.rangeOfString("Final", options: nil, range: nil, locale: nil) != nil {
+                tempArray.addObject(m)
+            }
+        }
+        self.matches = tempArray;
+    }
+    
+    func getMatchNum(str: String!) -> NSInteger {
+        var temp = split(str) {$0 == " "}
+        return temp[1].toInt()!
     }
 }

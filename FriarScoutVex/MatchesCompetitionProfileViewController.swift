@@ -40,7 +40,7 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         
         
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
-        println("hdgs\(m)")
+       // println("hdgs\(m)")
         cell.matchNameLabel.text = m.name
         cell.redTeam1Label.text = m.red1
         cell.redTeam2Label.text = m.red2

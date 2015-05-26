@@ -26,7 +26,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         
 
         matches = comp.matches
-        println(matches)
         self.matchesTable.reloadData()
         self.spPointsLabel.text = "\(comp.getSPAverage())"
         self.highestScoreLabel.text = "\(comp.highestScore)"
@@ -62,7 +61,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
-        println("hdgs\(m)")
         cell.matchNameLabel.text = m.name
         cell.redTeam1Label.text = m.red1
         cell.redTeam2Label.text = m.red2

@@ -71,7 +71,6 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.comp
-        println(a.award)
         return cell
     }
     

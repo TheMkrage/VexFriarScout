@@ -8,16 +8,21 @@
 
 import UIKit
 
-class OverviewCompetitionProfileViewController: HasCompetitionViewController {
+class OverviewCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
     var name: String! = ""
     var season: String! = ""
     
     var rankings: NSMutableArray! = NSMutableArray()
+    var qualMatchCount: NSInteger = 1000
     
+    @IBOutlet var rankingTable: UITableView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     override func viewDidLoad() {
+        
+        self.rankingTable.dataSource = self
+        self.rankingTable.delegate = self
         self.loadComp()
         var x:HasCompetitionViewController = self.tabBarController?.viewControllers![1] as! HasCompetitionViewController!
         x.comp = self.comp as Competition!
@@ -85,14 +90,13 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
                         self.comp.addMatchToTeam(m.blue2, m: m)
                         
                         self.comp.matchCount++
-                        println(self.comp.name)
-                        
-                        println("ADDING MATCHES")
                         self.comp.matches.addObject(m)
                     }
                     self.calculateRankings()
+                    self.comp.orderMatches()
+                    
                 }
-                self.comp.orderMatches()
+                
                 // Awards
                 let refAward = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/awards")
                 refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
@@ -101,8 +105,10 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
                         var a: Award = Award();
                         var team: Team = Team()
                         team.num = snapshot.childSnapshotForPath("\(i)").value["team"] as! String!
+                        //println(team.num)
                         a.team = team
-                        a.award = snapshot.childSnapshotForPath("\(i)").value["award"] as! String!
+                        a.award = snapshot.childSnapshotForPath("\(i)").value["name"] as! String!
+                        //println(snapshot.childSnapshotForPath("\(i)").value["award"] as! String!)
                         a.comp = self.comp.name
                         self.comp.awards.addObject(a)
                     }
@@ -114,44 +120,125 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController {
     
     func calculateRankings() {
         var tempArray: NSMutableArray! = self.comp.teams
-        // Sort by Wins
         for (var i = 0; i < tempArray.count; i++) {
             var t: Team! = tempArray.objectAtIndex(i) as! Team
+            t.calculateQualCount()
+            println("fadsf \(t.qualCount) and \(self.qualMatchCount)")
+            if self.qualMatchCount > t.qualCount {
+                self.qualMatchCount = t.qualCount
+            }
+        }
+        
+        // Sorting 3.0
+        for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            t.calculateStats(self.qualMatchCount)
             for (var y = i; y > -1; y--) {
-                if (t.calculateWins() > (tempArray.objectAtIndex(y) as! Team).calculateWins() ) {
+                if (t.wp > (tempArray.objectAtIndex(y) as! Team).wp ) {
                     tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(t, atIndex: y)
+                    
+                }else if (t.wp == (tempArray.objectAtIndex(y) as! Team).wp) {
+                    if t.spPointsSum > (tempArray.objectAtIndex(y) as! Team).spPointsSum {
+                        tempArray.removeObjectAtIndex(y + 1)
+                        tempArray.insertObject(t, atIndex: y)
+                    }
                 }
             }
+        }
+        /*// Sorting 2.0
+        for (var i = 0; i < tempArray.count; i++) {
+        var t: Team! = tempArray.objectAtIndex(i) as! Team
+        t.calculateStats()
+        for (var y = i; y > -1; y--) {
+        if (t.winMatchQualsCount > (tempArray.objectAtIndex(y) as! Team).winMatchQualsCount ) {
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
+        }else if (t.winMatchQualsCount == (tempArray.objectAtIndex(y) as! Team).winMatchQualsCount ) {
+        if (t.tieMatchQualsCount > (tempArray.objectAtIndex(y) as! Team).tieMatchQualsCount) {
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
+        }else if (t.tieMatchQualsCount == (tempArray.objectAtIndex(y) as! Team).tieMatchQualsCount) {
+        if t.spPointsSum > (tempArray.objectAtIndex(y) as! Team).spPointsSum {
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
+        }
+        }
+        }
+        }
+        }*/
+        
+        /*
+        //Old Sorting
+        // Sort by Wins
+        for (var i = 0; i < tempArray.count; i++) {
+        var t: Team! = tempArray.objectAtIndex(i) as! Team
+        t.calculateStats()
+        for (var y = i; y > -1; y--) {
+        if (t.winMatchQualsCount > (tempArray.objectAtIndex(y) as! Team).winMatchQualsCount ) {
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
+        }
+        }
         }
         // Sort by Ties if same num of wins
         for (var i = 0; i < tempArray.count; i++) {
-            var t: Team! = tempArray.objectAtIndex(i) as! Team
-            for (var y = i; y > -1; y--) {
-                if (t.calculateTies() > (tempArray.objectAtIndex(y) as! Team).calculateTies() && t.calculateWins() == (tempArray.objectAtIndex(y) as! Team).calculateWins()) {
-                    tempArray.removeObjectAtIndex(y + 1)
-                    tempArray.insertObject(t, atIndex: y)
-                }
-            }
+        var t: Team! = tempArray.objectAtIndex(i) as! Team
+        for (var y = i; y > -1; y--) {
+        if (t.tieMatchQualsCount > (tempArray.objectAtIndex(y) as! Team).tieMatchQualsCount && t.winMatchQualsCount == (tempArray.objectAtIndex(y) as! Team).winMatchQualsCount) {
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
+        }
+        }
         }
         // Sort by SP Points finally!
         for (var i = 0; i < tempArray.count; i++) {
-            var t: Team! = tempArray.objectAtIndex(i) as! Team
-            for (var y = i; y > -1; y--) {
-                if (t.calculateTies() == (tempArray.objectAtIndex(y) as! Team).calculateTies() && t.calculateWins() == (tempArray.objectAtIndex(y) as! Team).calculateWins()) && t.calculateSP() > (tempArray.objectAtIndex(y) as! Team).calculateSP(){
-                    tempArray.removeObjectAtIndex(y + 1)
-                    tempArray.insertObject(t, atIndex: y)
-                }
-            }
+        var t: Team! = tempArray.objectAtIndex(i) as! Team
+        for (var y = i; y > -1; y--) {
+        if (t.tieMatchQualsCount == (tempArray.objectAtIndex(y) as! Team).tieMatchQualsCount && t.winMatchQualsCount == (tempArray.objectAtIndex(y) as! Team).winMatchQualsCount) && t.spPointsSum > (tempArray.objectAtIndex(y) as! Team).spPointsSum{
+        tempArray.removeObjectAtIndex(y + 1)
+        tempArray.insertObject(t, atIndex: y)
         }
-        for (var i = 0; i < tempArray.count; i++) {
-            var t: Team! = tempArray.objectAtIndex(i) as! Team
-            println("\(t.num) \t \(t.calculateWins()) / \(t.calculateTies()) / SP: \(t.calculateSP())  ")
-            //println()
-            
         }
+        }*/
+        /*for (var i = 0; i < tempArray.count; i++) {
+            var t: Team! = tempArray.objectAtIndex(i) as! Team
+            self.rankingTable.reloadData()
+        }*/
+        self.rankings = tempArray
         
-
+        self.rankingTable.reloadData()
     }
-
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Ranking"
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Creates cell and sets title to team num
+        var cell = tableView.dequeueReusableCellWithIdentifier("RankingCell") as! RankingTableCell
+        
+        
+        var t: Team! = self.rankings.objectAtIndex(indexPath.row) as! Team
+        cell.rank.text = "\(indexPath.row + 1)"
+        cell.teamLabel.text = t.num
+        cell.winsLabel.text = "\(t.winMatchQualsCount)-"
+        cell.lossLabel.text = "\(t.lostMatchQualsCount)-"
+        cell.tieLabel.text = "\(t.tieMatchQualsCount)"
+        cell.spLabel.text = "\(t.spPointsSum)"
+        
+        
+        return cell
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.rankings.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
 }

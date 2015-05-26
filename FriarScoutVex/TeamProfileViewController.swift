@@ -14,6 +14,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
     
     override func viewWillAppear(animated: Bool) {
         self.competitionsTable.reloadData()
+        //self.competitionsTable.setContentOffset(CGPointZero, animated: false)
     }
     override func viewDidLoad() {
         
@@ -35,9 +36,9 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         }
         return self.team.competitions.count
     }
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    /*func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Competitions"
-    }
+    }*/
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         

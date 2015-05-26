@@ -133,7 +133,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                         self.team.spPointsSum += m.redScore.toInt()!
                                         comp.spPointsSum += m.redScore.toInt()!
                                     }
-                                    println(comp.spPointsSum)
                                 }else {
                                     comp.elimCount++
                                 }
@@ -170,7 +169,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                         self.team.spPointsSum += m.blueScore.toInt()!
                                         comp.spPointsSum += m.blueScore.toInt()!
                                     }
-                                    println(comp.spPointsSum)
                                 }else {
                                     comp.elimCount++
                                 }
@@ -192,8 +190,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 println("ERROR")
                             }
                             comp.matchCount++
-                            println(comp.name)
-                            
+                        
                             self.team.matchCount++
                             comp.matches.addObject(m)
                         }
@@ -211,15 +208,13 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             
                             self.team.awards.addObject(a)
                             self.team.awardCount++
-                            println("INT HERE \(self.team.awardCount)")
                             
                             self.awardCountLabel.text = "\(self.team.awardCount)"
                         }
                     })
                     self.team.compCount++
                     self.compCountLabel.text = "\(self.team.compCount)"
-                    
-                    println("HERE YOU GO: \(self.team.awardCount)")
+                
                     comp.orderMatches()
                     self.team.competitions.addObject(comp)
                     self.updateLabels()
