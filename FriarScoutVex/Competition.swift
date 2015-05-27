@@ -26,7 +26,9 @@ class Competition: NSObject {
     var qualsCount: NSInteger = 0
     
     var highestScore: NSInteger = 0
+    var highestRowNum: NSInteger = 0
     var lowestScore: NSInteger = 100000
+    var lowestRowNum: NSInteger = 0
     
     var teams: NSMutableArray! = NSMutableArray()
     
@@ -76,6 +78,17 @@ class Competition: NSObject {
             }
         }
         self.matches = tempArray;
+        for var i = 0; i < matches.count; i++ {
+            var m: Match! = matches.objectAtIndex(i) as! Match as Match
+            if (m.blueScore.toInt() == self.highestScore || m.redScore.toInt() == self.highestScore) {
+                self.highestRowNum = i
+            }
+            if (m.blueScore.toInt() == self.lowestScore || m.redScore.toInt() == self.lowestScore) {
+                self.lowestRowNum = i
+            }
+            
+        }
+        
     }
     
     func getMatchNum(str: String!) -> NSInteger {

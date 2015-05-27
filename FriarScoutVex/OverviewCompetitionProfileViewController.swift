@@ -19,6 +19,13 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    
+    override func viewWillAppear(animated: Bool) {
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityIndicator.frame = CGRectMake(100, 100, 100, 100);
+        activityIndicator.startAnimating()
+        self.view.addSubview( activityIndicator )
+    }
     override func viewDidLoad() {
         
         self.rankingTable.dataSource = self

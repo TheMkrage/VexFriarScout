@@ -25,6 +25,15 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     }
     
     
+    @IBAction func highestButton(sender: AnyObject) {
+        var index:NSIndexPath = NSIndexPath(forRow: self.comp.highestRowNum, inSection: 0)
+        self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
+    @IBAction func lowestButton(sender: AnyObject) {
+        var index:NSIndexPath = NSIndexPath(forRow: self.comp.lowestRowNum, inSection: 0)
+        self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
+   
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Matches"
     }
