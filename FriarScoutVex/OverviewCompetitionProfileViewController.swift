@@ -15,19 +15,31 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     var rankings: NSMutableArray! = NSMutableArray()
     var qualMatchCount: NSInteger = 1000
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     @IBOutlet var rankingTable: UITableView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
+    func setAllHidden() {
+        self.rankingTable.hidden = true
+    }
+    
+    func dataLoaded() {
+        self.rankingTable.hidden = false
+        self.activityIndicator.stopAnimating()
+    }
+    
     override func viewWillAppear(animated: Bool) {
-        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        activityIndicator.frame = CGRectMake(100, 100, 100, 100);
-        activityIndicator.startAnimating()
-        self.view.addSubview( activityIndicator )
+        
     }
     override func viewDidLoad() {
-        
+        self.setAllHidden()
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2) - 50, (self.view.frame.height/2) + 50);
+        self.activityIndicator.startAnimating()
+        self.view.addSubview( self.activityIndicator )
         self.rankingTable.dataSource = self
         self.rankingTable.delegate = self
         self.loadComp()
@@ -56,24 +68,24 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                     // Cycle through each Match
                     while let rest2 = enum2.nextObject() as? FDataSnapshot {
                         var m: Match = Match()
-                        m.red1 = rest2.value["rteam 0"] as! String
-                        m.red2 = rest2.value["rteam 1"] as! String
-                        if let y = rest2.value["rteam 2"]   as? String {
-                            m.red3 =  rest2.value["rteam 2"]  as! String
+                        m.red1 = rest2.value["r0"] as! String
+                        m.red2 = rest2.value["r1"] as! String
+                        if let y = rest2.value["r2"]   as? String {
+                            m.red3 =  rest2.value["r2"]  as! String
                         }
-                        m.blue1 = rest2.value["bteam 0"] as! String
-                        m.blue2 = rest2.value["bteam 1"] as! String
-                        if let y = rest2.value["bteam 2"]   as? String {
+                        m.blue1 = rest2.value["b0"] as! String
+                        m.blue2 = rest2.value["b1"] as! String
+                        if let y = rest2.value["b2"]   as? String {
                             
-                            m.blue3 =  rest2.value["bteam 2"]  as! String
+                            m.blue3 =  rest2.value["b2"]  as! String
                         }
                         m.name = rest2.value["num"] as! String
-                        let x =  rest2.value["rscore"] as! Int!
+                        let x =  rest2.value["rs"] as! Int!
                         m.redScore = "\(x)"
-                        let y = rest2.value["bscore"]as! Int!
+                        let y = rest2.value["bs"]as! Int!
                         m.blueScore = "\(y)"
                         
-                        self.comp.sumOfMatches += m.blueScore.toInt()! + m.redScore.toInt()!
+                        self.comp.sumOfMatches += m.blueScore.integerValue + m.redScore.integerValue
                         
                         // Quals Counter
                         if m.isQualsMatch() {
@@ -84,10 +96,10 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                         
                         // Check Highscore and Lowscores for team and comp
                         
-                        if m.redScore.toInt() > self.comp.highestScore {
-                            self.comp.highestScore = m.redScore.toInt()!
-                        }else if m.redScore.toInt() < self.comp.lowestScore {
-                            self.comp.lowestScore = m.redScore.toInt()!
+                        if m.redScore.integerValue > self.comp.highestScore {
+                            self.comp.highestScore = m.redScore.integerValue
+                        }else if m.redScore.integerValue < self.comp.lowestScore {
+                            self.comp.lowestScore = m.redScore.integerValue
                         }
                         
                         // Add Matches to each teams (for rankings calculations)
@@ -101,7 +113,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                     }
                     self.calculateRankings()
                     self.comp.orderMatches()
-                    
+                    self.dataLoaded()
                 }
                 
                 // Awards

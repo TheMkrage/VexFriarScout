@@ -51,15 +51,24 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
        // println("hdgs\(m)")
         cell.matchNameLabel.text = m.name
-        cell.redTeam1Label.text = m.red1
-        cell.redTeam2Label.text = m.red2
-        cell.redTeam3Label.text = m.red3
-        cell.blueTeam1Label.text = m.blue1
-        cell.blueTeam2Label.text = m.blue2
-        cell.blueTeam3Label.text = m.blue3
-        cell.redScoreLabel.text = m.redScore
-        cell.blueScoreLabel.text = m.blueScore
+        cell.redTeam1Label.text = m.red1 as String
+        cell.redTeam2Label.text = m.red2 as String
+        cell.redTeam3Label.text = m.red3 as String
+        cell.blueTeam1Label.text = m.blue1 as String
+        cell.blueTeam2Label.text = m.blue2 as String
+        cell.blueTeam3Label.text = m.blue3 as String
+        cell.redScoreLabel.text = m.redScore as String
+        cell.blueScoreLabel.text = m.blueScore as String
         
+        let boldAttribute = [NSStrokeWidthAttributeName: 7]
+        // Find out what position the team is in
+        if m.colorTeamWon().isEqualToString("red") {
+            let scoreAttr:NSMutableAttributedString = NSMutableAttributedString(string: m.redScore as String, attributes: boldAttribute)
+            cell.redScoreLabel.attributedText = scoreAttr
+        }else if m.colorTeamWon().isEqualToString("blue") {
+            let scoreAttr:NSMutableAttributedString = NSMutableAttributedString(string: m.blueScore as String, attributes: boldAttribute)
+            cell.blueScoreLabel.attributedText = scoreAttr
+        }
         
         return cell
         

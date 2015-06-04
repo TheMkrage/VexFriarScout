@@ -20,6 +20,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     @IBOutlet var awardsTable: UITableView!
    
     override func viewDidLoad() {
+        println("\(self.team.num)")
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
         // Overall Record
@@ -48,20 +49,18 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
         // Set the title of the menuViewController
         vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
         // Destintation ViewController, set team
         let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
         var comp:Competition! = Competition()
         comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
-        var t: Team! = Team()
-        team.num = self.title
-        dest.team = team
+        dest.team = self.team
         dest.comp = comp
         // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)*/
-        
+        self.showViewController(vc as UIViewController, sender: vc)
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

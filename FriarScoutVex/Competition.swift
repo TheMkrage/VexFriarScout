@@ -44,7 +44,7 @@ class Competition: NSObject {
         
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
-            if m.name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+            if m.isQualsMatch() {
                 tempArray.addObject(m)
             }
         }
@@ -52,7 +52,7 @@ class Competition: NSObject {
         for (var i = 0; i < tempArray.count; i++) {
             var m: Match! = tempArray.objectAtIndex(i) as! Match
             for (var y = i; y > -1; y--) {
-                if (getMatchNum(m.name) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+                if (getMatchNum(m.name as String) < getMatchNum(tempArray.objectAtIndex(y).name)) {
                 tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(m, atIndex: y)
                 }
@@ -73,17 +73,17 @@ class Competition: NSObject {
         }
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
-            if m.name.rangeOfString("Final", options: nil, range: nil, locale: nil) != nil {
+            if m.name.rangeOfString("F", options: nil, range: nil, locale: nil) != nil && m.name.rangeOfString("SF", options: nil, range: nil, locale: nil) == nil && m.name.rangeOfString("Q", options: nil, range: nil, locale: nil) == nil{
                 tempArray.addObject(m)
             }
         }
         self.matches = tempArray;
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
-            if (m.blueScore.toInt() == self.highestScore || m.redScore.toInt() == self.highestScore) {
+            if (m.blueScore.integerValue == self.highestScore || m.redScore.integerValue == self.highestScore) {
                 self.highestRowNum = i
             }
-            if (m.blueScore.toInt() == self.lowestScore || m.redScore.toInt() == self.lowestScore) {
+            if (m.blueScore.integerValue == self.lowestScore || m.redScore.integerValue == self.lowestScore) {
                 self.lowestRowNum = i
             }
             
@@ -123,4 +123,5 @@ class Competition: NSObject {
             self.teams.addObject(t)
         }
     }
-}
+    
+   }

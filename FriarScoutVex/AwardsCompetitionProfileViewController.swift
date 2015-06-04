@@ -21,19 +21,16 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
-        // Set the title of the menuViewController
-        vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        // Set the title of the teamcontroller
+        vc.title = "\((self.comp.awards.objectAtIndex(indexPath.row) as! Award).team.num)"
         // Destintation ViewController, set team
-        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
-        var comp:Competition! = Competition()
-        comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
-        var t: Team! = Team()
-        team.num = self.title
-        dest.team = team
-        dest.comp = comp
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
+       
+        var t: Team! = (self.comp.awards.objectAtIndex(indexPath.row) as! Award).team
+        dest.team = t
         // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)*/
+        self.showViewController(vc as UIViewController, sender: vc)
         
     }
     
@@ -55,4 +52,5 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
 }

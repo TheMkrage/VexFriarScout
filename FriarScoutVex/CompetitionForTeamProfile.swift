@@ -35,7 +35,16 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    @IBAction func highestBut(sender: AnyObject) {
+        var index:NSIndexPath = NSIndexPath(forRow: self.comp.highestRowNum, inSection: 0)
+        self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
+    @IBAction func lowestBut(sender: AnyObject) {
+        var index:NSIndexPath = NSIndexPath(forRow: self.comp.lowestRowNum, inSection: 0)
+        self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
     
+
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Matches"
     }
@@ -61,15 +70,64 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
-        cell.matchNameLabel.text = m.name
-        cell.redTeam1Label.text = m.red1
-        cell.redTeam2Label.text = m.red2
-        cell.redTeam3Label.text = m.red3
-        cell.blueTeam1Label.text = m.blue1
-        cell.blueTeam2Label.text = m.blue2
-        cell.blueTeam3Label.text = m.blue3
-        cell.redScoreLabel.text = m.redScore
-        cell.blueScoreLabel.text = m.blueScore
+        cell.matchNameLabel.text = m.name as String
+        cell.redTeam1Label.text = m.red1 as String
+        cell.redTeam2Label.text = m.red2 as String
+        cell.redTeam3Label.text = m.red3 as String
+        cell.blueTeam1Label.text = m.blue1 as String
+        cell.blueTeam2Label.text = m.blue2 as String
+        cell.blueTeam3Label.text = m.blue3 as String
+        cell.redScoreLabel.text = m.redScore as String
+        cell.blueScoreLabel.text = m.blueScore as String
+        
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+        let boldAttribute = [NSStrokeWidthAttributeName: 7]
+        let underlineAttributedString = NSAttributedString(string: self.team.num, attributes: underlineAttribute)
+        // Find out what position the team is in
+        if m.colorTeamIsOn(self.team.num).isEqualToString("red") {
+            let scoreAttr:NSMutableAttributedString = NSMutableAttributedString(string: m.redScore as String, attributes: underlineAttribute)
+            if m.didTeamWin(self.team.num) {
+                scoreAttr.addAttribute(NSStrokeWidthAttributeName, value: 7, range: NSRange(location: 0, length: m.redScore.length))
+            }else if m.didTeamTie(self.team.num) {
+                scoreAttr.addAttribute(NSStrokeWidthAttributeName, value: 7, range: NSRange(location: 0, length: m.redScore.length))
+                let opScoreAttr = NSMutableAttributedString(string: m.blueScore as String, attributes: boldAttribute)
+                cell.blueScoreLabel.attributedText = opScoreAttr
+            }else{
+                let opScoreAttr = NSMutableAttributedString(string: m.blueScore as String, attributes: boldAttribute)
+                cell.blueScoreLabel.attributedText = opScoreAttr
+            }
+            cell.redScoreLabel.attributedText = scoreAttr
+            if m.red1.isEqualToString(self.team.num) {
+                cell.redTeam1Label.attributedText = underlineAttributedString
+            }else  if m.red2.isEqualToString(self.team.num) {
+                cell.redTeam2Label.attributedText = underlineAttributedString
+            }else  if m.red3.isEqualToString(self.team.num) {
+                cell.redTeam3Label.attributedText = underlineAttributedString
+            }
+        }else if m.colorTeamIsOn(self.team.num).isEqualToString("blue") {
+            let scoreAttr:NSMutableAttributedString = NSMutableAttributedString(string: m.blueScore as String, attributes: underlineAttribute)
+            if m.didTeamWin(self.team.num) {
+                scoreAttr.addAttribute(NSStrokeWidthAttributeName, value: 7, range: NSRange(location: 0, length: m.blueScore.length))
+            }else if m.didTeamTie(self.team.num) {
+                scoreAttr.addAttribute(NSStrokeWidthAttributeName, value: 7, range: NSRange(location: 0, length: m.blueScore.length))
+                let opScoreAttr = NSMutableAttributedString(string: m.redScore as String, attributes: boldAttribute)
+                cell.redScoreLabel.attributedText = opScoreAttr
+            }else {
+                let opScoreAttr = NSMutableAttributedString(string: m.redScore as String, attributes: boldAttribute)
+                cell.redScoreLabel.attributedText = opScoreAttr
+            }
+            cell.blueScoreLabel.attributedText = scoreAttr
+            if m.blue1.isEqualToString(self.team.num) {
+                cell.blueTeam1Label.attributedText = underlineAttributedString
+            }else  if m.blue2.isEqualToString(self.team.num) {
+                cell.blueTeam2Label.attributedText = underlineAttributedString
+            }else  if m.blue3.isEqualToString(self.team.num) {
+                cell.blueTeam3Label.attributedText = underlineAttributedString
+            }
+        }
+       // cell.matchNameLabel.attributedText = underlineAttributedString
+        
+        
         
         
         return cell

@@ -54,6 +54,7 @@ class Team: NSObject {
                 self.qualCount++
             }
         }
+        println("\(self.num) had \(self.qualCount) matches")
     }
     
     func calculateStats(var max:NSInteger) {
@@ -63,9 +64,7 @@ class Team: NSObject {
             var m: Match! = matches.objectAtIndex(i) as! Match
             println("\(m.name) \(self.num) \(curQualCount) \(max)")
             
-           // println("HOWDY max:\(max) cur: \(curQualCount)")
-            if m.isQualsMatch() && curQualCount < max{
-                //println("WORKED MATCH \(curQualCount)")
+            if m.isQualsMatch() && curQualCount < max {
                 self.qualCount++
                 curQualCount++
                 if m.didTeamTie(self.num) {
@@ -96,7 +95,7 @@ class Team: NSObject {
         
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
-            if m.name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+            if m.isQualsMatch() {
                 tempArray.addObject(m)
             }
         }
@@ -104,7 +103,7 @@ class Team: NSObject {
         for (var i = 0; i < tempArray.count; i++) {
             var m: Match! = tempArray.objectAtIndex(i) as! Match
             for (var y = i; y > -1; y--) {
-                if (getMatchNum(m.name) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+                if (getMatchNum(m.name as String) < getMatchNum(tempArray.objectAtIndex(y).name)) {
                     tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(m, atIndex: y)
                 }
@@ -125,15 +124,40 @@ class Team: NSObject {
         }
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match
-            if m.name.rangeOfString("Final", options: nil, range: nil, locale: nil) != nil {
+            if m.name.rangeOfString("F", options: nil, range: nil, locale: nil) != nil && m.name.rangeOfString("SF", options: nil, range: nil, locale: nil) == nil && m.name.rangeOfString("Q", options: nil, range: nil, locale: nil) == nil{
                 tempArray.addObject(m)
             }
         }
-        self.matches = tempArray;
+        self.matches = tempArray;        
+
     }
     
     func getMatchNum(str: String!) -> NSInteger {
         var temp = split(str) {$0 == " "}
         return temp[1].toInt()!
     }
+    
+    // Date must be in yyyy-MM-dd
+    // Order comps newest to oldest
+    func orderCompetitions() {
+        // Make formatter
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        // Sort
+        for (var i = 0; i < self.competitions.count; i++) {
+            var c: Competition! = self.competitions.objectAtIndex(i) as! Competition
+            for (var y = i; y > -1; y--) {
+                var cDate: NSDate = formatter.dateFromString(c.date)!
+                var yDate: NSDate = formatter.dateFromString((self.competitions.objectAtIndex(y) as! Competition).date)!
+                // Date comparision to compare current date and end date.
+                var dateComparisionResult:NSComparisonResult = cDate.compare(yDate)
+                if dateComparisionResult == NSComparisonResult.OrderedDescending {
+                    self.competitions.removeObjectAtIndex(y + 1)
+                    self.competitions.insertObject(c, atIndex: y)
+                }
+            }
+        }
+        
+    }
+
 }

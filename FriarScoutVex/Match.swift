@@ -10,14 +10,14 @@ import UIKit
 
 class Match: NSObject {
     var name: String = ""
-    var red1: String = ""
-    var red2: String = ""
-    var red3: String = ""
-    var blue1: String = ""
-    var blue2: String = ""
-    var blue3: String = ""
-    var redScore: String = ""
-    var blueScore: String = ""
+    var red1: NSString = ""
+    var red2: NSString = ""
+    var red3: NSString = ""
+    var blue1: NSString = ""
+    var blue2: NSString = ""
+    var blue3: NSString = ""
+    var redScore: NSString = ""
+    var blueScore: NSString = ""
     
     // Return a string with the color depending on if a team was on the red or blue team, returns none if team was not in match
     func colorTeamIsOn(team: String!) -> NSString! {
@@ -28,9 +28,19 @@ class Match: NSObject {
         }
         return "none"
     }
+    
+    func colorTeamWon() -> NSString! {
+        if self.redScore.integerValue > self.blueScore.integerValue{
+            return "red"
+        }else if self.redScore.integerValue < self.blueScore.integerValue {
+            return "blue"
+        }
+        return "tie"
+
+    }
     // Determines if Team team tied the match or not, defaults to false if team was not present in match
     func didTeamTie(team: String!) -> Bool {
-        if redScore.toInt() == blueScore.toInt() {
+        if redScore.integerValue == blueScore.integerValue {
             return true
         }
         return false
@@ -39,18 +49,18 @@ class Match: NSObject {
     // Determines if Team team won the match or not, defaults to false if team was not present in match
     func didTeamWin(team: String!) -> Bool {
         if colorTeamIsOn(team).isEqualToString("red") {
-            if redScore.toInt() > blueScore.toInt() {
+            if redScore.integerValue > blueScore.integerValue {
                 return true
             }
         }else if colorTeamIsOn(team).isEqualToString("blue") {
-            if blueScore.toInt() > redScore.toInt() {
+            if blueScore.integerValue > redScore.integerValue {
                 return true
             }
         }
         return false
     }
     func isQualsMatch() -> Bool {
-        if name.rangeOfString("Qual", options: nil, range: nil, locale: nil) != nil {
+        if name.rangeOfString("Q", options: nil, range: nil, locale: nil) != nil && name.rangeOfString("QF", options: nil, range: nil, locale: nil) == nil{
             return true
         }
         return false
@@ -58,18 +68,18 @@ class Match: NSObject {
     
     func scoreForTeam(team: String) -> NSInteger {
         if colorTeamIsOn(team).isEqualToString("red") {
-            return redScore.toInt()!
+            return redScore.integerValue
         }else if colorTeamIsOn(team).isEqualToString("blue") {
-            return blueScore.toInt()!
+            return blueScore.integerValue
         }
         return 0
     }
     
     func scoreForOpposingTeam(team: String) -> NSInteger {
         if colorTeamIsOn(team).isEqualToString("red") {
-            return blueScore.toInt()!
+            return blueScore.integerValue
         }else if colorTeamIsOn(team).isEqualToString("blue") {
-            return redScore.toInt()!
+            return redScore.integerValue
         }
         return 0
     }

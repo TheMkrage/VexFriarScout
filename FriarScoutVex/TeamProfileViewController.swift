@@ -62,9 +62,8 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
         var comp:Competition! = Competition()
         comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
-        var t: Team! = Team()
-        team.num = self.title
-        dest.team = team
+        
+        dest.team = self.team
         dest.comp = comp
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
