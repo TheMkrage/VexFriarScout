@@ -28,6 +28,7 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
         let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
        
         var t: Team! = (self.comp.awards.objectAtIndex(indexPath.row) as! Award).team
+        t.season = self.comp.season
         dest.team = t
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)

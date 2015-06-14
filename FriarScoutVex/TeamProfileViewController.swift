@@ -22,7 +22,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         self.competitionsTable.delegate = self
         self.competitionsTable.dataSource = self
         
-           }
+    }
     
     //TABLE STUFF
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -37,7 +37,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         return self.team.competitions.count
     }
     /*func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Competitions"
+    return "Competitions"
     }*/
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -55,18 +55,31 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
-        // Set the title of the menuViewController
-        vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
-        // Destintation ViewController, set team
-        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
         var comp:Competition! = Competition()
         comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
-        
-        dest.team = self.team
-        dest.comp = comp
-        // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)
+        if comp.date == "League" {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+            // Set the title of the menuViewController
+            vc.title = "\(comp.name)"
+            // Destintation ViewController, set team
+            let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+            dest.name = comp.name
+            dest.season = comp.season
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }else {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+            // Set the title of the menuViewController
+            vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
+            // Destintation ViewController, set team
+            let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
+            
+            //comp.season = self.team.season
+            dest.team = self.team
+            dest.comp = comp
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }
         /*
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompetitionProfile") as! CompetitionForTeamProfile
         // Set the title of the menuViewController

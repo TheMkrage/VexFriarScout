@@ -27,8 +27,13 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
     
     func dataLoaded() {
-        self.rankingTable.hidden = false
+        
         self.activityIndicator.stopAnimating()
+        if self.comp.date == "League" {
+           // self.leagueMessage.hidden = false
+        }else {
+            self.rankingTable.hidden = false
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

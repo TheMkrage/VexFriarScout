@@ -14,6 +14,7 @@ class Team: NSObject {
     var num: String! = ""
     var loc: String! = ""
     var org: String! = ""
+    var season: String! = ""
     var competitions: NSMutableArray! = NSMutableArray()
     var awards: NSMutableArray! = NSMutableArray()
     

@@ -26,6 +26,7 @@
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
 		7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */; };
+		7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */; };
 		7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */; };
 		7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3C1AD30078008F0639 /* AppDelegate.swift */; };
 		7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3E1AD30078008F0639 /* LogInViewController.swift */; };
@@ -78,6 +79,7 @@
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
+		7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingTableCell.swift; sourceTree = "<group>"; };
 		7EC81E371AD30078008F0639 /* FriarScoutVex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriarScoutVex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E3B1AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		7EBFFB8E1AED66EF003597FE /* Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */,
 				7ECAEBDC1B090B190056733A /* Competition Profile */,
 				7EC93BC91B00316800796251 /* CompetitionForTeamProfile */,
 				7EC93BC81B00315C00796251 /* Team Profile */,
@@ -427,6 +430,7 @@
 				7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */,
 				7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */,
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
+				7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
 				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,

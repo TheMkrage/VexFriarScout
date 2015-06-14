@@ -48,7 +48,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
         var team2: Team! = Team()
         team2.num = team
-        
+        team2.season = self.season as String
         dest.team = team2
         // Set the title of the menuViewController
         vc.title = "Team \(team)"
