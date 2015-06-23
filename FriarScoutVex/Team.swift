@@ -129,8 +129,8 @@ class Team: NSObject {
                 tempArray.addObject(m)
             }
         }
-        self.matches = tempArray;        
-
+        self.matches = tempArray;
+        
     }
     
     func getMatchNum(str: String!) -> NSInteger {
@@ -141,6 +141,7 @@ class Team: NSObject {
     // Date must be in yyyy-MM-dd
     // Order comps newest to oldest
     func orderCompetitions() {
+        println("ORDERING")
         // Make formatter
         var formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -148,17 +149,22 @@ class Team: NSObject {
         for (var i = 0; i < self.competitions.count; i++) {
             var c: Competition! = self.competitions.objectAtIndex(i) as! Competition
             for (var y = i; y > -1; y--) {
-                var cDate: NSDate = formatter.dateFromString(c.date)!
-                var yDate: NSDate = formatter.dateFromString((self.competitions.objectAtIndex(y) as! Competition).date)!
-                // Date comparision to compare current date and end date.
-                var dateComparisionResult:NSComparisonResult = cDate.compare(yDate)
-                if dateComparisionResult == NSComparisonResult.OrderedDescending {
-                    self.competitions.removeObjectAtIndex(y + 1)
-                    self.competitions.insertObject(c, atIndex: y)
+                if c.date != "League" && (self.competitions.objectAtIndex(y) as! Competition).date != "League" {
+                    var cDate: NSDate = formatter.dateFromString(c.date)!
+                    var yDate: NSDate = formatter.dateFromString((self.competitions.objectAtIndex(y) as! Competition).date)!
+                    
+                    // Date comparision to compare current date and end date.
+                    var dateComparisionResult:NSComparisonResult = cDate.compare(yDate)
+                    if dateComparisionResult == NSComparisonResult.OrderedAscending {
+                        
+                        self.competitions.removeObjectAtIndex(y + 1)
+                        self.competitions.insertObject(c, atIndex: y)
+                        println(self.competitions)
+                    }
                 }
             }
         }
         
     }
-
+    
 }

@@ -9,28 +9,61 @@
 import UIKit
 
 class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerViewDataSource, AKPickerViewDelegate {
-    var userProfile: UserProfile = UserProfile()
-    var season: NSString = "Skyrise"
-    let seasons = ["Skyrise", "NBN"]
+    // Every possible season
+    let seasons = ["NBN", "Skyrise"]
+    var season: NSString = "NBN"
+    // Input
     @IBOutlet var seasonPicker: AKPickerView!
     @IBOutlet var TeamTextField: UITextField!
     
+    @IBOutlet var visitProfileButton: UIButton!
+    
+    struct defaultsKeys {
+        static let myTeam = "myTeam"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set Font for Main Menu Title and all future titles
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
+        self.title = "Welcome!"
         self.TeamTextField.delegate = self
+        // Setup seasonPicker
         self.seasonPicker.delegate = self
         self.seasonPicker.dataSource = self
-        
-        self.seasonPicker.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
-        self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
+        self.seasonPicker.font = UIFont(name: "HelveticaNeue-Bold", size: 20)!
+        self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: 20)!
         self.seasonPicker.interitemSpacing = 20.0
         self.seasonPicker.viewDepth = 1000.0
         self.seasonPicker.pickerViewStyle = .Wheel
         self.seasonPicker.maskDisabled = false
-        //self.seasonPicker.reloadData()
+        self.seasonPicker.reloadData()
     }
+    
+    // Changes function of text field and button
+    @IBAction func editButton(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
+            self.TeamTextField.text = stringOne
+        }
+
+        self.visitProfileButton.setTitle("SAVE CHANGES", forState: .Normal)
+        self.TeamTextField.backgroundColor = UIColor.redColor()
+    }
+    
+    // Button next to teamfield that advances the user to the team they typed in or if editing myTeam, it will save the ccchanges
     @IBAction func visitProfileButton(sender: AnyObject) {
-        self.moveToTeamProfile(self.TeamTextField.text)
+        if self.visitProfileButton.titleLabel!.text == "SAVE CHANGES" {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setValue(self.TeamTextField.text, forKey: defaultsKeys.myTeam)
+            defaults.synchronize()
+            self.visitProfileButton.setTitle("VISIT PROFILE", forState: .Normal)
+            self.TeamTextField.backgroundColor = UIColor.whiteColor()
+            self.TeamTextField.text = ""
+        }else {
+            self.moveToTeamProfile(self.TeamTextField.text)
+        }
     }
     
     // End editing if user taps off textfield
@@ -38,46 +71,67 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         self.view.endEditing(true)
     }
     
+    // Button for myTeam
     @IBAction func myTeamButton(sender: AnyObject) {
-       self.moveToTeamProfile(self.userProfile.team)
-    }
-    func moveToTeamProfile(team: String!) {
-        
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
-        // Destintation ViewController, set team
-        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
-        var team2: Team! = Team()
-        team2.num = team
-        team2.season = self.season as String
-        dest.team = team2
-        // Set the title of the menuViewController
-        vc.title = "Team \(team)"
-        // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)
-        /*
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! TeamProfileViewController
-        var team: Team! = Team()
-        team.num = self.TeamTextField.text
-        vc.team = team
-        // Set the title of the menuViewController
-        vc.title = "Team \(self.TeamTextField.text)"
-        // Present Main Menu
-        self.showViewController(vc as UIViewController, sender: vc)*/
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
+            self.moveToTeamProfile(stringOne)
+        }
+
         
     }
     
+    // Give it a team, it moves to their profile
+    func moveToTeamProfile(team: String!) {
+        if !team.isEmpty {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+            // Destintation ViewController, set team
+            let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
+            var team2: Team! = Team()
+            team2.num = team.uppercaseString
+            team2.season = self.season as String
+            dest.team = team2
+            // Set the title of the menuViewController
+            vc.title = "Team \(team)"
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }
+    }
+    
+    // Skills button, takes you to skills view and sends season along with it
+    @IBAction func skills(sender: AnyObject) {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("skills") as! UITabBarController
+        // Destintation ViewController, set season
+        let dest: SkillsViewController = vc.viewControllers?.first as! SkillsViewController
+         dest.title = "Robot Skills"
+        (vc.viewControllers?.last as! ProgrammingSkillsViewController).title = "Programming Skills"
+        (vc.viewControllers?.last as! ProgrammingSkillsViewController).season = self.season as String
+        dest.season = self.season as String
+        // Set the title of the menuViewController
+       
+        // Present Main Menu
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        moveToTeamProfile(textField.text)
+        if self.visitProfileButton.titleLabel!.text == "SAVE CHANGES" {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setValue(self.TeamTextField.text, forKey: defaultsKeys.myTeam)
+            defaults.synchronize()
+            self.visitProfileButton.setTitle("VISIT PROFILE", forState: .Normal)
+            self.TeamTextField.backgroundColor = UIColor.whiteColor()
+            self.TeamTextField.text = ""
+        }else {
+            self.moveToTeamProfile(self.TeamTextField.text)
+        }
         return true
     }
     
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        println("count!")
         return seasons.count;
     }
     
     func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        println("GETTING INFO")
         return seasons[item]
     }
     

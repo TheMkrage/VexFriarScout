@@ -232,6 +232,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 self.compCountLabel.text = "\(self.team.compCount)"
                 
                 comp.orderMatches()
+                //self.team.orderCompetitions()
                 comp.season = self.team.season
                 self.team.competitions.addObject(comp)
                 self.updateLabels()
@@ -240,6 +241,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
             //  }
             self.updateLabels()
         })
+        
         
     }
     

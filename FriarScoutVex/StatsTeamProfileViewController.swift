@@ -51,11 +51,17 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
         // Set the title of the menuViewController
-        vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
+        vc.title = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
         // Destintation ViewController, set team
         let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
         var comp:Competition! = Competition()
-        comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
+        for var i: Int = 0; i < self.team.competitions.count; i++ {
+            var c: Competition = self.team.competitions.objectAtIndex(i) as! Competition
+            if c.name == (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String {
+                comp = c
+            }
+        }
+        //comp.name = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
         dest.team = self.team
         dest.comp = comp
         // Present Profile

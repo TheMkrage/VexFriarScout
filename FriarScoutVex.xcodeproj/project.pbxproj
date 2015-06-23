@@ -26,23 +26,32 @@
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
 		7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */; };
+		7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB341B3352400046250B /* SkillsViewController.swift */; };
+		7EC5AB371B33561B0046250B /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB361B33561B0046250B /* Skills.swift */; };
+		7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB381B3356620046250B /* SkillsCell.swift */; };
 		7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */; };
 		7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */; };
 		7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3C1AD30078008F0639 /* AppDelegate.swift */; };
-		7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3E1AD30078008F0639 /* LogInViewController.swift */; };
 		7EC81E421AD30078008F0639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E401AD30078008F0639 /* Main.storyboard */; };
 		7EC81E441AD30078008F0639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E431AD30078008F0639 /* Images.xcassets */; };
 		7EC81E471AD30078008F0639 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E451AD30078008F0639 /* LaunchScreen.xib */; };
 		7EC81E531AD30078008F0639 /* FriarScoutVexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E521AD30078008F0639 /* FriarScoutVexTests.swift */; };
 		7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
 		7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
-		7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */; };
 		7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */; };
 		7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */; };
 		7ECAEBDE1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBDD1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift */; };
 		7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBDF1B090B9F0056733A /* MatchesCompetitionProfileViewController.swift */; };
 		7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBE11B090BCB0056733A /* AwardsCompetitionProfileViewController.swift */; };
 		7ECAEBE41B0913ED0056733A /* HasCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBE31B0913ED0056733A /* HasCompetitionViewController.swift */; };
+		7ECC92FE1B3906A30082F128 /* ProgrammingSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC92FD1B3906A30082F128 /* ProgrammingSkillsViewController.swift */; };
+		7ECC93071B390E990082F128 /* awards.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93001B390E990082F128 /* awards.png */; };
+		7ECC93081B390E990082F128 /* compOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93011B390E990082F128 /* compOverview.png */; };
+		7ECC93091B390E990082F128 /* matchList.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93021B390E990082F128 /* matchList.png */; };
+		7ECC930A1B390E990082F128 /* moreStats.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93031B390E990082F128 /* moreStats.png */; };
+		7ECC930B1B390E990082F128 /* ps.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93041B390E990082F128 /* ps.png */; };
+		7ECC930C1B390E990082F128 /* rs.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93051B390E990082F128 /* rs.png */; };
+		7ECC930D1B390E990082F128 /* teamOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93061B390E990082F128 /* teamOverview.png */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
 		7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEA292C1B05A1A50057DD1D /* UserProfile.swift */; };
@@ -79,12 +88,14 @@
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
+		7EC5AB341B3352400046250B /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
+		7EC5AB361B33561B0046250B /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
+		7EC5AB381B3356620046250B /* SkillsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsCell.swift; sourceTree = "<group>"; };
 		7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingTableCell.swift; sourceTree = "<group>"; };
 		7EC81E371AD30078008F0639 /* FriarScoutVex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriarScoutVex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E3B1AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC81E3C1AD30078008F0639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7EC81E3E1AD30078008F0639 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		7EC81E411AD30078008F0639 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EC81E431AD30078008F0639 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7EC81E461AD30078008F0639 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -92,13 +103,20 @@
 		7EC81E511AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC81E521AD30078008F0639 /* FriarScoutVexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriarScoutVexTests.swift; sourceTree = "<group>"; };
 		7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
-		7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
 		7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewTeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasTeamViewController.swift; sourceTree = "<group>"; };
 		7ECAEBDD1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7ECAEBDF1B090B9F0056733A /* MatchesCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7ECAEBE11B090BCB0056733A /* AwardsCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardsCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7ECAEBE31B0913ED0056733A /* HasCompetitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasCompetitionViewController.swift; sourceTree = "<group>"; };
+		7ECC92FD1B3906A30082F128 /* ProgrammingSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingSkillsViewController.swift; sourceTree = "<group>"; };
+		7ECC93001B390E990082F128 /* awards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awards.png; sourceTree = "<group>"; };
+		7ECC93011B390E990082F128 /* compOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compOverview.png; sourceTree = "<group>"; };
+		7ECC93021B390E990082F128 /* matchList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = matchList.png; sourceTree = "<group>"; };
+		7ECC93031B390E990082F128 /* moreStats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreStats.png; sourceTree = "<group>"; };
+		7ECC93041B390E990082F128 /* ps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ps.png; sourceTree = "<group>"; };
+		7ECC93051B390E990082F128 /* rs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rs.png; sourceTree = "<group>"; };
+		7ECC93061B390E990082F128 /* teamOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teamOverview.png; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		7EEA292C1B05A1A50057DD1D /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -134,18 +152,10 @@
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EE78C961AED791F001ED13F /* More Stats */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
-				7EBFFB8D1AED66CB003597FE /* Login */,
+				7EC5AB341B3352400046250B /* SkillsViewController.swift */,
+				7ECC92FD1B3906A30082F128 /* ProgrammingSkillsViewController.swift */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7EBFFB8D1AED66CB003597FE /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				7EC81E3E1AD30078008F0639 /* LogInViewController.swift */,
-				7EC81E5F1AD322D9008F0639 /* RegisterUserViewController.swift */,
-			);
-			name = Login;
 			sourceTree = "<group>";
 		};
 		7EBFFB8E1AED66EF003597FE /* Profiles */ = {
@@ -166,6 +176,7 @@
 				7EE78C941AED789B001ED13F /* MatchTableCell.swift */,
 				7EBFE57C1B02F59600E804BC /* AwardCell.swift */,
 				7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */,
+				7EC5AB381B3356620046250B /* SkillsCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -181,6 +192,7 @@
 		7EBFFB911AED6750003597FE /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				7ECC92FF1B390E820082F128 /* Icons */,
 				7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */,
 				7EC81E401AD30078008F0639 /* Main.storyboard */,
 				7EC81E431AD30078008F0639 /* Images.xcassets */,
@@ -294,6 +306,20 @@
 			name = "Competition Profile";
 			sourceTree = "<group>";
 		};
+		7ECC92FF1B390E820082F128 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				7ECC93001B390E990082F128 /* awards.png */,
+				7ECC93011B390E990082F128 /* compOverview.png */,
+				7ECC93021B390E990082F128 /* matchList.png */,
+				7ECC93031B390E990082F128 /* moreStats.png */,
+				7ECC93041B390E990082F128 /* ps.png */,
+				7ECC93051B390E990082F128 /* rs.png */,
+				7ECC93061B390E990082F128 /* teamOverview.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		7EE78C961AED791F001ED13F /* More Stats */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +335,7 @@
 				7EC2DE171AF6C0AF002071AC /* Competition.swift */,
 				7EBFE57A1B02E9A700E804BC /* Award.swift */,
 				7EEA292C1B05A1A50057DD1D /* UserProfile.swift */,
+				7EC5AB361B33561B0046250B /* Skills.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -362,6 +389,7 @@
 				TargetAttributes = {
 					7EC81E361AD30078008F0639 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 2MD9NK2MQ3;
 					};
 					7EC81E4B1AD30078008F0639 = {
 						CreatedOnToolsVersion = 6.2;
@@ -393,9 +421,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ECC930B1B390E990082F128 /* ps.png in Resources */,
+				7ECC930C1B390E990082F128 /* rs.png in Resources */,
 				7EC81E421AD30078008F0639 /* Main.storyboard in Resources */,
+				7ECC930A1B390E990082F128 /* moreStats.png in Resources */,
+				7ECC93091B390E990082F128 /* matchList.png in Resources */,
+				7ECC930D1B390E990082F128 /* teamOverview.png in Resources */,
+				7ECC93071B390E990082F128 /* awards.png in Resources */,
 				7EC81E471AD30078008F0639 /* LaunchScreen.xib in Resources */,
 				7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */,
+				7ECC93081B390E990082F128 /* compOverview.png in Resources */,
 				7EC1B0981B16C0CC00B3A7BA /* GraySquare.png in Resources */,
 				7EC81E441AD30078008F0639 /* Images.xcassets in Resources */,
 			);
@@ -423,23 +458,25 @@
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */,
 				7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */,
-				7EC81E3F1AD30078008F0639 /* LogInViewController.swift in Sources */,
 				7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */,
 				7EBFE57D1B02F59600E804BC /* AwardCell.swift in Sources */,
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
 				7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */,
 				7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */,
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
+				7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */,
 				7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */,
+				7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
 				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,
 				7ECAEBE41B0913ED0056733A /* HasCompetitionViewController.swift in Sources */,
-				7EC81E601AD322D9008F0639 /* RegisterUserViewController.swift in Sources */,
 				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
 				7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */,
 				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */,
+				7ECC92FE1B3906A30082F128 /* ProgrammingSkillsViewController.swift in Sources */,
+				7EC5AB371B33561B0046250B /* Skills.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
 				7EBFE57F1B02FC1900E804BC /* StatsTeamProfileViewController.swift in Sources */,
 			);
@@ -566,6 +603,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -575,6 +613,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FriarScoutVex-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -586,6 +625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -595,6 +635,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FriarScoutVex-Bridging-Header.h";
 			};
 			name = Release;

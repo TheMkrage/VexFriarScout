@@ -32,6 +32,9 @@ class Competition: NSObject {
     
     var teams: NSMutableArray! = NSMutableArray()
     
+    override var description: String {
+        return "\(self.name) date: \(self.date)"
+    }
     func getSPAverage() -> NSInteger {
         if self.qualsCount != 0 {
             return self.spPointsSum/self.qualsCount
