@@ -147,7 +147,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="dJI-vg-JMe"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="rs.png" id="dJI-vg-JMe"/>
                     <connections>
                         <outlet property="skillsTable" destination="nRz-CP-VXU" id="Fdk-z1-3M6"/>
                     </connections>
@@ -169,9 +169,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phw-tH-hyx">
-                                <rect key="frame" x="285" y="245" width="182" height="51"/>
+                                <rect key="frame" x="209" y="245" width="182" height="51"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="182" id="K8A-m4-QhC"/>
+                                    <constraint firstAttribute="width" constant="182" id="T21-6H-BmF"/>
+                                    <constraint firstAttribute="height" constant="51" id="cdY-R7-1C6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
                                 <state key="normal" title="Visit Profile">
@@ -181,14 +182,28 @@
                                     <action selector="visitProfileButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="jJF-1c-BUd"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fN2-L7-f7e">
-                                <rect key="frame" x="152" y="256" width="125" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fN2-L7-f7e">
+                                <rect key="frame" x="209" y="304" width="182" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="Lgc-t8-k3K"/>
+                                    <constraint firstAttribute="width" constant="182" id="DI5-CV-WG4"/>
+                                    <constraint firstAttribute="height" constant="30" id="Wc6-Yl-pSw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
+                                <rect key="frame" x="255" y="186" width="91" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="0Wc-vu-QCa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
+                                <state key="normal" title="My Team">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myTeamButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="5Ed-VK-M7r"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzj-0K-EgP" customClass="AKPickerView" customModule="FriarScoutVex" customModuleProvider="target">
                                 <rect key="frame" x="16" y="377" width="568" height="99"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,49 +224,50 @@
                                     <action selector="skills:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="hbh-QJ-a28"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hz-dS-Fzn">
-                                <rect key="frame" x="351" y="197" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friarbots white logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="68d-gp-9fF">
+                                <rect key="frame" x="157" y="428" width="287" height="164"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="DNr-CJ-WI2"/>
-                                    <constraint firstAttribute="height" constant="30" id="dcb-u2-Fqy"/>
+                                    <constraint firstAttribute="width" constant="287" id="6bG-96-Vli"/>
+                                    <constraint firstAttribute="height" constant="164" id="ug7-Za-hIa"/>
                                 </constraints>
-                                <state key="normal" title="Edit">
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hz-dS-Fzn">
+                                <rect key="frame" x="346" y="186" width="74" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="mt3-jl-Khq"/>
+                                    <constraint firstAttribute="height" constant="49" id="vrq-NE-jC2"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="wrench.png">
+                                    <color key="titleColor" red="0.0039215688589999999" green="0.18431372939999999" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="wrenchSelected.png"/>
+                                <state key="highlighted" image="wrenchSelected.png"/>
                                 <connections>
                                     <action selector="editButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="zJD-IG-34h"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nlK-rz-tSC">
-                                <rect key="frame" x="255" y="186" width="91" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="91" id="0Wc-vu-QCa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
-                                <state key="normal" title="My Team">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="myTeamButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="5Ed-VK-M7r"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="phw-tH-hyx" secondAttribute="centerX" constant="-76" id="2sX-nq-yi8"/>
-                            <constraint firstItem="phw-tH-hyx" firstAttribute="top" secondItem="3Hz-dS-Fzn" secondAttribute="bottom" constant="18" id="40j-Rn-MrG"/>
+                            <constraint firstItem="3Hz-dS-Fzn" firstAttribute="top" secondItem="Efl-Sc-JjP" secondAttribute="bottom" constant="8" id="3Y9-H0-VNG"/>
+                            <constraint firstItem="3Hz-dS-Fzn" firstAttribute="leading" secondItem="nlK-rz-tSC" secondAttribute="trailing" id="5T2-5U-Jgd"/>
+                            <constraint firstItem="phw-tH-hyx" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="8" id="EGk-AF-Q2z"/>
+                            <constraint firstAttribute="centerX" secondItem="fN2-L7-f7e" secondAttribute="centerX" id="GFm-jH-wfH"/>
                             <constraint firstAttribute="centerX" secondItem="nlK-rz-tSC" secondAttribute="centerX" id="Kj5-J7-fxH"/>
                             <constraint firstItem="Efl-Sc-JjP" firstAttribute="top" secondItem="5mA-kj-eNn" secondAttribute="bottom" constant="63" id="MTf-U6-phs"/>
-                            <constraint firstAttribute="centerX" secondItem="fN2-L7-f7e" secondAttribute="centerX" constant="85.5" id="N0j-3F-wWd"/>
-                            <constraint firstAttribute="centerX" secondItem="3Hz-dS-Fzn" secondAttribute="centerX" constant="-66" id="TBe-8l-1GV"/>
+                            <constraint firstAttribute="centerX" secondItem="phw-tH-hyx" secondAttribute="centerX" id="Q2E-fS-MNr"/>
                             <constraint firstAttribute="trailing" secondItem="Wzj-0K-EgP" secondAttribute="trailing" constant="16" id="TKG-JP-rDW"/>
                             <constraint firstAttribute="centerX" secondItem="Efl-Sc-JjP" secondAttribute="centerX" id="Tmm-IH-biL"/>
+                            <constraint firstAttribute="centerX" secondItem="68d-gp-9fF" secondAttribute="centerX" id="Uqd-6d-WLf"/>
+                            <constraint firstItem="BT2-rg-2yf" firstAttribute="top" secondItem="68d-gp-9fF" secondAttribute="bottom" constant="8" id="Y8e-5A-Gog"/>
                             <constraint firstAttribute="centerX" secondItem="Wzj-0K-EgP" secondAttribute="centerX" id="bTt-Jz-6hK"/>
                             <constraint firstItem="nlK-rz-tSC" firstAttribute="top" secondItem="Efl-Sc-JjP" secondAttribute="bottom" constant="8" id="gn1-ln-vDM"/>
                             <constraint firstItem="BT2-rg-2yf" firstAttribute="top" secondItem="Wzj-0K-EgP" secondAttribute="bottom" constant="124" id="mPa-R0-rr4"/>
-                            <constraint firstItem="fN2-L7-f7e" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="19" id="nTt-Bn-t22"/>
-                            <constraint firstItem="phw-tH-hyx" firstAttribute="top" secondItem="nlK-rz-tSC" secondAttribute="bottom" constant="8" id="qvx-U9-Ys2"/>
+                            <constraint firstItem="phw-tH-hyx" firstAttribute="top" secondItem="3Hz-dS-Fzn" secondAttribute="bottom" constant="10" id="rk4-go-B3f"/>
                             <constraint firstItem="Wzj-0K-EgP" firstAttribute="leading" secondItem="LqT-SX-0Sh" secondAttribute="leading" constant="16" id="udm-zu-92h"/>
+                            <constraint firstItem="fN2-L7-f7e" firstAttribute="top" secondItem="phw-tH-hyx" secondAttribute="bottom" constant="8" id="vRd-Hu-iXU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FJQ-gG-mzt"/>
@@ -330,7 +346,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Awards" id="eYE-ey-DdI"/>
+                    <tabBarItem key="tabBarItem" title="Awards" image="awards.png" id="eYE-ey-DdI"/>
                     <connections>
                         <outlet property="awardTable" destination="xFU-gq-Adi" id="l2t-VP-5NR"/>
                     </connections>
@@ -492,7 +508,7 @@
                             <constraint firstItem="XIg-dn-fW5" firstAttribute="top" secondItem="WLY-GT-MiR" secondAttribute="bottom" id="ymA-yy-mpK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Overview" id="1VO-Lf-e8v"/>
+                    <tabBarItem key="tabBarItem" title="Overview" image="compOverview.png" id="1VO-Lf-e8v"/>
                     <connections>
                         <outlet property="dateLabel" destination="Kcu-YV-cfm" id="EeC-wg-sGY"/>
                         <outlet property="locLabel" destination="meJ-oW-2ch" id="BqU-ig-cqE"/>
@@ -706,7 +722,7 @@
                             <constraint firstItem="C9o-TO-YM4" firstAttribute="centerY" secondItem="ygV-h7-2O1" secondAttribute="centerY" id="yCx-Qp-wAJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Matches" id="9SG-28-2ZN"/>
+                    <tabBarItem key="tabBarItem" title="Matches" image="matchList.png" id="9SG-28-2ZN"/>
                     <connections>
                         <outlet property="highestScoreLabel" destination="ygV-h7-2O1" id="n2y-uc-Wa8"/>
                         <outlet property="lowestScoreLabel" destination="ZFV-rC-rtc" id="afl-gN-NHN"/>
@@ -1000,7 +1016,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Matches" id="iP0-b5-j9O"/>
+                    <tabBarItem key="tabBarItem" title="Matches" image="matchList.png" id="iP0-b5-j9O"/>
                     <connections>
                         <outlet property="averageLabel" destination="k1z-AU-FHd" id="b5I-L8-IJy"/>
                         <outlet property="highestScoreLabel" destination="nZ6-Fh-8Aw" id="yQw-mb-ZRl"/>
@@ -1228,7 +1244,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Overview" id="vvi-79-VhY"/>
+                    <tabBarItem key="tabBarItem" title="Overview" image="teamOverview.png" id="vvi-79-VhY"/>
                     <connections>
                         <outlet property="averageLabel" destination="PBw-Hh-6dR" id="jpW-gU-xTo"/>
                         <outlet property="awardCountLabel" destination="NTU-hM-T8X" id="vXU-3J-jY4"/>
@@ -1315,7 +1331,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Competitions" id="mDx-J9-i43"/>
+                    <tabBarItem key="tabBarItem" title="Competitions" image="matchList.png" id="mDx-J9-i43"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="competitionsTable" destination="IeX-AC-y8w" id="4wT-Gd-tLS"/>
@@ -1487,7 +1503,7 @@
                             <constraint firstItem="clT-ms-ZEk" firstAttribute="leading" secondItem="Ai7-Ha-S0w" secondAttribute="trailing" constant="37" id="z7r-B9-ZNM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="More Stats" id="ltj-2G-7ul"/>
+                    <tabBarItem key="tabBarItem" title="More Stats" image="moreStats.png" id="ltj-2G-7ul"/>
                     <connections>
                         <outlet property="awardsTable" destination="4Dq-XE-4j6" id="3L7-sv-Wws"/>
                         <outlet property="lossesLabel" destination="clT-ms-ZEk" id="9Ud-k5-Lk0"/>
@@ -1678,7 +1694,6 @@
         <!--Programming Skills-->
         <scene sceneID="YqW-u7-Qgx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="28A-ZZ-qDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ps" title="Programming Skills" automaticallyAdjustsScrollViewInsets="NO" id="esV-el-8SD" customClass="ProgrammingSkillsViewController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZsF-XY-bON"/>
@@ -1754,16 +1769,27 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="wa3-ay-7x4"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="ps.png" id="wa3-ay-7x4"/>
                     <connections>
                         <outlet property="skillsTable" destination="twS-Bc-MgM" id="MuV-3w-zfi"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="28A-ZZ-qDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1367" y="-906"/>
         </scene>
     </scenes>
     <resources>
         <image name="GraySquare.png" width="186" height="181"/>
+        <image name="awards.png" width="32" height="32"/>
+        <image name="compOverview.png" width="32" height="32"/>
+        <image name="friarbots white logo.png" width="2222" height="1402"/>
+        <image name="matchList.png" width="32" height="32"/>
+        <image name="moreStats.png" width="32" height="32"/>
+        <image name="ps.png" width="32" height="32"/>
+        <image name="rs.png" width="32" height="32"/>
+        <image name="teamOverview.png" width="32" height="32"/>
+        <image name="wrench.png" width="32" height="32"/>
+        <image name="wrenchSelected.png" width="32" height="32"/>
     </resources>
 </document>

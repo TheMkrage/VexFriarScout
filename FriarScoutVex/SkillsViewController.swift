@@ -30,8 +30,6 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.skillsTable.reloadData()
     }
     
- 
-    
     // Gets and stores skills data in two arrays (ps and rs)
     func loadSkills() {
         // Robot Skills
@@ -64,6 +62,19 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        // Destintation ViewController, set team
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
+        var team2: Team! = Team()
+        team2.num = (self.curSkills.objectAtIndex(indexPath.row) as! Skills).team
+        team2.season = self.season as String
+        dest.team = team2
+        // Set the title of the menuViewController
+        vc.title = "Team \(team2.num)"
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.curSkills.count
     }

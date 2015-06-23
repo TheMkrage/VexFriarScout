@@ -24,6 +24,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.TeamTextField.placeholder = "3309B"
         // Set Font for Main Menu Title and all future titles
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
         self.title = "Welcome!"
@@ -101,6 +102,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     // Skills button, takes you to skills view and sends season along with it
     @IBAction func skills(sender: AnyObject) {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("skills") as! UITabBarController
+        vc.title = "Skills"
         // Destintation ViewController, set season
         let dest: SkillsViewController = vc.viewControllers?.first as! SkillsViewController
          dest.title = "Robot Skills"
