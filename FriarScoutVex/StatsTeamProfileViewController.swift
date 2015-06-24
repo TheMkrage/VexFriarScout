@@ -9,28 +9,15 @@
 import UIKit
 
 class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet var tieLabel: UILabel!
-    @IBOutlet var lossesLabel: UILabel!
-    @IBOutlet var winningsLabel: UILabel!
     @IBOutlet var lostAverageLabel: UILabel!
     @IBOutlet var lostInQualsAverageLabel: UILabel!
-    @IBOutlet var winningsQualLabel: UILabel!
-    @IBOutlet var lossesQualLabel: UILabel!
-    @IBOutlet var tieQualLabel: UILabel!
     @IBOutlet var awardsTable: UITableView!
    
     override func viewDidLoad() {
         println("\(self.team.num)")
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
-        // Overall Record
-        self.tieLabel.text = "\(self.team.tieMatchCount)"
-        self.winningsLabel.text = "\(self.team.winMatchCount) -"
-        self.lossesLabel.text = "\(self.team.lostMatchCount) -"
-        // Qual Record
-        self.tieQualLabel.text = "\(self.team.tieMatchQualsCount)"
-        self.winningsQualLabel.text = "\(self.team.winMatchQualsCount) -"
-        self.lossesQualLabel.text = "\(self.team.lostMatchQualsCount) -"
+        
         
         if self.team.lostMatchCount != 0 {
             self.lostAverageLabel.text = "\(self.team.lostMatchScoreSum/self.team.lostMatchCount)"

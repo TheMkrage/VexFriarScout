@@ -84,19 +84,22 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     
     // Give it a team, it moves to their profile
     func moveToTeamProfile(team: String!) {
-        if !team.isEmpty {
+        var team1 = team
+        if team.isEmpty {
+            team1 = "3309B"
+        }
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
             // Destintation ViewController, set team
             let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
             var team2: Team! = Team()
-            team2.num = team.uppercaseString
+            team2.num = team1.uppercaseString
             team2.season = self.season as String
             dest.team = team2
             // Set the title of the menuViewController
-            vc.title = "Team \(team)"
+            vc.title = "Team \(team1)"
             // Present Profile
             self.showViewController(vc as UIViewController, sender: vc)
-        }
+        
     }
     
     // Skills button, takes you to skills view and sends season along with it

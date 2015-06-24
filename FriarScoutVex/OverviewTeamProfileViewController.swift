@@ -16,10 +16,9 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var compCountLabel: UILabel!
     @IBOutlet var awardCountLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
-    
     @IBOutlet var spAvgLabel: UILabel!
-    @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
+    @IBOutlet var rankingsLabel: UILabel!
     override func viewDidLoad() {
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
@@ -257,10 +256,19 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         }
         self.highestScoreLabel.text = "\(self.team.highestScore)"
         self.lowScoreLabel.text = "\(self.team.lowestScore)"
-        if  self.team.matchCount != 0 {
+        
+        var tie = ""
+        var win = ""
+        var loss = ""
+        // Overall Record
+        tie = "\(self.team.tieMatchCount)"
+        win = "\(self.team.winMatchCount) - "
+        loss = "\(self.team.lostMatchCount) - "
+        self.rankingsLabel.text = "\(win)\(loss)\(tie)"
+        /*if  self.team.matchCount != 0 {
             let x = "\(self.team.sumOfMatches/self.team.matchCount)"
             self.averageLabel.text = x;
-        }
+        }*/
     }
     
 }
