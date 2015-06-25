@@ -78,7 +78,9 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.curSkills.count
     }
-    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Robot Skills"
+    }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

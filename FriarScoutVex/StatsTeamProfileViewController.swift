@@ -19,14 +19,14 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     @IBOutlet var overallInQualsAverageLabel: UILabel!
     @IBOutlet var overallInElimsAverageLabel: UILabel!
     @IBOutlet var awardsTable: UITableView!
-   
+    
     override func viewDidLoad() {
         self.title = "Team \(self.team.num)"
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
         
         self.updateTheLabels()
-           }
+    }
     
     override func viewWillAppear(animated: Bool) {
         self.title = "Team \(self.team.num)"
@@ -65,11 +65,6 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
-        // Set the title of the menuViewController
-        vc.title = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
-        // Destintation ViewController, set team
-        let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
         var comp:Competition! = Competition()
         for var i: Int = 0; i < self.team.competitions.count; i++ {
             var c: Competition = self.team.competitions.objectAtIndex(i) as! Competition
@@ -77,12 +72,29 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
                 comp = c
             }
         }
-        //comp.name = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
-        dest.team = self.team
-        dest.comp = comp
-        // Present Profile
-        self.showViewController(vc as UIViewController, sender: vc)
 
+        if comp.date == "League" {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+            // Set the title of the menuViewController
+            vc.title = "\(comp.name)"
+            // Destintation ViewController, set team
+            let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+            dest.name = comp.name
+            dest.season = comp.season
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }else {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
+            // Set the title of the menuViewController
+            vc.title = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
+            // Destintation ViewController, set team
+            let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
+                //comp.name = (self.team.awards.objectAtIndex(indexPath.row) as! Award).comp as String
+            dest.team = self.team
+            dest.comp = comp
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -98,7 +110,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }
-
+        
         return cell
     }
     
@@ -130,5 +142,5 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
             alpha: CGFloat(1.0)
         )
     }
-
+    
 }

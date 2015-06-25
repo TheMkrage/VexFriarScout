@@ -25,6 +25,15 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func alert(header:String!, withMemo memo:String!, withButtonText buttonText:String!) {
+        let alertController = UIAlertController(title: header, message:
+            memo, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+            
+        })
+    }
+    
     override func viewDidLoad() {
         var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
         self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
@@ -256,7 +265,11 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         
         
     }
-    
+    // Help Me
+    @IBAction func spAvgHelp(sender: AnyObject) {
+        self.alert("SP AVG", withMemo: "SP Avg represents the overall average of SP points a team obtains per competition.", withButtonText:"Thank You!")
+    }
+
     func updateLabels() {
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E6A461E1B3BC9A700AE63C3 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461D1B3BC9A700AE63C3 /* launch.png */; };
+		7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461F1B3BD59C00AE63C3 /* helpMe.png */; };
 		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */; };
 		7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFE57A1B02E9A700E804BC /* Award.swift */; };
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E6A461D1B3BC9A700AE63C3 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		7E6A461F1B3BD59C00AE63C3 /* helpMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpMe.png; sourceTree = "<group>"; };
 		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
 		7EBFE57A1B02E9A700E804BC /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 		7ECC92FF1B390E820082F128 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				7E6A461F1B3BD59C00AE63C3 /* helpMe.png */,
+				7E6A461D1B3BC9A700AE63C3 /* launch.png */,
 				7EC354AD1B39DD4600829C3C /* wrenchSelected.png */,
 				7ECC93241B3920CB0082F128 /* wrench.png */,
 				7ECC93201B391DF70082F128 /* gear.png */,
@@ -448,6 +454,8 @@
 				7EC81E471AD30078008F0639 /* LaunchScreen.xib in Resources */,
 				7ECC93161B3913870082F128 /* awards.png in Resources */,
 				7EC81E5D1AD301AE008F0639 /* BebasNeue.otf in Resources */,
+				7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */,
+				7E6A461E1B3BC9A700AE63C3 /* launch.png in Resources */,
 				7ECC93211B391DF70082F128 /* gear.png in Resources */,
 				7EC354AE1B39DD4600829C3C /* wrenchSelected.png in Resources */,
 				7ECC931F1B391AE60082F128 /* friarbots white logo.png in Resources */,

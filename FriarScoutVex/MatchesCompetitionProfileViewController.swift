@@ -13,6 +13,7 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     @IBOutlet var matchesTable: UITableView!
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
+    @IBOutlet var avgLabel: UILabel!
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
@@ -21,7 +22,15 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         self.matchesTable.reloadData()
         self.highestScoreLabel.text = "\(comp.highestScore)"
         self.lowestScoreLabel.text = "\(comp.lowestScore)"
-        
+        var sum = 0
+        var count = 0
+        for var i = 0; i < self.matches.count; i++ {
+            var m: Match = self.matches.objectAtIndex(i) as! Match
+            sum = sum + m.redScore.integerValue
+            sum = sum + m.blueScore.integerValue
+            count += 2
+        }
+        self.avgLabel.text = "\(sum/count)"
     }
     
     

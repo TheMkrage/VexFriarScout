@@ -24,7 +24,19 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    
+    func alert(header:String!, withMemo memo:String!, withButtonText buttonText:String!) {
+        let alertController = UIAlertController(title: header, message:
+            memo, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+            
+        })
+    }
+
+    
     override func viewDidLoad() {
+        
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
         self.compLabel.text = self.comp.name
@@ -51,7 +63,9 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         var index:NSIndexPath = NSIndexPath(forRow: self.comp.lowestRowNum, inSection: 0)
         self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         self.matchesTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top);
-
+    }
+    @IBAction func spAvgHelp(sender: AnyObject) {
+        alert("SP AVG", withMemo: "Unlike on the Team Profile, this SP Avg represents the average amount of SP Points \(self.team.num) scored per match.", withButtonText: "Fascinating!")
     }
     
 

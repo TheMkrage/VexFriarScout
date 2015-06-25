@@ -62,6 +62,9 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
         }
         return cell
     }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Programming Skills"
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.curSkills.count

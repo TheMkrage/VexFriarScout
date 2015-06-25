@@ -72,6 +72,8 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         return cell
     }
     
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var comp:Competition! = Competition()
         comp = self.team.competitions.objectAtIndex(indexPath.row) as! Competition
