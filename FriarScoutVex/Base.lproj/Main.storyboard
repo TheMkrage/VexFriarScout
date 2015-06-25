@@ -2916,23 +2916,6 @@
             </objects>
             <point key="canvasLocation" x="1881" y="-159"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="fHP-hh-Ytv">
-            <objects>
-                <viewController id="o8I-pd-L0k" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="b8O-Kf-7ik"/>
-                        <viewControllerLayoutGuide type="bottom" id="iJB-sk-Mqv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hio-yy-hCd">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b7C-mw-ysU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1701" y="763"/>
-        </scene>
         <!--Programming Skills-->
         <scene sceneID="YqW-u7-Qgx">
             <objects>
