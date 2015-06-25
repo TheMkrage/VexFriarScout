@@ -18,12 +18,18 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
     @IBOutlet var spPointsLabel: UILabel!
+    @IBOutlet var compLabel: UILabel!
+    
+    func goHome() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
     
     override func viewDidLoad() {
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
-        
-        
+        self.compLabel.text = self.comp.name
+        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
+        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
 
         matches = comp.matches
         self.matchesTable.reloadData()
@@ -38,10 +44,14 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     @IBAction func highestBut(sender: AnyObject) {
         var index:NSIndexPath = NSIndexPath(forRow: self.comp.highestRowNum, inSection: 0)
         self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        self.matchesTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top);
+
     }
     @IBAction func lowestBut(sender: AnyObject) {
         var index:NSIndexPath = NSIndexPath(forRow: self.comp.lowestRowNum, inSection: 0)
         self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        self.matchesTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top);
+
     }
     
 
@@ -125,14 +135,13 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
                 cell.blueTeam3Label.attributedText = underlineAttributedString
             }
         }
-       // cell.matchNameLabel.attributedText = underlineAttributedString
-        
-        
-        
-        
+        if indexPath.row % 2 == 0 {
+            println("ROW: \(indexPath.row)")
+            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
+        }else {
+            cell.backgroundColor = UIColor.whiteColor()
+        }
         return cell
-
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,4 +151,27 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
+        }
+        
+        if (count(cString) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rgbValue:UInt32 = 0
+        NSScanner(string: cString).scanHexInt(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 }

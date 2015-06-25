@@ -11,24 +11,53 @@ import UIKit
 class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var lostAverageLabel: UILabel!
     @IBOutlet var lostInQualsAverageLabel: UILabel!
+    @IBOutlet var lostInElimsAverageLabel: UILabel!
+    @IBOutlet var wonAverageLabel: UILabel!
+    @IBOutlet var wonInQualsAverageLabel: UILabel!
+    @IBOutlet var wonInElimsAverageLabel: UILabel!
+    @IBOutlet var overallAverageLabel: UILabel!
+    @IBOutlet var overallInQualsAverageLabel: UILabel!
+    @IBOutlet var overallInElimsAverageLabel: UILabel!
     @IBOutlet var awardsTable: UITableView!
    
     override func viewDidLoad() {
-        println("\(self.team.num)")
+        self.title = "Team \(self.team.num)"
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
         
-        
-        if self.team.lostMatchCount != 0 {
-            self.lostAverageLabel.text = "\(self.team.lostMatchScoreSum/self.team.lostMatchCount)"
-        }
-        if self.team.lostMatchQualsCount != 0 {
-            self.lostInQualsAverageLabel.text = "\(self.team.lostMatchQualsSum/self.team.lostMatchQualsCount)"
-        }
-    }
+        self.updateTheLabels()
+           }
     
     override func viewWillAppear(animated: Bool) {
+        self.title = "Team \(self.team.num)"
         self.awardsTable.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.title = "Team \(self.team.num)"
+    }
+    
+    func updateTheLabels() {
+        // LOST AVERAGE LABELS
+        doAverageLabel(self.lostAverageLabel, count: self.team.lostMatchCount, sum: self.team.lostMatchScoreSum)
+        doAverageLabel(self.lostInQualsAverageLabel, count: self.team.lostMatchQualsCount, sum: self.team.lostMatchQualsSum)
+        doAverageLabel(self.lostInElimsAverageLabel, count: self.team.lostMatchCount - self.team.lostMatchQualsCount, sum: self.team.lostMatchScoreSum - self.team.lostMatchQualsSum)
+        //WON AVERAGE LABELS
+        doAverageLabel(self.wonAverageLabel, count: self.team.winMatchCount, sum: self.team.winMatchScoreSum)
+        doAverageLabel(self.wonInQualsAverageLabel, count: self.team.winMatchQualsCount, sum: self.team.winMatchQualsSum)
+        doAverageLabel(self.wonInElimsAverageLabel, count: self.team.winMatchCount - self.team.winMatchQualsCount, sum: self.team.winMatchScoreSum - self.team.winMatchQualsSum)
+        //OVERALL AVERAGE LABELS
+        doAverageLabel(self.overallAverageLabel, count: self.team.matchCount, sum: self.team.sumOfMatches)
+        doAverageLabel(self.overallInQualsAverageLabel, count: self.team.qualCount, sum: self.team.lostMatchQualsSum + self.team.winMatchQualsSum + self.team.tieMatchQualsSum)
+        doAverageLabel(self.overallInElimsAverageLabel, count: self.team.matchCount - self.team.qualCount, sum: self.team.sumOfMatches - (self.team.lostMatchQualsSum + self.team.winMatchQualsSum + self.team.tieMatchQualsSum))
+    }
+    
+    func doAverageLabel(label:UILabel!, count: Int, sum: Int) {
+        if count != 0 {
+            label.text = "\(sum/count)"
+        }else {
+            label.text = "NA"
+        }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -63,6 +92,13 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.comp
+        if indexPath.row % 2 == 0 {
+            println("ROW: \(indexPath.row)")
+            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
+        }else {
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+
         return cell
     }
     
@@ -73,4 +109,26 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
+        }
+        
+        if (count(cString) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rgbValue:UInt32 = 0
+        NSScanner(string: cString).scanHexInt(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 }

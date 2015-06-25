@@ -17,8 +17,9 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    @IBOutlet var disclaimer: UILabel!
     @IBOutlet var rankingTable: UITableView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var seasonLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
@@ -30,7 +31,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         
         self.activityIndicator.stopAnimating()
         if self.comp.date == "League" {
-           // self.leagueMessage.hidden = false
+          self.disclaimer.hidden = false
         }else {
             self.rankingTable.hidden = false
         }
@@ -39,12 +40,20 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     override func viewWillAppear(animated: Bool) {
         
     }
+    
+    func goHome() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+
     override func viewDidLoad() {
         self.setAllHidden()
-        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2) - 50, (self.view.frame.height/2) + 50);
-        self.activityIndicator.startAnimating()
-        self.view.addSubview( self.activityIndicator )
+        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
+        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
+        //self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        //self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2) - 50, (self.view.frame.height/2) + 50);
+       
+       // self.activityIndicator.startAnimating()
+        //self.view.addSubview( self.activityIndicator )
         self.rankingTable.dataSource = self
         self.rankingTable.delegate = self
         self.loadComp()
@@ -62,7 +71,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             self.comp.date = snapshot.value["date"]as! String
             self.comp.loc = snapshot.value["loc"]as! String
             self.comp.season = snapshot.value["season"] as! String
-            self.nameLabel.text = self.comp.name
+            self.seasonLabel.text = self.season
             self.locLabel.text = self.comp.loc
             self.dateLabel.text = self.comp.date
             // Matches
@@ -239,7 +248,18 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        // Set the title of the teamcontroller
+        vc.title = "Team \((self.rankings.objectAtIndex(indexPath.row) as! Team).num)"
+        // Destintation ViewController, set team
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
         
+        var t: Team! = self.rankings.objectAtIndex(indexPath.row) as! Team
+        t.season = self.comp.season
+        dest.team = t
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -248,20 +268,19 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         
         
         var t: Team! = self.rankings.objectAtIndex(indexPath.row) as! Team
-        cell.rank.text = "\(indexPath.row + 1)"
+        cell.rank.text = "\(indexPath.row + 1)."
         cell.teamLabel.text = t.num
-        cell.winsLabel.text = "\(t.winMatchQualsCount)-"
-        cell.lossLabel.text = "\(t.lostMatchQualsCount)-"
-        cell.tieLabel.text = "\(t.tieMatchQualsCount)"
+        var win = "\(t.winMatchQualsCount) - "
+        var loss = "\(t.lostMatchQualsCount) - "
+        var tie = "\(t.tieMatchQualsCount)"
+        cell.rankingLabel.text = "\(win)\(loss)\(tie)"
         cell.spLabel.text = "\(t.spPointsSum)"
         if indexPath.row % 2 == 0 {
             println("ROW: \(indexPath.row)")
-            cell.backgroundColor = self.colorWithHexString("#e0e0e0")
+            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }
-
-        
         return cell
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -28,10 +28,12 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     @IBAction func highestButton(sender: AnyObject) {
         var index:NSIndexPath = NSIndexPath(forRow: self.comp.highestRowNum, inSection: 0)
         self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        self.matchesTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top);
     }
     @IBAction func lowestButton(sender: AnyObject) {
         var index:NSIndexPath = NSIndexPath(forRow: self.comp.lowestRowNum, inSection: 0)
         self.matchesTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        self.matchesTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top);
     }
    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -39,7 +41,6 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         
     }
     
@@ -71,7 +72,7 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         }
         if indexPath.row % 2 == 0 {
             println("ROW: \(indexPath.row)")
-            cell.backgroundColor = self.colorWithHexString("#e0e0e0")
+            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }

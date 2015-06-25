@@ -88,7 +88,9 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         if team.isEmpty {
             team1 = "3309B"
         }
+           // var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+            //vc.navigationItem.rightBarButtonItem = homeButton
             // Destintation ViewController, set team
             let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
             var team2: Team! = Team()

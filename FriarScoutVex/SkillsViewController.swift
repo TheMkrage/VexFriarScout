@@ -55,7 +55,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.teamLabel.text = "\(s.team)"
         if indexPath.row % 2 == 0 {
             println("ROW: \(indexPath.row)")
-            cell.backgroundColor = self.colorWithHexString("#e0e0e0")
+            cell.backgroundColor = self.colorWithHexString("#c5e2ec")
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }

@@ -24,6 +24,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
     }*/
     
     override func viewDidLoad() {
+        self.navigationItem.title = "Team \(self.team.num)"
         
         //set delegates and datasources
         self.competitionsTable.delegate = self
@@ -31,6 +32,9 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         self.team.orderCompetitions()
     }
     
+    
+    override func viewWillDisappear(animated: Bool) {
+    }
     
     //TABLE STUFF
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -58,7 +62,13 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         cell.nameLabel.text = (self.team.competitions.objectAtIndex(indexPath.row) as! Competition).name as String
         cell.dateLabel.text = (self.team.competitions.objectAtIndex(indexPath.row) as! Competition).date as String
         cell.LocationLabel.text = (self.team.competitions.objectAtIndex(indexPath.row) as! Competition).loc as String
-        
+        if indexPath.row % 2 == 0 {
+            println("ROW: \(indexPath.row)")
+            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
+        }else {
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+
         return cell
     }
     
@@ -96,7 +106,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
             }else {
                 let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompeitionProfile") as! UITabBarController
                 // Set the title of the menuViewController
-                vc.title = "\(self.team.competitions.objectAtIndex(indexPath.row).name as String)"
+                vc.title = "Team \(self.team.num)"
                 // Destintation ViewController, set team
                 let dest: CompetitionForTeamProfile = vc.viewControllers?.first as! CompetitionForTeamProfile
                 
@@ -108,4 +118,26 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
             }
         }
     }
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
+        }
+        
+        if (count(cString) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rgbValue:UInt32 = 0
+        NSScanner(string: cString).scanHexInt(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 }

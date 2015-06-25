@@ -9,6 +9,7 @@
 import UIKit
 
 class OverviewTeamProfileViewController: HasTeamViewController {
+    @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
@@ -19,15 +20,26 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var spAvgLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
     @IBOutlet var rankingsLabel: UILabel!
+    
+    func goHome() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     override func viewDidLoad() {
+        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
+        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
+        self.title = "Team Overview"
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
         x.team = self.team as Team!
         var y:HasTeamViewController = self.tabBarController?.viewControllers![2] as! HasTeamViewController!
         y.team = self.team as Team!
-        
+        self.updateLabels()
     }
-    
+    override func viewDidLayoutSubviews() {
+        self.scrollView.contentSize.height = 450;
+        self.scrollView.contentSize.width = self.view.frame.size.width;
+    }
     func loadCompetitions() {
         println("Will Appear")
         self.team.competitions = NSMutableArray()
@@ -109,6 +121,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                         }
                         // Now For Quals Matches
                         if m.isQualsMatch() {
+                            self.team.qualCount++
                             // Win Loss Counters
                             if m.didTeamTie(self.team.num) {
                                 self.team.tieMatchQualsCount++
@@ -244,31 +257,43 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         
     }
     
-    
     func updateLabels() {
-        var sumOfspAvgs: NSInteger = 0
+        var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
-            sumOfspAvgs += (c as! Competition).getSPAverage()
+            sumOfsp += (c as! Competition).spPointsSum
         }
-        
         if self.team.compCount != 0 {
-            self.spAvgLabel.text = "\(sumOfspAvgs/self.team.compCount)"
+            self.spAvgLabel.text = "\(sumOfsp/self.team.compCount)"
         }
-        self.highestScoreLabel.text = "\(self.team.highestScore)"
-        self.lowScoreLabel.text = "\(self.team.lowestScore)"
         
-        var tie = ""
-        var win = ""
-        var loss = ""
-        // Overall Record
-        tie = "\(self.team.tieMatchCount)"
-        win = "\(self.team.winMatchCount) - "
-        loss = "\(self.team.lostMatchCount) - "
-        self.rankingsLabel.text = "\(win)\(loss)\(tie)"
+        
+            
+        if self.team.matchCount != 0 {
+            
+            self.highestScoreLabel.text = "\(self.team.highestScore)"
+            self.lowScoreLabel.text = "\(self.team.lowestScore)"
+            
+            var tie = ""
+            var win = ""
+            var loss = ""
+            // Overall Record
+            tie = "\(self.team.tieMatchCount)"
+            win = "\(self.team.winMatchCount) - "
+            loss = "\(self.team.lostMatchCount) - "
+            self.rankingsLabel.text = "\(win)\(loss)\(tie)"
+        }else {
+            self.spAvgLabel.text = "NA"
+            self.highestScoreLabel.text = "NA"
+            self.lowScoreLabel.text = "NA"
+            self.rankingsLabel.text = "NA"
+            self.awardCountLabel.text = "NA"
+        }
         /*if  self.team.matchCount != 0 {
-            let x = "\(self.team.sumOfMatches/self.team.matchCount)"
-            self.averageLabel.text = x;
+        let x = "\(self.team.sumOfMatches/self.team.matchCount)"
+        self.averageLabel.text = x;
         }*/
     }
+    
+    
     
 }

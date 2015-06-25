@@ -12,8 +12,6 @@ class RankingTableCell: UITableViewCell {
     
     @IBOutlet var rank: UILabel!
     @IBOutlet var teamLabel: UILabel!
-    @IBOutlet var winsLabel: UILabel!
-    @IBOutlet var lossLabel: UILabel!
-    @IBOutlet var tieLabel: UILabel!
+    @IBOutlet var rankingLabel: UILabel!
     @IBOutlet var spLabel: UILabel!
 }
