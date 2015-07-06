@@ -40,7 +40,6 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         if foundAt == -1 {
-            
             let alertController = UIAlertController(title: "I'm so sorry", message:
                 "It appears that your team is not in the top 50 :(  Keep trying and check back later!", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "EEK!", style: UIAlertActionStyle.Default,handler: nil))

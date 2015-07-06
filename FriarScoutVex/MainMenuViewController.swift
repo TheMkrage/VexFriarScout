@@ -81,8 +81,14 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     @IBAction func myTeamButton(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
-            if stringOne.isEmpty() {
-                
+            if stringOne.isEmpty {
+                let alertController = UIAlertController(title: "You haven't told us what team you are on!", message:
+                    "To configure 'My Team', press the wrench and type your team into the text box!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Will Do!", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                    
+                })
+
             }else {
                 self.moveToTeamProfile(stringOne)
             }
