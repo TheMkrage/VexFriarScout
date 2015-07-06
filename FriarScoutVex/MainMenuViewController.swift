@@ -15,6 +15,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     // Input
     @IBOutlet var seasonPicker: AKPickerView!
     @IBOutlet var TeamTextField: UITextField!
+    @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet var visitProfileButton: UIButton!
     
@@ -33,7 +34,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         self.seasonPicker.delegate = self
         self.seasonPicker.dataSource = self
         self.seasonPicker.font = UIFont(name: "HelveticaNeue-Bold", size: 20)!
-        self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: 20)!
+        self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: 20 )!
         self.seasonPicker.interitemSpacing = 20.0
         self.seasonPicker.viewDepth = 1000.0
         self.seasonPicker.pickerViewStyle = .Wheel
@@ -41,6 +42,10 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         self.seasonPicker.reloadData()
     }
     
+    override func viewDidLayoutSubviews() {
+        self.scrollView.contentSize.height = 900
+        self.scrollView.contentSize.width = self.view.frame.width
+    }
     // Changes function of text field and button
     @IBAction func editButton(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -76,7 +81,11 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     @IBAction func myTeamButton(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
-            self.moveToTeamProfile(stringOne)
+            if stringOne.isEmpty() {
+                
+            }else {
+                self.moveToTeamProfile(stringOne)
+            }
         }
 
         

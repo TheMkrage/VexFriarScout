@@ -14,19 +14,50 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var season:String! = ""
     // Arrays for data
     var rs:NSMutableArray = NSMutableArray()
-    var ps:NSMutableArray = NSMutableArray()
     // Array table uses
     var curSkills:NSMutableArray = NSMutableArray()
     // Table
     @IBOutlet var skillsTable: UITableView!
-
+    
     override func viewDidLoad() {
+        var myTeamButton: UIBarButtonItem = UIBarButtonItem(title: "My Team", style: .Plain, target: self, action: "myTeam")
+        self.tabBarController?.navigationItem.rightBarButtonItem = myTeamButton
         self.skillsTable.delegate = self
         self.skillsTable.dataSource = self
         self.loadSkills()
     }
     
+    func myTeam() {
+        var team: String! = ""
+        var foundAt = -1
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let stringOne = defaults.valueForKey("myTeam") as? String {
+            team = stringOne
+        }
+        for (var i = 0; i < self.rs.count; i++) {
+            if  (rs.objectAtIndex(i) as! Skills).team == team {
+                foundAt = (rs.objectAtIndex(i) as! Skills).rank.toInt()!
+            }
+        }
+        if foundAt == -1 {
+            
+            let alertController = UIAlertController(title: "I'm so sorry", message:
+                "It appears that your team is not in the top 50 :(  Keep trying and check back later!", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "EEK!", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                
+            })
+            
+        }else {
+            var index:NSIndexPath = NSIndexPath(forRow: foundAt, inSection: 0)
+            self.skillsTable.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            self.skillsTable.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        var myTeamButton: UIBarButtonItem = UIBarButtonItem(title: "My Team", style: .Plain, target: self, action: "myTeam")
+        self.tabBarController?.navigationItem.rightBarButtonItem = myTeamButton
         self.skillsTable.reloadData()
     }
     
