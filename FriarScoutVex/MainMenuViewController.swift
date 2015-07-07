@@ -88,13 +88,10 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
                 self.presentViewController(alertController, animated: true, completion:  { () -> Void in
                     
                 })
-
             }else {
                 self.moveToTeamProfile(stringOne)
             }
         }
-
-        
     }
     
     // Give it a team, it moves to their profile
