@@ -340,7 +340,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="visitProfileButton:" destination="K1m-QK-QtQ" eventType="touchUpInside" id="GIG-ei-emG"/>
+                                            <segue destination="SlG-iI-Uyr" kind="show" id="RAP-gP-dKX"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2194,6 +2194,9 @@
                                                 <include reference="xXg-8P-Oaz"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="favorite:" destination="XNe-ni-YGm" eventType="touchUpInside" id="kfT-Jb-eAn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -2398,6 +2401,7 @@
                     <connections>
                         <outlet property="awardCountLabel" destination="NTU-hM-T8X" id="vXU-3J-jY4"/>
                         <outlet property="compCountLabel" destination="w3e-oZ-JTF" id="m5N-BE-6mf"/>
+                        <outlet property="favoriteButton" destination="WRI-T2-aqw" id="ddR-OK-EgM"/>
                         <outlet property="highestScoreLabel" destination="cXd-CL-rW6" id="Deb-12-hq2"/>
                         <outlet property="locationLabel" destination="WcE-VC-7jI" id="f0i-f5-sFi"/>
                         <outlet property="lowScoreLabel" destination="qrN-bS-fl7" id="a0a-Z4-VkH"/>
@@ -2970,7 +2974,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="vEI-5a-amE">
             <objects>
-                <tabBarController id="SlG-iI-Uyr" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SlG-iI-Uyr" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Av5-ae-36t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

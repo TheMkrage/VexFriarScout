@@ -21,6 +21,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var lowScoreLabel: UILabel!
     @IBOutlet var rankingsLabel: UILabel!
     
+    @IBOutlet var favoriteButton: UIButton!
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -307,6 +308,20 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         }*/
     }
     
+    @IBAction func favorite(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        // Get the bookmarks array
+        if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
+            
+        }else { // This is the first bookmark
+            var curEl: NSMutableDictionary = NSMutableDictionary()
+            curEl.setObject("Team", forKey: "Kind")
+            curEl.setObject(self.team.num, forKey: "Num")
+            curEl.setObject(self.team.name, forKey: "Name")
+            var bookmarks: NSArray = [curEl]
+            defaults.set
+        }
+    }
     
     
 }
