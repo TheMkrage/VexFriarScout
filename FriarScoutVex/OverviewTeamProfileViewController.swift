@@ -10,6 +10,7 @@ import UIKit
 
 class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var scrollView: UIScrollView!
+    var isBookmarked: Bool = false // Tells if current profile is bookmarked
     
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
@@ -37,6 +38,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     override func viewDidLoad() {
         var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
+        self.findIfBookmarked()
         self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
         self.title = "Team Overview"
         self.loadCompetitions()
@@ -46,10 +48,31 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         y.team = self.team as Team!
         self.updateLabels()
     }
+    
     override func viewDidLayoutSubviews() {
         self.scrollView.contentSize.height = 450;
         self.scrollView.contentSize.width = self.view.frame.size.width;
     }
+    
+    func findIfBookmarked() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
+            var book: NSMutableArray = NSMutableArray(array: curBookmarks)
+            for (var i = 0; i < book.count; i++) {
+                var curEl: NSDictionary = book.objectAtIndex(i) as! NSDictionary
+                println(curEl)
+                // if num and season equal current ones
+                if (curEl.objectForKey("Num") as! NSString).isEqualToString(self.team.num) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.team.season){
+                    isBookmarked = true
+                    self.favoriteButton.setTitle("Unfav", forState: .Normal)
+                    return
+                }
+            }
+        }
+        isBookmarked = false
+        self.favoriteButton.setTitle("Fav", forState: .Normal)
+    }
+    
     func loadCompetitions() {
         println("Will Appear")
         self.team.competitions = NSMutableArray()
@@ -270,7 +293,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBAction func spAvgHelp(sender: AnyObject) {
         self.alert("SP AVG", withMemo: "SP Avg represents the overall average of SP points a team obtains per competition.", withButtonText:"Thank You!")
     }
-
+    
     func updateLabels() {
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
@@ -281,7 +304,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         }
         
         
-            
+        
         if self.team.matchCount != 0 {
             
             self.highestScoreLabel.text = "\(self.team.highestScore)"
@@ -310,18 +333,49 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     @IBAction func favorite(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        // Get the bookmarks array
-        if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
-            
-        }else { // This is the first bookmark
-            var curEl: NSMutableDictionary = NSMutableDictionary()
-            curEl.setObject("Team", forKey: "Kind")
-            curEl.setObject(self.team.num, forKey: "Num")
-            curEl.setObject(self.team.name, forKey: "Name")
-            var bookmarks: NSArray = [curEl]
-            defaults.set
+        if !isBookmarked {
+            // Get the bookmarks array
+            if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
+                var book: NSMutableArray = NSMutableArray(array: curBookmarks)
+                // Add new team to bookmarks
+                book.addObject(self.getCurrentDictionaryBookmark())
+                defaults.setObject(book as NSArray, forKey: "Bookmarks")
+                defaults.synchronize()
+            }else { // This is the first bookmark
+                var bookmarks: NSArray = [(self.getCurrentDictionaryBookmark())]
+                defaults.setObject(bookmarks, forKey: "Bookmarks")
+                defaults.synchronize()
+            }
+            self.isBookmarked = true
+            self.favoriteButton.setTitle("Unfav", forState: .Normal)
+        }else { // Remove the current profile from bookmarks
+            let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray
+            var book: NSMutableArray = NSMutableArray(array: curBookmarks!)
+            // loop through and find item with num and season equal to current profile, find index
+            var index = 0
+            for (var i = 0; i < book.count; i++) {
+                var curEl: NSDictionary = book.objectAtIndex(i) as! NSDictionary
+                // if num and season equal current ones
+                if (curEl.objectForKey("Num") as! NSString).isEqualToString(self.team.num) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.team.season){
+                    index = i
+                }
+            }
+            book.removeObjectAtIndex(index)
+            // Update bookmarks
+            defaults.setObject(book as NSArray, forKey: "Bookmarks")
+            defaults.synchronize()
+            self.isBookmarked = false
+            self.favoriteButton.setTitle("Fav", forState: .Normal)
         }
+        println(defaults.valueForKey("Bookmarks") as? NSArray)
     }
     
-    
+    func getCurrentDictionaryBookmark() -> NSDictionary {
+        var curEl: NSMutableDictionary = NSMutableDictionary()
+        curEl.setObject("Team", forKey: "Kind")
+        curEl.setObject(self.team.num.uppercaseString, forKey: "Num")
+        curEl.setObject(self.team.season, forKey: "Season")
+        curEl.setObject(self.team.name, forKey: "Name")
+        return curEl as NSDictionary
+    }
 }
