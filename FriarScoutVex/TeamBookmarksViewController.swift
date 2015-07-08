@@ -36,8 +36,6 @@ class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UIT
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         // Creates cell and sets title to team num of bookmark
         var cell = tableView.dequeueReusableCellWithIdentifier("TeamBookmarkedCell") as! UITableViewCell
         cell.textLabel?.text = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as? String

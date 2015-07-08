@@ -60,7 +60,7 @@ class EmptyCompetitionProfileViewController: HasCompetitionViewController, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
         // Set the title of the teamcontroller
-        vc.title = "Team \(self.teams.objectAtIndex(indexPath.row) as? String)"
+        vc.title = "Team \(self.teams.objectAtIndex(indexPath.row) as! String)"
         // Destintation ViewController, set team
         let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
         
