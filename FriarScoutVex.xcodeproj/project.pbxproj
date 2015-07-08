@@ -10,6 +10,7 @@
 		7E6A461E1B3BC9A700AE63C3 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461D1B3BC9A700AE63C3 /* launch.png */; };
 		7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461F1B3BD59C00AE63C3 /* helpMe.png */; };
 		7E6A46241B3BDE5000AE63C3 /* flames.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A46231B3BDE5000AE63C3 /* flames.png */; };
+		7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */; };
 		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */; };
 		7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFE57A1B02E9A700E804BC /* Award.swift */; };
@@ -79,6 +80,7 @@
 		7E6A461D1B3BC9A700AE63C3 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		7E6A461F1B3BD59C00AE63C3 /* helpMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpMe.png; sourceTree = "<group>"; };
 		7E6A46231B3BDE5000AE63C3 /* flames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flames.png; sourceTree = "<group>"; };
+		7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarksViewController.swift; sourceTree = "<group>"; };
 		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
 		7EBFE57A1B02E9A700E804BC /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
@@ -162,14 +164,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EBE42491B4CD17E0015D500 /* Skills */ = {
+			isa = PBXGroup;
+			children = (
+				7EC5AB341B3352400046250B /* SkillsViewController.swift */,
+				7ECC92FD1B3906A30082F128 /* ProgrammingSkillsViewController.swift */,
+			);
+			name = Skills;
+			sourceTree = "<group>";
+		};
+		7EBE424A1B4CD1BB0015D500 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */,
+			);
+			name = Bookmarks;
+			sourceTree = "<group>";
+		};
 		7EBFFB8C1AED66BA003597FE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
-				7EE78C961AED791F001ED13F /* More Stats */,
+				7EBE42491B4CD17E0015D500 /* Skills */,
+				7EBE424A1B4CD1BB0015D500 /* Bookmarks */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
-				7EC5AB341B3352400046250B /* SkillsViewController.swift */,
-				7ECC92FD1B3906A30082F128 /* ProgrammingSkillsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -344,13 +362,6 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
-		7EE78C961AED791F001ED13F /* More Stats */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "More Stats";
-			sourceTree = "<group>";
-		};
 		7EE78C971AED7FE4001ED13F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +510,7 @@
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
 				7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */,
 				7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */,
+				7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */,
 				7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
