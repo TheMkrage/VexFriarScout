@@ -52,5 +52,20 @@ class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UIT
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var teamDic: NSDictionary = self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        //vc.navigationItem.rightBarButtonItem = homeButton
+        // Destintation ViewController, set team
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
+        var team2: Team! = Team()
+        team2.num = teamDic.objectForKey("Num") as! String!
+        team2.season = teamDic.objectForKey("Season") as! String!
+        dest.team = team2
+        // Set the title of the menuViewController
+        vc.title = "Team \(team2.num)"
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+        
+
     }
 }
