@@ -26,6 +26,8 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.TeamTextField.placeholder = "3309B"
+        var touch = UITapGestureRecognizer(target: self, action:"scrollTouchesBegan")
+        self.scrollView.addGestureRecognizer(touch)
         // Set Font for Main Menu Title and all future titles
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeue", size: 34)!]
         self.title = "Welcome!"
@@ -74,6 +76,10 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     
     // End editing if user taps off textfield
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
+    func scrollTouchesBegan() {
         self.view.endEditing(true)
     }
     
