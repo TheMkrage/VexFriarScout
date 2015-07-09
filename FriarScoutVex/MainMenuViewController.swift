@@ -35,7 +35,9 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         // Setup seasonPicker
         self.seasonPicker.delegate = self
         self.seasonPicker.dataSource = self
+        self.seasonPicker.textColor = UIColor.redColor()
         self.seasonPicker.font = UIFont(name: "HelveticaNeue-Bold", size: 20)!
+        self.seasonPicker.highlightedTextColor = UIColor.orangeColor()
         self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: 20 )!
         self.seasonPicker.interitemSpacing = 20.0
         self.seasonPicker.viewDepth = 1000.0
