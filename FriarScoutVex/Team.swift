@@ -55,7 +55,7 @@ class Team: NSObject {
                 self.qualCount++
             }
         }
-        println("\(self.num) had \(self.qualCount) matches")
+        //println("\(self.num) had \(self.qualCount) matches")
     }
     
     func calculateStats(var max:NSInteger) {
@@ -63,7 +63,7 @@ class Team: NSObject {
         self.orderMatches()
         for var i = 0; i < self.matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
-            println("\(m.name) \(self.num) \(curQualCount) \(max)")
+            //println("\(m.name) \(self.num) \(curQualCount) \(max)")
             
             if m.isQualsMatch() && curQualCount < max {
                 self.qualCount++
@@ -159,7 +159,7 @@ class Team: NSObject {
                         
                         self.competitions.removeObjectAtIndex(y + 1)
                         self.competitions.insertObject(c, atIndex: y)
-                        println(self.competitions)
+                       // println(self.competitions)
                     }
                 }
             }

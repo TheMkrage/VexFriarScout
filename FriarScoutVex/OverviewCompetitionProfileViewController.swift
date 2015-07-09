@@ -17,6 +17,9 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    var isBookmarked:Bool = false
+    
+    @IBOutlet var favoriteButton: UIButton!
     @IBOutlet var disclaimer: UILabel!
     @IBOutlet var rankingTable: UITableView!
     @IBOutlet var seasonLabel: UILabel!
@@ -28,8 +31,8 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
     
     func dataLoaded() {
-        
         self.activityIndicator.stopAnimating()
+        self.findIfBookmarked()
         if self.comp.date == "League" {
           self.disclaimer.hidden = false
         }else {
@@ -38,7 +41,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
     
     override func viewWillAppear(animated: Bool) {
-        
+        self.findIfBookmarked()
     }
     
     func goHome() {
@@ -46,6 +49,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
 
     override func viewDidLoad() {
+        
         self.setAllHidden()
         var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
         self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
@@ -57,6 +61,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         self.rankingTable.dataSource = self
         self.rankingTable.delegate = self
         self.loadComp()
+        self.findIfBookmarked()
         var x:HasCompetitionViewController = self.tabBarController?.viewControllers![1] as! HasCompetitionViewController!
         x.comp = self.comp as Competition!
         var y:HasCompetitionViewController = self.tabBarController?.viewControllers![2] as! HasCompetitionViewController!
@@ -125,6 +130,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                         self.comp.matchCount++
                         self.comp.matches.addObject(m)
                     }
+                    self.findIfBookmarked()
                     self.calculateRankings()
                     self.comp.orderMatches()
                     self.dataLoaded()
@@ -156,7 +162,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         for (var i = 0; i < tempArray.count; i++) {
             var t: Team! = tempArray.objectAtIndex(i) as! Team
             t.calculateQualCount()
-            println("fadsf \(t.qualCount) and \(self.qualMatchCount)")
+           // println("fadsf \(t.qualCount) and \(self.qualMatchCount)")
             if self.qualMatchCount > t.qualCount {
                 self.qualMatchCount = t.qualCount
             }
@@ -243,6 +249,75 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         self.rankingTable.reloadData()
     }
     
+    func findIfBookmarked() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
+            var book: NSMutableArray = NSMutableArray(array: curBookmarks)
+            for (var i = 0; i < book.count; i++) {
+                var curEl: NSDictionary = book.objectAtIndex(i) as! NSDictionary
+                println(curEl)
+                println(self.getCurrentDictionaryBookmark())
+                // if num and season equal current ones
+                if (curEl.objectForKey("Name") as! NSString).isEqualToString(self.name) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.season){
+                    isBookmarked = true
+                    self.favoriteButton.setTitle("Unfav", forState: .Normal)
+                    println("IT WORKED")
+                    return
+                }
+            }
+        }
+        isBookmarked = false
+        self.favoriteButton.setTitle("Fav", forState: .Normal)
+    }
+
+    @IBAction func favorite(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if !isBookmarked {
+            // Get the bookmarks array
+            if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
+                var book: NSMutableArray = NSMutableArray(array: curBookmarks)
+                // Add new team to bookmarks
+                book.addObject(self.getCurrentDictionaryBookmark())
+                defaults.setObject(book as NSArray, forKey: "Bookmarks Comp")
+                defaults.synchronize()
+            }else { // This is the first bookmark
+                var bookmarks: NSArray = [(self.getCurrentDictionaryBookmark())]
+                defaults.setObject(bookmarks, forKey: "Bookmarks Comp")
+                defaults.synchronize()
+            }
+            self.isBookmarked = true
+            self.favoriteButton.setTitle("Unfav", forState: .Normal)
+        }else { // Remove the current profile from bookmarks
+            let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray
+            var book: NSMutableArray = NSMutableArray(array: curBookmarks!)
+            // loop through and find item with num and season equal to current profile, find index
+            var index = 0
+            for (var i = 0; i < book.count; i++) {
+                var curEl: NSDictionary = book.objectAtIndex(i) as! NSDictionary
+                // if num and season equal current ones
+                if (curEl.objectForKey("Name") as! NSString).isEqualToString(self.comp.name) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.comp.season){
+                    index = i
+                }
+            }
+            book.removeObjectAtIndex(index)
+            // Update bookmarks
+            defaults.setObject(book as NSArray, forKey: "Bookmarks Comp")
+            defaults.synchronize()
+            self.isBookmarked = false
+            self.favoriteButton.setTitle("Fav", forState: .Normal)
+        }
+        println(defaults.valueForKey("Bookmarks Comp") as? NSArray)
+    }
+    
+    func getCurrentDictionaryBookmark() -> NSDictionary {
+        var curEl: NSMutableDictionary = NSMutableDictionary()
+        curEl.setObject("Comp", forKey: "Kind")
+        curEl.setObject(self.name, forKey: "Name")
+        curEl.setObject(self.season, forKey: "Season")
+        return curEl as NSDictionary
+    }
+
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Ranking"
     }
@@ -276,7 +351,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         cell.rankingLabel.text = "\(win)\(loss)\(tie)"
         cell.spLabel.text = "\(t.spPointsSum)"
         if indexPath.row % 2 == 0 {
-            println("ROW: \(indexPath.row)")
+            //println("ROW: \(indexPath.row)")
             cell.backgroundColor = self.colorWithHexString("#f0f0f0")
         }else {
             cell.backgroundColor = UIColor.whiteColor()

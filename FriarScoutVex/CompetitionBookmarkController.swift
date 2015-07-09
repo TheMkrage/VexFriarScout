@@ -42,8 +42,8 @@ class CompetitionBookmarkController: UITableViewController, UITableViewDelegate,
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Creates cell and sets title to team num of bookmark
         var cell = tableView.dequeueReusableCellWithIdentifier("CompBookmarkedCell") as! TeamBookmarkCell
-        var team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as! String
-        cell.teamLabel.text = "Team \(team)"
+        var team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Name") as! String
+        cell.teamLabel.text = "\(team)"
         cell.seasonLabel.text = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Season") as? String
         /*if indexPath.row % 2 == 0 {
         println("ROW: \(indexPath.row)")
