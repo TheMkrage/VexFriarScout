@@ -36,7 +36,7 @@ class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UIT
         return self.bookmarks.count
     }
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Bookmarks"
+        return "Favorites"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

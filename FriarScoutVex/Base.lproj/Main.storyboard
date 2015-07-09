@@ -324,7 +324,7 @@
                                             <constraint firstAttribute="width" constant="182" id="rCL-Go-kmc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="32"/>
-                                        <state key="normal" title="Bookmarks">
+                                        <state key="normal" title="Favorites">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">

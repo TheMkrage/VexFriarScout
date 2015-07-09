@@ -35,9 +35,9 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
         // Setup seasonPicker
         self.seasonPicker.delegate = self
         self.seasonPicker.dataSource = self
-        self.seasonPicker.textColor = UIColor.redColor()
+        self.seasonPicker.textColor = UIColor.blueColor()
         self.seasonPicker.font = UIFont(name: "HelveticaNeue-Bold", size: 20)!
-        self.seasonPicker.highlightedTextColor = UIColor.orangeColor()
+        self.seasonPicker.highlightedTextColor = UIColor.blueColor()
         self.seasonPicker.highlightedFont = UIFont(name: "HelveticaNeue-Bold", size: 20 )!
         self.seasonPicker.interitemSpacing = 20.0
         self.seasonPicker.viewDepth = 1000.0
@@ -121,7 +121,6 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
             vc.title = "Team \(team1)"
             // Present Profile
             self.showViewController(vc as UIViewController, sender: vc)
-        
     }
     
     // Skills button, takes you to skills view and sends season along with it
@@ -165,4 +164,27 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         self.season = seasons[item]
     }
+    
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
+        }
+        
+        if (count(cString) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rgbValue:UInt32 = 0
+        NSScanner(string: cString).scanHexInt(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 }
