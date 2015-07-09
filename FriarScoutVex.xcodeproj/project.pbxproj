@@ -11,6 +11,8 @@
 		7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461F1B3BD59C00AE63C3 /* helpMe.png */; };
 		7E6A46241B3BDE5000AE63C3 /* flames.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A46231B3BDE5000AE63C3 /* flames.png */; };
 		7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */; };
+		7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */; };
+		7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */; };
 		7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */; };
 		7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */; };
 		7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFE57A1B02E9A700E804BC /* Award.swift */; };
@@ -81,6 +83,8 @@
 		7E6A461F1B3BD59C00AE63C3 /* helpMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpMe.png; sourceTree = "<group>"; };
 		7E6A46231B3BDE5000AE63C3 /* flames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flames.png; sourceTree = "<group>"; };
 		7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarksViewController.swift; sourceTree = "<group>"; };
+		7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarkCell.swift; sourceTree = "<group>"; };
+		7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionBookmarkController.swift; sourceTree = "<group>"; };
 		7EBF4A401AD6E1CE00C98EFA /* TeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EBFA9E21AE60D2D00986361 /* CompetitionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableCell.swift; sourceTree = "<group>"; };
 		7EBFE57A1B02E9A700E804BC /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */,
+				7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */,
 			);
 			name = Bookmarks;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 				7EBFE57C1B02F59600E804BC /* AwardCell.swift */,
 				7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */,
 				7EC5AB381B3356620046250B /* SkillsCell.swift */,
+				7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -499,7 +505,9 @@
 				7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */,
 				7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */,
 				7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */,
+				7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */,
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
+				7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */,
 				7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */,
 				7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */,
 				7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */,

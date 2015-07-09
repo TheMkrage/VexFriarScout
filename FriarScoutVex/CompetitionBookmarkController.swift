@@ -1,14 +1,14 @@
 //
-//  TeamBookmarksViewController.swift
+//  CompetitionBookmarkController.swift
 //  FriarScoutVex
 //
-//  Created by Matthew Krager on 7/7/15.
+//  Created by Matthew Krager on 7/8/15.
 //  Copyright (c) 2015 Matthew Krager. All rights reserved.
 //
 
 import UIKit
 
-class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UITableViewDataSource {
+class CompetitionBookmarkController: UITableViewController, UITableViewDelegate,UITableViewDataSource {
     var bookmarks: NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UIT
     
     func getBookmarks() {
         let defaults = NSUserDefaults.standardUserDefaults()
-        if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
+        if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
             self.bookmarks = NSMutableArray(array: curBookmarks)
         }
         self.tableView.reloadData()
@@ -41,15 +41,15 @@ class TeamBookmarksViewController: UITableViewController,UITableViewDelegate,UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Creates cell and sets title to team num of bookmark
-        var cell = tableView.dequeueReusableCellWithIdentifier("TeamBookmarkedCell") as! TeamBookmarkCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("CompBookmarkedCell") as! TeamBookmarkCell
         var team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as! String
         cell.teamLabel.text = "Team \(team)"
         cell.seasonLabel.text = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Season") as? String
         /*if indexPath.row % 2 == 0 {
-            println("ROW: \(indexPath.row)")
-            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
+        println("ROW: \(indexPath.row)")
+        cell.backgroundColor = self.colorWithHexString("#f0f0f0")
         }else {
-            cell.backgroundColor = UIColor.whiteColor()
+        cell.backgroundColor = UIColor.whiteColor()
         }*/
         
         return cell
