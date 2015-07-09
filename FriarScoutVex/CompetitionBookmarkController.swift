@@ -57,16 +57,16 @@ class CompetitionBookmarkController: UITableViewController, UITableViewDelegate,
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var teamDic: NSDictionary = self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
-        // Destintation ViewController, set team
-        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
-        var team2: Team! = Team()
-        team2.num = teamDic.objectForKey("Num") as! String!
-        team2.season = teamDic.objectForKey("Season") as! String!
-        dest.team = team2
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
         // Set the title of the menuViewController
-        vc.title = "Team \(team2.num)"
+        
+        // Destintation ViewController, set team
+        let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+        dest.name = teamDic.objectForKey("Name") as! String!
+        dest.season = teamDic.objectForKey("Season") as! String!
+        vc.title = "\(dest.name)"
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
+
     }
 }

@@ -1125,8 +1125,7 @@
                                         <exclude reference="MRi-l8-Mk5"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="116" y="64" width="37" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="MRi-l8-Mk5"/>
                                     </mask>
@@ -1146,8 +1145,7 @@
                                         <exclude reference="b8C-2E-VFS"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="96" y="32" width="76" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="b8C-2E-VFS"/>
                                     </mask>
@@ -1171,8 +1169,7 @@
                                         <exclude reference="132-Ge-9bF"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="229" y="32" width="72" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="132-Ge-9bF"/>
                                         <exclude reference="S2E-AR-drt"/>
@@ -1195,8 +1192,7 @@
                                         <exclude reference="VGD-1N-G3b"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="246" y="64" width="37" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="VGD-1N-G3b"/>
                                     </mask>
@@ -1215,8 +1211,7 @@
                                         <exclude reference="Yzo-Y3-Xle"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="160" y="32" width="81" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Yzo-Y3-Xle"/>
                                     </mask>
@@ -1235,8 +1230,7 @@
                                         <exclude reference="BSu-by-ebB"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="181" y="64" width="39" height="27"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="BSu-by-ebB"/>
                                     </mask>
