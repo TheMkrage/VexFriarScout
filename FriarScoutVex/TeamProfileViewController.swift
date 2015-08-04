@@ -64,7 +64,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         cell.LocationLabel.text = (self.team.competitions.objectAtIndex(indexPath.row) as! Competition).loc as String
         if indexPath.row % 2 == 0 {
             println("ROW: \(indexPath.row)")
-            cell.backgroundColor = self.colorWithHexString("#f0f0f0")
+            cell.backgroundColor = Colors.colorWithHexString("#f0f0f0")
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }
@@ -120,26 +120,4 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
             }
         }
     }
-    func colorWithHexString (hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
-        
-        if (cString.hasPrefix("#")) {
-            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
-        }
-        
-        if (count(cString) != 6) {
-            return UIColor.grayColor()
-        }
-        
-        var rgbValue:UInt32 = 0
-        NSScanner(string: cString).scanHexInt(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-
 }

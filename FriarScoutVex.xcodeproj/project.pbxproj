@@ -10,6 +10,7 @@
 		7E6A461E1B3BC9A700AE63C3 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461D1B3BC9A700AE63C3 /* launch.png */; };
 		7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461F1B3BD59C00AE63C3 /* helpMe.png */; };
 		7E6A46241B3BDE5000AE63C3 /* flames.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A46231B3BDE5000AE63C3 /* flames.png */; };
+		7EB472E41B706C1600F29190 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB472E31B706C1600F29190 /* Colors.swift */; };
 		7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */; };
 		7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */; };
 		7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */; };
@@ -82,6 +83,7 @@
 		7E6A461D1B3BC9A700AE63C3 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		7E6A461F1B3BD59C00AE63C3 /* helpMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpMe.png; sourceTree = "<group>"; };
 		7E6A46231B3BDE5000AE63C3 /* flames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flames.png; sourceTree = "<group>"; };
+		7EB472E31B706C1600F29190 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarksViewController.swift; sourceTree = "<group>"; };
 		7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarkCell.swift; sourceTree = "<group>"; };
 		7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionBookmarkController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				7EBFFB901AED673A003597FE /* Depracated */,
 				7EC1B0971B16C0CC00B3A7BA /* GraySquare.png */,
 				7EC81E3A1AD30078008F0639 /* Supporting Files */,
+				7EB472E31B706C1600F29190 /* Colors.swift */,
 			);
 			path = FriarScoutVex;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				7ECAEBE41B0913ED0056733A /* HasCompetitionViewController.swift in Sources */,
 				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
 				7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */,
+				7EB472E41B706C1600F29190 /* Colors.swift in Sources */,
 				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */,
 				7ECC92FE1B3906A30082F128 /* ProgrammingSkillsViewController.swift in Sources */,
