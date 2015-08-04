@@ -14,11 +14,16 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     var matches: NSMutableArray!
     @IBOutlet var matchesTable: UITableView!
     
+    @IBOutlet var rankingLabel: UILabel!
     @IBOutlet var averageLabel: UILabel!
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
     @IBOutlet var spPointsLabel: UILabel!
     @IBOutlet var compLabel: UILabel!
+    
+    var wins = 0
+    var losses = 0
+    var ties = 0
     
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
@@ -51,6 +56,17 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         if comp.matchCount != 0 {
             self.averageLabel.text = "\(comp.sumOfMatches/comp.matchCount)"
         }
+        for m in comp.matches {
+            if (m as! Match).didTeamTie(self.team.num) {
+                ties++
+            }else if (m as! Match).didTeamWin(self.team.num){
+                wins++
+            }else {
+                losses++
+            }
+        }
+        self.rankingLabel.text = "\(wins) - \(losses) - \(ties)"
+        
     }
     
     @IBAction func highestBut(sender: AnyObject) {
@@ -155,6 +171,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }
+
         return cell
     }
     

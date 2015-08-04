@@ -65,6 +65,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Robot Skills
         var ref: Firebase = Firebase(url:"https://vexscoutcompetitions.firebaseio.com/\(self.season)/rs")
         ref.queryLimitedToFirst(50).observeEventType(.ChildAdded, withBlock: { snapshot in
+            println(self.rs.count)
             var s:Skills = Skills()
             s.rank = snapshot.value["rank"] as! String
             s.team = snapshot.value["team"] as! String
@@ -106,6 +107,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.showViewController(vc as UIViewController, sender: vc)
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return self.curSkills.count
     }
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
