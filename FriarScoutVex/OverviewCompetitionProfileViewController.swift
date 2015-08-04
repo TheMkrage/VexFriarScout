@@ -260,14 +260,14 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 // if num and season equal current ones
                 if (curEl.objectForKey("Name") as! NSString).isEqualToString(self.name) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.season){
                     isBookmarked = true
-                    self.favoriteButton.setTitle("Unfav", forState: .Normal)
+                    self.favoriteButton.setImage(UIImage(named: "FavoritedIcon.png"), forState: .Normal)
                     println("IT WORKED")
                     return
                 }
             }
         }
         isBookmarked = false
-        self.favoriteButton.setTitle("Fav", forState: .Normal)
+        //self.favoriteButton.setTitle("Fav", forState: .Normal)
     }
 
     @IBAction func favorite(sender: AnyObject) {
@@ -286,7 +286,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 defaults.synchronize()
             }
             self.isBookmarked = true
-            self.favoriteButton.setTitle("Unfav", forState: .Normal)
+            self.favoriteButton.setImage(UIImage(named: "FavoritedIcon.png"), forState: .Normal)
         }else { // Remove the current profile from bookmarks
             let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray
             var book: NSMutableArray = NSMutableArray(array: curBookmarks!)
@@ -304,7 +304,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             defaults.setObject(book as NSArray, forKey: "Bookmarks Comp")
             defaults.synchronize()
             self.isBookmarked = false
-            self.favoriteButton.setTitle("Fav", forState: .Normal)
+            self.favoriteButton.setImage(UIImage(named: "UnfavoritedIcon.png"), forState: .Normal)
         }
         println(defaults.valueForKey("Bookmarks Comp") as? NSArray)
     }

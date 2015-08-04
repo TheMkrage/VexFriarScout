@@ -66,7 +66,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 // if num and season equal current ones
                 if (curEl.objectForKey("Num") as! NSString).isEqualToString(self.team.num) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.team.season){
                     isBookmarked = true
-                    self.favoriteButton.setTitle("Unfav", forState: .Normal)
+                    self.favoriteButton.setImage(UIImage(named: "FavoritedIcon.png"), forState: .Normal)
                     return
                 }
             }
@@ -357,7 +357,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 defaults.synchronize()
             }
             self.isBookmarked = true
-            self.favoriteButton.setTitle("Unfav", forState: .Normal)
+            self.favoriteButton.setImage(UIImage(named: "FavoritedIcon.png"), forState: .Normal)
         }else { // Remove the current profile from bookmarks
             let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray
             var book: NSMutableArray = NSMutableArray(array: curBookmarks!)
@@ -375,7 +375,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
             defaults.setObject(book as NSArray, forKey: "Bookmarks")
             defaults.synchronize()
             self.isBookmarked = false
-            self.favoriteButton.setTitle("Fav", forState: .Normal)
+            self.favoriteButton.setImage(UIImage(named: "UnfavoritedIcon.png"), forState: .Normal)
         }
         println(defaults.valueForKey("Bookmarks") as? NSArray)
     }

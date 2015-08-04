@@ -93,11 +93,8 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
                 let alertController = UIAlertController(title: "You haven't told us what team you are on!", message:
                     "To configure 'My Team', press the wrench and type your team into the text box!", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Will Do!", style: UIAlertActionStyle.Default,handler: nil))
-                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
-                    
-                })
-            self.presentViewController(alertController, animated: true, completion:  { () -> Void in
-                })
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
             }else {
                 self.moveToTeamProfile(stringOne)
             }
