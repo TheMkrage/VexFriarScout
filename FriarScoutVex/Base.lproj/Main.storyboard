@@ -3316,18 +3316,23 @@
                             <outlet property="delegate" destination="H3o-2e-zBf" id="vdT-EH-Kkh"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Teams" image="teamOverview.png" id="QlS-FN-KZR"/>
+                    <tabBarItem key="tabBarItem" title="Teams" image="teamOverview.png" id="QlS-FN-KZR" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex">
+                        <connections>
+                            <outlet property="animation" destination="CTW-Dq-BDv" id="dh2-7a-AlK"/>
+                        </connections>
+                    </tabBarItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RH4-c7-oqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="CTW-Dq-BDv" customClass="RAMBounceAnimation" customModule="FriarScoutVex"/>
             </objects>
             <point key="canvasLocation" x="2260.5" y="599"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Animated Tab Bar Controller-->
         <scene sceneID="vEI-5a-amE">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SlG-iI-Uyr" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="SlG-iI-Uyr" customClass="RAMAnimatedTabBarController" customModule="FriarScoutVex" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Av5-ae-36t">
@@ -3761,11 +3766,16 @@
                             <outlet property="delegate" destination="yTM-EQ-jjX" id="6WP-v4-LP1"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Competitions" image="compOverview.png" id="ATj-nr-nac"/>
+                    <tabBarItem key="tabBarItem" title="Competitions" image="compOverview.png" id="ATj-nr-nac" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex">
+                        <connections>
+                            <outlet property="animation" destination="r6h-WR-1Kp" id="Sko-Vm-121"/>
+                        </connections>
+                    </tabBarItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ao4-Sg-jcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="r6h-WR-1Kp" customClass="RAMFumeAnimation" customModule="FriarScoutVex"/>
             </objects>
             <point key="canvasLocation" x="2260.5" y="1434"/>
         </scene>

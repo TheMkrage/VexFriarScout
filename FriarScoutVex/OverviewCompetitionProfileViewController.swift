@@ -36,7 +36,11 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         if self.comp.date == "League" {
           self.disclaimer.hidden = false
         }else {
+            self.rankingTable.alpha = 0.1
             self.rankingTable.hidden = false
+            UIView.animateWithDuration(0.5, animations: {
+                self.rankingTable.alpha = 1.0
+            })
         }
     }
     
@@ -53,11 +57,11 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         self.setAllHidden()
         var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
         self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
-        //self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        //self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2) - 50, (self.view.frame.height/2) + 50);
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2), (self.view.frame.height/2) + 50);
        
-       // self.activityIndicator.startAnimating()
-        //self.view.addSubview( self.activityIndicator )
+        self.activityIndicator.startAnimating()
+        self.view.addSubview( self.activityIndicator )
         self.rankingTable.dataSource = self
         self.rankingTable.delegate = self
         self.loadComp()
@@ -72,7 +76,20 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         let ref = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)")
         ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
             
-            self.comp.name = snapshot.value["name"]as! String
+            // reassurance
+            if let x = snapshot.value["name"] as? String {
+                self.comp.name = x
+            }else{
+                let alertController = UIAlertController(title: "Well, this is awkard!", message:
+                "I can't seem to find this competition! It isn't in our database... Hey it happens" , preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.Default,handler: nil))
+            
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+                return
+            }
+
             self.comp.date = snapshot.value["date"]as! String
             self.comp.loc = snapshot.value["loc"]as! String
             self.comp.season = snapshot.value["season"] as! String
@@ -153,7 +170,6 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                     }
                 })
             })
-            //println("RANKINGS!")
         })
     }
     
