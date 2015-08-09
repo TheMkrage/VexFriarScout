@@ -19,6 +19,7 @@ class Team: NSObject {
     var rs: String! = "NA"
     var ps: String! = "NA"
     
+    var competitionIDs: NSMutableArray! = NSMutableArray()
     var competitions: NSMutableArray! = NSMutableArray()
     var awards: NSMutableArray! = NSMutableArray()
     

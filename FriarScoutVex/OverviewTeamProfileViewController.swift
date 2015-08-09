@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var scrollView: UIScrollView!
@@ -76,14 +77,11 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     func loadCompetitions() {
-        println("Will Appear")
-        self.team.competitions = NSMutableArray()
-        
-        // General Info
-        let ref1 = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num.uppercaseString)")
-        ref1.observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-            // if the team does not exist
-            if !snapshot.exists() {
+        var query = PFQuery(className:"Teams")
+        query.whereKey("num", equalTo:self.team.num)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if objects?.count == 0 {
                 // Alert the user and bring them back to the main menu
                 let alertController = UIAlertController(title: "Oh Dear!", message:
                     "Team \(self.team.num.uppercaseString) does not exist!", preferredStyle: UIAlertControllerStyle.Alert)
@@ -94,10 +92,52 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 })
                 return;
             }
+            if let newTeam: AnyObject = objects?[0] {
+                // Find and set simple values
+                self.team.name = newTeam["name"] as! String
+                self.team.loc =  newTeam["loc"] as! String
+                self.team.num = newTeam["num"] as! String
+                self.nameLabel.text = self.team.name
+                self.locationLabel.text = self.team.loc
+                self.numLabel.text = self.team.num
+                self.team.competitionIDs = newTeam["competitions"] as! NSMutableArray
+                println(self.team.competitionIDs)
+                // Find all comps tahat apply to current season
+                var query = PFQuery(className:"Competitions")
+                for compID in self.team.competitionIDs {
+                    var result: AnyObject = query.whereKey("season", equalTo: self.team.season).getObjectWithId(compID as! String)!
+                    var comp: Competition = Competition()
+                    comp.name = result["name"] as! String
+                    comp.date = result["date"] as! String
+                    comp.loc = result["loc"] as! String
+                    comp.season = result["season"] as! String
+                    println(result)
+                    self.team.competitions.addObject(comp)
+                }
+                //self.compCountLabel.text = "\(self.team.competitions.count)"
+                
+            }
+
+        }
+
+        
+        
+        /*
+        // FIREBASE ----____________________________________----
+        println("Will Appear")
+        self.team.competitions = NSMutableArray()
+        
+        // General Info
+        let ref1 = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num.uppercaseString)")
+        ref1.observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+            // if the team does not exist
+            if !snapshot.exists() {
+                            }
             // Set the name, loc, and num vars and set text
             self.team.name = snapshot.value["name"] as! String
             self.team.loc = snapshot.value["loc"] as! String
             self.team.num = snapshot.value["num"] as! String
+           
             self.nameLabel.text = self.team.name
             self.locationLabel.text = self.team.loc
             self.numLabel.text = self.team.num
@@ -295,7 +335,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
             }
             self.updateLabels()
         })
-        self.updateLabels()
+        self.updateLabels()*/
     }
     // Help Me
     @IBAction func spAvgHelp(sender: AnyObject) {

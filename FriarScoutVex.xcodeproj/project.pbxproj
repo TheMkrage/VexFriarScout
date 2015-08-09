@@ -35,6 +35,17 @@
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
 		7EC354AE1B39DD4600829C3C /* wrenchSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC354AD1B39DD4600829C3C /* wrenchSelected.png */; };
+		7EC36A5B1B72C97D00675E1D /* CustomAnimationCompetitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */; };
+		7EC36A5E1B7333CA00675E1D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A5C1B7333CA00675E1D /* Bolts.framework */; };
+		7EC36A5F1B7333CA00675E1D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A5D1B7333CA00675E1D /* Parse.framework */; };
+		7EC36A611B7333F000675E1D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A601B7333EF00675E1D /* AudioToolbox.framework */; };
+		7EC36A631B73340000675E1D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A621B73340000675E1D /* CoreGraphics.framework */; };
+		7EC36A651B73340800675E1D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A641B73340800675E1D /* QuartzCore.framework */; };
+		7EC36A671B73341600675E1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A661B73341600675E1D /* StoreKit.framework */; };
+		7EC36A691B73342400675E1D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A681B73342400675E1D /* libz.dylib */; };
+		7EC36A6B1B73342C00675E1D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6A1B73342C00675E1D /* libsqlite3.dylib */; };
+		7EC36A6D1B73354600675E1D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6C1B73354600675E1D /* Accounts.framework */; };
+		7EC36A6F1B73354A00675E1D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6E1B73354A00675E1D /* Social.framework */; };
 		7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */; };
 		7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB341B3352400046250B /* SkillsViewController.swift */; };
 		7EC5AB371B33561B0046250B /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB361B33561B0046250B /* Skills.swift */; };
@@ -118,6 +129,17 @@
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		7EC354AD1B39DD4600829C3C /* wrenchSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrenchSelected.png; sourceTree = "<group>"; };
+		7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnimationCompetitions.swift; sourceTree = "<group>"; };
+		7EC36A5C1B7333CA00675E1D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		7EC36A5D1B7333CA00675E1D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		7EC36A601B7333EF00675E1D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7EC36A621B73340000675E1D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7EC36A641B73340800675E1D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7EC36A661B73341600675E1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7EC36A681B73342400675E1D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7EC36A6A1B73342C00675E1D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7EC36A6C1B73354600675E1D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		7EC36A6E1B73354A00675E1D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		7EC5AB341B3352400046250B /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		7EC5AB361B33561B0046250B /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
@@ -169,12 +191,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC36A6F1B73354A00675E1D /* Social.framework in Frameworks */,
+				7EC36A6D1B73354600675E1D /* Accounts.framework in Frameworks */,
+				7EC36A6B1B73342C00675E1D /* libsqlite3.dylib in Frameworks */,
+				7EC36A691B73342400675E1D /* libz.dylib in Frameworks */,
+				7EC36A671B73341600675E1D /* StoreKit.framework in Frameworks */,
+				7EC36A651B73340800675E1D /* QuartzCore.framework in Frameworks */,
+				7EC36A631B73340000675E1D /* CoreGraphics.framework in Frameworks */,
+				7EC2991F1AD5927800A7E008 /* CFNetwork.framework in Frameworks */,
+				7EC36A611B7333F000675E1D /* AudioToolbox.framework in Frameworks */,
 				7EC299231AD5928D00A7E008 /* SystemConfiguration.framework in Frameworks */,
 				7EC299211AD5928300A7E008 /* Security.framework in Frameworks */,
-				7EC2991F1AD5927800A7E008 /* CFNetwork.framework in Frameworks */,
 				7EC2991D1AD5926E00A7E008 /* libicucore.dylib in Frameworks */,
 				7EC2991B1AD5925500A7E008 /* libc++.dylib in Frameworks */,
 				7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */,
+				7EC36A5F1B7333CA00675E1D /* Parse.framework in Frameworks */,
+				7EC36A5E1B7333CA00675E1D /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +314,7 @@
 				7EC5CCFE1B71EF08003075BD /* RAMTransitionItemAnimation.swift */,
 				7EC5CCFF1B71EF08003075BD /* RAMAnimatedTabBarController.swift */,
 				7EC5CD001B71EF08003075BD /* RAMItemAnimationProtocol.swift */,
+				7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */,
 			);
 			name = RAMA;
 			sourceTree = "<group>";
@@ -289,6 +322,14 @@
 		7EC81E2E1AD30078008F0639 = {
 			isa = PBXGroup;
 			children = (
+				7EC36A6E1B73354A00675E1D /* Social.framework */,
+				7EC36A6C1B73354600675E1D /* Accounts.framework */,
+				7EC36A6A1B73342C00675E1D /* libsqlite3.dylib */,
+				7EC36A681B73342400675E1D /* libz.dylib */,
+				7EC36A661B73341600675E1D /* StoreKit.framework */,
+				7EC36A641B73340800675E1D /* QuartzCore.framework */,
+				7EC36A621B73340000675E1D /* CoreGraphics.framework */,
+				7EC36A601B7333EF00675E1D /* AudioToolbox.framework */,
 				7EC299221AD5928D00A7E008 /* SystemConfiguration.framework */,
 				7EC299201AD5928300A7E008 /* Security.framework */,
 				7EC2991E1AD5927800A7E008 /* CFNetwork.framework */,
@@ -332,6 +373,8 @@
 		7EC81E3A1AD30078008F0639 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7EC36A5C1B7333CA00675E1D /* Bolts.framework */,
+				7EC36A5D1B7333CA00675E1D /* Parse.framework */,
 				7EC81E3B1AD30078008F0639 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -564,6 +607,7 @@
 				7EC5CD031B71EF08003075BD /* RAMFumeAnimation.swift in Sources */,
 				7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */,
 				7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */,
+				7EC36A5B1B72C97D00675E1D /* CustomAnimationCompetitions.swift in Sources */,
 				7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */,
 				7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
@@ -708,6 +752,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FriarScoutVex",
 				);
 				INFOPLIST_FILE = FriarScoutVex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -730,6 +775,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FriarScoutVex",
 				);
 				INFOPLIST_FILE = FriarScoutVex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

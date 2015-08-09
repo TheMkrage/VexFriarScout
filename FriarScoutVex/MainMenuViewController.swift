@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerViewDataSource, AKPickerViewDelegate {
     // Every possible season
@@ -25,6 +26,31 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var query = PFQuery(className:"Matches")
+        query.whereKey("num", equalTo:"Q23")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                println("Successfully retrieved \(objects!.count) scores.")
+                // Do something with the found objects
+                if let objects = objects as? [PFObject] {
+                    for object in objects {
+                        println(object.objectId!)
+                    }
+                }
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+        }
+        /*let testObject = PFObject(className: "Matches")
+        testObject["num"] = "Q23"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("Object has been saved.")
+        }*/
+        
         self.TeamTextField.placeholder = "3309B"
         var touch = UITapGestureRecognizer(target: self, action:"scrollTouchesBegan")
         self.scrollView.addGestureRecognizer(touch)

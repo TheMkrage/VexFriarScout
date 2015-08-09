@@ -26,27 +26,31 @@ import UIKit
 class RAMBounceAnimation : RAMItemAnimation {
 
     override func playAnimation(icon : UIImageView, textLabel : UILabel) {
+        println("PLAY ANIMATION")
         playBounceAnimation(icon)
         textLabel.textColor = textSelectedColor
     }
 
     override func deselectAnimation(icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
+        println("Deselect")
         textLabel.textColor = defaultTextColor
       
         if let iconImage = icon.image {
             let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
             icon.image = renderImage
-            icon.tintColor = defaultTextColor
+            icon.tintColor = UIColor.grayColor()
         }
     }
 
     override func selectedState(icon : UIImageView, textLabel : UILabel) {
+        println("SelecT")
         textLabel.textColor = textSelectedColor
       
         if let iconImage = icon.image {
+            println("HAS IMAGE")
             let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
             icon.image = renderImage
-            icon.tintColor = textSelectedColor
+            icon.tintColor = iconSelectedColor
         }
     }
 
