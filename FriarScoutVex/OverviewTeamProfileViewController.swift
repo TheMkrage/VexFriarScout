@@ -66,33 +66,41 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         let chartRect = CAShapeLayer()
         chartRect.bounds = bounds
         chartRect.position = CGPoint(x: center.x, y: 200)
-    view.layer.addSublayer(chartRect)
+   self.scrollView.layer.addSublayer(chartRect)
         // 1
         chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
         chartRect.cornerRadius = 20
         let rightDivider = CAShapeLayer()
         rightDivider.bounds = CGRect(x: self.view.frame.width * (2/3), y: 200, width: 5, height: 55)
         rightDivider.position = CGPoint(x: self.view.frame.width * (2/3), y: 200)
-        view.layer.addSublayer(rightDivider)
+        self.scrollView.layer.addSublayer(rightDivider)
         rightDivider.backgroundColor = UIColor.whiteColor().CGColor
         rightDivider.cornerRadius = 5
         let leftDivider = CAShapeLayer()
         leftDivider.bounds = CGRect(x: self.view.frame.width * (1/3), y: 200, width: 5, height: 55)
         leftDivider.position = CGPoint(x: self.view.frame.width * (1/3), y: 200)
-        view.layer.addSublayer(leftDivider)
+        self.scrollView.layer.addSublayer(leftDivider)
         leftDivider.backgroundColor = UIColor.whiteColor().CGColor
         leftDivider.cornerRadius = 5
         
         let seasonDivider = CAShapeLayer()
         seasonDivider.bounds = CGRect(x: self.view.frame.width/2, y: self.rankingsLabel.frame.origin.y, width: 160, height: 3)
         seasonDivider.position = CGPoint(x: self.view.frame.width/2, y: chartRect.frame.origin.y + 115)
-        view.layer.addSublayer(seasonDivider)
+        self.scrollView.layer.addSublayer(seasonDivider)
         seasonDivider.backgroundColor = UIColor.darkGrayColor().CGColor
         seasonDivider.cornerRadius = 2
         
         var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
-        self.view.addSubview(circle)
+        self.scrollView.addSubview(circle)
         circle.animateCircle(1.0)
+        
+        var compCircle = CircleView(frame: CGRectMake(leftDivider.frame.origin.x - 40, seasonDivider.frame.origin.y + 50, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor)
+        self.scrollView.addSubview(compCircle)
+        compCircle.animateCircle(1.0)
+        
+        var awardCircle = CircleView(frame: CGRectMake(compCircle.frame.origin.x, compCircle.frame.origin.y + 107, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor)
+        self.scrollView.addSubview(awardCircle)
+        awardCircle.animateCircle(1.0)
     }
     
     override func viewDidLayoutSubviews() {

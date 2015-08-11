@@ -11,7 +11,7 @@ import UIKit
 class CircleView: UIView {
     let circleLayer: CAShapeLayer  = CAShapeLayer()
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor: CGColor = UIColor.blueColor().CGColor) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clearColor()
         // Use UIBezierPath as an easy way to create the CGPath for the layer.
@@ -20,8 +20,8 @@ class CircleView: UIView {
         
         // Setup the CAShapeLayer with the path, colors, and line width
         circleLayer.path = circlePath.CGPath
-        circleLayer.fillColor = Colors.colorWithHexString("#858585").CGColor
-        circleLayer.strokeColor = UIColor.blueColor().CGColor
+        circleLayer.fillColor = innerColor
+        circleLayer.strokeColor = rimColor
         circleLayer.lineWidth = 5.0
         
         // Don't draw the circle initially
