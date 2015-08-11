@@ -39,7 +39,13 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         })
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.highestScoreLabel.center = CGPoint(x:(view.frame.width * (2/3)) + ((view.frame.width * (1/3))/2),y: self.highestScoreLabel.frame.origin.y)
+        
+    }
+    
     override func viewDidLoad() {
+        self.drawBackground()
         var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
         self.findIfBookmarked()
         self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
@@ -52,9 +58,38 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         self.updateLabels()
     }
     
+    func drawBackground() {
+        let center = view.center
+        let bounds = CGRect(x: center.x, y: 200, width: self.view.frame.width - 16, height: 67)
+        // Create CAShapeLayerS
+        let chartRect = CAShapeLayer()
+        chartRect.bounds = bounds
+        chartRect.position = CGPoint(x: center.x, y: 200)
+        view.layer.addSublayer(chartRect)
+        // 1
+        chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
+        chartRect.cornerRadius = 20
+        let rightDivider = CAShapeLayer()
+        rightDivider.bounds = CGRect(x: self.view.frame.width * (2/3), y: 200, width: 5, height: 55)
+        rightDivider.position = CGPoint(x: self.view.frame.width * (2/3), y: 200)
+        view.layer.addSublayer(rightDivider)
+        rightDivider.backgroundColor = UIColor.whiteColor().CGColor
+        rightDivider.cornerRadius = 5
+        let leftDivider = CAShapeLayer()
+        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/3), y: 200, width: 5, height: 55)
+        leftDivider.position = CGPoint(x: self.view.frame.width * (1/3), y: 200)
+        view.layer.addSublayer(leftDivider)
+        leftDivider.backgroundColor = UIColor.whiteColor().CGColor
+        leftDivider.cornerRadius = 5
+        
+        var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
+        self.view.addSubview(circle)
+        circle.animateCircle(1.0)
+    }
+    
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize.height = 450;
-        self.scrollView.contentSize.width = self.view.frame.size.width;
+        self.scrollView.contentSize.height = 450
+        self.scrollView.contentSize.width = self.view.frame.size.width
     }
     
     func findIfBookmarked() {
@@ -102,91 +137,54 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 self.numLabel.text = self.team.num
                 self.team.competitionIDs = newTeam["competitions"] as! NSMutableArray
                 println(self.team.competitionIDs)
-                // Find all comps tahat apply to current season
-                var query = PFQuery(className:"Competitions")
+                // Find all comps tahat apply to current seaso
                 for compID in self.team.competitionIDs {
-                    var result: AnyObject = query.whereKey("season", equalTo: self.team.season).getObjectWithId(compID as! String)!
-                    var comp: Competition = Competition()
-                    comp.name = result["name"] as! String
-                    comp.date = result["date"] as! String
-                    comp.loc = result["loc"] as! String
-                    comp.season = result["season"] as! String
-                    println(result)
-                    self.team.competitions.addObject(comp)
-                }
-                //self.compCountLabel.text = "\(self.team.competitions.count)"
-                
-            }
-
-        }
-
-        
-        
-        /*
-        // FIREBASE ----____________________________________----
-        println("Will Appear")
-        self.team.competitions = NSMutableArray()
-        
-        // General Info
-        let ref1 = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num.uppercaseString)")
-        ref1.observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-            // if the team does not exist
-            if !snapshot.exists() {
+                    var query = PFQuery(className:"Competitions")
+                    query.whereKey("season", equalTo: self.team.season)
+                    query.getObjectInBackgroundWithId(compID as! String) { ( result:PFObject?, error: NSError?
+                        ) -> Void in
+                        var comp: Competition = Competition()
+                        comp.name = result!["name"] as! String
+                        println(comp.name)
+                        comp.date = result!["date"] as! String
+                        comp.loc = result!["loc"] as! String
+                        comp.season = result!["season"] as! String
+                        // get matches for each comp
+                        var matchIDQuery = PFQuery(className: "Matches")
+                        matchIDQuery.whereKey("compID", equalTo: compID)
+                        var matchesB0 = PFQuery(className: "Matches")
+                        matchesB0.whereKey("b0", equalTo: self.team.num)
+                        var matchesB1 = PFQuery(className: "Matches")
+                        matchesB1.whereKey("b1", equalTo: self.team.num)
+                        var matchesB2 = PFQuery(className: "Matches")
+                        matchesB2.whereKey("b2", equalTo: self.team.num)
+                        var matchesR0 = PFQuery(className: "Matches")
+                        matchesR0.whereKey("r0", equalTo: self.team.num)
+                        var matchesR1 = PFQuery(className: "Matches")
+                        matchesR1.whereKey("r1", equalTo: self.team.num)
+                        var matchesR2 = PFQuery(className: "Matches")
+                        matchesR2.whereKey("r2", equalTo: self.team.num)
+                        var matchesRaw = NSMutableArray()
+                        matchesRaw.addObjectsFromArray( PFQuery.orQueryWithSubqueries([ matchesB0, matchesB1, matchesB2, matchesR0, matchesR1, matchesR2]).whereKey("compID", equalTo: compID).findObjects() as NSArray! as! [PFObject])
+                        // Parse into Match objects
+                        for mRaw in matchesRaw {
+                            var m:Match = Match()
+                            m.red1 = mRaw["r0"] as! String
+                            m.red2 = mRaw["r1"] as! String
+                            if let y = mRaw["r2"]   as? String {
+                                m.red3 =  mRaw["r2"]  as! String
                             }
-            // Set the name, loc, and num vars and set text
-            self.team.name = snapshot.value["name"] as! String
-            self.team.loc = snapshot.value["loc"] as! String
-            self.team.num = snapshot.value["num"] as! String
-           
-            self.nameLabel.text = self.team.name
-            self.locationLabel.text = self.team.loc
-            self.numLabel.text = self.team.num
-            
-        })
-        // Competitions
-        let refComp = Firebase(url: "https://vexscout.firebaseio.com/teams/\(team.num.uppercaseString)/comps/\(self.team.season)")
-        println("https://vexscout.firebaseio.com/teams/\(team.num.uppercaseString)/comps/\(self.team.season)")
-        refComp.observeEventType(.ChildAdded, withBlock: { snapshot in            println("Begin!")
-            // Cycle through each competition
-            println(snapshot.value.objectForKey("loc"))
-            // let enumerator = snapshot.children
-            
-            // while let rest = enumerator.nextObject() as? FDataSnapshot {
-            if (snapshot.value["name"]as! String) == "rs" {
-                self.team.rs = snapshot.value["score"] as! String
-            }else if (snapshot.value["name"]as! String) == "ps" {
-                self.team.ps = snapshot.value["score"] as! String
-            }else {
-                var comp: Competition = Competition()
-                comp.name = snapshot.value["name"]as! String
-                comp.date = snapshot.value["date"]as! String
-                comp.loc = snapshot.value["loc"]as! String
-                comp.season = snapshot.value["season"] as! String
-                // Matches
-                let ref = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/matches")
-                ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-                    if snapshot.exists() {
-                        let enum2 = snapshot.children
-                        // Cycle through each Match
-                        while let rest2 = enum2.nextObject() as? FDataSnapshot {
-                            var m: Match = Match()
-                            m.red1 = rest2.value["r0"] as! String
-                            m.red2 = rest2.value["r1"] as! String
-                            if let y = rest2.value["r2"]   as? String {
-                                m.red3 =  rest2.value["r2"]  as! String
-                            }
-                            m.blue1 = rest2.value["b0"] as! String
-                            m.blue2 = rest2.value["b1"] as! String
-                            if let y = rest2.value["b2"]   as? String {
+                            m.blue1 = mRaw["b0"] as! String
+                            m.blue2 = mRaw["b1"] as! String
+                            if let y = mRaw["b2"]   as? String {
                                 
-                                m.blue3 =  rest2.value["b2"]  as! String
+                                m.blue3 =  mRaw["b2"]  as! String
                             }
-                            m.name = rest2.value["num"] as! String
-                            let x =  rest2.value["rs"] as! Int!
+                            m.name = mRaw["num"] as! String
+                            let x =  mRaw["rs"] as! Int!
                             m.redScore = "\(x)"
-                            let y = rest2.value["bs"]as! Int!
+                            let y = mRaw["bs"]as! Int!
                             m.blueScore = "\(y)"
-                            
                             // Win Loss Counters
                             if m.didTeamTie(self.team.num) {
                                 self.team.tieMatchCount++
@@ -218,7 +216,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             // Find Team Color and Act Accordingly
                             let teamColor:NSString! = m.colorTeamIsOn(self.team.num)
                             if teamColor.isEqualToString("red") {
-                                let score:Int =  rest2.value["rs"] as! Int
+                                let score:Int =  mRaw["rs"] as! Int
                                 self.team.sumOfMatches += score
                                 comp.sumOfMatches += score
                                 
@@ -254,7 +252,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                     comp.lowestScore = m.redScore.integerValue
                                 }
                             }else if teamColor.isEqualToString("blue") {
-                                let score:Int = rest2.value["bs"] as! Int
+                                let score:Int = mRaw["bs"] as! Int
                                 self.team.sumOfMatches += score
                                 comp.sumOfMatches += score
                                 // Find SP Points
@@ -297,43 +295,71 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 println("ERROR")
                             }
                             comp.matchCount++
-                            
                             self.team.matchCount++
                             comp.matches.addObject(m)
+                            
                         }
+                        self.team.compCount++
+                        self.team.competitions.addObject(comp)
+                        self.updateLabels()
                     }
-                    // Awards
-                    let refAward = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
-                    println("https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
-                    refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-                        let x = NSNumber(unsignedLong: snapshot.childrenCount) as NSInteger
-                        for var i = 0; i < x; i++ {
-                            var a: Award = Award();
-                            
-                            a.award = snapshot.value[i] as! String!
-                            a.comp = comp.name
-                            a.team = self.team
-                            
+                    var awardQuery = PFQuery(className:"Awards")
+                    awardQuery.whereKey("compID", equalTo: compID)
+                    awardQuery.whereKey("team", equalTo: self.team.num)
+                    awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
+                        ) -> Void in
+                        if let result = results?.first as? PFObject {
+                            var a: Award = Award()
+                            a.award = result["name"] as! String
+                            //a.comp = comp.name
+                            var t:Team = Team()
+                            t.num = result["team"] as! String
+                            a.team = t
                             self.team.awards.addObject(a)
                             self.team.awardCount++
-                            
                             self.awardCountLabel.text = "\(self.team.awardCount)"
+                            
                         }
-                    })
-                    self.team.compCount++
-                    self.compCountLabel.text = "\(self.team.compCount)"
-                    
-                    comp.orderMatches()
-                    //self.team.orderCompetitions()
-                    comp.season = self.team.season
-                    self.team.competitions.addObject(comp)
-                    self.updateLabels()
-                    
-                })
-                //  }
-                self.updateLabels()
+                    }
+                }
             }
-            self.updateLabels()
+        }
+        
+        
+        
+        /*
+        // Awards
+        let refAward = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
+        println("https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
+        refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
+        let x = NSNumber(unsignedLong: snapshot.childrenCount) as NSInteger
+        for var i = 0; i < x; i++ {
+        var a: Award = Award();
+        
+        a.award = snapshot.value[i] as! String!
+        a.comp = comp.name
+        a.team = self.team
+        
+        self.team.awards.addObject(a)
+        self.team.awardCount++
+        
+        self.awardCountLabel.text = "\(self.team.awardCount)"
+        }
+        })
+        self.team.compCount++
+        self.compCountLabel.text = "\(self.team.compCount)"
+        
+        comp.orderMatches()
+        //self.team.orderCompetitions()
+        comp.season = self.team.season
+        self.team.competitions.addObject(comp)
+        self.updateLabels()
+        
+        })
+        //  }
+        self.updateLabels()
+        }
+        self.updateLabels()
         })
         self.updateLabels()*/
     }
@@ -343,6 +369,8 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     func updateLabels() {
+        println("bleH")
+        self.compCountLabel.text = "\(self.team.compCount)"
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
             sumOfsp += (c as! Competition).spPointsSum
