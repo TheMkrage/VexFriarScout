@@ -20,7 +20,7 @@ class CircleView: UIView {
         
         // Setup the CAShapeLayer with the path, colors, and line width
         circleLayer.path = circlePath.CGPath
-        circleLayer.fillColor = UIColor.lightGrayColor().CGColor
+        circleLayer.fillColor = Colors.colorWithHexString("#858585").CGColor
         circleLayer.strokeColor = UIColor.blueColor().CGColor
         circleLayer.lineWidth = 5.0
         
@@ -34,20 +34,8 @@ class CircleView: UIView {
         //Draw Text
         textLayer.string = "Hello"
         
-        // 3
-        let fontName: CFStringRef = "Noteworthy-Light"
-        textLayer.font = CTFontCreateWithName(fontName, 14, nil)
-        
-        // 4
-        textLayer.foregroundColor = UIColor.darkGrayColor().CGColor
-        textLayer.wrapped = true
-        textLayer.alignmentMode = kCAAlignmentLeft
-        textLayer.contentsScale = UIScreen.mainScreen().scale
-        
-        
         // Add the circleLayer to the view's layer's sublayers
         layer.addSublayer(circleLayer)
-        layer.addSublayer(textLayer)
     }
     
     func animateCircle(duration: NSTimeInterval) {

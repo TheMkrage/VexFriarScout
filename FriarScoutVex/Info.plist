@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>HelveticaNeue-Thin.otf</string>
 		<string>BebasNeue.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

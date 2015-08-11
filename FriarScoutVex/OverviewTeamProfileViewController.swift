@@ -22,10 +22,12 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var spAvgLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
     @IBOutlet var rankingsLabel: UILabel!
+    @IBOutlet var letterLabel: UILabel!
     
     @IBOutlet var favoriteButton: UIButton!
     @IBOutlet var programmingSkillsScore: UILabel!
     @IBOutlet var robotSkillsScore: UILabel!
+    
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -41,7 +43,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.highestScoreLabel.center = CGPoint(x:(view.frame.width * (2/3)) + ((view.frame.width * (1/3))/2),y: self.highestScoreLabel.frame.origin.y)
-        
     }
     
     override func viewDidLoad() {
@@ -65,7 +66,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         let chartRect = CAShapeLayer()
         chartRect.bounds = bounds
         chartRect.position = CGPoint(x: center.x, y: 200)
-        view.layer.addSublayer(chartRect)
+    view.layer.addSublayer(chartRect)
         // 1
         chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
         chartRect.cornerRadius = 20
@@ -81,6 +82,13 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         view.layer.addSublayer(leftDivider)
         leftDivider.backgroundColor = UIColor.whiteColor().CGColor
         leftDivider.cornerRadius = 5
+        
+        let seasonDivider = CAShapeLayer()
+        seasonDivider.bounds = CGRect(x: self.view.frame.width/2, y: self.rankingsLabel.frame.origin.y, width: 160, height: 3)
+        seasonDivider.position = CGPoint(x: self.view.frame.width/2, y: chartRect.frame.origin.y + 115)
+        view.layer.addSublayer(seasonDivider)
+        seasonDivider.backgroundColor = UIColor.darkGrayColor().CGColor
+        seasonDivider.cornerRadius = 2
         
         var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
         self.view.addSubview(circle)
@@ -112,6 +120,20 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     func loadCompetitions() {
+        var teamDigits:String = ""
+        var teamLetters:String = ""
+        let letters = NSCharacterSet.letterCharacterSet()
+        let digits = NSCharacterSet.decimalDigitCharacterSet()
+        let characters = Array(self.team.num)
+        for c in self.team.num.unicodeScalars {
+            if letters.longCharacterIsMember(c.value) {
+                teamLetters.append(c)
+            } else if digits.longCharacterIsMember(c.value) {
+                teamDigits.append(c)
+            }
+        }
+        self.numLabel.text = teamDigits
+        self.letterLabel.text = teamLetters
         var query = PFQuery(className:"Teams")
         query.whereKey("num", equalTo:self.team.num)
         query.findObjectsInBackgroundWithBlock {
@@ -134,7 +156,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 self.team.num = newTeam["num"] as! String
                 self.nameLabel.text = self.team.name
                 self.locationLabel.text = self.team.loc
-                self.numLabel.text = self.team.num
+                
                 self.team.competitionIDs = newTeam["competitions"] as! NSMutableArray
                 println(self.team.competitionIDs)
                 // Find all comps tahat apply to current seaso

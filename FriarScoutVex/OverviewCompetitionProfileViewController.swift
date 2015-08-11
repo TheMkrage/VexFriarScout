@@ -51,6 +51,10 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
+    
+    override func layoutSublayersOfLayer(layer: CALayer!) {
+        layer.frame = self.view.bounds
+    }
 
     override func viewDidLoad() {
         
