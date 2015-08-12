@@ -154,9 +154,20 @@ class Team: NSObject {
         for (var i = 0; i < self.competitions.count; i++) {
             var c: Competition! = self.competitions.objectAtIndex(i) as! Competition
             for (var y = i; y > -1; y--) {
-                if c.date != "League" && (self.competitions.objectAtIndex(y) as! Competition).date != "League" {
-                    var cDate: NSDate = formatter.dateFromString(c.date)!
-                    var yDate: NSDate = formatter.dateFromString((self.competitions.objectAtIndex(y) as! Competition).date)!
+                var cDate: NSDate
+                var yDate: NSDate
+                if c.date == "League" {
+                   cDate = formatter.dateFromString("9999-12-12")!
+                }else {
+                    cDate = formatter.dateFromString(c.date)!
+                }
+                    
+                if (self.competitions.objectAtIndex(y) as! Competition).date == "League"{
+                    yDate = formatter.dateFromString("9999-12-12")!
+                }else {
+                    yDate = formatter.dateFromString((self.competitions.objectAtIndex(y) as! Competition).date)!
+                }
+                
                     
                     // Date comparision to compare current date and end date.
                     var dateComparisionResult:NSComparisonResult = cDate.compare(yDate)
@@ -164,7 +175,7 @@ class Team: NSObject {
                         
                         self.competitions.removeObjectAtIndex(y + 1)
                         self.competitions.insertObject(c, atIndex: y)
-                       // println(self.competitions)
+                        println(self.competitions)
                     }
                 }
             }

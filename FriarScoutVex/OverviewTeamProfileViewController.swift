@@ -66,7 +66,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         let chartRect = CAShapeLayer()
         chartRect.bounds = bounds
         chartRect.position = CGPoint(x: center.x, y: 200)
-   self.scrollView.layer.addSublayer(chartRect)
+        self.scrollView.layer.addSublayer(chartRect)
         // 1
         chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
         chartRect.cornerRadius = 20
@@ -90,6 +90,16 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         seasonDivider.backgroundColor = UIColor.darkGrayColor().CGColor
         seasonDivider.cornerRadius = 2
         
+        let skillsChart = CAShapeLayer()
+        skillsChart.bounds = CGRect(x: seasonDivider.frame.origin.x + 40, y: seasonDivider.frame.origin.y + 50, width: 50, height: 200)
+        skillsChart.position = CGPoint(x: seasonDivider.frame.origin.x + 40, y: seasonDivider.frame.origin.y + 50)
+        self.scrollView.layer.addSublayer(skillsChart)
+        //skillsChart.backgroundColor = UIColor.greenColor().CGColor
+        skillsChart.strokeColor = UIColor.grayColor().CGColor
+        skillsChart.cornerRadius = 2
+        skillsChart.lineWidth = 5.0
+        
+        
         var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
         self.scrollView.addSubview(circle)
         circle.animateCircle(1.0)
@@ -104,7 +114,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize.height = 450
+        self.scrollView.contentSize.height = 650
         self.scrollView.contentSize.width = self.view.frame.size.width
     }
     
@@ -170,12 +180,17 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 // Find all comps tahat apply to current seaso
                 for compID in self.team.competitionIDs {
                     var query = PFQuery(className:"Competitions")
-                    query.whereKey("season", equalTo: self.team.season)
-                    query.getObjectInBackgroundWithId(compID as! String) { ( result:PFObject?, error: NSError?
+                    query.whereKey("season", equalTo: self.team.season).getObjectInBackgroundWithId(compID as! String) { ( result:PFObject?, error: NSError?
                         ) -> Void in
+                        if (result!["season"] as! String) != self.team.season {
+                            println("Wrong season")
+                            return;
+                        }
                         var comp: Competition = Competition()
+                        comp.compID = result!.objectId
                         comp.name = result!["name"] as! String
                         println(comp.name)
+                        println(result!["season"] as! String)
                         comp.date = result!["date"] as! String
                         comp.loc = result!["loc"] as! String
                         comp.season = result!["season"] as! String
@@ -332,66 +347,36 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                         self.team.compCount++
                         self.team.competitions.addObject(comp)
                         self.updateLabels()
-                    }
-                    var awardQuery = PFQuery(className:"Awards")
-                    awardQuery.whereKey("compID", equalTo: compID)
-                    awardQuery.whereKey("team", equalTo: self.team.num)
-                    awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
-                        ) -> Void in
-                        if let result = results?.first as? PFObject {
-                            var a: Award = Award()
-                            a.award = result["name"] as! String
-                            //a.comp = comp.name
-                            var t:Team = Team()
-                            t.num = result["team"] as! String
-                            a.team = t
-                            self.team.awards.addObject(a)
-                            self.team.awardCount++
-                            self.awardCountLabel.text = "\(self.team.awardCount)"
-                            
+                        // Now awards!
+                        var awardQuery = PFQuery(className:"Awards")
+                        awardQuery.whereKey("compID", equalTo: compID)
+                        awardQuery.whereKey("team", equalTo: self.team.num)
+                        awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
+                            ) -> Void in
+                            if let resultsArray = results {
+                                for result1 in resultsArray {
+                                    var result = result1 as! PFObject
+                                    var a: Award = Award()
+                                    a.award = result["name"] as! String
+                                    
+                                    var t:Team = Team()
+                                    t.num = result["team"] as! String
+                                    a.team = t
+                                    for c in self.team.competitions {
+                                        if (c as! Competition).compID == (result["compID"] as! String) {
+                                            a.comp = c.name
+                                        }
+                                    }
+                                    self.team.awards.addObject(a)
+                                    self.team.awardCount++
+                                    self.awardCountLabel.text = "\(self.team.awardCount)"
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-        
-        
-        
-        /*
-        // Awards
-        let refAward = Firebase(url: "https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
-        println("https://vexscout.firebaseio.com/teams/\(self.team.num.uppercaseString)/comps/\(self.team.season)/\(comp.name)/awards")
-        refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-        let x = NSNumber(unsignedLong: snapshot.childrenCount) as NSInteger
-        for var i = 0; i < x; i++ {
-        var a: Award = Award();
-        
-        a.award = snapshot.value[i] as! String!
-        a.comp = comp.name
-        a.team = self.team
-        
-        self.team.awards.addObject(a)
-        self.team.awardCount++
-        
-        self.awardCountLabel.text = "\(self.team.awardCount)"
-        }
-        })
-        self.team.compCount++
-        self.compCountLabel.text = "\(self.team.compCount)"
-        
-        comp.orderMatches()
-        //self.team.orderCompetitions()
-        comp.season = self.team.season
-        self.team.competitions.addObject(comp)
-        self.updateLabels()
-        
-        })
-        //  }
-        self.updateLabels()
-        }
-        self.updateLabels()
-        })
-        self.updateLabels()*/
     }
     // Help Me
     @IBAction func spAvgHelp(sender: AnyObject) {

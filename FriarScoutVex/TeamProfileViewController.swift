@@ -29,7 +29,13 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         //set delegates and datasources
         self.competitionsTable.delegate = self
         self.competitionsTable.dataSource = self
+        println(self.team.competitions)
         self.team.orderCompetitions()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+         self.team.orderCompetitions()
+        self.competitionsTable.reloadData()
     }
     
     

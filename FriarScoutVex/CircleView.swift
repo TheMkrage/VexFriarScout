@@ -27,13 +27,6 @@ class CircleView: UIView {
         // Don't draw the circle initially
         circleLayer.strokeEnd = 1.0
         
-        
-        // 1
-        let textLayer = CATextLayer()
-        textLayer.frame = CGRectMake(frame.width/2, frame.height/2, 0, 0)
-        //Draw Text
-        textLayer.string = "Hello"
-        
         // Add the circleLayer to the view's layer's sublayers
         layer.addSublayer(circleLayer)
     }

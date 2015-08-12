@@ -9,7 +9,7 @@
 import UIKit
 
 class AwardCell: UITableViewCell {
+    @IBOutlet var circleNumber: UILabel!
     @IBOutlet var awardNameLabel: UILabel!
-
     @IBOutlet var compNameLabel: UILabel!
 }
