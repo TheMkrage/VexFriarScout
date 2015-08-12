@@ -345,6 +345,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             
                         }
                         self.team.compCount++
+                        comp.orderMatches()
                         self.team.competitions.addObject(comp)
                         self.updateLabels()
                         // Now awards!

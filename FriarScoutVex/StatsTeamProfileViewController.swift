@@ -115,11 +115,19 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("AwardCell") as! AwardCell
-        cell.bringSubviewToFront(cell.circleNumber)
-        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor))
-        cell.contentView.bringSubviewToFront(cell.circleNumber)
         var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
-        cell.circleNumber.text = String(Array(a.award)[0]).uppercaseString
+        var color:CGColor = UIColor.grayColor().CGColor
+        var letter = String(Array(a.award)[0]).uppercaseString
+        cell.circleNumber.text = letter
+        if letter == "E" {
+            color = UIColor.redColor().CGColor
+        }else if letter == "T" {
+            color = UIColor.yellowColor().CGColor
+        }
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color))
+        cell.contentView.bringSubviewToFront(cell.circleNumber)
+        
+        
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.comp
         if indexPath.row % 2 == 0 {
