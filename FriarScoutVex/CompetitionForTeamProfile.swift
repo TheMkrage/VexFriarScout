@@ -41,6 +41,17 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
 
     
     override func viewDidLoad() {
+        let center = view.center
+        let bounds = CGRect(x: center.x, y: 200, width: self.view.frame.width - 16, height: 75)
+        // Create CAShapeLayerS
+        let chartRect = CAShapeLayer()
+        chartRect.bounds = bounds
+        chartRect.position = CGPoint(x: center.x, y: 175)
+        self.view.layer.addSublayer(chartRect)
+        // 1
+        chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
+        chartRect.cornerRadius = 20
+
         
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
