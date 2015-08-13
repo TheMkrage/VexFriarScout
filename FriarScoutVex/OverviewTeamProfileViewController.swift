@@ -47,9 +47,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     override func viewDidLoad() {
         self.drawBackground()
-        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
         self.findIfBookmarked()
-        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
         self.title = "Team Overview"
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!

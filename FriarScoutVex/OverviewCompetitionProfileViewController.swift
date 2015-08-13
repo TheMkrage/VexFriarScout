@@ -59,8 +59,6 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     override func viewDidLoad() {
         
         self.setAllHidden()
-        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
-        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2), (self.view.frame.height/2) + 50);
        

@@ -42,22 +42,40 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         let center = view.center
-        let bounds = CGRect(x: center.x, y: 200, width: self.view.frame.width - 16, height: 75)
+        let bounds = CGRect(x: center.x, y: 200, width: self.view.frame.width - 16, height: 65)
         // Create CAShapeLayerS
         let chartRect = CAShapeLayer()
         chartRect.bounds = bounds
-        chartRect.position = CGPoint(x: center.x, y: 175)
+        chartRect.position = CGPoint(x: center.x, y: 172)
         self.view.layer.addSublayer(chartRect)
         // 1
         chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
         chartRect.cornerRadius = 20
+        
+        let leftDivider = CAShapeLayer()
+        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/4), y: 172, width: 5, height: 55)
+        leftDivider.position = CGPoint(x: self.view.frame.width * (1/4), y: 172)
+        self.view.layer.addSublayer(leftDivider)
+        leftDivider.backgroundColor = UIColor.whiteColor().CGColor
+        leftDivider.cornerRadius = 5
+        
+        let rightDivider = CAShapeLayer()
+        rightDivider.bounds = CGRect(x: self.view.frame.width * (3/4), y: 172, width: 5, height: 55)
+        rightDivider.position = CGPoint(x: self.view.frame.width * (3/4), y: 172)
+        self.view.layer.addSublayer(rightDivider)
+        rightDivider.backgroundColor = UIColor.whiteColor().CGColor
+        rightDivider.cornerRadius = 5
 
+        let midDivider = CAShapeLayer()
+        midDivider.bounds = CGRect(x: self.view.frame.width * (2/4), y: 172, width: 5, height: 55)
+        midDivider.position = CGPoint(x: self.view.frame.width * (2/4), y: 172)
+        self.view.layer.addSublayer(midDivider)
+        midDivider.backgroundColor = UIColor.whiteColor().CGColor
+        midDivider.cornerRadius = 5
         
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
         self.compLabel.text = self.comp.name
-        var homeButton: UIBarButtonItem = UIBarButtonItem(title: "Home", style: .Plain, target: self, action: "goHome")
-        self.tabBarController?.navigationItem.rightBarButtonItem = homeButton
 
         matches = comp.matches
         self.matchesTable.reloadData()
