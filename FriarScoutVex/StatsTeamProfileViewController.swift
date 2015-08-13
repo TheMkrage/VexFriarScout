@@ -119,10 +119,16 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         var color:CGColor = UIColor.grayColor().CGColor
         var letter = String(Array(a.award)[0]).uppercaseString
         cell.circleNumber.text = letter
-        if letter == "E" {
-            color = UIColor.redColor().CGColor
-        }else if letter == "T" {
-            color = UIColor.yellowColor().CGColor
+        if a.award.lowercaseString.rangeOfString("skills") != nil {
+            color = Colors.colorWithHexString("#FF6666").CGColor
+        }else if a.award.lowercaseString.rangeOfString("champion") != nil {
+            color = Colors.colorWithHexString("#80CCFF").CGColor
+        }else if a.award.lowercaseString.rangeOfString("excellence") != nil {
+            color = Colors.colorWithHexString("#CCB2FF").CGColor
+        }else if a.award.lowercaseString.rangeOfString("tournament") != nil {
+            color = Colors.colorWithHexString("#FFB280").CGColor
+        }else {
+            color = Colors.colorWithHexString("#99E699").CGColor
         }
         cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color))
         cell.contentView.bringSubviewToFront(cell.circleNumber)

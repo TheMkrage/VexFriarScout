@@ -148,6 +148,23 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                         
                         self.comp.matchCount++
                         self.comp.matches.addObject(m)
+                        m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
+                        if m.name.uppercaseString.rangeOfString("QF") != nil {
+                            m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                            self.comp.qf.addObject(m)
+                        }else if m.name.uppercaseString.rangeOfString("SF") != nil {
+                            m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
+                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                            self.comp.sf.addObject(m)
+                        }else if m.name.uppercaseString.rangeOfString("F") != nil {
+                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                            self.comp.finals.addObject(m)
+                        }else {
+                            m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                            self.comp.quals.addObject(m)
+                        }
+
                     }
                     self.findIfBookmarked()
                     self.calculateRankings()

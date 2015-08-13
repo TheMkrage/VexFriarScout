@@ -18,6 +18,10 @@ class Competition: NSObject {
     
     var matches: NSMutableArray! = NSMutableArray()
     var awards: NSMutableArray! = NSMutableArray()
+    var quals: NSMutableArray = NSMutableArray()
+    var qf: NSMutableArray = NSMutableArray()
+    var sf: NSMutableArray = NSMutableArray()
+    var finals: NSMutableArray = NSMutableArray()
     
     var spPointsSum:NSInteger = 0
     var sumOfMatches: NSInteger = 0
