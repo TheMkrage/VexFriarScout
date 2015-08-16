@@ -43,6 +43,11 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 self.rankingTable.alpha = 1.0
             })
         }
+        var x:HasCompetitionViewController = self.tabBarController?.viewControllers![1] as! HasCompetitionViewController!
+        x.comp = self.comp as Competition!
+        var y:HasCompetitionViewController = self.tabBarController?.viewControllers![2] as! HasCompetitionViewController!
+        y.comp = self.comp as Competition!
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -68,12 +73,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         self.rankingTable.dataSource = self
         self.rankingTable.delegate = self
         self.loadComp()
-        self.findIfBookmarked()
-        var x:HasCompetitionViewController = self.tabBarController?.viewControllers![1] as! HasCompetitionViewController!
-        x.comp = self.comp as Competition!
-        var y:HasCompetitionViewController = self.tabBarController?.viewControllers![2] as! HasCompetitionViewController!
-        y.comp = self.comp as Competition!
-    }
+     }
     
     func loadComp() {
         var query = PFQuery(className:"Competitions")
@@ -107,6 +107,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 // Parse into Match objects
                 for mRaw in objects! {
                     var m = Match()
+                    m.name = (mRaw as! PFObject)["num"] as! String
                     m.blue1 = (mRaw as! PFObject)["b0"] as! String
                     m.blue2 = (mRaw as! PFObject)["b1"] as! String
                     if let x = (mRaw as! PFObject)["b2"] as? String {
@@ -122,7 +123,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                     var y = ((mRaw as! PFObject)["rs"] as! Int)
                     m.redScore = "\(y)"
                     self.comp.sumOfMatches += m.blueScore.integerValue + m.redScore.integerValue
-                    
+                    println(m.blue2)
                     // Quals Counter
                     if m.isQualsMatch() {
                         self.comp.qualsCount++
@@ -144,8 +145,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                     self.comp.addMatchToTeam(m.blue1, m: m)
                     self.comp.addMatchToTeam(m.blue2, m: m)
                     
-                    self.comp.matchCount++
-                    self.comp.matches.addObject(m)
+                    
                     m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
                     if m.name.uppercaseString.rangeOfString("QF") != nil {
                         m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
@@ -162,8 +162,9 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                         m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
                         self.comp.quals.addObject(m)
                     }
+                    self.comp.matchCount++
+                    self.comp.matches.addObject(m)
                 }
-                self.findIfBookmarked()
                 self.calculateRankings()
                 self.comp.orderMatches()
                 self.dataLoaded()
@@ -197,7 +198,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         for (var i = 0; i < tempArray.count; i++) {
             var t: Team! = tempArray.objectAtIndex(i) as! Team
             t.calculateQualCount()
-           // println("fadsf \(t.qualCount) and \(self.qualMatchCount)")
+            println("fadsf \(t.qualCount) and \(self.qualMatchCount)")
             if self.qualMatchCount > t.qualCount {
                 self.qualMatchCount = t.qualCount
             }
@@ -290,13 +291,13 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             var book: NSMutableArray = NSMutableArray(array: curBookmarks)
             for (var i = 0; i < book.count; i++) {
                 var curEl: NSDictionary = book.objectAtIndex(i) as! NSDictionary
-                println(curEl)
-                println(self.getCurrentDictionaryBookmark())
+               // println(curEl)
+                //println(self.getCurrentDictionaryBookmark())
                 // if num and season equal current ones
                 if (curEl.objectForKey("Name") as! NSString).isEqualToString(self.name) && (curEl.objectForKey("Season") as! NSString).isEqualToString(self.season){
                     isBookmarked = true
                     self.favoriteButton.setImage(UIImage(named: "FavoritedIcon.png"), forState: .Normal)
-                    println("IT WORKED")
+                   // println("IT WORKED")
                     return
                 }
             }
@@ -341,7 +342,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             self.isBookmarked = false
             self.favoriteButton.setImage(UIImage(named: "UnfavoritedIcon.png"), forState: .Normal)
         }
-        println(defaults.valueForKey("Bookmarks Comp") as? NSArray)
+        //println(defaults.valueForKey("Bookmarks Comp") as? NSArray)
     }
     
     func getCurrentDictionaryBookmark() -> NSDictionary {

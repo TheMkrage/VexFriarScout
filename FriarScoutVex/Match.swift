@@ -59,8 +59,8 @@ class Match: NSObject {
         }
         return false
     }
-    func isQualsMatch() -> Bool {
-        if name.rangeOfString("Q", options: nil, range: nil, locale: nil) != nil && name.rangeOfString("QF", options: nil, range: nil, locale: nil) == nil{
+    func isQualsMatch() -> Bool {      
+        if name.rangeOfString("-", options: nil, range: nil, locale: nil) == nil{
             return true
         }
         return false

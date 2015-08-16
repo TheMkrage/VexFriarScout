@@ -57,6 +57,7 @@ class Team: NSObject {
         for var i = 0; i < self.matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
             if m.isQualsMatch() {
+                println("bleh")
                 self.qualCount++
             }
         }
@@ -68,7 +69,7 @@ class Team: NSObject {
         self.orderMatches()
         for var i = 0; i < self.matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match
-            //println("\(m.name) \(self.num) \(curQualCount) \(max)")
+            println("\(m.name) \(self.num) \(curQualCount) \(max)")
             
             if m.isQualsMatch() && curQualCount < max {
                 self.qualCount++
@@ -109,7 +110,7 @@ class Team: NSObject {
         for (var i = 0; i < tempArray.count; i++) {
             var m: Match! = tempArray.objectAtIndex(i) as! Match
             for (var y = i; y > -1; y--) {
-                if (getMatchNum(m.name as String) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+                if (m.name.toInt()! < tempArray.objectAtIndex(y).name.toInt()!) {
                     tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(m, atIndex: y)
                 }
@@ -136,11 +137,6 @@ class Team: NSObject {
         }
         self.matches = tempArray;
         
-    }
-    
-    func getMatchNum(str: String!) -> NSInteger {
-        var temp = split(str) {$0 == " "}
-        return temp[1].toInt()!
     }
     
     // Date must be in yyyy-MM-dd
@@ -180,7 +176,4 @@ class Team: NSObject {
                 }
             }
         }
-        
     }
-    
-

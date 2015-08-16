@@ -60,7 +60,7 @@ class Competition: NSObject {
         for (var i = 0; i < tempArray.count; i++) {
             var m: Match! = tempArray.objectAtIndex(i) as! Match
             for (var y = i; y > -1; y--) {
-                if (getMatchNum(m.name as String) < getMatchNum(tempArray.objectAtIndex(y).name)) {
+               if (m.name.toInt()! < tempArray.objectAtIndex(y).name.toInt()!)  {
                 tempArray.removeObjectAtIndex(y + 1)
                     tempArray.insertObject(m, atIndex: y)
                 }
@@ -97,11 +97,6 @@ class Competition: NSObject {
             
         }
         
-    }
-    
-    func getMatchNum(str: String!) -> NSInteger {
-        var temp = split(str) {$0 == " "}
-        return temp[1].toInt()!
     }
     
     // To be used when finding rankings,

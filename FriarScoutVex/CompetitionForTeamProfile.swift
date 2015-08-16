@@ -25,11 +25,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     var losses = 0
     var ties = 0
     
-    var quals: NSMutableArray = NSMutableArray()
-    var qf: NSMutableArray = NSMutableArray()
-    var sf: NSMutableArray = NSMutableArray()
-    var finals: NSMutableArray = NSMutableArray()
-    
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -98,22 +93,6 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
             }else {
                 losses++
             }
-            (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString(" ", withString: "")
-            if (m as! Match).name.uppercaseString.rangeOfString("QF") != nil {
-                (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("F", withString: "")
-                qf.addObject(m)
-            }else if (m as! Match).name.uppercaseString.rangeOfString("SF") != nil {
-                (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("S", withString: "")
-                (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("F", withString: "")
-                sf.addObject(m)
-            }else if (m as! Match).name.uppercaseString.rangeOfString("F") != nil {
-                (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("F", withString: "")
-                finals.addObject(m)
-            }else {
-                 (m as! Match).name = (m as! Match).name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                quals.addObject(m)
-            }
         }
         self.matchesTable.reloadData()
         self.rankingLabel.text = "\(wins) - \(losses) - \(ties)"
@@ -174,20 +153,18 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         var m: Match
         switch (indexPath.section) {
         case 0:
-            m = self.quals.objectAtIndex(indexPath.row) as! Match
+            m = self.comp.quals.objectAtIndex(indexPath.row) as! Match
         case 1:
-            m = self.qf.objectAtIndex(indexPath.row) as! Match
+            m = self.comp.qf.objectAtIndex(indexPath.row) as! Match
         case 2:
-            m = self.sf.objectAtIndex(indexPath.row) as! Match
+            m = self.comp.sf.objectAtIndex(indexPath.row) as! Match
         case 3:
-            m = self.finals.objectAtIndex(indexPath.row) as! Match
+            m = self.comp.finals.objectAtIndex(indexPath.row) as! Match
         default:
             m = self.matches.objectAtIndex(indexPath.row) as! Match
         }
         
-        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 14, 60, 60), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor))
-        cell.contentView.bringSubviewToFront(cell.matchNameLabel)
-        cell.matchNameLabel.text = m.name as String
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 14, 60, 60), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: m.name, font: UIFont(name: "HelveticaNeue-UltraLight", size: 24)!))
         cell.redTeam1Label.text = m.red1 as String
         cell.redTeam2Label.text = m.red2 as String
         cell.redTeam3Label.text = m.red3 as String
@@ -255,13 +232,13 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section) {
         case 0:
-            return self.quals.count
+            return self.comp.quals.count
         case 1:
-            return self.qf.count
+            return self.comp.qf.count
         case 2:
-            return self.sf.count
+            return self.comp.sf.count
         case 3:
-            return self.finals.count
+            return self.comp.finals.count
         default:
             return 0
         }
@@ -269,11 +246,11 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.finals.count != 0 {
+        if self.comp.finals.count != 0 {
             return 4
-        }else if self.sf.count != 0 {
+        }else if self.comp.sf.count != 0 {
             return 3
-        }else if self.qf.count != 0 {
+        }else if self.comp.qf.count != 0 {
             return 2
         }
         return 1

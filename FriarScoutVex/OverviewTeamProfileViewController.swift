@@ -16,8 +16,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numLabel: UILabel!
-    @IBOutlet var compCountLabel: UILabel!
-    @IBOutlet var awardCountLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
     @IBOutlet var spAvgLabel: UILabel!
     @IBOutlet var lowScoreLabel: UILabel!
@@ -28,6 +26,9 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var programmingSkillsScore: UILabel!
     @IBOutlet var robotSkillsScore: UILabel!
     
+    // just default values
+    var compCircle:CircleView = CircleView(frame: CGRectMake(50, 50, 80, 80))
+    var awardCircle:CircleView = CircleView(frame: CGRectMake(50, 50, 80, 80))
     func goHome() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -102,13 +103,13 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         self.scrollView.addSubview(circle)
         circle.animateCircle(1.0)
         
-        var compCircle = CircleView(frame: CGRectMake(leftDivider.frame.origin.x - 40, seasonDivider.frame.origin.y + 50, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor)
-        self.scrollView.addSubview(compCircle)
-        compCircle.animateCircle(1.0)
+        self.compCircle = CircleView(frame: CGRectMake(leftDivider.frame.origin.x - 40, seasonDivider.frame.origin.y + 50, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: "NA", font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!)
+        self.scrollView.addSubview(self.compCircle)
+        self.compCircle.animateCircle(1.0)
         
-        var awardCircle = CircleView(frame: CGRectMake(compCircle.frame.origin.x, compCircle.frame.origin.y + 107, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor)
-        self.scrollView.addSubview(awardCircle)
-        awardCircle.animateCircle(1.0)
+        self.awardCircle = CircleView(frame: CGRectMake(compCircle.frame.origin.x, compCircle.frame.origin.y + 107, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: "NA", font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!)
+        self.scrollView.addSubview(self.awardCircle)
+        self.awardCircle.animateCircle(1.0)
     }
     
     override func viewDidLayoutSubviews() {
@@ -187,6 +188,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                         var comp: Competition = Competition()
                         comp.compID = result!.objectId
                         comp.name = result!["name"] as! String
+                        
                         println(comp.name)
                         println(result!["season"] as! String)
                         comp.date = result!["date"] as! String
@@ -224,6 +226,23 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 m.blue3 =  mRaw["b2"]  as! String
                             }
                             m.name = mRaw["num"] as! String
+                            m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
+                            if m.name.uppercaseString.rangeOfString("QF") != nil {
+                                m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                comp.qf.addObject(m)
+                            }else if m.name.uppercaseString.rangeOfString("SF") != nil {
+                                m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
+                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                comp.sf.addObject(m)
+                            }else if m.name.uppercaseString.rangeOfString("F") != nil {
+                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                comp.finals.addObject(m)
+                            }else {
+                                m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                                comp.quals.addObject(m)
+                            }
+
                             let x =  mRaw["rs"] as! Int!
                             m.redScore = "\(x)"
                             let y = mRaw["bs"]as! Int!
@@ -368,7 +387,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                     }
                                     self.team.awards.addObject(a)
                                     self.team.awardCount++
-                                    self.awardCountLabel.text = "\(self.team.awardCount)"
+                                    self.awardCircle.label.text = "\(self.team.awardCount)"
                                 }
                             }
                         }
@@ -384,7 +403,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     func updateLabels() {
         println("bleH")
-        self.compCountLabel.text = "\(self.team.compCount)"
+        self.compCircle.label.text = "\(self.team.compCount)"
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
             sumOfsp += (c as! Competition).spPointsSum
@@ -410,7 +429,6 @@ class OverviewTeamProfileViewController: HasTeamViewController {
             self.highestScoreLabel.text = "NA"
             self.lowScoreLabel.text = "NA"
             self.rankingsLabel.text = "NA"
-            self.awardCountLabel.text = "NA"
         }
         
         //Skills
