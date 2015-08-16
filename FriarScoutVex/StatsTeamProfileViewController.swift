@@ -44,12 +44,11 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.title = "Team \(self.team.num)"
         self.awardsTable.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
-        self.title = "Team \(self.team.num)"
+        
     }
     
     func updateTheLabels() {
@@ -118,7 +117,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         var a: Award = self.team.awards.objectAtIndex(indexPath.row) as! Award
         var color:CGColor = UIColor.grayColor().CGColor
         var letter = String(Array(a.award)[0]).uppercaseString
-        cell.circleNumber.text = letter
+        
         if a.award.lowercaseString.rangeOfString("skills") != nil {
             color = Colors.colorWithHexString("#FF6666").CGColor
         }else if a.award.lowercaseString.rangeOfString("champion") != nil {
@@ -130,8 +129,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         }else {
             color = Colors.colorWithHexString("#99E699").CGColor
         }
-        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color))
-        cell.contentView.bringSubviewToFront(cell.circleNumber)
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color, text: letter, font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!))
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.comp
         if indexPath.row % 2 == 0 {

@@ -91,6 +91,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
             // Destintation ViewController, set team
             let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
             dest.name = comp.name
+            dest.comp.compID = comp.compID
             dest.season = comp.season
             // Present Profile
             self.showViewController(vc as UIViewController, sender: vc)

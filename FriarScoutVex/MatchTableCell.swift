@@ -9,7 +9,6 @@
 import UIKit
 
 class MatchTableCell: UITableViewCell {
-    @IBOutlet var matchNameLabel: UILabel!
     @IBOutlet var blueTeam1Label: UILabel!
     @IBOutlet var blueTeam2Label: UILabel!
     @IBOutlet var blueTeam3Label: UILabel!

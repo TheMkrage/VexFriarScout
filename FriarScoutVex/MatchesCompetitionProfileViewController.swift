@@ -72,7 +72,7 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         
         var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
        // println("hdgs\(m)")
-        cell.matchNameLabel.text = m.name
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 14, 60, 60), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: m.name, font: UIFont(name: "HelveticaNeue-UltraLight", size: 24)!))
         cell.redTeam1Label.text = m.red1 as String
         cell.redTeam2Label.text = m.red2 as String
         cell.redTeam3Label.text = m.red3 as String

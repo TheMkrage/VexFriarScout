@@ -14,15 +14,16 @@ class CircleView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+       
         label.sizeToFit()
         label.center = self.convertPoint(self.center, fromView: self.superview)
         self.addSubview(label)
     }
-    init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor: CGColor = UIColor.blueColor().CGColor, text:String = "", font:UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 30)! ) {
+    init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor: CGColor = UIColor.blueColor().CGColor, text:String = "", font:UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 30)!, fontColor:UIColor = UIColor.whiteColor() ) {
         super.init(frame: frame)
         label.text = text
         label.font = font
+         label.textColor = fontColor
         self.backgroundColor = UIColor.clearColor()
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: 0.0, endAngle: CGFloat(M_PI * 2.0), clockwise: true)
         
