@@ -69,9 +69,19 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         // Creates cell and sets title to team num
         var cell = tableView.dequeueReusableCellWithIdentifier("MatchCell") as! MatchTableCell
         
-        
-        var m: Match = self.matches.objectAtIndex(indexPath.row) as! Match
-       // println("hdgs\(m)")
+        var m: Match
+        switch (indexPath.section) {
+        case 0:
+            m = self.comp.quals.objectAtIndex(indexPath.row) as! Match
+        case 1:
+            m = self.comp.qf.objectAtIndex(indexPath.row) as! Match
+        case 2:
+            m = self.comp.sf.objectAtIndex(indexPath.row) as! Match
+        case 3:
+            m = self.comp.finals.objectAtIndex(indexPath.row) as! Match
+        default:
+            m = self.matches.objectAtIndex(indexPath.row) as! Match
+        }
         cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 14, 60, 60), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: m.name, font: UIFont(name: "HelveticaNeue-UltraLight", size: 24)!))
         cell.redTeam1Label.text = m.red1 as String
         cell.redTeam2Label.text = m.red2 as String
@@ -105,10 +115,28 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.matches.count
+        switch (section) {
+        case 0:
+            return self.comp.quals.count
+        case 1:
+            return self.comp.qf.count
+        case 2:
+            return self.comp.sf.count
+        case 3:
+            return self.comp.finals.count
+        default:
+            return 0
+        }
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if self.comp.finals.count != 0 {
+            return 4
+        }else if self.comp.sf.count != 0 {
+            return 3
+        }else if self.comp.qf.count != 0 {
+            return 2
+        }
         return 1
-    }
-}
+    }}

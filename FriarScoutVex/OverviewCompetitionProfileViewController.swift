@@ -169,6 +169,19 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 self.comp.orderMatches()
                 self.dataLoaded()
             })
+            var awardQuery = PFQuery(className: "Awards")
+            awardQuery.whereKey("compID", equalTo: self.comp.compID)
+            awardQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
+                for result in (objects as! [PFObject]) {
+                    var a: Award = Award();
+                    var team: Team = Team()
+                    team.num = result["team"] as! String!
+                    a.team = team
+                    a.award = result["name"] as! String!
+                    a.comp = self.comp.name
+                    self.comp.awards.addObject(a)
+                }
+            })
         }
     }
         /*
