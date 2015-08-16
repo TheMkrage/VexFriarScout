@@ -58,7 +58,18 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     }
    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Matches"
+        switch (section) {
+        case 0:
+            return "Qualification"
+        case 1:
+            return "Quarterfinals"
+        case 2:
+            return "Semi-finals"
+        case 3:
+            return "Finals"
+        default:
+            return "ERROR"
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -107,11 +118,7 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
         }else {
             cell.backgroundColor = UIColor.whiteColor()
         }
-
-        
         return cell
-        
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

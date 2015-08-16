@@ -95,6 +95,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
             let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
             dest.name = comp.name
             dest.season = comp.season
+            dest.comp.compID = comp.compID
             // Present Profile
             self.showViewController(vc as UIViewController, sender: vc)
         }else {

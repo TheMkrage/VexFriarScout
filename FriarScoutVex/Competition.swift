@@ -66,6 +66,7 @@ class Competition: NSObject {
                 }
             }
         }
+        self.quals = tempArray
         // QF
         for var i = 0; i < matches.count; i++ {
             var m: Match! = matches.objectAtIndex(i) as! Match as Match

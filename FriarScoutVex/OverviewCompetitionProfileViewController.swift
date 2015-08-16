@@ -184,27 +184,6 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             })
         }
     }
-        /*
-            ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-                // Awards
-                let refAward = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/awards")
-                refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-                    let x = NSNumber(unsignedLong: snapshot.childrenCount) as NSInteger
-                    for var i = 1; i <= x; i++ {
-                        var a: Award = Award();
-                        var team: Team = Team()
-                        team.num = snapshot.childSnapshotForPath("\(i)").value["team"] as! String!
-                        //println(team.num)
-                        a.team = team
-                        a.award = snapshot.childSnapshotForPath("\(i)").value["name"] as! String!
-                        //println(snapshot.childSnapshotForPath("\(i)").value["award"] as! String!)
-                        a.comp = self.comp.name
-                        self.comp.awards.addObject(a)
-                    }
-                })
-            })
-        })
-    }*/
     
     func calculateRankings() {
         var tempArray: NSMutableArray! = self.comp.teams
