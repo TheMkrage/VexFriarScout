@@ -132,8 +132,6 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
         }
         cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color))
         cell.contentView.bringSubviewToFront(cell.circleNumber)
-        
-        
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.comp
         if indexPath.row % 2 == 0 {

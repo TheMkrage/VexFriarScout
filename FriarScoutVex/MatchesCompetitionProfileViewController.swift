@@ -14,7 +14,19 @@ class MatchesCompetitionProfileViewController: HasCompetitionViewController, UIT
     @IBOutlet var lowestScoreLabel: UILabel!
     @IBOutlet var highestScoreLabel: UILabel!
     @IBOutlet var avgLabel: UILabel!
+    
     override func viewDidLoad() {
+        let center = view.center
+        let bounds = CGRect(x: center.x, y: 20, width: self.view.frame.width - 16, height: 67)
+        // Create CAShapeLayerS
+        let chartRect = CAShapeLayer()
+        chartRect.bounds = bounds
+        chartRect.position = CGPoint(x: center.x, y: 200)
+        self.view.layer.addSublayer(chartRect)
+        // 1
+        chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
+        chartRect.cornerRadius = 20
+
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self
         matches = comp.matches

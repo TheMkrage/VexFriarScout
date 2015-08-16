@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class OverviewCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
     var name: String! = ""
@@ -75,103 +76,102 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     }
     
     func loadComp() {
-        let ref = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)")
-        ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-            
+        var query = PFQuery(className:"Competitions")
+        println(self.comp.compID as String)
+        query.getObjectInBackgroundWithId(self.comp.compID as String) {
+            (object: PFObject?, error:NSError?) -> Void in
             // reassurance
-            if let x = snapshot.value["name"] as? String {
+            if let x = object!["name"] as? String {
                 self.comp.name = x
             }else{
                 let alertController = UIAlertController(title: "Well, this is awkard!", message:
-                "I can't seem to find this competition! It isn't in our database... Hey it happens" , preferredStyle: UIAlertControllerStyle.Alert)
+                    "I can't seem to find this competition! It isn't in our database... Hey it happens" , preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.Default,handler: nil))
-            
+                
                 self.presentViewController(alertController, animated: true, completion:  { () -> Void in
                     self.navigationController?.popViewControllerAnimated(true)
                 })
                 return
             }
-
-            self.comp.date = snapshot.value["date"]as! String
-            self.comp.loc = snapshot.value["loc"]as! String
-            self.comp.season = snapshot.value["season"] as! String
+            self.comp.date = object!["date"] as! String
+            self.comp.loc = object!["loc"] as! String
+            self.comp.season = object!["season"] as! String
+            self.comp.compID = object!.objectId
             self.seasonLabel.text = self.season
             self.locLabel.text = self.comp.loc
             self.dateLabel.text = self.comp.date
-            // Matches
-            let ref = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/matches")
-            ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-                if snapshot.exists() {
-                    let enum2 = snapshot.children
-                    // Cycle through each Match
-                    while let rest2 = enum2.nextObject() as? FDataSnapshot {
-                        var m: Match = Match()
-                        m.red1 = rest2.value["r0"] as! String
-                        m.red2 = rest2.value["r1"] as! String
-                        if let y = rest2.value["r2"]   as? String {
-                            m.red3 =  rest2.value["r2"]  as! String
-                        }
-                        m.blue1 = rest2.value["b0"] as! String
-                        m.blue2 = rest2.value["b1"] as! String
-                        if let y = rest2.value["b2"]   as? String {
-                            
-                            m.blue3 =  rest2.value["b2"]  as! String
-                        }
-                        m.name = rest2.value["num"] as! String
-                        let x =  rest2.value["rs"] as! Int!
-                        m.redScore = "\(x)"
-                        let y = rest2.value["bs"]as! Int!
-                        m.blueScore = "\(y)"
-                        
-                        self.comp.sumOfMatches += m.blueScore.integerValue + m.redScore.integerValue
-                        
-                        // Quals Counter
-                        if m.isQualsMatch() {
-                            self.comp.qualsCount++
-                        }else {
-                            self.comp.elimCount++
-                        }
-                        
-                        // Check Highscore and Lowscores for team and comp
-                        
-                        if m.redScore.integerValue > self.comp.highestScore {
-                            self.comp.highestScore = m.redScore.integerValue
-                        }else if m.redScore.integerValue < self.comp.lowestScore {
-                            self.comp.lowestScore = m.redScore.integerValue
-                        }
-                        
-                        // Add Matches to each teams (for rankings calculations)
-                        self.comp.addMatchToTeam(m.red1, m: m)
-                        self.comp.addMatchToTeam(m.red2, m: m)
-                        self.comp.addMatchToTeam(m.blue1, m: m)
-                        self.comp.addMatchToTeam(m.blue2, m: m)
-                        
-                        self.comp.matchCount++
-                        self.comp.matches.addObject(m)
-                        m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
-                        if m.name.uppercaseString.rangeOfString("QF") != nil {
-                            m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                            self.comp.qf.addObject(m)
-                        }else if m.name.uppercaseString.rangeOfString("SF") != nil {
-                            m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
-                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                            self.comp.sf.addObject(m)
-                        }else if m.name.uppercaseString.rangeOfString("F") != nil {
-                            m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                            self.comp.finals.addObject(m)
-                        }else {
-                            m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                            self.comp.quals.addObject(m)
-                        }
-
+            
+            var query = PFQuery(className:"Matches")
+            query.whereKey("compID", equalTo: self.comp.compID)
+            query.findObjectsInBackgroundWithBlock({ (objects:[AnyObject]?, error: NSError?) -> Void in
+                // Parse into Match objects
+                for mRaw in objects! {
+                    var m = Match()
+                    m.blue1 = (mRaw as! PFObject)["b0"] as! String
+                    m.blue2 = (mRaw as! PFObject)["b1"] as! String
+                    if let x = (mRaw as! PFObject)["b2"] as? String {
+                        m.blue3 = x
                     }
-                    self.findIfBookmarked()
-                    self.calculateRankings()
-                    self.comp.orderMatches()
-                    self.dataLoaded()
+                    m.red1 = (mRaw as! PFObject)["r0"] as! String
+                    m.red2 = (mRaw as! PFObject)["r1"] as! String
+                    if let x = (mRaw as! PFObject)["r2"] as? String {
+                        m.red3 = x
+                    }
+                    var x = ((mRaw as! PFObject)["bs"] as! Int)
+                    m.blueScore = "\(x)"
+                    var y = ((mRaw as! PFObject)["rs"] as! Int)
+                    m.redScore = "\(y)"
+                    self.comp.sumOfMatches += m.blueScore.integerValue + m.redScore.integerValue
+                    
+                    // Quals Counter
+                    if m.isQualsMatch() {
+                        self.comp.qualsCount++
+                    }else {
+                        self.comp.elimCount++
+                    }
+                    
+                    // Check Highscore and Lowscores for team and comp
+                    
+                    if m.redScore.integerValue > self.comp.highestScore {
+                        self.comp.highestScore = m.redScore.integerValue
+                    }else if m.redScore.integerValue < self.comp.lowestScore {
+                        self.comp.lowestScore = m.redScore.integerValue
+                    }
+                    
+                    // Add Matches to each teams (for rankings calculations)
+                    self.comp.addMatchToTeam(m.red1, m: m)
+                    self.comp.addMatchToTeam(m.red2, m: m)
+                    self.comp.addMatchToTeam(m.blue1, m: m)
+                    self.comp.addMatchToTeam(m.blue2, m: m)
+                    
+                    self.comp.matchCount++
+                    self.comp.matches.addObject(m)
+                    m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    if m.name.uppercaseString.rangeOfString("QF") != nil {
+                        m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                        m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                        self.comp.qf.addObject(m)
+                    }else if m.name.uppercaseString.rangeOfString("SF") != nil {
+                        m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
+                        m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                        self.comp.sf.addObject(m)
+                    }else if m.name.uppercaseString.rangeOfString("F") != nil {
+                        m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                        self.comp.finals.addObject(m)
+                    }else {
+                        m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                        self.comp.quals.addObject(m)
+                    }
                 }
-                
+                self.findIfBookmarked()
+                self.calculateRankings()
+                self.comp.orderMatches()
+                self.dataLoaded()
+            })
+        }
+    }
+        /*
+            ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
                 // Awards
                 let refAward = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.season)/\(self.name)/awards")
                 refAward.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
@@ -190,7 +190,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 })
             })
         })
-    }
+    }*/
     
     func calculateRankings() {
         var tempArray: NSMutableArray! = self.comp.teams

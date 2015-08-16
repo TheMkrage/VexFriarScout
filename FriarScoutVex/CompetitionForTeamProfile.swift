@@ -163,6 +163,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
         dest.name = self.comp.name
         dest.season = self.comp.season
+        dest.comp.compID = self.comp.compID
         // Present Profile
         self.showViewController(vc as UIViewController, sender: vc)
     }
