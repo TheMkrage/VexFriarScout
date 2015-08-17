@@ -12,6 +12,11 @@ class CircleView: UIView {
     let circleLayer: CAShapeLayer  = CAShapeLayer()
     var label: UILabel = UILabel()
     
+    func setText(str:String) {
+        self.label.text = str
+        layoutSubviews()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
        
@@ -23,7 +28,10 @@ class CircleView: UIView {
         super.init(frame: frame)
         label.text = text
         label.font = font
-         label.textColor = fontColor
+        label.textColor = fontColor
+        label.sizeToFit()
+        label.center = self.convertPoint(self.center, fromView: self.superview)
+
         self.backgroundColor = UIColor.clearColor()
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: 0.0, endAngle: CGFloat(M_PI * 2.0), clockwise: true)
         

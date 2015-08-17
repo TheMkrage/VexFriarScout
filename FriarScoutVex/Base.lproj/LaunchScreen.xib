@@ -28,6 +28,9 @@
                     <fontDescription key="fontDescription" name="BebasNeue" family="Bebas Neue" pointSize="40"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="0.0" y="41" width="400" height="47"/>
+                    </variation>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="lox-ap-M0e">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -39,7 +42,8 @@
                             <exclude reference="QB6-fJ-kCd"/>
                         </mask>
                     </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="96" width="362" height="362"/>
                         <mask key="constraints">
                             <include reference="QB6-fJ-kCd"/>
                         </mask>
@@ -55,7 +59,8 @@
                             <exclude reference="f73-g7-D4T"/>
                         </mask>
                     </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="466" width="362" height="184"/>
                         <mask key="constraints">
                             <include reference="f73-g7-D4T"/>
                         </mask>

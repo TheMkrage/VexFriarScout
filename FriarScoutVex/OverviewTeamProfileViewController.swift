@@ -387,7 +387,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                     }
                                     self.team.awards.addObject(a)
                                     self.team.awardCount++
-                                    self.awardCircle.label.text = "\(self.team.awardCount)"
+                                    self.awardCircle.setText("\(self.team.awardCount)")
                                 }
                             }
                         }
@@ -403,7 +403,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     func updateLabels() {
         println("bleH")
-        self.compCircle.label.text = "\(self.team.compCount)"
+        self.compCircle.setText("\(self.team.compCount)")
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
             sumOfsp += (c as! Competition).spPointsSum

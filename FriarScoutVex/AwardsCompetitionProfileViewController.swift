@@ -11,6 +11,10 @@ import UIKit
 class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var awardTable: UITableView!
     
+    override func viewWillAppear(animated: Bool) {
+        self.awardTable.reloadData()
+    }
+    
     override func viewDidLoad() {
         self.awardTable.delegate = self
         self.awardTable.dataSource = self;
@@ -40,6 +44,21 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
         var cell = tableView.dequeueReusableCellWithIdentifier("AwardCell") as! AwardCell
         
         var a: Award = self.comp.awards.objectAtIndex(indexPath.row) as! Award
+        var color:CGColor = UIColor.grayColor().CGColor
+        var letter = String(Array(a.award)[0]).uppercaseString
+        
+        if a.award.lowercaseString.rangeOfString("skills") != nil {
+            color = Colors.colorWithHexString("#FF6666").CGColor
+        }else if a.award.lowercaseString.rangeOfString("champion") != nil {
+            color = Colors.colorWithHexString("#80CCFF").CGColor
+        }else if a.award.lowercaseString.rangeOfString("excellence") != nil {
+            color = Colors.colorWithHexString("#CCB2FF").CGColor
+        }else if a.award.lowercaseString.rangeOfString("tournament") != nil {
+            color = Colors.colorWithHexString("#FFB280").CGColor
+        }else {
+            color = Colors.colorWithHexString("#99E699").CGColor
+        }
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color, text: letter, font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!))
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.team.num
         if indexPath.row % 2 == 0 {
