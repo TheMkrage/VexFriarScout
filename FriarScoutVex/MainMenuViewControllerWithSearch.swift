@@ -84,17 +84,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             println("EQUALS")
             println(tableView.bounds)
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
-                println(title)
                 switch title {
                 case "My Team":
-                    return 0
+                    return 3
                 case "Favorites":
                     return 0
                 case "Robot Skills":
-                    println("ROBOT LENGTH: \(self.programmingSkills.count)")
                     return self.robotSkills.count
                 case "Programming Skills":
-                    println("PROGRAMMING LENGTH: \(self.programmingSkills.count)")
                     return self.programmingSkills.count
                 default:
                     return 0

@@ -50,6 +50,7 @@
 		7EC36A6B1B73342C00675E1D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6A1B73342C00675E1D /* libsqlite3.dylib */; };
 		7EC36A6D1B73354600675E1D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6C1B73354600675E1D /* Accounts.framework */; };
 		7EC36A6F1B73354A00675E1D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A6E1B73354A00675E1D /* Social.framework */; };
+		7EC4CFDD1B830091006C916B /* StatisticsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4CFDC1B830091006C916B /* StatisticsTableCell.swift */; };
 		7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */; };
 		7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB341B3352400046250B /* SkillsViewController.swift */; };
 		7EC5AB371B33561B0046250B /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB361B33561B0046250B /* Skills.swift */; };
@@ -150,6 +151,7 @@
 		7EC36A6A1B73342C00675E1D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		7EC36A6C1B73354600675E1D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		7EC36A6E1B73354A00675E1D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		7EC4CFDC1B830091006C916B /* StatisticsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTableCell.swift; sourceTree = "<group>"; };
 		7EC54D231B20F9A1009CEF3A /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		7EC5AB341B3352400046250B /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		7EC5AB361B33561B0046250B /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				7EC5AB381B3356620046250B /* SkillsCell.swift */,
 				7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */,
 				7EC0646D1B81727500A6BD64 /* MainMenuTableCell.swift */,
+				7EC4CFDC1B830091006C916B /* StatisticsTableCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				7EBFE57D1B02F59600E804BC /* AwardCell.swift in Sources */,
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
 				7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */,
+				7EC4CFDD1B830091006C916B /* StatisticsTableCell.swift in Sources */,
 				7EC5CD041B71EF08003075BD /* RAMRotationAnimation.swift in Sources */,
 				7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */,
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
