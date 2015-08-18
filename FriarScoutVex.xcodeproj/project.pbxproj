@@ -26,6 +26,7 @@
 		7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */; };
 		7EC0646C1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */; };
 		7EC0646E1B81727500A6BD64 /* MainMenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0646D1B81727500A6BD64 /* MainMenuTableCell.swift */; };
+		7EC064711B81A8F600A6BD64 /* SkillsTableDelegateAndDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC064701B81A8F600A6BD64 /* SkillsTableDelegateAndDataSource.swift */; };
 		7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */; };
 		7EC1B0981B16C0CC00B3A7BA /* GraySquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1B0971B16C0CC00B3A7BA /* GraySquare.png */; };
 		7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299181AD5920200A7E008 /* Firebase.framework */; };
@@ -125,6 +126,7 @@
 		7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICheckBoxButton.swift; sourceTree = "<group>"; };
 		7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewControllerWithSearch.swift; sourceTree = "<group>"; };
 		7EC0646D1B81727500A6BD64 /* MainMenuTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableCell.swift; sourceTree = "<group>"; };
+		7EC064701B81A8F600A6BD64 /* SkillsTableDelegateAndDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableDelegateAndDataSource.swift; sourceTree = "<group>"; };
 		7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionForTeamProfile.swift; sourceTree = "<group>"; };
 		7EC1B0971B16C0CC00B3A7BA /* GraySquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GraySquare.png; sourceTree = "<group>"; };
 		7EC299181AD5920200A7E008 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
@@ -254,10 +256,10 @@
 			isa = PBXGroup;
 			children = (
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
+				7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */,
 				7EBE42491B4CD17E0015D500 /* Skills */,
 				7EBE424A1B4CD1BB0015D500 /* Bookmarks */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
-				7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -319,6 +321,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		7EC0646F1B81A8CA00A6BD64 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
+				7EC064701B81A8F600A6BD64 /* SkillsTableDelegateAndDataSource.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
 		7EC5CCEB1B71EEA3003075BD /* RAMA */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,7 +383,7 @@
 		7EC81E391AD30078008F0639 /* FriarScoutVex */ = {
 			isa = PBXGroup;
 			children = (
-				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
+				7EC0646F1B81A8CA00A6BD64 /* Delegates */,
 				7EBFFB8C1AED66BA003597FE /* ViewControllers */,
 				7EBFFB8F1AED671C003597FE /* TableCells */,
 				7EBFFB911AED6750003597FE /* Interface */,
@@ -613,6 +624,7 @@
 				7EC5CD021B71EF08003075BD /* RAMFrameItemAnimation.swift in Sources */,
 				7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */,
 				7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */,
+				7EC064711B81A8F600A6BD64 /* SkillsTableDelegateAndDataSource.swift in Sources */,
 				7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */,
 				7EC0646C1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift in Sources */,
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
