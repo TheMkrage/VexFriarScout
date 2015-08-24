@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,18 +16,48 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
-        var s:Skills = Skills()
-        s.rank = "1"
-        s.team = "9983B"
-        s.score = "32"
-        self.robotSkills.addObject(s)
-        self.programmingSkills.addObject(s)
+        self.getData()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+    }
+    
+    func getData() {
+
+        // Robot Skills
+        var query = PFQuery(className:"rs")
+        query.whereKey("season", equalTo:"Skyrise")
+        query.limit = 10
+        query.orderByDescending("score")
+        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
+            for cur in objects as! [PFObject] {
+                var s: Skills = Skills()
+                s.rank = cur["rank"] as! String
+                s.team = cur["team"] as! String
+                s.score = cur["score"] as! String
+                self.robotSkills.addObject(s)
+            }
+
+            (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+        }
+        
+        query = PFQuery(className:"ps")
+        query.whereKey("season", equalTo:"Skyrise")
+        query.limit = 10
+        query.orderByDescending("score")
+        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
+            for cur in objects as! [PFObject] {
+                var s: Skills = Skills()
+                s.rank = cur["rank"] as! String
+                s.team = cur["team"] as! String
+                s.score = cur["score"] as! String
+                self.programmingSkills.addObject(s)
+            }
+           // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         if tableView.isEqual(self.tableView) {
             println("SELECT")
         }
@@ -46,8 +77,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 cell.titleLabel.text = "Favorites"
             case 2:
                 cell.titleLabel.text = "Robot Skills"
+                println("loaded rs")
             case 3:
                 cell.titleLabel.text = "Programming Skills"
+                println("loaded ps")
             default:
                 cell.titleLabel.text = "ERROR"
             }
@@ -56,7 +89,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
                 case "My Team":
-                    return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
+                    return tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
                 case "Robot Skills":
                     println("rs: \(indexPath.row)")
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
@@ -65,7 +98,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.scoreLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score
                     return cell
                 case "Programming Skills":
-                    println(indexPath.row)
+                    println("ps: \(indexPath.row)")
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.rankLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team
@@ -81,8 +114,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !tableView.isEqual(self.tableView) {
-            println("EQUALS")
-            println(tableView.bounds)
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
                 case "My Team":
