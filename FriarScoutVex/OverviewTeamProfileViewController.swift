@@ -93,11 +93,9 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         skillsChart.bounds = CGRect(x: seasonDivider.frame.origin.x + 40, y: seasonDivider.frame.origin.y + 50, width: 50, height: 200)
         skillsChart.position = CGPoint(x: seasonDivider.frame.origin.x + 40, y: seasonDivider.frame.origin.y + 50)
         self.scrollView.layer.addSublayer(skillsChart)
-        //skillsChart.backgroundColor = UIColor.greenColor().CGColor
         skillsChart.strokeColor = UIColor.grayColor().CGColor
         skillsChart.cornerRadius = 2
         skillsChart.lineWidth = 5.0
-        
         
         var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
         self.scrollView.addSubview(circle)

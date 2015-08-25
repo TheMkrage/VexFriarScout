@@ -9,16 +9,32 @@
 import UIKit
 import Parse
 
-class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate, UISearchDisplayDelegate {
     
     var myTeam: Team = Team()
     var curSeason = "Skyrise"
     
+    var bookmarks = NSMutableArray()
+    
+    var statistics: [Statistic] = []
+    
     var robotSkills:NSMutableArray = NSMutableArray()
     var programmingSkills:NSMutableArray = NSMutableArray()
     
+    struct cardCellsRows {
+        static let myTeam = 0
+        static let favorites = 1
+        static let rs = 2
+        static let ps = 3
+    }
+    
     struct defaultsKeys {
         static let myTeam = "myTeam"
+    }
+    
+    struct Statistic {
+        var stat:String
+        var value:String
     }
     
     @IBOutlet var tableView: UITableView!
@@ -27,10 +43,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         println("finsihed that method")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
     }
     
+    
+    
     func getData() {
+        // Bookmarks 
+        self.getBookmarks()
+        
         // Team Information
         let defaults = NSUserDefaults.standardUserDefaults()
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
@@ -43,7 +63,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 }
             }
         }
-
+        
         // Robot Skills
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:"Skyrise")
@@ -77,11 +97,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     curStreak = false
                 }
                 previousScore = cur.score.toInt()!
-            
             }
-
-
-            (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+            self.updateInternalCell(cardCellsRows.rs)
         }
         
         query = PFQuery(className:"ps")
@@ -117,19 +134,83 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     curStreak = false
                 }
                 previousScore = cur.score.toInt()!
-                
             }
-           // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+            // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
         }
     }
     
     func updateMyTeamTable() {
+        // Overall Record
+        var tie = "\(self.myTeam.tieMatchCount)"
+        var win = "\(self.myTeam.winMatchCount) - "
+        var loss = "\(self.myTeam.lostMatchCount) - "
+        var record = Statistic(stat: "Record", value: "\(win)\(loss)\(tie)")
+        self.statistics.append(record)
+        var highScore = Statistic(stat: "High Score", value: "\(self.myTeam.highestScore)")
+        self.statistics.append(highScore)
+        self.updateInternalCell(cardCellsRows.myTeam)
         println("got team")
+    }
+    
+    func getBookmarks() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let curBookmarks = defaults.valueForKey("Bookmarks") as? NSArray {
+            self.bookmarks.addObjectsFromArray(curBookmarks as [AnyObject])
+        }
+        if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
+            self.bookmarks.addObjectsFromArray(curBookmarks as [AnyObject])
+        }
+    }
+    
+    // Give it a team, it moves to their profile
+    func moveToTeamProfile(team: String!) {
+        var team1 = team
+        if team.isEmpty {
+            team1 = "3309B"
+        }
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TeamProfile") as! UITabBarController
+        // Destintation ViewController, set team
+        let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
+        var team2: Team! = Team()
+        team2.num = team1.uppercaseString
+        team2.season = self.curSeason as String
+        dest.team = team2
+        // Set the title of the menuViewController
+        vc.title = "Team \(team1)"
+        // Present Profile
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+    
+    func moveToSkills() {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("skills") as! UITabBarController
+        vc.title = "Skills"
+        // Destintation ViewController, set season
+        let dest: SkillsViewController = vc.viewControllers?.first as! SkillsViewController
+        dest.title = "Robot Skills"
+        (vc.viewControllers?.last as! ProgrammingSkillsViewController).title = "Programming Skills"
+        (vc.viewControllers?.last as! ProgrammingSkillsViewController).season = self.curSeason as String
+        dest.season = self.curSeason as String
+        // Present Main Menu
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+    
+    func updateInternalCell(row:NSInteger) {
+        (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.isEqual(self.tableView) {
-            println("SELECT")
+            switch indexPath.row {
+            case cardCellsRows.myTeam:
+                self.moveToTeamProfile(self.myTeam.num)
+            case cardCellsRows.rs:
+                self.moveToSkills()
+            case cardCellsRows.ps:
+                self.moveToSkills()
+            default:
+                println("NOPE")
+            }
+            
         }
     }
     
@@ -141,14 +222,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             cell.tableView.delegate = self
             cell.tableView.dataSource = self
             switch indexPath.row  {
-            case 0:
+            case cardCellsRows.myTeam:
                 cell.titleLabel.text = "My Team"
-            case 1:
+            case cardCellsRows.favorites:
                 cell.titleLabel.text = "Favorites"
-            case 2:
+            case cardCellsRows.rs:
                 cell.titleLabel.text = "Robot Skills"
                 println("loaded rs")
-            case 3:
+            case cardCellsRows.ps:
                 cell.titleLabel.text = "Programming Skills"
                 println("loaded ps")
             default:
@@ -159,16 +240,26 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
                 case "My Team":
-                    return tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
+                    var cell = tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
+                    cell.statisticLabel.text = self.statistics[indexPath.row].stat
+                    cell.valueLabel.text = self.statistics[indexPath.row].value
+                    return cell
+                case "Favorites":
+                    var cell = tableView.dequeueReusableCellWithIdentifier("favTeamCell") as! TeamBookmarkCell
+                    if let team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as? String {
+                        cell.teamLabel.text = team
+                    }else if let compName = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Name") as? String {
+                        cell.teamLabel.text = compName
+                    }
+                    cell.seasonLabel.text = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Season") as? String
+                    return cell
                 case "Robot Skills":
-                    println("rs: \(indexPath.row)")
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.rankLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team
                     cell.scoreLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score
                     return cell
                 case "Programming Skills":
-                    println("ps: \(indexPath.row)")
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.rankLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team
@@ -183,13 +274,16 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !tableView.isEqual(self.tableView) {
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            println("POWER OF RA")
+            return 2
+        }else if !tableView.isEqual(self.tableView) {
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
                 case "My Team":
-                    return 3
+                    return self.statistics.count
                 case "Favorites":
-                    return 0
+                    return self.bookmarks.count
                 case "Robot Skills":
                     return self.robotSkills.count
                 case "Programming Skills":
@@ -200,7 +294,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             }
             return 0
         }else {
-            return 5
+            return 4
         }
     }
     

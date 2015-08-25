@@ -93,7 +93,6 @@
 		7ECCB04E1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
-		7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEA292C1B05A1A50057DD1D /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,7 +196,6 @@
 		7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Thin.otf"; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
-		7EEA292C1B05A1A50057DD1D /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,7 +483,6 @@
 				7EC2DE151AF6C0A4002071AC /* Team.swift */,
 				7EC2DE171AF6C0AF002071AC /* Competition.swift */,
 				7EBFE57A1B02E9A700E804BC /* Award.swift */,
-				7EEA292C1B05A1A50057DD1D /* UserProfile.swift */,
 				7EC5AB361B33561B0046250B /* Skills.swift */,
 			);
 			name = Model;
@@ -651,7 +648,6 @@
 				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,
 				7ECAEBE41B0913ED0056733A /* HasCompetitionViewController.swift in Sources */,
 				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
-				7EEA292D1B05A1A50057DD1D /* UserProfile.swift in Sources */,
 				7EB472E41B706C1600F29190 /* Colors.swift in Sources */,
 				7EBF4A411AD6E1CE00C98EFA /* TeamProfileViewController.swift in Sources */,
 				7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */,
