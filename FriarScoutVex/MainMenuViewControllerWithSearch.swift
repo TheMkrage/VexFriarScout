@@ -11,18 +11,38 @@ import Parse
 
 class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var myTeam: Team = Team()
+    var curSeason = "Skyrise"
+    
     var robotSkills:NSMutableArray = NSMutableArray()
     var programmingSkills:NSMutableArray = NSMutableArray()
+    
+    struct defaultsKeys {
+        static let myTeam = "myTeam"
+    }
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         self.getData()
+        println("finsihed that method")
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
     }
     
     func getData() {
+        // Team Information
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
+            self.myTeam.num = stringOne
+            self.myTeam.season = self.curSeason
+            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+                self.myTeam = Team.loadTeam(self.myTeam)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.updateMyTeamTable()
+                }
+            }
+        }
 
         // Robot Skills
         var query = PFQuery(className:"rs")
@@ -37,6 +57,29 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 s.score = cur["score"] as! String
                 self.robotSkills.addObject(s)
             }
+            var previousScore = 0
+            var curStreak = false
+            var count = 0
+            var curRank = "T-1"
+            for var i = 0; i < self.robotSkills.count; i = i + 1{
+                var cur = self.robotSkills.objectAtIndex(i) as! Skills
+                if cur.score.toInt() == previousScore {
+                    println("hello \(i)")
+                    if curStreak {
+                        cur.rank = curRank
+                    }else {
+                        curStreak = true
+                        cur.rank = "T-\(i)"
+                        (self.robotSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
+                        curRank = "T-\(i)"
+                    }
+                }else {
+                    curStreak = false
+                }
+                previousScore = cur.score.toInt()!
+            
+            }
+
 
             (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
         }
@@ -53,8 +96,35 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 s.score = cur["score"] as! String
                 self.programmingSkills.addObject(s)
             }
+            // Fix the tie things
+            var previousScore = 0
+            var curStreak = false
+            var count = 0
+            var curRank = "T-1"
+            for var i = 0; i < self.programmingSkills.count; i = i + 1{
+                var cur = self.programmingSkills.objectAtIndex(i) as! Skills
+                if cur.score.toInt() == previousScore {
+                    println("hello \(i)")
+                    if curStreak {
+                        cur.rank = curRank
+                    }else {
+                        curStreak = true
+                        cur.rank = "T-\(i)"
+                        (self.programmingSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
+                        curRank = "T-\(i)"
+                    }
+                }else {
+                    curStreak = false
+                }
+                previousScore = cur.score.toInt()!
+                
+            }
            // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
         }
+    }
+    
+    func updateMyTeamTable() {
+        println("got team")
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
