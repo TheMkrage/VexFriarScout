@@ -14,6 +14,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     var myTeam: Team = Team()
     var curSeason = "Skyrise"
     
+    var searchResults:[SearchResults] = []
     var bookmarks = NSMutableArray()
     
     var statistics: [Statistic] = []
@@ -26,6 +27,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         static let favorites = 1
         static let rs = 2
         static let ps = 3
+    }
+    
+    struct SearchResults {
+        var name: String!
+        var additionalInfo: String!
     }
     
     struct defaultsKeys {
@@ -48,7 +54,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     
     func getData() {
-        // Bookmarks 
+        // Bookmarks
         self.getBookmarks()
         
         // Team Information
@@ -70,35 +76,48 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         query.limit = 10
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
-            for cur in objects as! [PFObject] {
-                var s: Skills = Skills()
-                s.rank = cur["rank"] as! String
-                s.team = cur["team"] as! String
-                s.score = cur["score"] as! String
-                self.robotSkills.addObject(s)
-            }
-            var previousScore = 0
-            var curStreak = false
-            var count = 0
-            var curRank = "T-1"
-            for var i = 0; i < self.robotSkills.count; i = i + 1{
-                var cur = self.robotSkills.objectAtIndex(i) as! Skills
-                if cur.score.toInt() == previousScore {
-                    println("hello \(i)")
-                    if curStreak {
-                        cur.rank = curRank
-                    }else {
-                        curStreak = true
-                        cur.rank = "T-\(i)"
-                        (self.robotSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
-                        curRank = "T-\(i)"
-                    }
-                }else {
-                    curStreak = false
+            if error != nil{
+                println(error?.localizedDescription)
+                // Alert the user and bring them back to the main menu
+                let alertController = UIAlertController(title: "Oh no! An Error!", message:
+                    error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+                
+            }else {
+                for cur in objects as! [PFObject] {
+                    var s: Skills = Skills()
+                    s.rank = cur["rank"] as! String
+                    s.team = cur["team"] as! String
+                    s.score = cur["score"] as! String
+                    self.robotSkills.addObject(s)
                 }
-                previousScore = cur.score.toInt()!
+                var previousScore = -1
+                var curStreak = false
+                var count = 0
+                var curRank = "T-1"
+                for var i = 0; i < self.robotSkills.count; i = i + 1{
+                    var cur = self.robotSkills.objectAtIndex(i) as! Skills
+                    if cur.score.toInt() == previousScore {
+                        println("hello \(i)")
+                        if curStreak {
+                            cur.rank = curRank
+                        }else {
+                            curStreak = true
+                            cur.rank = "T-\(i)"
+                            (self.robotSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
+                            curRank = "T-\(i)"
+                        }
+                    }else {
+                        curStreak = false
+                    }
+                    previousScore = cur.score.toInt()!
+                }
+                self.updateInternalCell(cardCellsRows.rs)
             }
-            self.updateInternalCell(cardCellsRows.rs)
         }
         
         query = PFQuery(className:"ps")
@@ -106,37 +125,74 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         query.limit = 10
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
-            for cur in objects as! [PFObject] {
-                var s: Skills = Skills()
-                s.rank = cur["rank"] as! String
-                s.team = cur["team"] as! String
-                s.score = cur["score"] as! String
-                self.programmingSkills.addObject(s)
-            }
-            // Fix the tie things
-            var previousScore = 0
-            var curStreak = false
-            var count = 0
-            var curRank = "T-1"
-            for var i = 0; i < self.programmingSkills.count; i = i + 1{
-                var cur = self.programmingSkills.objectAtIndex(i) as! Skills
-                if cur.score.toInt() == previousScore {
-                    println("hello \(i)")
-                    if curStreak {
-                        cur.rank = curRank
-                    }else {
-                        curStreak = true
-                        cur.rank = "T-\(i)"
-                        (self.programmingSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
-                        curRank = "T-\(i)"
-                    }
-                }else {
-                    curStreak = false
+            if error != nil{
+                println(error?.localizedDescription)
+                // Alert the user and bring them back to the main menu
+                let alertController = UIAlertController(title: "Oh no! An Error!", message:
+                    error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+                
+            }else{
+                for cur in objects as! [PFObject] {
+                    var s: Skills = Skills()
+                    s.rank = cur["rank"] as! String
+                    s.team = cur["team"] as! String
+                    s.score = cur["score"] as! String
+                    self.programmingSkills.addObject(s)
                 }
-                previousScore = cur.score.toInt()!
+                // Fix the tie things
+                var previousScore = 0
+                var curStreak = false
+                var count = 0
+                var curRank = "T-1"
+                for var i = 0; i < self.programmingSkills.count; i = i + 1{
+                    var cur = self.programmingSkills.objectAtIndex(i) as! Skills
+                    if cur.score.toInt() == previousScore {
+                        println("hello \(i)")
+                        if curStreak {
+                            cur.rank = curRank
+                        }else {
+                            curStreak = true
+                            cur.rank = "T-\(i)"
+                            (self.programmingSkills.objectAtIndex(i - 1) as! Skills).rank = "T-\(i)"
+                            curRank = "T-\(i)"
+                        }
+                    }else {
+                        curStreak = false
+                    }
+                    previousScore = cur.score.toInt()!
+                    
+                    // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+                }
             }
-            // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
         }
+    }
+    
+    func updateSearchWithNewString(str:String!) {
+        println(str)
+        var query = PFQuery(className:"Teams")
+        query.limit = 10
+        query.whereKey("num", hasPrefix: str)
+        var arrayOfTeams = query.findObjects() as! [PFObject]
+        self.searchResults = []
+        for x in arrayOfTeams {
+            var curResults = SearchResults(name: (x["num"] as! String), additionalInfo: x["name"] as! String)
+            self.searchResults.append(curResults)
+        }
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+            self.updateSearchWithNewString(searchString)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.searchDisplayController?.searchResultsTableView.reloadData()
+            }
+        }
+        return true
     }
     
     func updateMyTeamTable() {
@@ -148,7 +204,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.statistics.append(record)
         var highScore = Statistic(stat: "High Score", value: "\(self.myTeam.highestScore)")
         self.statistics.append(highScore)
-        self.updateInternalCell(cardCellsRows.myTeam)
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+            self.updateInternalCell(cardCellsRows.myTeam)
+        }
+        
         println("got team")
     }
     
@@ -194,8 +253,26 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.showViewController(vc as UIViewController, sender: vc)
     }
     
+    func moveToFavorites() {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("fav") as! UITabBarController
+        vc.title = "Favorite"
+        // Destintation ViewController, set season
+        let dest: TeamBookmarksViewController = vc.viewControllers?.first as! TeamBookmarksViewController
+        dest.title = "Team Favorites"
+        (vc.viewControllers?.last as! CompetitionBookmarkController).title = "Team Competitions"
+        // Present Main Menu
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+    
     func updateInternalCell(row:NSInteger) {
-        (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+
+        //for var i = self.tableView.
+        if let cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0))) as? MainMenuTableCell {
+                (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+        }else {
+            updateInternalCell(row)
+        }
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -203,6 +280,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             switch indexPath.row {
             case cardCellsRows.myTeam:
                 self.moveToTeamProfile(self.myTeam.num)
+            case cardCellsRows.favorites:
+                self.moveToFavorites()
             case cardCellsRows.rs:
                 self.moveToSkills()
             case cardCellsRows.ps:
@@ -210,7 +289,24 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             default:
                 println("NOPE")
             }
+        }else {
             
+            if tableView.isEqual(self.searchDisplayController?.searchResultsTableView) {
+                self.moveToTeamProfile(self.searchResults[indexPath.row].name)
+            }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text{
+                switch title {
+                case "My Team":
+                    self.moveToTeamProfile(self.myTeam.num)
+                case "Favorites":
+                    self.moveToTeamProfile((self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as! String)
+                case "Robot Skills":
+                    self.moveToTeamProfile((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team)
+                case "Programming Skills":
+                    self.moveToTeamProfile((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team)
+                default:
+                    println("WHAT")
+                }
+            }
         }
     }
     
@@ -221,23 +317,37 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             cell.setUp()
             cell.tableView.delegate = self
             cell.tableView.dataSource = self
+            cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+            cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+            //cell.backgroundColor = Colors.colorWithHexString("F0F0F0")
             switch indexPath.row  {
             case cardCellsRows.myTeam:
                 cell.titleLabel.text = "My Team"
+                cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
+                var teamCircle:CircleView = CircleView(frame: CGRectMake(30, 30, 90, 90))
+                cell.addSubview(teamCircle)
             case cardCellsRows.favorites:
                 cell.titleLabel.text = "Favorites"
+                cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
             case cardCellsRows.rs:
                 cell.titleLabel.text = "Robot Skills"
-                println("loaded rs")
+                cell.titleLabel.backgroundColor = Colors.colorWithHexString("33774C")
             case cardCellsRows.ps:
                 cell.titleLabel.text = "Programming Skills"
-                println("loaded ps")
+                cell.titleLabel.backgroundColor = Colors.colorWithHexString("8F423E")
             default:
                 cell.titleLabel.text = "ERROR"
             }
             return cell
         }else {
-            if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
+            if tableView == self.searchDisplayController!.searchResultsTableView {
+                var cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("searchResultsCell") as! TeamBookmarkCell
+                cell.teamLabel.text = self.searchResults[indexPath.row].name
+                cell.seasonLabel.text = self.searchResults[indexPath.row].additionalInfo
+                
+                return cell
+                // PUT SEARCH RESULTS ROW HERE
+            }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
                 case "My Team":
                     var cell = tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
@@ -269,14 +379,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                 }
             }
-            return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
+            return (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.searchDisplayController!.searchResultsTableView {
             println("POWER OF RA")
-            return 2
+            return self.searchResults.count
         }else if !tableView.isEqual(self.tableView) {
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
