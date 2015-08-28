@@ -89,14 +89,14 @@ class Team: NSObject {
                 query.whereKey("season", equalTo: team.season)
                 var result = query.getObjectWithId(compID as! String) as PFObject?
                 if (result!["season"] as! String) != team.season {
-                    println("Wrong season")
+                    //println("Wrong season")
                 }else {
                     var comp: Competition = Competition()
                     comp.compID = result!.objectId
                     comp.name = result!["name"] as! String
                     
-                    println(comp.name)
-                    println(result!["season"] as! String)
+                    //println(comp.name)
+                    //println(result!["season"] as! String)
                     comp.date = result!["date"] as! String
                     comp.loc = result!["loc"] as! String
                     comp.season = result!["season"] as! String

@@ -11,6 +11,7 @@ import Parse
 
 class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate, UISearchDisplayDelegate {
     
+    var circleAdded = false
     var myTeam: Team = Team()
     var curSeason = "Skyrise"
     
@@ -45,6 +46,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
+        self.tableView.scrollEnabled = false
         self.getData()
         println("finsihed that method")
         self.tableView.delegate = self
@@ -102,7 +104,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 for var i = 0; i < self.robotSkills.count; i = i + 1{
                     var cur = self.robotSkills.objectAtIndex(i) as! Skills
                     if cur.score.toInt() == previousScore {
-                        println("hello \(i)")
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -116,7 +117,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     }
                     previousScore = cur.score.toInt()!
                 }
-                self.updateInternalCell(cardCellsRows.rs)
+               //self.updateInternalCell(cardCellsRows.rs)
             }
         }
         
@@ -204,10 +205,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.statistics.append(record)
         var highScore = Statistic(stat: "High Score", value: "\(self.myTeam.highestScore)")
         self.statistics.append(highScore)
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-            self.updateInternalCell(cardCellsRows.myTeam)
-        }
-        
+        self.getMainMenuCellForID("MyTeam")?.tableView.reloadData()
+        self.tableView.scrollEnabled = true
         println("got team")
     }
     
@@ -264,17 +263,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.showViewController(vc as UIViewController, sender: vc)
     }
     
-    func updateInternalCell(row:NSInteger) {
-
-        //for var i = self.tableView.
-        if let cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0))) as? MainMenuTableCell {
-                (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
-        }else {
-            updateInternalCell(row)
-        }
-        
-    }
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.isEqual(self.tableView) {
             switch indexPath.row {
@@ -290,7 +278,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 println("NOPE")
             }
         }else {
-            
             if tableView.isEqual(self.searchDisplayController?.searchResultsTableView) {
                 self.moveToTeamProfile(self.searchResults[indexPath.row].name)
             }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text{
@@ -310,35 +297,98 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         }
     }
     
+    func getMainMenuCellForID(string:String!) -> MainMenuTableCell?{
+        for var i:Int = 0; i < self.tableView.numberOfRowsInSection(0); i = i + 1 {
+            if self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))?.reuseIdentifier == string {
+                println("AY")
+                return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? MainMenuTableCell
+            }
+        }
+        return nil
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.isEqual(self.tableView) {
-            var cell = tableView.dequeueReusableCellWithIdentifier("CardCell") as! MainMenuTableCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.setUp()
-            cell.tableView.delegate = self
-            cell.tableView.dataSource = self
-            cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
-            cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
-            //cell.backgroundColor = Colors.colorWithHexString("F0F0F0")
-            switch indexPath.row  {
-            case cardCellsRows.myTeam:
-                cell.titleLabel.text = "My Team"
-                cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
-                var teamCircle:CircleView = CircleView(frame: CGRectMake(30, 30, 90, 90))
-                cell.addSubview(teamCircle)
-            case cardCellsRows.favorites:
-                cell.titleLabel.text = "Favorites"
-                cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
-            case cardCellsRows.rs:
-                cell.titleLabel.text = "Robot Skills"
-                cell.titleLabel.backgroundColor = Colors.colorWithHexString("33774C")
-            case cardCellsRows.ps:
-                cell.titleLabel.text = "Programming Skills"
-                cell.titleLabel.backgroundColor = Colors.colorWithHexString("8F423E")
-            default:
-                cell.titleLabel.text = "ERROR"
+            println(tableView.cellForRowAtIndexPath(indexPath)?.reuseIdentifier)
+            if (tableView.cellForRowAtIndexPath(indexPath) == nil)  {
+                //println(cell.reuseIdentifier)
+                
+                //cell.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                switch indexPath.row  {
+                case cardCellsRows.myTeam:
+                    var cell = tableView.dequeueReusableCellWithIdentifier("MyTeam") as! MainMenuTableCell
+
+                    if cell.titleLabel.text == "My Team" || cell.titleLabel.text == "Title"{
+                        
+                        println(cell.titleLabel.text)
+                        println(indexPath.row)
+                        println(tableView.numberOfSections())
+                        println(tableView.numberOfRowsInSection(0))
+                        cell.clearsContextBeforeDrawing = true
+                        cell.selectionStyle = UITableViewCellSelectionStyle.None
+                        cell.setUp()
+                        cell.tableView.delegate = self
+                        cell.tableView.dataSource = self
+                        
+                        cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                        cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                        cell.titleLabel.text = "My Team"
+                        cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
+                        if !circleAdded {
+                            var teamCircle:CircleView = CircleView(frame: CGRectMake(30, 30, 90, 90), text: "9983",bottom: "B")
+                            cell.addSubview(teamCircle)
+                            circleAdded = true
+                        }
+                        
+                        println("AddeD Circle")
+                    }
+                    return cell
+                    
+                case cardCellsRows.favorites:
+                    var cell = tableView.dequeueReusableCellWithIdentifier("Favorites") as! MainMenuTableCell
+                    cell.clearsContextBeforeDrawing = true
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.setUp()
+                    cell.tableView.delegate = self
+                    cell.tableView.dataSource = self
+                    
+                    cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.titleLabel.text = "Favorites"
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
+                    return cell
+                case cardCellsRows.rs:
+                    var cell = tableView.dequeueReusableCellWithIdentifier("RobotSkills") as! MainMenuTableCell
+                    cell.clearsContextBeforeDrawing = true
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.setUp()
+                    cell.tableView.delegate = self
+                    cell.tableView.dataSource = self
+                    
+                    cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.titleLabel.text = "Robot Skills"
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("33774C")
+                    return cell
+                case cardCellsRows.ps:
+                    var cell = tableView.dequeueReusableCellWithIdentifier("ProgrammingSkills") as! MainMenuTableCell
+                    println("PROGRAMMING SKILLS IS RUNNING" )
+                    cell.clearsContextBeforeDrawing = true
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.setUp()
+                    cell.tableView.delegate = self
+                    cell.tableView.dataSource = self
+                    cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
+                    cell.titleLabel.text = "Programming Skills"
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("8F423E")
+                    return cell
+                default:
+                    println("FDSAF")
+                    //cell.titleLabel.text = "ERROR"
+                }
             }
-            return cell
+            
         }else {
             if tableView == self.searchDisplayController!.searchResultsTableView {
                 var cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("searchResultsCell") as! TeamBookmarkCell
@@ -376,11 +426,13 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.scoreLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score
                     return cell
                 default:
+                    println(title)
                     return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                 }
             }
             return (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
         }
+        return (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -397,6 +449,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "Robot Skills":
                     return self.robotSkills.count
                 case "Programming Skills":
+                    println("WRONG")
                     return self.programmingSkills.count
                 default:
                     return 0
