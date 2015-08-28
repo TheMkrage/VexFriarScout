@@ -11,6 +11,8 @@ import Parse
 
 class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate, UISearchDisplayDelegate {
     
+    var searchID = 0
+    var updatingSerach = true
     var circleAdded = false
     var myTeam: Team = Team()
     var curSeason = "Skyrise"
@@ -173,27 +175,49 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         }
     }
     
-    func updateSearchWithNewString(str:String!) {
+    func updateSearchWithNewString(str:String!, id:Int) {
         println(str)
         var query = PFQuery(className:"Teams")
         query.limit = 10
         query.whereKey("num", hasPrefix: str)
         var arrayOfTeams = query.findObjects() as! [PFObject]
+        if id != self.searchID {
+            return
+        }
+        // Find some comps
+        query = PFQuery(className: "Competitions")
+        query.limit = 10
+        query.whereKey("name", containsString: str.capitalizedString)
+        if id != self.searchID {
+            return
+        }
+        var arrayOfComps = query.findObjects() as! [PFObject]
+
+        self.updatingSerach = true
         self.searchResults = []
         for x in arrayOfTeams {
             var curResults = SearchResults(name: (x["num"] as! String), additionalInfo: x["name"] as! String)
             self.searchResults.append(curResults)
         }
+       
+        for x in arrayOfComps {
+            var curResults = SearchResults(name: (x["name"] as! String), additionalInfo: "")
+            self.searchResults.append(curResults)
+        }
+        self.updatingSerach = false
     }
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-            self.updateSearchWithNewString(searchString)
+            self.searchID++
+            self.updateSearchWithNewString(searchString, id: self.searchID)
+            
+            
             dispatch_async(dispatch_get_main_queue()) {
                 self.searchDisplayController?.searchResultsTableView.reloadData()
             }
         }
-        return true
+        return false
     }
     
     func updateMyTeamTable() {
@@ -388,14 +412,20 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     //cell.titleLabel.text = "ERROR"
                 }
             }
-            
         }else {
             if tableView == self.searchDisplayController!.searchResultsTableView {
+                if !updatingSerach {
                 var cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("searchResultsCell") as! TeamBookmarkCell
                 cell.teamLabel.text = self.searchResults[indexPath.row].name
                 cell.seasonLabel.text = self.searchResults[indexPath.row].additionalInfo
-                
                 return cell
+                }else {
+                    if let x = tableView.cellForRowAtIndexPath(indexPath) {
+                        return x
+                    }else {
+                        return UITableViewCell()
+                    }
+                }
                 // PUT SEARCH RESULTS ROW HERE
             }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
                 switch title {
