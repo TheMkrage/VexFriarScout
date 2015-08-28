@@ -35,6 +35,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     struct SearchResults {
         var name: String!
         var additionalInfo: String!
+        var isTeam: Bool!
+        var comp:Competition!
     }
     
     struct defaultsKeys {
@@ -119,6 +121,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     }
                     previousScore = cur.score.toInt()!
                 }
+                self.getMainMenuCellForID("RobotSkills")?.tableView.reloadData()
                //self.updateInternalCell(cardCellsRows.rs)
             }
         }
@@ -195,13 +198,21 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
 
         self.updatingSerach = true
         self.searchResults = []
+        
         for x in arrayOfTeams {
-            var curResults = SearchResults(name: (x["num"] as! String), additionalInfo: x["name"] as! String)
+            var curResults = SearchResults(name: (x["num"] as! String),additionalInfo: x["name"] as! String, isTeam: true, comp: nil)
             self.searchResults.append(curResults)
         }
        
         for x in arrayOfComps {
-            var curResults = SearchResults(name: (x["name"] as! String), additionalInfo: "")
+            
+            var comp: Competition = Competition()
+            comp.date = x["date"] as! String
+            comp.name = x["name"] as! String
+            comp.season = x["season"] as! String
+            comp.compID = x.objectId
+            var curResults = SearchResults(name: (x["name"] as! String), additionalInfo: "", isTeam: false, comp: comp)
+            
             self.searchResults.append(curResults)
         }
         self.updatingSerach = false
@@ -211,8 +222,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
             self.searchID++
             self.updateSearchWithNewString(searchString, id: self.searchID)
-            
-            
             dispatch_async(dispatch_get_main_queue()) {
                 self.searchDisplayController?.searchResultsTableView.reloadData()
             }
@@ -229,6 +238,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.statistics.append(record)
         var highScore = Statistic(stat: "High Score", value: "\(self.myTeam.highestScore)")
         self.statistics.append(highScore)
+        var events = Statistic(stat: "Events", value: "\(self.myTeam.compCount)")
+        self.statistics.append(events)
         self.getMainMenuCellForID("MyTeam")?.tableView.reloadData()
         self.tableView.scrollEnabled = true
         println("got team")
@@ -276,6 +287,51 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.showViewController(vc as UIViewController, sender: vc)
     }
     
+    func moveToComp(comp: Competition!) {
+        if comp.date == "League" {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+            // Set the title of the menuViewController
+            vc.title = "\(comp.name)"
+            // Destintation ViewController, set team
+            let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+            dest.name = comp.name
+            dest.comp.compID = comp.compID
+            dest.season = comp.season
+            // Present Profile
+            self.showViewController(vc as UIViewController, sender: vc)
+        }else {
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            var cDate: NSDate = formatter.dateFromString(comp.date)!
+            var dateComparisionResult:NSComparisonResult = cDate.compare(NSDate())
+            if(dateComparisionResult == NSComparisonResult.OrderedDescending) {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("EmptyProfile") as! EmptyCompetitionProfileViewController
+                // Set the title of the menuViewController
+                vc.title = "\(comp.name)"
+                vc.name = comp.name
+                vc.season = comp.season
+                vc.comp = comp
+                // Destintation ViewController, set team
+                
+                // Present Profile
+                self.showViewController(vc as UIViewController, sender: vc)
+                
+            }else {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+                // Set the title of the menuViewController
+                vc.title = "\(comp.name)"
+                // Destintation ViewController, set team
+                let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+                dest.name = comp.name
+                dest.season = comp.season
+                dest.comp.compID = comp.compID
+                // Present Profile
+                self.showViewController(vc as UIViewController, sender: vc)
+            }
+        }
+
+    }
+    
     func moveToFavorites() {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("fav") as! UITabBarController
         vc.title = "Favorite"
@@ -303,12 +359,17 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             }
         }else {
             if tableView.isEqual(self.searchDisplayController?.searchResultsTableView) {
-                self.moveToTeamProfile(self.searchResults[indexPath.row].name)
+                if (self.searchResults[indexPath.row].isTeam != nil && self.searchResults[indexPath.row].isTeam! ) {
+                    self.moveToTeamProfile(self.searchResults[indexPath.row].name)
+                }else {
+                    self.moveToComp(self.searchResults[indexPath.row].comp)
+                }
             }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text{
                 switch title {
                 case "My Team":
                     self.moveToTeamProfile(self.myTeam.num)
                 case "Favorites":
+                    
                     self.moveToTeamProfile((self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as! String)
                 case "Robot Skills":
                     self.moveToTeamProfile((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team)
