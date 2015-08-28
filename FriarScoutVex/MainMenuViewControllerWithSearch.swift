@@ -369,9 +369,24 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "My Team":
                     self.moveToTeamProfile(self.myTeam.num)
                 case "Favorites":
-                    
-                    self.moveToTeamProfile((self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as! String)
-                case "Robot Skills":
+                    if let team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as? String {
+                        
+                        self.moveToTeamProfile(team)
+                    }else if let compName = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Name") as? String {
+                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CompFullProfile") as! UITabBarController
+                        // Set the title of the menuViewController
+                        
+                        // Destintation ViewController, set team
+                        let dest: OverviewCompetitionProfileViewController = vc.viewControllers?.first as! OverviewCompetitionProfileViewController
+                        dest.name = compName
+                        dest.comp.compID = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("ID") as? String
+                        dest.season = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Season") as? String
+                        vc.title = "\(dest.name)"
+                        // Present Profile
+                        self.showViewController(vc as UIViewController, sender: vc)
+                    }
+
+                                   case "Robot Skills":
                     self.moveToTeamProfile((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team)
                 case "Programming Skills":
                     self.moveToTeamProfile((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team)

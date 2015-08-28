@@ -20,13 +20,13 @@ class CircleView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-       
         label.sizeToFit()
+        bottomLabel.sizeToFit()
         if (self.bottomLabel.text?.isEmpty != nil) && self.bottomLabel.text!.isEmpty {
             label.center = self.convertPoint(self.center, fromView: self.superview)
             self.addSubview(label)
         }else {
-            self.bottomLabel.center = self.convertPoint(CGPointMake(self.center.x, self.center.y + 10), fromView: self.superview)
+            self.bottomLabel.center = self.convertPoint(CGPointMake(self.center.x, self.center.y + 20), fromView: self.superview)
             label.center = self.convertPoint(CGPointMake(self.center.x, self.center.y - 10), fromView: self.superview)
             self.addSubview(bottomLabel)
             self.addSubview(label)

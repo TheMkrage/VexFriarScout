@@ -295,7 +295,6 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             }
         }
         isBookmarked = false
-        //self.favoriteButton.setTitle("Fav", forState: .Normal)
     }
 
     @IBAction func favorite(sender: AnyObject) {
@@ -342,6 +341,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
         curEl.setObject("Comp", forKey: "Kind")
         curEl.setObject(self.name, forKey: "Name")
         curEl.setObject(self.season, forKey: "Season")
+        curEl.setObject(self.comp.compID, forKey: "ID")
         return curEl as NSDictionary
     }
 
