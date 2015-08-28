@@ -46,7 +46,32 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         self.highestScoreLabel.center = CGPoint(x:(view.frame.width * (2/3)) + ((view.frame.width * (1/3))/2),y: self.highestScoreLabel.frame.origin.y)
     }
     
+     var lineChart: LineChart!
     override func viewDidLoad() {
+        
+        // simple arrays
+        var data: [CGFloat] = [3, 4, -2, 11, 13, 15]
+        var data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
+        
+        // simple line with custom x axis labels
+        var xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        
+        lineChart = LineChart()
+        lineChart.frame = CGRect(x: 0, y: 600, width: 200, height: 100)
+        lineChart.animation.enabled = true
+        lineChart.area = true
+        lineChart.x.labels.visible = true
+        lineChart.x.grid.count = 5
+        lineChart.y.grid.count = 5
+        lineChart.x.labels.values = xLabels
+        lineChart.y.labels.visible = true
+        lineChart.addLine(data)
+        lineChart.addLine(data2)
+        
+        lineChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //lineChart.delegate = self
+        self.scrollView.addSubview(lineChart)
+        
         self.drawBackground()
         self.findIfBookmarked()
         self.title = "Team Overview"
@@ -111,7 +136,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize.height = 650
+        self.scrollView.contentSize.height = 1400
         self.scrollView.contentSize.width = self.view.frame.size.width
     }
     
