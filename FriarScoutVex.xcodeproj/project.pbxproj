@@ -75,6 +75,7 @@
 		7EC81E5E1AD301C0008F0639 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */; };
 		7EC93BC71B00315500796251 /* OverviewTeamProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */; };
 		7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */; };
+		7EC9B5F01B92415900696C77 /* TeamChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9B5EF1B92415900696C77 /* TeamChartsViewController.swift */; };
 		7ECAEBDE1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBDD1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift */; };
 		7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBDF1B090B9F0056733A /* MatchesCompetitionProfileViewController.swift */; };
 		7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAEBE11B090BCB0056733A /* AwardsCompetitionProfileViewController.swift */; };
@@ -180,6 +181,7 @@
 		7EC81E5C1AD300E1008F0639 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
 		7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewTeamProfileViewController.swift; sourceTree = "<group>"; };
 		7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasTeamViewController.swift; sourceTree = "<group>"; };
+		7EC9B5EF1B92415900696C77 /* TeamChartsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamChartsViewController.swift; sourceTree = "<group>"; };
 		7ECAEBDD1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7ECAEBDF1B090B9F0056733A /* MatchesCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesCompetitionProfileViewController.swift; sourceTree = "<group>"; };
 		7ECAEBE11B090BCB0056733A /* AwardsCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardsCompetitionProfileViewController.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 				7EC93BC61B00315500796251 /* OverviewTeamProfileViewController.swift */,
 				7EC93BCA1B00328A00796251 /* HasTeamViewController.swift */,
 				7EBFE57E1B02FC1900E804BC /* StatsTeamProfileViewController.swift */,
+				7EC9B5EF1B92415900696C77 /* TeamChartsViewController.swift */,
 			);
 			name = "Team Profile";
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				7EC5CD061B71EF08003075BD /* RAMAnimatedTabBarController.swift in Sources */,
 				7EC0646E1B81727500A6BD64 /* MainMenuTableCell.swift in Sources */,
 				7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */,
+				7EC9B5F01B92415900696C77 /* TeamChartsViewController.swift in Sources */,
 				7ECCB04C1B79B6C3005D02F3 /* CircleView.swift in Sources */,
 				7EC5CD021B71EF08003075BD /* RAMFrameItemAnimation.swift in Sources */,
 				7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */,
