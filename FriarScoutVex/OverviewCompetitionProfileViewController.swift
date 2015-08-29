@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 class OverviewCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var eventNameTitleLabel: UILabel!
     var name: String! = ""
     var season: String! = ""
     
@@ -25,7 +26,6 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     @IBOutlet var rankingTable: UITableView!
     @IBOutlet var seasonLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel!
     
     func setAllHidden() {
         self.rankingTable.hidden = true
@@ -65,6 +65,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
     override func viewDidLoad() {
         
         self.setAllHidden()
+       
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         self.activityIndicator.frame = CGRectMake(100, 100, (self.view.frame.width/2), (self.view.frame.height/2) + 50);
        
@@ -93,13 +94,16 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
                 })
                 return
             }
+            self.comp.name = object!["name"] as! String
             self.comp.date = object!["date"] as! String
             self.comp.loc = object!["loc"] as! String
             self.comp.season = object!["season"] as! String
             self.comp.compID = object!.objectId
             self.seasonLabel.text = self.season
             self.locLabel.text = self.comp.loc
-            self.dateLabel.text = self.comp.date
+             self.eventNameTitleLabel.text = self.comp.name
+           // self.eventNameTitleLabel.
+            //self.comp.date
             
             var query = PFQuery(className:"Matches")
             query.whereKey("compID", equalTo: self.comp.compID)

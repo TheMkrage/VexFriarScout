@@ -26,7 +26,7 @@ class CircleView: UIView {
             label.center = self.convertPoint(self.center, fromView: self.superview)
             self.addSubview(label)
         }else {
-            self.bottomLabel.center = self.convertPoint(CGPointMake(self.center.x, self.center.y + 20), fromView: self.superview)
+            self.bottomLabel.center = self.convertPoint(CGPointMake(self.center.x, self.center.y + (self.frame.width * 1/4)), fromView: self.superview)
             label.center = self.convertPoint(CGPointMake(self.center.x, self.center.y - 10), fromView: self.superview)
             self.addSubview(bottomLabel)
             self.addSubview(label)
@@ -35,9 +35,10 @@ class CircleView: UIView {
     init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor: CGColor = UIColor.blueColor().CGColor, text:String = "", font:UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 30)!, fontColor:UIColor = UIColor.whiteColor(), bottom:String = "" ) {
         super.init(frame: frame)
         bottomLabel.text = bottom
+        
         label.text = text
         label.font = font
-        bottomLabel.font = font
+        bottomLabel.font = UIFont(name: font.fontName, size: font.pointSize + 4)
         label.textColor = fontColor
         bottomLabel.textColor = fontColor
         label.sizeToFit()

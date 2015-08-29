@@ -17,8 +17,42 @@ class Team: NSObject {
     var org: String! = ""
     var season: String! = ""
     
-    var numOnly:String! = ""
-    var letterOnly: String! = ""
+    var numOnly:String! {
+        get{
+            var teamDigits:String = ""
+            var teamLetters:String = ""
+            let letters = NSCharacterSet.letterCharacterSet()
+            let digits = NSCharacterSet.decimalDigitCharacterSet()
+            let characters = Array(self.num)
+            for c in self.num.unicodeScalars {
+                if letters.longCharacterIsMember(c.value) {
+                    teamLetters.append(c)
+                } else if digits.longCharacterIsMember(c.value) {
+                    teamDigits.append(c)
+                }
+            }
+            return teamDigits
+        }
+    }
+    var letterOnly: String! {
+        
+        get{
+            var teamDigits:String = ""
+            var teamLetters:String = ""
+            let letters = NSCharacterSet.letterCharacterSet()
+            let digits = NSCharacterSet.decimalDigitCharacterSet()
+            let characters = Array(self.num)
+            for c in self.num.unicodeScalars {
+                if letters.longCharacterIsMember(c.value) {
+                    teamLetters.append(c)
+                } else if digits.longCharacterIsMember(c.value) {
+                    teamDigits.append(c)
+                }
+            }
+            return teamLetters
+        }
+        
+    }
     
     var rs: String! = "NA"
     var ps: String! = "NA"
@@ -58,20 +92,6 @@ class Team: NSObject {
     var wp: NSInteger = 0
     
     static func loadTeam(var team:Team) -> Team {
-        var teamDigits:String = ""
-        var teamLetters:String = ""
-        let letters = NSCharacterSet.letterCharacterSet()
-        let digits = NSCharacterSet.decimalDigitCharacterSet()
-        let characters = Array(team.num)
-        for c in team.num.unicodeScalars {
-            if letters.longCharacterIsMember(c.value) {
-                teamLetters.append(c)
-            } else if digits.longCharacterIsMember(c.value) {
-                teamDigits.append(c)
-            }
-        }
-        team.numOnly = teamDigits
-        team.letterOnly = teamLetters
         var query = PFQuery(className:"Teams")
         query.whereKey("num", equalTo:team.num)
         var objects = query.findObjects()

@@ -37,6 +37,7 @@
 		7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */; };
 		7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */; };
 		7EC2C3771B90EB8500CD7696 /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2C3761B90EB8500CD7696 /* LineGraph.swift */; };
+		7EC2C3791B918F2400CD7696 /* UISettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2C3781B918F2400CD7696 /* UISettingsViewController.swift */; };
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
 		7EC354AE1B39DD4600829C3C /* wrenchSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC354AD1B39DD4600829C3C /* wrenchSelected.png */; };
@@ -138,6 +139,7 @@
 		7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		7EC299281AD6548100A7E008 /* TeamListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamListTableViewController.swift; sourceTree = "<group>"; };
 		7EC2C3761B90EB8500CD7696 /* LineGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
+		7EC2C3781B918F2400CD7696 /* UISettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISettingsViewController.swift; sourceTree = "<group>"; };
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		7EC354AD1B39DD4600829C3C /* wrenchSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrenchSelected.png; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			children = (
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */,
+				7EC2C3781B918F2400CD7696 /* UISettingsViewController.swift */,
 				7EBE42491B4CD17E0015D500 /* Skills */,
 				7EBE424A1B4CD1BB0015D500 /* Bookmarks */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
@@ -629,6 +632,7 @@
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7EC5CD011B71EF08003075BD /* RAMBounceAnimation.swift in Sources */,
 				7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */,
+				7EC2C3791B918F2400CD7696 /* UISettingsViewController.swift in Sources */,
 				7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */,
 				7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */,
 				7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */,

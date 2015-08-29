@@ -122,9 +122,9 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         skillsChart.cornerRadius = 2
         skillsChart.lineWidth = 5.0
         
-        var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)))
+        var circle: CircleView = CircleView(frame: CGRectMake(10, 10, self.view.frame.width * (2/5), self.view.frame.width * (2/5)), text: self.team.numOnly, bottom: self.team.letterOnly, font: UIFont(name: "HelveticaNeue-UltraLight", size: 45)!)
         self.scrollView.addSubview(circle)
-        circle.animateCircle(1.0)
+        //circle.animateCircle(1.0)
         
         self.compCircle = CircleView(frame: CGRectMake(leftDivider.frame.origin.x - 40, seasonDivider.frame.origin.y + 50, 80, 80), innerColor: UIColor.lightGrayColor().CGColor, rimColor: UIColor.lightGrayColor().CGColor, text: "NA", font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!)
         self.scrollView.addSubview(self.compCircle)
@@ -382,8 +382,8 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                             comp.matchCount++
                             self.team.matchCount++
                             comp.matches.addObject(m)
-                            
                         }
+                        
                         self.team.compCount++
                         comp.orderMatches()
                         self.team.competitions.addObject(comp)

@@ -22,7 +22,7 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     
     override func viewDidLoad() {
         self.drawBackground()
-        self.title = "Team \(self.team.num)"
+        //self.title = "Team \(self.team.num)"
         self.awardsTable.delegate = self
         self.awardsTable.dataSource = self
         

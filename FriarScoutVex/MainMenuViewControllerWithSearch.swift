@@ -50,14 +50,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
-        self.tableView.scrollEnabled = false
+        var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
+        self.navigationItem.rightBarButtonItem = settingsButton
+        self.tableView.scrollEnabled = true
         self.getData()
         println("finsihed that method")
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-    
-    
     
     func getData() {
         // Bookmarks
@@ -122,7 +122,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     previousScore = cur.score.toInt()!
                 }
                 self.getMainMenuCellForID("RobotSkills")?.tableView.reloadData()
-               //self.updateInternalCell(cardCellsRows.rs)
+                //self.updateInternalCell(cardCellsRows.rs)
             }
         }
         
@@ -195,7 +195,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             return
         }
         var arrayOfComps = query.findObjects() as! [PFObject]
-
+        
         self.updatingSerach = true
         self.searchResults = []
         
@@ -203,7 +203,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             var curResults = SearchResults(name: (x["num"] as! String),additionalInfo: x["name"] as! String, isTeam: true, comp: nil)
             self.searchResults.append(curResults)
         }
-       
+        
         for x in arrayOfComps {
             
             var comp: Competition = Competition()
@@ -253,6 +253,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
             self.bookmarks.addObjectsFromArray(curBookmarks as [AnyObject])
         }
+    }
+    
+    func goToSetting() {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as! UISettingsViewController
+        self.showViewController(vc, sender: vc)
     }
     
     // Give it a team, it moves to their profile
@@ -329,7 +334,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.showViewController(vc as UIViewController, sender: vc)
             }
         }
-
+        
     }
     
     func moveToFavorites() {
@@ -385,8 +390,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         // Present Profile
                         self.showViewController(vc as UIViewController, sender: vc)
                     }
-
-                                   case "Robot Skills":
+                    
+                case "Robot Skills":
                     self.moveToTeamProfile((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team)
                 case "Programming Skills":
                     self.moveToTeamProfile((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team)
@@ -417,7 +422,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 switch indexPath.row  {
                 case cardCellsRows.myTeam:
                     var cell = tableView.dequeueReusableCellWithIdentifier("MyTeam") as! MainMenuTableCell
-
+                    
                     if cell.titleLabel.text == "My Team" || cell.titleLabel.text == "Title"{
                         
                         println(cell.titleLabel.text)
@@ -434,13 +439,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.titleLabel.text = "My Team"
                         cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
-                        if !circleAdded {
-                            var teamCircle:CircleView = CircleView(frame: CGRectMake(30, 30, 90, 90), text: "9983",bottom: "B")
-                            cell.addSubview(teamCircle)
-                            circleAdded = true
-                        }
-                        
-                        println("AddeD Circle")
+                        var teamCircle:CircleView = CircleView(frame: CGRectMake(20, 30, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                        cell.addSubview(teamCircle)
                     }
                     return cell
                     
@@ -456,6 +456,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Favorites"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
+                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 30, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.blackColor().CGColor)
+                    cell.addSubview(teamCircle)
+                    circleAdded = true
+                    
+                    
                     return cell
                 case cardCellsRows.rs:
                     var cell = tableView.dequeueReusableCellWithIdentifier("RobotSkills") as! MainMenuTableCell
@@ -491,10 +496,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         }else {
             if tableView == self.searchDisplayController!.searchResultsTableView {
                 if !updatingSerach {
-                var cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("searchResultsCell") as! TeamBookmarkCell
-                cell.teamLabel.text = self.searchResults[indexPath.row].name
-                cell.seasonLabel.text = self.searchResults[indexPath.row].additionalInfo
-                return cell
+                    var cell = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MainMenuTableCell).tableView.dequeueReusableCellWithIdentifier("searchResultsCell") as! TeamBookmarkCell
+                    cell.teamLabel.text = self.searchResults[indexPath.row].name
+                    cell.seasonLabel.text = self.searchResults[indexPath.row].additionalInfo
+                    return cell
                 }else {
                     if let x = tableView.cellForRowAtIndexPath(indexPath) {
                         return x
