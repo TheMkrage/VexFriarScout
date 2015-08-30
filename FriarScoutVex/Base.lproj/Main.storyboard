@@ -132,10 +132,10 @@
             </objects>
             <point key="canvasLocation" x="1367" y="-1671"/>
         </scene>
-        <!--Main Menu View Controller With Search-->
+        <!--Main Menu-->
         <scene sceneID="dmz-mu-6P6">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dS7-vR-Smz" customClass="MainMenuViewControllerWithSearch" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main Menu" automaticallyAdjustsScrollViewInsets="NO" id="dS7-vR-Smz" customClass="MainMenuViewControllerWithSearch" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aFk-EY-YsT"/>
                         <viewControllerLayoutGuide type="bottom" id="i71-6N-06A"/>
@@ -1033,7 +1033,7 @@
                                                                                         <exclude reference="8B9-Ij-27s"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES">
                                                                                     <rect key="frame" x="8" y="11" width="116" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="8B9-Ij-27s"/>
@@ -1562,7 +1562,7 @@
                                                                                         <exclude reference="6aM-P2-DqU"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                                                                     <rect key="frame" x="8" y="11" width="116" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="6aM-P2-DqU"/>
@@ -2093,7 +2093,7 @@
                                                                                         <exclude reference="JG2-E7-Xh6"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES">
                                                                                     <rect key="frame" x="8" y="11" width="116" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="JG2-E7-Xh6"/>
@@ -2113,7 +2113,7 @@
                                                                                         <exclude reference="IiP-0i-fGp"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES">
                                                                                     <rect key="frame" x="249" y="11" width="27" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="IiP-0i-fGp"/>
@@ -2314,7 +2314,7 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="fA1-wl-2vA"/>
+                    <navigationItem key="navigationItem" title="Main Menu" id="fA1-wl-2vA"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="D6T-Al-7p4" id="c3C-ys-fCH"/>
                         <outlet property="tableView" destination="I0n-bx-pMU" id="LZS-YL-VvC"/>
@@ -4589,7 +4589,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5L-AM-ZwC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F2F42D74-3347-455C-AA68-8B341EDB2C6D" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-1B-0lF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="88F8588D-8F95-4849-AC44-E3172F043071" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-1B-0lF">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="133" id="Baz-uh-qqg"/>
@@ -5422,6 +5422,9 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Graphs" image="moreStats.png" id="Ta0-9D-sgg"/>
+                    <connections>
+                        <outlet property="scrollView" destination="ZKg-ev-VEg" id="7iS-mb-OHO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lg2-f4-Xs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -6602,7 +6605,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F2F42D74-3347-455C-AA68-8B341EDB2C6D" width="288" height="289">
+        <image name="88F8588D-8F95-4849-AC44-E3172F043071" width="288" height="289">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

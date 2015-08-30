@@ -50,6 +50,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 34)!]
+
         var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
         self.navigationItem.rightBarButtonItem = settingsButton
         self.tableView.scrollEnabled = true

@@ -30,6 +30,11 @@ class Competition: NSObject {
     var elimCount: NSInteger = 0
     var qualsCount: NSInteger = 0
     
+    var sumOfQuals: NSInteger = 0
+    var sumOfQF: NSInteger = 0
+    var sumOfSF: NSInteger = 0
+    var sumOfFinals: NSInteger = 0
+    
     var highestScore: NSInteger = 0
     var highestRowNum: NSInteger = 0
     var lowestScore: NSInteger = 100000
