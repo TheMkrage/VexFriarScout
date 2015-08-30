@@ -86,8 +86,11 @@ class Team: NSObject {
     var awardCount: NSInteger = 0
     var qualCount: NSInteger = 0
     
+    
+    
     // For use with comp overview
     var matches:NSMutableArray! = NSMutableArray()
+    var statArray: NSMutableArray = NSMutableArray()
     
     var wp: NSInteger = 0
     

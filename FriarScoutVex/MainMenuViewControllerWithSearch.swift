@@ -99,7 +99,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             if error != nil{
                 println(error?.localizedDescription)
                 // Alert the user and bring them back to the main menu
-                if (error?.localizedDescription as? NSString)!.containsString("application performed") {
+                if (error!.localizedDescription as NSString).containsString("application performed") {
                     let alertController = UIAlertController(title: "Too many requests!", message:
                         "Try again in a few minutes! We are refreshing our data right now!", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Ok :(", style: UIAlertActionStyle.Default,handler: nil))

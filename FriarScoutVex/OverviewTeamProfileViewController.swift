@@ -172,6 +172,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 self.team.name = newTeam["name"] as! String
                 self.team.loc =  newTeam["loc"] as! String
                 self.team.num = newTeam["num"] as! String
+                self.team.statArray = newTeam["stats"] as! NSMutableArray
                 self.nameLabel.text = self.team.name
                 self.locationLabel.text = self.team.loc
                 self.team.competitionIDs = newTeam["competitions"] as! NSMutableArray
@@ -194,6 +195,15 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                         comp.date = result!["date"] as! String
                         comp.loc = result!["loc"] as! String
                         comp.season = result!["season"] as! String
+                        for str in self.team.statArray {
+                            // right string with stats
+                            if str.containsString(comp.compID) {
+                                var array: [String] = split(str as! String) {$0 == "+"}
+                                comp.opr = CGFloat(array[1].toInt()!)
+                                comp.dpr = CGFloat(array[2].toInt()!)
+                                comp.ccwm = CGFloat(array[3].toInt()!)
+                            }
+                        }
                         // get matches for each comp
                         var matchIDQuery = PFQuery(className: "Matches")
                         matchIDQuery.whereKey("compID", equalTo: compID)

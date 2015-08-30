@@ -41,6 +41,10 @@ class Competition: NSObject {
     var lowestScore: NSInteger = 100000
     var lowestRowNum: NSInteger = 0
     
+    var opr:CGFloat = 0.0
+    var dpr:CGFloat = 0.0
+    var ccwm:CGFloat = 0.0
+    
     var teams: NSMutableArray! = NSMutableArray()
     
     override var description: String {
