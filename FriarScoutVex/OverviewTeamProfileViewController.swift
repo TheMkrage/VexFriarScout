@@ -225,6 +225,10 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 
                                 m.blue3 =  mRaw["b2"]  as! String
                             }
+                            let x =  mRaw["rs"] as! Int!
+                            m.redScore = "\(x)"
+                            let y = mRaw["bs"]as! Int!
+                            m.blueScore = "\(y)"
                             m.name = mRaw["num"] as! String
                             m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
                             if m.name.uppercaseString.rangeOfString("QF") != nil {
@@ -232,25 +236,23 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
                                 comp.qf.addObject(m)
                                 comp.sumOfQF += m.scoreForTeam(self.team.num)
+                                comp.sumOfElims += m.scoreForTeam(self.team.num)
                             }else if m.name.uppercaseString.rangeOfString("SF") != nil {
                                 m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
                                 m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
                                 comp.sf.addObject(m)
                                 comp.sumOfSF += m.scoreForTeam(self.team.num)
+                                comp.sumOfElims += m.scoreForTeam(self.team.num)
                             }else if m.name.uppercaseString.rangeOfString("F") != nil {
                                 m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
                                 comp.finals.addObject(m)
                                 comp.sumOfFinals += m.scoreForTeam(self.team.num)
+                                comp.sumOfElims += m.scoreForTeam(self.team.num)
                             }else {
                                 m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
                                 comp.quals.addObject(m)
                                 comp.sumOfQuals += m.scoreForTeam(self.team.num)
                             }
-
-                            let x =  mRaw["rs"] as! Int!
-                            m.redScore = "\(x)"
-                            let y = mRaw["bs"]as! Int!
-                            m.blueScore = "\(y)"
                             // Win Loss Counters
                             if m.didTeamTie(self.team.num) {
                                 self.team.tieMatchCount++

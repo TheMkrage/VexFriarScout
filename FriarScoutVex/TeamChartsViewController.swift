@@ -25,6 +25,8 @@ class TeamChartsViewController: HasTeamViewController {
     
     func addAverageChart() {
         var xLabels: [String] = []
+        var averageQualsData: [CGFloat] = []
+        var averageElimsData: [CGFloat] = []
         var averageData: [CGFloat] = []
         var formatter: NSDateFormatter = NSDateFormatter()
         formatter.dateFormat = "mm-dd-yyyy"
@@ -33,11 +35,15 @@ class TeamChartsViewController: HasTeamViewController {
             if comp.date != "League" {
                 var datePart:[String] = comp.date.componentsSeparatedByString("-")
                 var simplifiedDate:String = "\(datePart[1])-\(datePart[2])"
-                if comp.matches.count != 0 {
+                if comp.quals.count != 0 {
                     xLabels.append(simplifiedDate)
-                    
-                    averageData.append(CGFloat((comp.sumOfQuals)/comp.quals.count))
-                    println(CGFloat((comp.sumOfQuals)/comp.quals.count))
+                    if comp.elimCount != 0 {
+                        averageElimsData.append(CGFloat((comp.sumOfQF + comp.sumOfSF + comp.sumOfFinals)/(comp.elimCount)))
+                    }else {
+                        averageElimsData.append(0)
+                    }
+                    averageData.append(CGFloat((comp.sumOfElims + comp.sumOfQuals)/(comp.quals.count + comp.elimCount)))
+                    averageQualsData.append(CGFloat((comp.sumOfQuals)/comp.quals.count))
                 }
             }
         }
@@ -48,12 +54,14 @@ class TeamChartsViewController: HasTeamViewController {
         averageChart = LineChart()
         averageChart.frame = CGRect(x: 0, y: 45, width: self.view.frame.width, height: 200)
         averageChart.animation.enabled = true
-        averageChart.area = true
+        averageChart.area = false
         averageChart.x.labels.visible = true
         averageChart.x.grid.count = CGFloat(xLabels.count)
         averageChart.y.grid.count = 5
         averageChart.x.labels.values = xLabels
         averageChart.y.labels.visible = true
+        averageChart.addLine(averageQualsData)
+        averageChart.addLine(averageElimsData)
         averageChart.addLine(averageData)
         averageChart.setTranslatesAutoresizingMaskIntoConstraints(false)
         //lineChart.delegate = self

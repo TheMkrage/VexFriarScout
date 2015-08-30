@@ -91,10 +91,14 @@ class Team: NSObject {
     
     var wp: NSInteger = 0
     
-    static func loadTeam(var team:Team) -> Team {
+    static func loadTeam(var team:Team) -> Team? {
         var query = PFQuery(className:"Teams")
         query.whereKey("num", equalTo:team.num)
         var objects = query.findObjects()
+        println(team.num)
+        if (objects!.isEmpty) {
+            return nil
+        }
         if let newTeam: AnyObject = objects?[0] {
             // Find and set simple values
             team.name = newTeam["name"] as! String

@@ -71,7 +71,19 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             self.myTeam.num = stringOne
             self.myTeam.season = self.curSeason
             dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-                self.myTeam = Team.loadTeam(self.myTeam)
+                if let x = Team.loadTeam(self.myTeam) as Team? {
+                    self.myTeam = x
+                }else {
+                    // Alert the user and bring them back to the main menu
+                    println("ERRORklklk")
+                    let alertController = UIAlertController(title: "Oh no! An Error!", message:
+                        "Your Team does not exist!", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                        
+                    })
+
+                }
                 dispatch_async(dispatch_get_main_queue()) {
                     self.updateMyTeamTable()
                 }
@@ -87,6 +99,15 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             if error != nil{
                 println(error?.localizedDescription)
                 // Alert the user and bring them back to the main menu
+                if (error?.localizedDescription as? NSString)!.containsString("application performed") {
+                    let alertController = UIAlertController(title: "Too many requests!", message:
+                        "Try again in a few minutes! We are refreshing our data right now!", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Ok :(", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                }else {
                 let alertController = UIAlertController(title: "Oh no! An Error!", message:
                     error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
@@ -94,6 +115,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.presentViewController(alertController, animated: true, completion:  { () -> Void in
                     self.navigationController?.popViewControllerAnimated(true)
                 })
+                }
                 
             }else {
                 for cur in objects as! [PFObject] {
