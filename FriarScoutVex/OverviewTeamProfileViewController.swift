@@ -46,7 +46,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     var lineChart: LineChart!
     override func viewDidLoad() {
         
- 
+        
         
         self.drawBackground()
         self.findIfBookmarked()
@@ -201,9 +201,17 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                 println(str)
                                 var array: [String] = split(str as! String) {$0 == "+"}
                                 println(array)
-                                comp.opr = CGFloat((array[1] as NSString).floatValue)
-                                comp.dpr = CGFloat((array[2] as NSString).floatValue)
-                                comp.ccwm = CGFloat((array[3] as NSString).floatValue)
+                                
+                                if (array[1] as NSString? != nil) {
+                                    comp.opr = CGFloat((array[1] as NSString).floatValue)
+                                }
+                                if array[2] as NSString? != nil {
+                                    comp.dpr = CGFloat((array[2] as NSString).floatValue)
+                                }
+                                if array[3] as NSString? != nil {
+                                    comp.ccwm = CGFloat((array[3] as NSString).floatValue)
+                                }
+                                
                             }
                         }
                         // get matches for each comp

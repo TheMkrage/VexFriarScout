@@ -13,30 +13,68 @@ class TeamChartsViewController: HasTeamViewController {
     @IBOutlet var scrollView: UIScrollView!
     
     var averageChart: LineChart = LineChart()
-    
+    var oprDprCcwmChart: LineChart = LineChart()
     override func viewDidLoad() {
         self.team.orderCompetitions()
-        addAverageChart()
+        addCharts()
     }
     
     override func viewDidLayoutSubviews() {
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 720)
     }
     
-    func addAverageChart() {
-        var xLabels: [String] = []
+    func addCharts() {
+        
+        var xAverageLabels: [String] = []
+        var xStatsLabels: [String] = []
+        
         var averageQualsData: [CGFloat] = []
         var averageElimsData: [CGFloat] = []
         var averageData: [CGFloat] = []
-        var formatter: NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "mm-dd-yyyy"
+        
+        var oprData: [CGFloat] = []
+        var dprData: [CGFloat] = []
+        var ccwmData: [CGFloat] = []
+        
+        var highestStatValue: CGFloat = CGFloat.min // used to find the step of axis
+        var lowestStatValue: CGFloat = CGFloat.max // used to find the step of axis
+        var maxOPR: CGFloat = CGFloat.max
+        var maxDPR: CGFloat = CGFloat.max
+        var maxCCWM: CGFloat = CGFloat.max
+        var avgOPR: CGFloat = 0.0
+        var avgDPR: CGFloat = 0.0
+        var avgCCWM: CGFloat = 0.0
         for ctemp in self.team.competitions {
             var comp: Competition = ctemp as! Competition
             if comp.date != "League" {
                 var datePart:[String] = comp.date.componentsSeparatedByString("-")
                 var simplifiedDate:String = "\(datePart[1])-\(datePart[2])"
+                if comp.opr != 0.0 {
+                    xStatsLabels.append(simplifiedDate)
+                    if comp.opr > highestStatValue {
+                        highestStatValue = comp.opr
+                    }
+                    if comp.dpr > highestStatValue {
+                        highestStatValue = comp.dpr
+                    }
+                    if comp.ccwm > highestStatValue {
+                        highestStatValue = comp.ccwm
+                    }
+                    if comp.opr < lowestStatValue {
+                        lowestStatValue = comp.opr
+                    }
+                    if comp.dpr < lowestStatValue {
+                        lowestStatValue = comp.dpr
+                    }
+                    if comp.ccwm < lowestStatValue {
+                        lowestStatValue = comp.ccwm
+                    }
+                    oprData.append(comp.opr)
+                    dprData.append(comp.dpr)
+                    ccwmData.append(comp.ccwm)
+                }
                 if comp.quals.count != 0 {
-                    xLabels.append(simplifiedDate)
+                    xAverageLabels.append(simplifiedDate)
                     if comp.elimCount != 0 {
                         averageElimsData.append(CGFloat((comp.sumOfQF + comp.sumOfSF + comp.sumOfFinals)/(comp.elimCount)))
                     }else {
@@ -48,23 +86,61 @@ class TeamChartsViewController: HasTeamViewController {
             }
         }
         
-        // simple line with custom x axis labels
-        
-        
+        // Average Chart setup
+        var averageTitle: UILabel = UILabel()
+        averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
+        var attrStr = NSMutableAttributedString(string: "Average, Qual Average, Elim Average", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#9C5055"), range: NSRange(location:0,length:8))
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#F5A120"), range: NSRange(location:19,length:16))
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#83D6B7"), range: NSRange(location:9,length:13))
+        averageTitle.attributedText = attrStr
+        averageTitle.textAlignment = .Center
+        //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
+        self.scrollView.addSubview(averageTitle)
         averageChart = LineChart()
-        averageChart.frame = CGRect(x: 0, y: 45, width: self.view.frame.width, height: 200)
+        averageChart.frame = CGRect(x: 15, y: 45, width: self.view.frame.width - 15, height: 200)
         averageChart.animation.enabled = true
         averageChart.area = false
         averageChart.x.labels.visible = true
-        averageChart.x.grid.count = CGFloat(xLabels.count)
+        averageChart.x.grid.count = CGFloat(xAverageLabels.count)
         averageChart.y.grid.count = 5
-        averageChart.x.labels.values = xLabels
+        averageChart.x.labels.values = xAverageLabels
         averageChart.y.labels.visible = true
+        averageChart.colors = [Colors.colorWithHexString("#83D6B7"), Colors.colorWithHexString("#F5A120"), Colors.colorWithHexString("#9C5055")]
         averageChart.addLine(averageQualsData)
         averageChart.addLine(averageElimsData)
         averageChart.addLine(averageData)
         averageChart.setTranslatesAutoresizingMaskIntoConstraints(false)
         //lineChart.delegate = self
         self.scrollView.addSubview(averageChart)
+        
+        // Setup opr,dpr,ccwm chart
+        // opr,dpr,ccwm Chart setup
+        var statTitle: UILabel = UILabel()
+        statTitle.frame = CGRectMake(0, 265, self.view.frame.width, 30)
+        var statAttrStr = NSMutableAttributedString(string: "OPR, DPR, CCWM", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
+        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#5889DB"), range: NSRange(location:0,length:5))
+        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#ff00ff"), range: NSRange(location:5,length:6))
+        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#FF7373"), range: NSRange(location:9,length:5))
+        statTitle.attributedText = statAttrStr
+        statTitle.textAlignment = .Center
+        //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
+        self.scrollView.addSubview(statTitle)
+        oprDprCcwmChart = LineChart()
+        oprDprCcwmChart.frame = CGRect(x: 15, y: 290, width: self.view.frame.width - 15, height: 200)
+        oprDprCcwmChart.animation.enabled = true
+        oprDprCcwmChart.area = false
+        oprDprCcwmChart.x.labels.visible = true
+        oprDprCcwmChart.x.grid.count = CGFloat(xStatsLabels.count)
+        oprDprCcwmChart.y.grid.count = ((highestStatValue - lowestStatValue)/10)
+        println( oprDprCcwmChart.y.grid.count)
+        oprDprCcwmChart.x.labels.values = xStatsLabels
+        oprDprCcwmChart.y.labels.visible = true
+        oprDprCcwmChart.colors = [Colors.colorWithHexString("#5889DB"),Colors.colorWithHexString("#ff00ff"), Colors.colorWithHexString("#FF7373")]
+        oprDprCcwmChart.addLine(oprData)
+        oprDprCcwmChart.addLine(dprData)
+        oprDprCcwmChart.addLine(ccwmData)
+        oprDprCcwmChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.scrollView.addSubview(oprDprCcwmChart)
     }
 }
