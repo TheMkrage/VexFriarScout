@@ -516,7 +516,7 @@ public class LineChart: UIView {
         var text: String
         for (index, value) in enumerate(xAxisData) {
             var xValue = self.x.scale(CGFloat(index)) + x.axis.inset - (width / 2)
-            var label = UILabel(frame: CGRect(x: xValue, y: y, width: width, height: x.axis.inset))
+            var label = UILabel(frame: CGRect(x: xValue, y: y + 5, width: width, height: x.axis.inset))
             label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
             label.textAlignment = .Center
             if (x.labels.values.count != 0) {

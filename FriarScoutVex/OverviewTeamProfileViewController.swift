@@ -198,10 +198,12 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                         for str in self.team.statArray {
                             // right string with stats
                             if str.containsString(comp.compID) {
+                                println(str)
                                 var array: [String] = split(str as! String) {$0 == "+"}
-                                comp.opr = CGFloat(array[1].toInt()!)
-                                comp.dpr = CGFloat(array[2].toInt()!)
-                                comp.ccwm = CGFloat(array[3].toInt()!)
+                                println(array)
+                                comp.opr = CGFloat((array[1] as NSString).floatValue)
+                                comp.dpr = CGFloat((array[2] as NSString).floatValue)
+                                comp.ccwm = CGFloat((array[3] as NSString).floatValue)
                             }
                         }
                         // get matches for each comp

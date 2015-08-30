@@ -99,7 +99,7 @@ class Team: NSObject {
         query.whereKey("num", equalTo:team.num)
         var objects = query.findObjects()
         println(team.num)
-        if (objects!.isEmpty) {
+        if (objects == nil || objects!.isEmpty) {
             return nil
         }
         if let newTeam: AnyObject = objects?[0] {
