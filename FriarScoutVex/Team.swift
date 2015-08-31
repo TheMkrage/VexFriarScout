@@ -444,7 +444,6 @@ class Team: NSObject {
                     
                     self.competitions.removeObjectAtIndex(y + 1)
                     self.competitions.insertObject(c, atIndex: y)
-                    println(self.competitions)
                 }
             }
         }

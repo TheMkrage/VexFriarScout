@@ -28,6 +28,13 @@ class UISettingsViewController: UIViewController, UITextFieldDelegate, UIPickerV
         self.myTeamTextField.delegate = self
         // Team Information
         let defaults = NSUserDefaults.standardUserDefaults()
+        var count = 0
+        for str in seasons{
+            if self.curSeason == str {
+                self.seasonPicker.selectRow(count, inComponent: 0, animated: true)
+            }
+            count++
+        }
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
             self.myTeamTextField.text = stringOne
         }

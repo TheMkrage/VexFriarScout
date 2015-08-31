@@ -157,7 +157,7 @@ class MainMenuViewController: UIViewController, UITextFieldDelegate, AKPickerVie
          dest.title = "Robot Skills"
         (vc.viewControllers?.last as! ProgrammingSkillsViewController).title = "Programming Skills"
         (vc.viewControllers?.last as! ProgrammingSkillsViewController).season = self.season as String
-        dest.season = self.season as String
+        dest.curSeason = self.season as String
         // Set the title of the menuViewController
        
         // Present Main Menu

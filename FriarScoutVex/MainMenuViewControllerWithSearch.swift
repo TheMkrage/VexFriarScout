@@ -25,6 +25,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     var robotSkills:NSMutableArray = NSMutableArray()
     var programmingSkills:NSMutableArray = NSMutableArray()
     
+    var loadingIcon: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     struct cardCellsRows {
         static let myTeam = 0
         static let favorites = 1
@@ -52,9 +54,21 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         // Reload if changes in season or myTeam
         let defaults = NSUserDefaults.standardUserDefaults()
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
-            
             if self.myTeam.num != stringOne || self.myTeam.season != self.curSeason{
+                self.myTeam.num = stringOne
+                self.myTeam.season = self.curSeason
+                self.title = self.curSeason
+                self.myTeam = Team()
+                // Make some tables hidden and Put loading icons in their places
+                self.getMainMenuCellForID("MyTeam")?.tableView.hidden = true
+                self.tableView.delegate = nil
+                self.tableView.dataSource = nil
+                self.clearCurrentData()
                 self.getData()
+                self.tableView.delegate = self
+                self.tableView.dataSource = self
+                self.tableView.reloadData()
+                self.getMainMenuCellForID("MyTeam")?.tableView.hidden = false
             }
         }
     }
@@ -63,6 +77,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 34)!]
         var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
+        self.title = self.curSeason
         self.navigationItem.rightBarButtonItem = settingsButton
         self.getData()
         println("finsihed that method")
@@ -70,7 +85,15 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.tableView.dataSource = self
     }
     
-    
+    func clearCurrentData() {
+        self.statistics = []
+        println("STATS \(self.statistics.count)")
+        self.robotSkills = NSMutableArray()
+        self.programmingSkills = NSMutableArray()
+        self.bookmarks = NSMutableArray()
+        self.circleAdded = false;
+        
+    }
     
     func getData() {
         // Bookmarks
@@ -207,7 +230,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     }
                     previousScore = cur.score.toInt()!
                     
-                    // (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! MainMenuTableCell).tableView.reloadData()
+                    self.getMainMenuCellForID("ProgrammingSkills")?.tableView.reloadData()
                 }
             }
         }
@@ -226,6 +249,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         query = PFQuery(className: "Competitions")
         query.limit = 10
         query.whereKey("name", containsString: str.capitalizedString)
+        query.whereKey("season", equalTo: self.curSeason)
         if id != self.searchID {
             return
         }
@@ -275,9 +299,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.statistics.append(highScore)
         var events = Statistic(stat: "Events", value: "\(self.myTeam.compCount)")
         self.statistics.append(events)
-        self.getMainMenuCellForID("MyTeam")?.tableView.reloadData()
-        self.tableView.scrollEnabled = true
-        println("got team")
+        println("UPDATE MY TEAM TABLE")
+        dispatch_async(dispatch_get_main_queue()) {
+            //self.getMainMenuCellForID("MyTeam")!.hidden = false
+            self.getMainMenuCellForID("MyTeam")!.tableView.reloadData()
+        }
     }
     
     func getBookmarks() {
@@ -323,7 +349,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         dest.title = "Robot Skills"
         (vc.viewControllers?.last as! ProgrammingSkillsViewController).title = "Programming Skills"
         (vc.viewControllers?.last as! ProgrammingSkillsViewController).season = self.curSeason as String
-        dest.season = self.curSeason as String
+        dest.curSeason = self.curSeason as String
         // Present Main Menu
         self.showViewController(vc as UIViewController, sender: vc)
     }
@@ -370,7 +396,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.showViewController(vc as UIViewController, sender: vc)
             }
         }
-        
     }
     
     func moveToFavorites() {
@@ -596,7 +621,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "Robot Skills":
                     return self.robotSkills.count
                 case "Programming Skills":
-                    println("WRONG")
                     return self.programmingSkills.count
                 default:
                     return 0

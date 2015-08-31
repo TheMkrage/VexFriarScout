@@ -180,240 +180,241 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                 // Find all comps tahat apply to current seaso
                 for compID in self.team.competitionIDs {
                     var query = PFQuery(className:"Competitions")
-                    query.whereKey("season", equalTo: self.team.season).getObjectInBackgroundWithId(compID as! String) { ( result:PFObject?, error: NSError?
+                    query.whereKey("season", equalTo: self.team.season)
+                    query.getObjectInBackgroundWithId(compID as! String) { ( result:PFObject?, error: NSError?
                         ) -> Void in
                         if (result!["season"] as! String) != self.team.season {
-                            println("Wrong season")
-                            return;
-                        }
-                        var comp: Competition = Competition()
-                        comp.compID = result!.objectId
-                        comp.name = result!["name"] as! String
-                        
-                        println(comp.name)
-                        println(result!["season"] as! String)
-                        comp.date = result!["date"] as! String
-                        comp.loc = result!["loc"] as! String
-                        comp.season = result!["season"] as! String
-                        for str in self.team.statArray {
-                            // right string with stats
-                            if str.containsString(comp.compID) {
-                                println(str)
-                                var array: [String] = split(str as! String) {$0 == "+"}
-                                println(array)
-                                
-                                if (array[1] as NSString? != nil) {
-                                    comp.opr = CGFloat((array[1] as NSString).floatValue)
+                            println(result!["season"] as! String)
+                        }else {
+                            var comp: Competition = Competition()
+                            comp.compID = result!.objectId
+                            comp.name = result!["name"] as! String
+                            
+                            comp.date = result!["date"] as! String
+                            comp.loc = result!["loc"] as! String
+                            comp.season = result!["season"] as! String
+                            println("RIGHT SEASON \(comp.name) \(comp.season)")
+
+                            for str in self.team.statArray {
+                                // right string with stats
+                                if str.containsString(comp.compID) {
+                                    println(str)
+                                    var array: [String] = split(str as! String) {$0 == "+"}
+                                    println(array)
+                                    
+                                    if (array[1] as NSString? != nil) {
+                                        comp.opr = CGFloat((array[1] as NSString).floatValue)
+                                    }
+                                    if array[2] as NSString? != nil {
+                                        comp.dpr = CGFloat((array[2] as NSString).floatValue)
+                                    }
+                                    if array[3] as NSString? != nil {
+                                        comp.ccwm = CGFloat((array[3] as NSString).floatValue)
+                                    }
+                                    
                                 }
-                                if array[2] as NSString? != nil {
-                                    comp.dpr = CGFloat((array[2] as NSString).floatValue)
+                            }
+                            // get matches for each comp
+                            var matchIDQuery = PFQuery(className: "Matches")
+                            matchIDQuery.whereKey("compID", equalTo: compID)
+                            var matchesB0 = PFQuery(className: "Matches")
+                            matchesB0.whereKey("b0", equalTo: self.team.num)
+                            var matchesB1 = PFQuery(className: "Matches")
+                            matchesB1.whereKey("b1", equalTo: self.team.num)
+                            var matchesB2 = PFQuery(className: "Matches")
+                            matchesB2.whereKey("b2", equalTo: self.team.num)
+                            var matchesR0 = PFQuery(className: "Matches")
+                            matchesR0.whereKey("r0", equalTo: self.team.num)
+                            var matchesR1 = PFQuery(className: "Matches")
+                            matchesR1.whereKey("r1", equalTo: self.team.num)
+                            var matchesR2 = PFQuery(className: "Matches")
+                            matchesR2.whereKey("r2", equalTo: self.team.num)
+                            var matchesRaw = NSMutableArray()
+                            matchesRaw.addObjectsFromArray( PFQuery.orQueryWithSubqueries([ matchesB0, matchesB1, matchesB2, matchesR0, matchesR1, matchesR2]).whereKey("compID", equalTo: compID).findObjects() as NSArray! as! [PFObject])
+                            // Parse into Match objects
+                            for mRaw in matchesRaw {
+                                var m:Match = Match()
+                                m.red1 = mRaw["r0"] as! String
+                                m.red2 = mRaw["r1"] as! String
+                                if let y = mRaw["r2"]   as? String {
+                                    m.red3 =  mRaw["r2"]  as! String
                                 }
-                                if array[3] as NSString? != nil {
-                                    comp.ccwm = CGFloat((array[3] as NSString).floatValue)
+                                m.blue1 = mRaw["b0"] as! String
+                                m.blue2 = mRaw["b1"] as! String
+                                if let y = mRaw["b2"]   as? String {
+                                    
+                                    m.blue3 =  mRaw["b2"]  as! String
                                 }
-                                
-                            }
-                        }
-                        // get matches for each comp
-                        var matchIDQuery = PFQuery(className: "Matches")
-                        matchIDQuery.whereKey("compID", equalTo: compID)
-                        var matchesB0 = PFQuery(className: "Matches")
-                        matchesB0.whereKey("b0", equalTo: self.team.num)
-                        var matchesB1 = PFQuery(className: "Matches")
-                        matchesB1.whereKey("b1", equalTo: self.team.num)
-                        var matchesB2 = PFQuery(className: "Matches")
-                        matchesB2.whereKey("b2", equalTo: self.team.num)
-                        var matchesR0 = PFQuery(className: "Matches")
-                        matchesR0.whereKey("r0", equalTo: self.team.num)
-                        var matchesR1 = PFQuery(className: "Matches")
-                        matchesR1.whereKey("r1", equalTo: self.team.num)
-                        var matchesR2 = PFQuery(className: "Matches")
-                        matchesR2.whereKey("r2", equalTo: self.team.num)
-                        var matchesRaw = NSMutableArray()
-                        matchesRaw.addObjectsFromArray( PFQuery.orQueryWithSubqueries([ matchesB0, matchesB1, matchesB2, matchesR0, matchesR1, matchesR2]).whereKey("compID", equalTo: compID).findObjects() as NSArray! as! [PFObject])
-                        // Parse into Match objects
-                        for mRaw in matchesRaw {
-                            var m:Match = Match()
-                            m.red1 = mRaw["r0"] as! String
-                            m.red2 = mRaw["r1"] as! String
-                            if let y = mRaw["r2"]   as? String {
-                                m.red3 =  mRaw["r2"]  as! String
-                            }
-                            m.blue1 = mRaw["b0"] as! String
-                            m.blue2 = mRaw["b1"] as! String
-                            if let y = mRaw["b2"]   as? String {
-                                
-                                m.blue3 =  mRaw["b2"]  as! String
-                            }
-                            let x =  mRaw["rs"] as! Int!
-                            m.redScore = "\(x)"
-                            let y = mRaw["bs"]as! Int!
-                            m.blueScore = "\(y)"
-                            m.name = mRaw["num"] as! String
-                            m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
-                            if m.name.uppercaseString.rangeOfString("QF") != nil {
-                                m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                                comp.qf.addObject(m)
-                                comp.sumOfQF += m.scoreForTeam(self.team.num)
-                                comp.sumOfElims += m.scoreForTeam(self.team.num)
-                            }else if m.name.uppercaseString.rangeOfString("SF") != nil {
-                                m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
-                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                                comp.sf.addObject(m)
-                                comp.sumOfSF += m.scoreForTeam(self.team.num)
-                                comp.sumOfElims += m.scoreForTeam(self.team.num)
-                            }else if m.name.uppercaseString.rangeOfString("F") != nil {
-                                m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
-                                comp.finals.addObject(m)
-                                comp.sumOfFinals += m.scoreForTeam(self.team.num)
-                                comp.sumOfElims += m.scoreForTeam(self.team.num)
-                            }else {
-                                m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
-                                comp.quals.addObject(m)
-                                comp.sumOfQuals += m.scoreForTeam(self.team.num)
-                            }
-                            // Win Loss Counters
-                            if m.didTeamTie(self.team.num) {
-                                self.team.tieMatchCount++
-                                self.team.tieMatchScoreSum += m.scoreForTeam(self.team.num)
-                            }else if m.didTeamWin(self.team.num) {
-                                self.team.winMatchCount++
-                                self.team.winMatchScoreSum += m.scoreForTeam(self.team.num)
-                            }else {
-                                self.team.lostMatchCount++
-                                self.team.lostMatchScoreSum +=
-                                    m.scoreForTeam(self.team.num)
-                            }
-                            // Now For Quals Matches
-                            if m.isQualsMatch() {
-                                self.team.qualCount++
+                                let x =  mRaw["rs"] as! Int!
+                                m.redScore = "\(x)"
+                                let y = mRaw["bs"]as! Int!
+                                m.blueScore = "\(y)"
+                                m.name = mRaw["num"] as! String
+                                m.name = m.name.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                if m.name.uppercaseString.rangeOfString("QF") != nil {
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                    comp.qf.addObject(m)
+                                    comp.sumOfQF += m.scoreForTeam(self.team.num)
+                                    comp.sumOfElims += m.scoreForTeam(self.team.num)
+                                }else if m.name.uppercaseString.rangeOfString("SF") != nil {
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("S", withString: "")
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                    comp.sf.addObject(m)
+                                    comp.sumOfSF += m.scoreForTeam(self.team.num)
+                                    comp.sumOfElims += m.scoreForTeam(self.team.num)
+                                }else if m.name.uppercaseString.rangeOfString("F") != nil {
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("F", withString: "")
+                                    comp.finals.addObject(m)
+                                    comp.sumOfFinals += m.scoreForTeam(self.team.num)
+                                    comp.sumOfElims += m.scoreForTeam(self.team.num)
+                                }else {
+                                    m.name = m.name.stringByReplacingOccurrencesOfString("Q", withString: "")
+                                    comp.quals.addObject(m)
+                                    comp.sumOfQuals += m.scoreForTeam(self.team.num)
+                                }
                                 // Win Loss Counters
                                 if m.didTeamTie(self.team.num) {
-                                    self.team.tieMatchQualsCount++
-                                    self.team.tieMatchQualsSum += m.scoreForTeam(self.team.num)
+                                    self.team.tieMatchCount++
+                                    self.team.tieMatchScoreSum += m.scoreForTeam(self.team.num)
                                 }else if m.didTeamWin(self.team.num) {
-                                    self.team.winMatchQualsCount++
-                                    self.team.winMatchQualsSum += m.scoreForTeam(self.team.num)
+                                    self.team.winMatchCount++
+                                    self.team.winMatchScoreSum += m.scoreForTeam(self.team.num)
                                 }else {
-                                    self.team.lostMatchQualsCount++
-                                    self.team.lostMatchQualsSum +=
+                                    self.team.lostMatchCount++
+                                    self.team.lostMatchScoreSum +=
                                         m.scoreForTeam(self.team.num)
                                 }
-                            }
-                            // Find Team Color and Act Accordingly
-                            let teamColor:NSString! = m.colorTeamIsOn(self.team.num)
-                            if teamColor.isEqualToString("red") {
-                                let score:Int =  mRaw["rs"] as! Int
-                                self.team.sumOfMatches += score
-                                comp.sumOfMatches += score
-                                
-                                // Find SP Points
+                                // Now For Quals Matches
                                 if m.isQualsMatch() {
-                                    comp.qualsCount++
-                                    // if Team Won
-                                    if m.didTeamWin(self.team.num) {
-                                        // If the other alliance was a no-show, add red's score, else add the opponents score
-                                        if m.blueScore.integerValue == 0 {
-                                            self.team.spPointsSum += m.redScore.integerValue
-                                            comp.spPointsSum += m.redScore.integerValue
-                                        }else {
-                                            self.team.spPointsSum += m.blueScore.integerValue
-                                            comp.spPointsSum += m.blueScore.integerValue
-                                        }
+                                    self.team.qualCount++
+                                    // Win Loss Counters
+                                    if m.didTeamTie(self.team.num) {
+                                        self.team.tieMatchQualsCount++
+                                        self.team.tieMatchQualsSum += m.scoreForTeam(self.team.num)
+                                    }else if m.didTeamWin(self.team.num) {
+                                        self.team.winMatchQualsCount++
+                                        self.team.winMatchQualsSum += m.scoreForTeam(self.team.num)
                                     }else {
-                                        self.team.spPointsSum += m.redScore.integerValue
-                                        comp.spPointsSum += m.redScore.integerValue
+                                        self.team.lostMatchQualsCount++
+                                        self.team.lostMatchQualsSum +=
+                                            m.scoreForTeam(self.team.num)
                                     }
-                                }else {
-                                    comp.elimCount++
                                 }
-                                // Check Highscore and Lowscores for team and comp
-                                if m.redScore.integerValue > self.team.highestScore {
-                                    self.team.highestScore = m.redScore.integerValue
-                                }else if m.redScore.integerValue < self.team.lowestScore {
-                                    self.team.lowestScore = m.redScore.integerValue
-                                }
-                                if m.redScore.integerValue > comp.highestScore {
-                                    comp.highestScore = m.redScore.integerValue
-                                }else if m.redScore.integerValue < comp.lowestScore {
-                                    comp.lowestScore = m.redScore.integerValue
-                                }
-                            }else if teamColor.isEqualToString("blue") {
-                                let score:Int = mRaw["bs"] as! Int
-                                self.team.sumOfMatches += score
-                                comp.sumOfMatches += score
-                                // Find SP Points
-                                if m.isQualsMatch() {
-                                    comp.qualsCount++
-                                    // if Team Won
-                                    if m.didTeamWin(self.team.num) {
-                                        // If the other alliance was a no-show, add red's score, else add the opponents score
-                                        if m.redScore.integerValue == 0 {
-                                            self.team.spPointsSum += m.blueScore.integerValue
-                                            comp.spPointsSum += m.blueScore.integerValue
-                                        }else {
-                                            self.team.spPointsSum += m.redScore.integerValue
-                                            
-                                            comp.spPointsSum += m.redScore.integerValue
-                                        }
-                                        
-                                    }else {
-                                        self.team.spPointsSum += m.blueScore.integerValue
-                                        comp.spPointsSum += m.blueScore.integerValue
-                                    }
-                                }else {
-                                    comp.elimCount++
-                                }
-                                
-                                // Check Highscore and Lowscores for team and comp
-                                if m.blueScore.integerValue > self.team.highestScore {
-                                    self.team.highestScore = m.blueScore.integerValue
-                                }
-                                if m.blueScore.integerValue < self.team.lowestScore {
-                                    self.team.lowestScore = m.blueScore.integerValue
-                                }
-                                if m.blueScore.integerValue > comp.highestScore {
-                                    comp.highestScore = m.blueScore.integerValue
-                                }
-                                if m.blueScore.integerValue < comp.lowestScore {
-                                    comp.lowestScore = m.blueScore.integerValue
-                                }
-                            }else {
-                                println("ERROR")
-                            }
-                            comp.matchCount++
-                            self.team.matchCount++
-                            comp.matches.addObject(m)
-                        }
-                        
-                        self.team.compCount++
-                        comp.orderMatches()
-                        self.team.competitions.addObject(comp)
-                        self.updateLabels()
-                        // Now awards!
-                        var awardQuery = PFQuery(className:"Awards")
-                        awardQuery.whereKey("compID", equalTo: compID)
-                        awardQuery.whereKey("team", equalTo: self.team.num)
-                        awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
-                            ) -> Void in
-                            if let resultsArray = results {
-                                for result1 in resultsArray {
-                                    var result = result1 as! PFObject
-                                    var a: Award = Award()
-                                    a.award = result["name"] as! String
+                                // Find Team Color and Act Accordingly
+                                let teamColor:NSString! = m.colorTeamIsOn(self.team.num)
+                                if teamColor.isEqualToString("red") {
+                                    let score:Int =  mRaw["rs"] as! Int
+                                    self.team.sumOfMatches += score
+                                    comp.sumOfMatches += score
                                     
-                                    var t:Team = Team()
-                                    t.num = result["team"] as! String
-                                    a.team = t
-                                    for c in self.team.competitions {
-                                        if (c as! Competition).compID == (result["compID"] as! String) {
-                                            a.comp = c.name
+                                    // Find SP Points
+                                    if m.isQualsMatch() {
+                                        comp.qualsCount++
+                                        // if Team Won
+                                        if m.didTeamWin(self.team.num) {
+                                            // If the other alliance was a no-show, add red's score, else add the opponents score
+                                            if m.blueScore.integerValue == 0 {
+                                                self.team.spPointsSum += m.redScore.integerValue
+                                                comp.spPointsSum += m.redScore.integerValue
+                                            }else {
+                                                self.team.spPointsSum += m.blueScore.integerValue
+                                                comp.spPointsSum += m.blueScore.integerValue
+                                            }
+                                        }else {
+                                            self.team.spPointsSum += m.redScore.integerValue
+                                            comp.spPointsSum += m.redScore.integerValue
                                         }
+                                    }else {
+                                        comp.elimCount++
                                     }
-                                    self.team.awards.addObject(a)
-                                    self.team.awardCount++
-                                    self.awardCircle.setText("\(self.team.awardCount)")
+                                    // Check Highscore and Lowscores for team and comp
+                                    if m.redScore.integerValue > self.team.highestScore {
+                                        self.team.highestScore = m.redScore.integerValue
+                                    }else if m.redScore.integerValue < self.team.lowestScore {
+                                        self.team.lowestScore = m.redScore.integerValue
+                                    }
+                                    if m.redScore.integerValue > comp.highestScore {
+                                        comp.highestScore = m.redScore.integerValue
+                                    }else if m.redScore.integerValue < comp.lowestScore {
+                                        comp.lowestScore = m.redScore.integerValue
+                                    }
+                                }else if teamColor.isEqualToString("blue") {
+                                    let score:Int = mRaw["bs"] as! Int
+                                    self.team.sumOfMatches += score
+                                    comp.sumOfMatches += score
+                                    // Find SP Points
+                                    if m.isQualsMatch() {
+                                        comp.qualsCount++
+                                        // if Team Won
+                                        if m.didTeamWin(self.team.num) {
+                                            // If the other alliance was a no-show, add red's score, else add the opponents score
+                                            if m.redScore.integerValue == 0 {
+                                                self.team.spPointsSum += m.blueScore.integerValue
+                                                comp.spPointsSum += m.blueScore.integerValue
+                                            }else {
+                                                self.team.spPointsSum += m.redScore.integerValue
+                                                
+                                                comp.spPointsSum += m.redScore.integerValue
+                                            }
+                                            
+                                        }else {
+                                            self.team.spPointsSum += m.blueScore.integerValue
+                                            comp.spPointsSum += m.blueScore.integerValue
+                                        }
+                                    }else {
+                                        comp.elimCount++
+                                    }
+                                    
+                                    // Check Highscore and Lowscores for team and comp
+                                    if m.blueScore.integerValue > self.team.highestScore {
+                                        self.team.highestScore = m.blueScore.integerValue
+                                    }
+                                    if m.blueScore.integerValue < self.team.lowestScore {
+                                        self.team.lowestScore = m.blueScore.integerValue
+                                    }
+                                    if m.blueScore.integerValue > comp.highestScore {
+                                        comp.highestScore = m.blueScore.integerValue
+                                    }
+                                    if m.blueScore.integerValue < comp.lowestScore {
+                                        comp.lowestScore = m.blueScore.integerValue
+                                    }
+                                }else {
+                                    println("ERROR")
+                                }
+                                comp.matchCount++
+                                self.team.matchCount++
+                                comp.matches.addObject(m)
+                            }
+                            
+                            self.team.compCount++
+                            comp.orderMatches()
+                            self.team.competitions.addObject(comp)
+                            self.updateLabels()
+                            // Now awards!
+                            var awardQuery = PFQuery(className:"Awards")
+                            awardQuery.whereKey("compID", equalTo: compID)
+                            awardQuery.whereKey("team", equalTo: self.team.num)
+                            awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
+                                ) -> Void in
+                                if let resultsArray = results {
+                                    for result1 in resultsArray {
+                                        var result = result1 as! PFObject
+                                        var a: Award = Award()
+                                        a.award = result["name"] as! String
+                                        
+                                        var t:Team = Team()
+                                        t.num = result["team"] as! String
+                                        a.team = t
+                                        for c in self.team.competitions {
+                                            if (c as! Competition).compID == (result["compID"] as! String) {
+                                                a.comp = c.name
+                                            }
+                                        }
+                                        self.team.awards.addObject(a)
+                                        self.team.awardCount++
+                                        self.awardCircle.setText("\(self.team.awardCount)")
+                                    }
                                 }
                             }
                         }
