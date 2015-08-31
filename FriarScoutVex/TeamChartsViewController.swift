@@ -20,7 +20,7 @@ class TeamChartsViewController: HasTeamViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 720)
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 600)
     }
     
     func addCharts() {
@@ -38,12 +38,13 @@ class TeamChartsViewController: HasTeamViewController {
         
         var highestStatValue: CGFloat = CGFloat.min // used to find the step of axis
         var lowestStatValue: CGFloat = CGFloat.max // used to find the step of axis
-        var maxOPR: CGFloat = CGFloat.max
-        var maxDPR: CGFloat = CGFloat.max
-        var maxCCWM: CGFloat = CGFloat.max
+        var maxOPR: CGFloat = CGFloat.min
+        var maxDPR: CGFloat = CGFloat.min
+        var maxCCWM: CGFloat = CGFloat.min
         var avgOPR: CGFloat = 0.0
         var avgDPR: CGFloat = 0.0
         var avgCCWM: CGFloat = 0.0
+        var statCount = 0
         for ctemp in self.team.competitions {
             var comp: Competition = ctemp as! Competition
             if comp.date != "League" {
@@ -51,14 +52,18 @@ class TeamChartsViewController: HasTeamViewController {
                 var simplifiedDate:String = "\(datePart[1])-\(datePart[2])"
                 if comp.opr != 0.0 {
                     xStatsLabels.append(simplifiedDate)
-                    if comp.opr > highestStatValue {
-                        highestStatValue = comp.opr
+                    avgOPR += comp.opr
+                    avgDPR += comp.dpr
+                    avgCCWM += comp.ccwm
+                    statCount++
+                    if comp.opr > maxOPR {
+                        maxOPR = comp.opr
                     }
-                    if comp.dpr > highestStatValue {
-                        highestStatValue = comp.dpr
+                    if comp.dpr > maxDPR {
+                        maxDPR = comp.dpr
                     }
-                    if comp.ccwm > highestStatValue {
-                        highestStatValue = comp.ccwm
+                    if comp.ccwm > maxCCWM {
+                        maxCCWM = comp.ccwm
                     }
                     if comp.opr < lowestStatValue {
                         lowestStatValue = comp.opr
@@ -85,7 +90,19 @@ class TeamChartsViewController: HasTeamViewController {
                 }
             }
         }
-        
+        avgOPR /= CGFloat(statCount)
+        avgDPR /= CGFloat(statCount)
+        avgCCWM /= CGFloat(statCount)
+        if maxOPR > highestStatValue {
+            highestStatValue = maxOPR
+        }
+        if maxDPR > highestStatValue{
+            highestStatValue = maxDPR
+        }
+        if maxCCWM > highestStatValue {
+            highestStatValue = maxCCWM
+        }
+
         // Average Chart setup
         var averageTitle: UILabel = UILabel()
         averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
@@ -141,6 +158,27 @@ class TeamChartsViewController: HasTeamViewController {
         oprDprCcwmChart.addLine(dprData)
         oprDprCcwmChart.addLine(ccwmData)
         oprDprCcwmChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+        var oprLabel: UILabel = UILabel()
+        oprLabel.frame = CGRectMake(0, 500, self.view.frame.width, 30)
+        oprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        oprLabel.text = "OPR: Max: \(maxOPR) Avg: \(avgOPR)"
+        oprLabel.textColor = Colors.colorWithHexString("#5889DB")
+        oprLabel.textAlignment = .Center
+        self.scrollView.addSubview(oprLabel)
+        var dprLabel: UILabel = UILabel()
+        dprLabel.frame = CGRectMake(0, 530, self.view.frame.width, 30)
+        dprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        dprLabel.text = "DPR: Max: \(maxDPR) Avg: \(avgDPR)"
+        dprLabel.textColor = Colors.colorWithHexString("#ff00ff")
+        dprLabel.textAlignment = .Center
+        self.scrollView.addSubview(dprLabel)
+        var ccwmLabel: UILabel = UILabel()
+        ccwmLabel.frame = CGRectMake(0, 560, self.view.frame.width, 30)
+        ccwmLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        ccwmLabel.text = "CCWM: Max: \(maxCCWM) Avg: \(avgCCWM)"
+        ccwmLabel.textColor = Colors.colorWithHexString("#FF7373")
+        ccwmLabel.textAlignment = .Center
+        self.scrollView.addSubview(ccwmLabel)
         self.scrollView.addSubview(oprDprCcwmChart)
     }
 }

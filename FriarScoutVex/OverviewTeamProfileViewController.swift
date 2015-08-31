@@ -114,7 +114,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize.height = 1400
+        self.scrollView.contentSize.height = 700
         self.scrollView.contentSize.width = self.view.frame.size.width
     }
     

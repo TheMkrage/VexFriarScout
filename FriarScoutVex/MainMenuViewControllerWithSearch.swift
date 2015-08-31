@@ -15,7 +15,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     var updatingSerach = true
     var circleAdded = false
     var myTeam: Team = Team()
-    var curSeason = "Skyrise"
+    var curSeason = "NBN"
     
     var searchResults:[SearchResults] = []
     var bookmarks = NSMutableArray()
@@ -48,18 +48,29 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         var value:String
     }
     
+    override func viewDidAppear(animated: Bool) {
+        // Reload if changes in season or myTeam
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
+            
+            if self.myTeam.num != stringOne || self.myTeam.season != self.curSeason{
+                self.getData()
+            }
+        }
+    }
+    
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 34)!]
-
         var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
         self.navigationItem.rightBarButtonItem = settingsButton
-        self.tableView.scrollEnabled = true
         self.getData()
         println("finsihed that method")
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
+    
     
     func getData() {
         // Bookmarks
@@ -82,7 +93,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     self.presentViewController(alertController, animated: true, completion:  { () -> Void in
                         
                     })
-
+                    
                 }
                 dispatch_async(dispatch_get_main_queue()) {
                     self.updateMyTeamTable()
@@ -92,7 +103,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         
         // Robot Skills
         var query = PFQuery(className:"rs")
-        query.whereKey("season", equalTo:"Skyrise")
+        query.whereKey("season", equalTo:self.curSeason)
         query.limit = 10
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
@@ -108,13 +119,13 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         self.navigationController?.popViewControllerAnimated(true)
                     })
                 }else {
-                let alertController = UIAlertController(title: "Oh no! An Error!", message:
-                    error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
-                
-                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
-                    self.navigationController?.popViewControllerAnimated(true)
-                })
+                    let alertController = UIAlertController(title: "Oh no! An Error!", message:
+                        error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
                 }
                 
             }else {
@@ -151,7 +162,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         }
         
         query = PFQuery(className:"ps")
-        query.whereKey("season", equalTo:"Skyrise")
+        query.whereKey("season", equalTo:self.curSeason)
         query.limit = 10
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
@@ -281,6 +292,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func goToSetting() {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as! UISettingsViewController
+        vc.curSeason = self.curSeason
         self.showViewController(vc, sender: vc)
     }
     
