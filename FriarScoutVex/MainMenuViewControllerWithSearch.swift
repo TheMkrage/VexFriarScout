@@ -348,7 +348,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         let dest: SkillsViewController = vc.viewControllers?.first as! SkillsViewController
         dest.title = "Robot Skills"
         (vc.viewControllers?.last as! ProgrammingSkillsViewController).title = "Programming Skills"
-        (vc.viewControllers?.last as! ProgrammingSkillsViewController).season = self.curSeason as String
+        (vc.viewControllers?.last as! ProgrammingSkillsViewController).curSeason = self.curSeason as String
         dest.curSeason = self.curSeason as String
         // Present Main Menu
         self.showViewController(vc as UIViewController, sender: vc)

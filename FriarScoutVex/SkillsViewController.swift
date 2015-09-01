@@ -15,8 +15,6 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var curSeason:String! = ""
     // Arrays for data
     var rs:NSMutableArray = NSMutableArray()
-    // Array table uses
-    var curSkills:NSMutableArray = NSMutableArray()
     // Table
     @IBOutlet var skillsTable: UITableView!
     
@@ -132,7 +130,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Creates cells
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:SkillsCell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
-        var s: Skills = self.curSkills.objectAtIndex(indexPath.row) as! Skills
+        var s: Skills = self.rs.objectAtIndex(indexPath.row) as! Skills
         cell.rankLabel.text = "\(s.rank)."
         cell.scoreLabel.text = "\(s.score)"
         cell.teamLabel.text = "\(s.team)"
@@ -151,7 +149,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Destintation ViewController, set team
         let dest: OverviewTeamProfileViewController = vc.viewControllers?.first as! OverviewTeamProfileViewController
         var team2: Team! = Team()
-        team2.num = (self.curSkills.objectAtIndex(indexPath.row) as! Skills).team
+        team2.num = (self.rs.objectAtIndex(indexPath.row) as! Skills).team
         team2.season = self.curSeason as String
         dest.team = team2
         // Set the title of the menuViewController
@@ -161,7 +159,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.curSkills.count
+        return self.rs.count
     }
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Robot Skills"
