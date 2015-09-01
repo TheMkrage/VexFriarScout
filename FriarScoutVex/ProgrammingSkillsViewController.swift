@@ -66,8 +66,7 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
         var query = PFQuery(className:"ps")
         query.whereKey("season", equalTo:self.curSeason)
         query.limit = 50
-        query.orderByDescending("score")
-        println("LOADING FOR \(self.ps)")
+        query.orderByAscending("rank")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)

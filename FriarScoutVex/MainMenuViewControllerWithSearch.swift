@@ -80,14 +80,12 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.title = self.curSeason
         self.navigationItem.rightBarButtonItem = settingsButton
         self.getData()
-        println("finsihed that method")
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
     
     func clearCurrentData() {
         self.statistics = []
-        println("STATS \(self.statistics.count)")
         self.robotSkills = NSMutableArray()
         self.programmingSkills = NSMutableArray()
         self.bookmarks = NSMutableArray()
@@ -109,7 +107,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     self.myTeam = x
                 }else {
                     // Alert the user and bring them back to the main menu
-                    println("ERRORklklk")
                     let alertController = UIAlertController(title: "Oh no! An Error!", message:
                         "Your Team does not exist!", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
@@ -127,8 +124,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         // Robot Skills
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:self.curSeason)
+        query.whereKey("rank", containedIn: ["1","2","3","4","5","6","7","8","9","T-1","T-2","T-3","T-4","T-5","T-6","T-7","T-8","T-9", "T-10", "10"])
         query.limit = 10
-        query.orderByDescending("score")
+        query.orderByAscending("rank")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)
@@ -186,8 +184,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         
         query = PFQuery(className:"ps")
         query.whereKey("season", equalTo:self.curSeason)
+        query.whereKey("rank", containedIn: ["1","2","3","4","5","6","7","8","9","T-1","T-2","T-3","T-4","T-5","T-6","T-7","T-8","T-9", "T-10", "10"])
         query.limit = 10
-        query.orderByDescending("score")
+        query.orderByAscending("rank")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)
@@ -206,6 +205,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
                     s.score = cur["score"] as! String
+                    println(s.team)
                     self.programmingSkills.addObject(s)
                 }
                 // Fix the tie things
@@ -216,7 +216,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 for var i = 0; i < self.programmingSkills.count; i = i + 1{
                     var cur = self.programmingSkills.objectAtIndex(i) as! Skills
                     if cur.score.toInt() == previousScore {
-                        println("hello \(i)")
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -237,7 +236,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     }
     
     func updateSearchWithNewString(str:String!, id:Int) {
-        println(str)
         var query = PFQuery(className:"Teams")
         query.limit = 10
         query.whereKey("num", hasPrefix: str)
@@ -466,7 +464,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     func getMainMenuCellForID(string:String!) -> MainMenuTableCell?{
         for var i:Int = 0; i < self.tableView.numberOfRowsInSection(0); i = i + 1 {
             if self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))?.reuseIdentifier == string {
-                println("AY")
                 return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? MainMenuTableCell
             }
         }
@@ -475,7 +472,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.isEqual(self.tableView) {
-            println(tableView.cellForRowAtIndexPath(indexPath)?.reuseIdentifier)
             if (tableView.cellForRowAtIndexPath(indexPath) == nil)  {
                 //println(cell.reuseIdentifier)
                 
@@ -485,11 +481,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     var cell = tableView.dequeueReusableCellWithIdentifier("MyTeam") as! MainMenuTableCell
                     
                     if cell.titleLabel.text == "My Team" || cell.titleLabel.text == "Title"{
-                        
-                        println(cell.titleLabel.text)
-                        println(indexPath.row)
-                        println(tableView.numberOfSections())
-                        println(tableView.numberOfRowsInSection(0))
                         cell.clearsContextBeforeDrawing = true
                         cell.selectionStyle = UITableViewCellSelectionStyle.None
                         cell.setUp()
@@ -501,10 +492,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.titleLabel.text = "My Team"
                         cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
                         var teamCircle:CircleView = CircleView(frame: CGRectMake(20, 30, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
-                        teamCircle.layer.shadowOpacity = 0.25
-                        teamCircle.layer.shadowOffset = CGSizeMake(5, 5);
-                        teamCircle.layer.shadowColor = UIColor.blackColor().CGColor;
-                        teamCircle.layer.shadowRadius = 5
                         cell.layer.shadowOffset = CGSizeMake(15, 15);
                         cell.layer.shadowColor = UIColor.blackColor().CGColor;
                         cell.layer.shadowRadius = 10
@@ -526,10 +513,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.titleLabel.text = "Favorites"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
                     var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 30, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.blackColor().CGColor)
-                    teamCircle.layer.shadowOpacity = 0.25
-                    teamCircle.layer.shadowOffset = CGSizeMake(5, 5);
-                    teamCircle.layer.shadowColor = UIColor.blackColor().CGColor;
-                    teamCircle.layer.shadowRadius = 5
                     cell.layer.shadowOffset = CGSizeMake(15, 15);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
@@ -558,7 +541,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     return cell
                 case cardCellsRows.ps:
                     var cell = tableView.dequeueReusableCellWithIdentifier("ProgrammingSkills") as! MainMenuTableCell
-                    println("PROGRAMMING SKILLS IS RUNNING" )
                     cell.clearsContextBeforeDrawing = true
                     cell.selectionStyle = UITableViewCellSelectionStyle.None
                     cell.setUp()
@@ -622,7 +604,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.scoreLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score
                     return cell
                 default:
-                    println(title)
                     return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                 }
             }
@@ -633,7 +614,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.searchDisplayController!.searchResultsTableView {
-            println("POWER OF RA")
             return self.searchResults.count
         }else if !tableView.isEqual(self.tableView) {
             if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {

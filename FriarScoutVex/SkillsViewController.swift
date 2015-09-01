@@ -64,7 +64,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:self.curSeason)
         query.limit = 50
-        query.orderByDescending("score")
+        query.orderBySortDescriptor(NSSortDescriptor(key: "score", ascending: false, selector: "localizedStandardCompare"))
         println("LOADING FOR \(self.curSeason)")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
@@ -94,7 +94,6 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
                     s.score = cur["score"] as! String
-                    println(s.rank)
                     self.rs.addObject(s)
                 }
                 var previousScore = -1
