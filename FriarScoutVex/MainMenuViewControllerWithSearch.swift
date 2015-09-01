@@ -302,7 +302,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         println("UPDATE MY TEAM TABLE")
         dispatch_async(dispatch_get_main_queue()) {
             //self.getMainMenuCellForID("MyTeam")!.hidden = false
-            self.getMainMenuCellForID("MyTeam")!.tableView.reloadData()
+            self.getMainMenuCellForID("MyTeam")?.tableView.reloadData()
         }
     }
     
@@ -501,6 +501,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.titleLabel.text = "My Team"
                         cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
                         var teamCircle:CircleView = CircleView(frame: CGRectMake(20, 30, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                        teamCircle.layer.shadowOpacity = 0.25
+                        teamCircle.layer.shadowOffset = CGSizeMake(5, 5);
+                        teamCircle.layer.shadowColor = UIColor.blackColor().CGColor;
+                        teamCircle.layer.shadowRadius = 5
+                        cell.layer.shadowOffset = CGSizeMake(15, 15);
+                        cell.layer.shadowColor = UIColor.blackColor().CGColor;
+                        cell.layer.shadowRadius = 10
+                        cell.layer.shadowOpacity = 0.5
                         cell.addSubview(teamCircle)
                     }
                     return cell
@@ -518,6 +526,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.titleLabel.text = "Favorites"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
                     var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 30, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.blackColor().CGColor)
+                    teamCircle.layer.shadowOpacity = 0.25
+                    teamCircle.layer.shadowOffset = CGSizeMake(5, 5);
+                    teamCircle.layer.shadowColor = UIColor.blackColor().CGColor;
+                    teamCircle.layer.shadowRadius = 5
+                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    cell.layer.shadowColor = UIColor.blackColor().CGColor;
+                    cell.layer.shadowRadius = 10
+                    cell.layer.shadowOpacity = 0.5
                     cell.addSubview(teamCircle)
                     circleAdded = true
                     
@@ -535,6 +551,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Robot Skills"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("33774C")
+                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    cell.layer.shadowColor = UIColor.blackColor().CGColor;
+                    cell.layer.shadowRadius = 10
+                    cell.layer.shadowOpacity = 0.5
                     return cell
                 case cardCellsRows.ps:
                     var cell = tableView.dequeueReusableCellWithIdentifier("ProgrammingSkills") as! MainMenuTableCell
@@ -548,6 +568,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Programming Skills"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("8F423E")
+                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    cell.layer.shadowColor = UIColor.blackColor().CGColor;
+                    cell.layer.shadowRadius = 10
+                    cell.layer.shadowOpacity = 0.5
                     return cell
                 default:
                     println("FDSAF")
