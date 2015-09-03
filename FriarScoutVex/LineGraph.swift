@@ -553,8 +553,10 @@ public class LineChart: UIView {
     * Add line chart
     */
     public func addLine(data: [CGFloat]) {
-        self.dataStore.append(data)
-        self.setNeedsDisplay()
+        if !data.isEmpty {
+            self.dataStore.append(data)
+            self.setNeedsDisplay()
+        }
     }
     
     

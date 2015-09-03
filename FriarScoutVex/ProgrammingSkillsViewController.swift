@@ -94,7 +94,7 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
                     var s: Skills = Skills()
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
-                    s.score = cur["score"] as! String
+                    s.score = cur["score"] as! NSInteger
                     println(s.rank)
                     self.ps.addObject(s)
                 }
@@ -104,7 +104,7 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
                 var curRank = "T-1"
                 for var i = 0; i < self.ps.count; i = i + 1{
                     var cur = self.ps.objectAtIndex(i) as! Skills
-                    if cur.score.toInt() == previousScore {
+                    if cur.score == previousScore {
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -116,7 +116,7 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
                     }else {
                         curStreak = false
                     }
-                    previousScore = cur.score.toInt()!
+                    previousScore = cur.score
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {

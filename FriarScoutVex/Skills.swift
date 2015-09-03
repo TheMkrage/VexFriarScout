@@ -11,5 +11,5 @@ import UIKit
 class Skills: UIViewController {
     var team: String! = ""
     var rank: String! = ""
-    var score: String! = ""
+    var score: NSInteger! = 0
 }

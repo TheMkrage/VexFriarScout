@@ -93,7 +93,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     var s: Skills = Skills()
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
-                    s.score = cur["score"] as! String
+                    s.score = cur["score"] as! NSInteger
                     self.rs.addObject(s)
                 }
                 var previousScore = -1
@@ -102,7 +102,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 var curRank = "T-1"
                 for var i = 0; i < self.rs.count; i = i + 1{
                     var cur = self.rs.objectAtIndex(i) as! Skills
-                    if cur.score.toInt() == previousScore {
+                    if cur.score == previousScore {
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -114,7 +114,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }else {
                         curStreak = false
                     }
-                    previousScore = cur.score.toInt()!
+                    previousScore = cur.score
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {

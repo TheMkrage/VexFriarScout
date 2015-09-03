@@ -154,7 +154,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     var s: Skills = Skills()
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
-                    s.score = cur["score"] as! String
+                    s.score = cur["score"] as! NSInteger
                     self.robotSkills.addObject(s)
                 }
                 var previousScore = -1
@@ -163,7 +163,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 var curRank = "T-1"
                 for var i = 0; i < self.robotSkills.count; i = i + 1{
                     var cur = self.robotSkills.objectAtIndex(i) as! Skills
-                    if cur.score.toInt() == previousScore {
+                    if cur.score == previousScore {
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -175,7 +175,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     }else {
                         curStreak = false
                     }
-                    previousScore = cur.score.toInt()!
+                    previousScore = cur.score
                 }
                 self.getMainMenuCellForID("RobotSkills")?.tableView.reloadData()
                 //self.updateInternalCell(cardCellsRows.rs)
@@ -204,7 +204,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     var s: Skills = Skills()
                     s.rank = cur["rank"] as! String
                     s.team = cur["team"] as! String
-                    s.score = cur["score"] as! String
+                    s.score = cur["score"] as! NSInteger
                     println(s.team)
                     self.programmingSkills.addObject(s)
                 }
@@ -215,7 +215,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 var curRank = "T-1"
                 for var i = 0; i < self.programmingSkills.count; i = i + 1{
                     var cur = self.programmingSkills.objectAtIndex(i) as! Skills
-                    if cur.score.toInt() == previousScore {
+                    if cur.score == previousScore {
                         if curStreak {
                             cur.rank = curRank
                         }else {
@@ -227,7 +227,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     }else {
                         curStreak = false
                     }
-                    previousScore = cur.score.toInt()!
+                    previousScore = cur.score
                     
                     self.getMainMenuCellForID("ProgrammingSkills")?.tableView.reloadData()
                 }
@@ -491,11 +491,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.titleLabel.text = "My Team"
                         cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
-                        var teamCircle:CircleView = CircleView(frame: CGRectMake(20, 30, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                        var teamCircle:CircleView = CircleView(frame: CGRectMake(25, 20, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
                         cell.layer.shadowOffset = CGSizeMake(15, 15);
                         cell.layer.shadowColor = UIColor.blackColor().CGColor;
                         cell.layer.shadowRadius = 10
-                        cell.layer.shadowOpacity = 0.5
+                        cell.layer.shadowOpacity = 0.35
                         cell.addSubview(teamCircle)
                     }
                     return cell
@@ -512,15 +512,13 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Favorites"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
-                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 30, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.blackColor().CGColor)
+                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 20, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
                     cell.layer.shadowOffset = CGSizeMake(15, 15);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
-                    cell.layer.shadowOpacity = 0.5
+                    cell.layer.shadowOpacity = 0.35
                     cell.addSubview(teamCircle)
                     circleAdded = true
-                    
-                    
                     return cell
                 case cardCellsRows.rs:
                     var cell = tableView.dequeueReusableCellWithIdentifier("RobotSkills") as! MainMenuTableCell
@@ -537,7 +535,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.layer.shadowOffset = CGSizeMake(15, 15);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
-                    cell.layer.shadowOpacity = 0.5
+                    cell.layer.shadowOpacity = 0.35
                     return cell
                 case cardCellsRows.ps:
                     var cell = tableView.dequeueReusableCellWithIdentifier("ProgrammingSkills") as! MainMenuTableCell
@@ -553,7 +551,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.layer.shadowOffset = CGSizeMake(15, 15);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
-                    cell.layer.shadowOpacity = 0.5
+                    cell.layer.shadowOpacity = 0.35
                     return cell
                 default:
                     println("FDSAF")
@@ -595,13 +593,13 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.rankLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team
-                    cell.scoreLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score
+                    cell.scoreLabel.text = "\((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score)"
                     return cell
                 case "Programming Skills":
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.rankLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team
-                    cell.scoreLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score
+                    cell.scoreLabel.text = "\((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score)"
                     return cell
                 default:
                     return tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell

@@ -102,83 +102,88 @@ class TeamChartsViewController: HasTeamViewController {
         if maxCCWM > highestStatValue {
             highestStatValue = maxCCWM
         }
-
-        // Average Chart setup
-        var averageTitle: UILabel = UILabel()
-        averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
-        var attrStr = NSMutableAttributedString(string: "Average, Qual Average, Elim Average", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#9C5055"), range: NSRange(location:0,length:8))
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#F5A120"), range: NSRange(location:19,length:16))
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#83D6B7"), range: NSRange(location:9,length:13))
-        averageTitle.attributedText = attrStr
-        averageTitle.textAlignment = .Center
-        //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
-        self.scrollView.addSubview(averageTitle)
-        averageChart = LineChart()
-        averageChart.frame = CGRect(x: 15, y: 45, width: self.view.frame.width - 15, height: 200)
-        averageChart.animation.enabled = true
-        averageChart.area = false
-        averageChart.x.labels.visible = true
-        averageChart.x.grid.count = CGFloat(xAverageLabels.count)
-        averageChart.y.grid.count = 5
-        averageChart.x.labels.values = xAverageLabels
-        averageChart.y.labels.visible = true
-        averageChart.colors = [Colors.colorWithHexString("#83D6B7"), Colors.colorWithHexString("#F5A120"), Colors.colorWithHexString("#9C5055")]
-        averageChart.addLine(averageQualsData)
-        averageChart.addLine(averageElimsData)
-        averageChart.addLine(averageData)
-        averageChart.setTranslatesAutoresizingMaskIntoConstraints(false)
-        //lineChart.delegate = self
-        self.scrollView.addSubview(averageChart)
         
-        // Setup opr,dpr,ccwm chart
-        // opr,dpr,ccwm Chart setup
-        var statTitle: UILabel = UILabel()
-        statTitle.frame = CGRectMake(0, 265, self.view.frame.width, 30)
-        var statAttrStr = NSMutableAttributedString(string: "OPR, DPR, CCWM", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
-        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#5889DB"), range: NSRange(location:0,length:5))
-        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#ff00ff"), range: NSRange(location:5,length:6))
-        statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#FF7373"), range: NSRange(location:9,length:5))
-        statTitle.attributedText = statAttrStr
-        statTitle.textAlignment = .Center
-        //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
-        self.scrollView.addSubview(statTitle)
-        oprDprCcwmChart = LineChart()
-        oprDprCcwmChart.frame = CGRect(x: 15, y: 290, width: self.view.frame.width - 15, height: 200)
-        oprDprCcwmChart.animation.enabled = true
-        oprDprCcwmChart.area = false
-        oprDprCcwmChart.x.labels.visible = true
-        oprDprCcwmChart.x.grid.count = CGFloat(xStatsLabels.count)
-        oprDprCcwmChart.y.grid.count = ((highestStatValue - lowestStatValue)/10)
-        println( oprDprCcwmChart.y.grid.count)
-        oprDprCcwmChart.x.labels.values = xStatsLabels
-        oprDprCcwmChart.y.labels.visible = true
-        oprDprCcwmChart.colors = [Colors.colorWithHexString("#5889DB"),Colors.colorWithHexString("#ff00ff"), Colors.colorWithHexString("#FF7373")]
-        oprDprCcwmChart.addLine(oprData)
-        oprDprCcwmChart.addLine(dprData)
-        oprDprCcwmChart.addLine(ccwmData)
-        oprDprCcwmChart.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var oprLabel: UILabel = UILabel()
-        oprLabel.frame = CGRectMake(0, 500, self.view.frame.width, 30)
-        oprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-        oprLabel.text = "OPR: Max: \(maxOPR) Avg: \(avgOPR)"
-        oprLabel.textColor = Colors.colorWithHexString("#5889DB")
-        oprLabel.textAlignment = .Center
-        self.scrollView.addSubview(oprLabel)
-        var dprLabel: UILabel = UILabel()
-        dprLabel.frame = CGRectMake(0, 530, self.view.frame.width, 30)
-        dprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-        dprLabel.text = "DPR: Max: \(maxDPR) Avg: \(avgDPR)"
-        dprLabel.textColor = Colors.colorWithHexString("#ff00ff")
-        dprLabel.textAlignment = .Center
-        self.scrollView.addSubview(dprLabel)
-        var ccwmLabel: UILabel = UILabel()
-        ccwmLabel.frame = CGRectMake(0, 560, self.view.frame.width, 30)
-        ccwmLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-        ccwmLabel.text = "CCWM: Max: \(maxCCWM) Avg: \(avgCCWM)"
-        ccwmLabel.textColor = Colors.colorWithHexString("#FF7373")
-        ccwmLabel.textAlignment = .Center
-        self.scrollView.addSubview(ccwmLabel)
-        self.scrollView.addSubview(oprDprCcwmChart)
+        if !xAverageLabels.isEmpty {
+            // Average Chart setup
+            var averageTitle: UILabel = UILabel()
+            averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
+            var attrStr = NSMutableAttributedString(string: "Average, Qual Average, Elim Average", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#9C5055"), range: NSRange(location:0,length:8))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#F5A120"), range: NSRange(location:19,length:16))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#83D6B7"), range: NSRange(location:9,length:13))
+            averageTitle.attributedText = attrStr
+            averageTitle.textAlignment = .Center
+            //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
+            self.scrollView.addSubview(averageTitle)
+            averageChart = LineChart()
+            averageChart.frame = CGRect(x: 15, y: 45, width: self.view.frame.width - 15, height: 200)
+            averageChart.animation.enabled = true
+            averageChart.area = false
+            averageChart.x.labels.visible = true
+            averageChart.x.grid.count = CGFloat(xAverageLabels.count)
+            averageChart.y.grid.count = 5
+            averageChart.x.labels.values = xAverageLabels
+            averageChart.y.labels.visible = true
+            averageChart.colors = [Colors.colorWithHexString("#83D6B7"), Colors.colorWithHexString("#F5A120"), Colors.colorWithHexString("#9C5055")]
+            averageChart.addLine(averageQualsData)
+            averageChart.addLine(averageElimsData)
+            averageChart.addLine(averageData)
+            averageChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+            //lineChart.delegate = self
+            self.scrollView.addSubview(averageChart)
+        }
+        
+        if !xStatsLabels.isEmpty {
+            // Setup opr,dpr,ccwm chart
+            // opr,dpr,ccwm Chart setup
+            var statTitle: UILabel = UILabel()
+            statTitle.frame = CGRectMake(0, 265, self.view.frame.width, 30)
+            var statAttrStr = NSMutableAttributedString(string: "OPR, DPR, CCWM", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#5889DB"), range: NSRange(location:0,length:5))
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#ff00ff"), range: NSRange(location:5,length:6))
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#FF7373"), range: NSRange(location:9,length:5))
+            statTitle.attributedText = statAttrStr
+            statTitle.textAlignment = .Center
+            //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
+            self.scrollView.addSubview(statTitle)
+            oprDprCcwmChart = LineChart()
+            oprDprCcwmChart.frame = CGRect(x: 15, y: 290, width: self.view.frame.width - 15, height: 200)
+            oprDprCcwmChart.animation.enabled = true
+            oprDprCcwmChart.area = false
+            oprDprCcwmChart.x.labels.visible = true
+            oprDprCcwmChart.x.grid.count = CGFloat(xStatsLabels.count)
+            oprDprCcwmChart.y.grid.count = ((highestStatValue - lowestStatValue)/10)
+            println( oprDprCcwmChart.y.grid.count)
+            oprDprCcwmChart.x.labels.values = xStatsLabels
+            oprDprCcwmChart.y.labels.visible = true
+            oprDprCcwmChart.colors = [Colors.colorWithHexString("#5889DB"),Colors.colorWithHexString("#ff00ff"), Colors.colorWithHexString("#FF7373")]
+            oprDprCcwmChart.addLine(oprData)
+            oprDprCcwmChart.addLine(dprData)
+            oprDprCcwmChart.addLine(ccwmData)
+            oprDprCcwmChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+            var oprLabel: UILabel = UILabel()
+            oprLabel.frame = CGRectMake(0, 500, self.view.frame.width, 30)
+            oprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            oprLabel.text = "OPR: Max: \(maxOPR) Avg: \(avgOPR)"
+            oprLabel.textColor = Colors.colorWithHexString("#5889DB")
+            oprLabel.textAlignment = .Center
+            self.scrollView.addSubview(oprLabel)
+            var dprLabel: UILabel = UILabel()
+            dprLabel.frame = CGRectMake(0, 530, self.view.frame.width, 30)
+            dprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            dprLabel.text = "DPR: Max: \(maxDPR) Avg: \(avgDPR)"
+            dprLabel.textColor = Colors.colorWithHexString("#ff00ff")
+            dprLabel.textAlignment = .Center
+            self.scrollView.addSubview(dprLabel)
+            var ccwmLabel: UILabel = UILabel()
+            ccwmLabel.frame = CGRectMake(0, 560, self.view.frame.width, 30)
+            ccwmLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            ccwmLabel.text = "CCWM: Max: \(maxCCWM) Avg: \(avgCCWM)"
+            ccwmLabel.textColor = Colors.colorWithHexString("#FF7373")
+            ccwmLabel.textAlignment = .Center
+            self.scrollView.addSubview(ccwmLabel)
+            self.scrollView.addSubview(oprDprCcwmChart)
+            
+        }
     }
 }
