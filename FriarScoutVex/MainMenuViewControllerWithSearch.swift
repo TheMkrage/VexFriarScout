@@ -124,9 +124,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         // Robot Skills
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:self.curSeason)
-        query.whereKey("rank", containedIn: ["1","2","3","4","5","6","7","8","9","T-1","T-2","T-3","T-4","T-5","T-6","T-7","T-8","T-9", "T-10", "10"])
         query.limit = 10
-        query.orderByAscending("rank")
+        query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)
@@ -184,9 +183,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         
         query = PFQuery(className:"ps")
         query.whereKey("season", equalTo:self.curSeason)
-        query.whereKey("rank", containedIn: ["1","2","3","4","5","6","7","8","9","T-1","T-2","T-3","T-4","T-5","T-6","T-7","T-8","T-9", "T-10", "10"])
         query.limit = 10
-        query.orderByAscending("rank")
+        query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)
@@ -631,6 +629,12 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
             return 0
         }else {
             return 4
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.isEqual(self.tableView) {
+            (cell as! MainMenuTableCell).tableView.reloadData()
         }
     }
     

@@ -25,8 +25,8 @@ class TeamChartsViewController: HasTeamViewController {
     
     func addCharts() {
         
-        var xAverageLabels: [String] = []
-        var xStatsLabels: [String] = []
+        var xAverageLabels: [String] = ["start"]
+        var xStatsLabels: [String] = ["start"]
         
         var averageQualsData: [CGFloat] = []
         var averageElimsData: [CGFloat] = []
@@ -74,12 +74,31 @@ class TeamChartsViewController: HasTeamViewController {
                     if comp.ccwm < lowestStatValue {
                         lowestStatValue = comp.ccwm
                     }
+                    if xStatsLabels.count == 2 {
+                        println(xStatsLabels)
+                        oprData.append(comp.opr)
+                        dprData.append(comp.dpr)
+                        ccwmData.append(comp.ccwm)
+                        println(oprData)
+                        println(dprData)
+                        println(ccwmData)
+                    }
                     oprData.append(comp.opr)
                     dprData.append(comp.dpr)
                     ccwmData.append(comp.ccwm)
                 }
                 if comp.quals.count != 0 {
                     xAverageLabels.append(simplifiedDate)
+                    if xAverageLabels.count == 2 {
+                        averageData.append(CGFloat((comp.sumOfElims + comp.sumOfQuals)/(comp.quals.count + comp.elimCount)))
+                        averageQualsData.append(CGFloat((comp.sumOfQuals)/comp.quals.count))
+                        if comp.elimCount != 0 {
+                            averageElimsData.append(CGFloat((comp.sumOfQF + comp.sumOfSF + comp.sumOfFinals)/(comp.elimCount)))
+                        }else {
+                            averageElimsData.append(0)
+                        }
+                    }
+
                     if comp.elimCount != 0 {
                         averageElimsData.append(CGFloat((comp.sumOfQF + comp.sumOfSF + comp.sumOfFinals)/(comp.elimCount)))
                     }else {
@@ -120,6 +139,7 @@ class TeamChartsViewController: HasTeamViewController {
             averageChart.animation.enabled = true
             averageChart.area = false
             averageChart.x.labels.visible = true
+            println("FDSA KISS IS COSMIC \(xAverageLabels) \(xAverageLabels.count)")
             averageChart.x.grid.count = CGFloat(xAverageLabels.count)
             averageChart.y.grid.count = 5
             averageChart.x.labels.values = xAverageLabels
