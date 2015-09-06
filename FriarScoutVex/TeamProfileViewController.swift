@@ -23,6 +23,11 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
         self.competitionsTable.setContentOffset(CGPointMake(0, 0), animated: false)
     }*/
     
+    override func viewDidAppear(animated: Bool) {
+        self.team.orderCompetitions()
+        self.competitionsTable.reloadData()
+    }
+    
     override func viewDidLoad() {
         self.navigationItem.title = "Team \(self.team.num)"
         

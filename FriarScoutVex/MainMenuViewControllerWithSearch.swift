@@ -27,6 +27,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     var loadingIcon: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    
     struct cardCellsRows {
         static let myTeam = 0
         static let favorites = 1
@@ -68,6 +69,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
+                bookmarks = NSMutableArray()
+                self.getBookmarks()
                 self.getMainMenuCellForID("MyTeam")?.tableView.hidden = false
             }
         }
@@ -310,6 +313,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         if let curBookmarks = defaults.valueForKey("Bookmarks Comp") as? NSArray {
             self.bookmarks.addObjectsFromArray(curBookmarks as [AnyObject])
         }
+        if self.bookmarks.count > 0 {
+            self.getMainMenuCellForID("Favorites")?.tableView.hidden = false
+            self.getMainMenuCellForID("Favorites")?.nothingLabel.hidden = true
+        }
     }
     
     func goToSetting() {
@@ -471,9 +478,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.isEqual(self.tableView) {
             if (tableView.cellForRowAtIndexPath(indexPath) == nil)  {
-                //println(cell.reuseIdentifier)
-                
-                //cell.backgroundColor = Colors.colorWithHexString("F0F0F0")
                 switch indexPath.row  {
                 case cardCellsRows.myTeam:
                     var cell = tableView.dequeueReusableCellWithIdentifier("MyTeam") as! MainMenuTableCell
@@ -484,7 +488,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.setUp()
                         cell.tableView.delegate = self
                         cell.tableView.dataSource = self
-                        
+                        cell.nothingLabel.hidden = true
                         cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.titleLabel.text = "My Team"
@@ -495,17 +499,24 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.layer.shadowRadius = 10
                         cell.layer.shadowOpacity = 0.35
                         cell.addSubview(teamCircle)
+                        if self.myTeam.num.isEmpty {
+                            
+                            cell.tableView.hidden = true
+                            cell.nothingLabel.hidden = false
+                        }
                     }
                     return cell
                     
                 case cardCellsRows.favorites:
                     var cell = tableView.dequeueReusableCellWithIdentifier("Favorites") as! MainMenuTableCell
+                    
                     cell.clearsContextBeforeDrawing = true
                     cell.selectionStyle = UITableViewCellSelectionStyle.None
                     cell.setUp()
                     cell.tableView.delegate = self
                     cell.tableView.dataSource = self
-                    
+                    cell.nothingLabel.hidden = true
+                    cell.tableView.hidden = false
                     cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Favorites"
@@ -517,6 +528,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.layer.shadowOpacity = 0.35
                     cell.addSubview(teamCircle)
                     circleAdded = true
+                    if self.bookmarks.count == 0 {
+                        cell.tableView.hidden = true
+                        cell.nothingLabel.hidden = false
+                    }
                     return cell
                 case cardCellsRows.rs:
                     var cell = tableView.dequeueReusableCellWithIdentifier("RobotSkills") as! MainMenuTableCell

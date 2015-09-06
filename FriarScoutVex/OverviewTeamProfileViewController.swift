@@ -9,7 +9,8 @@
 import UIKit
 import Parse
 
-class OverviewTeamProfileViewController: HasTeamViewController {
+class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    var seasons = ["NBN","Skyrise","Toss Up", "Sack Attack"]
     @IBOutlet var scrollView: UIScrollView!
     var isBookmarked: Bool = false // Tells if current profile is bookmarked
     
@@ -25,29 +26,53 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     @IBOutlet var favoriteButton: UIButton!
     @IBOutlet var programmingSkillsScore: UILabel!
     @IBOutlet var robotSkillsScore: UILabel!
+    @IBOutlet var seasonPicker: UIPickerView!
     
     // just default values
     var compCircle:CircleView = CircleView(frame: CGRectMake(50, 50, 80, 80))
     var awardCircle:CircleView = CircleView(frame: CGRectMake(50, 50, 80, 80))
+    
+    @IBOutlet var seasonPickerButton: UIButton!
+    @IBAction func seasonPickerButton(sender: AnyObject) {
+        sender.setTitle(self.team.season, forState: .Normal)
+        println(self.team.season)
+        if self.seasonPicker.hidden {
+            self.seasonPicker.hidden = false
+        }else {
+            self.seasonPicker.hidden = true
+        }
+        
+    }
     
     func alert(header:String!, withMemo memo:String!, withButtonText buttonText:String!) {
         let alertController = UIAlertController(title: header, message:
             memo, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.Default,handler: nil))
         self.presentViewController(alertController, animated: true, completion:  { () -> Void in
-            
         })
     }
     
     override func viewWillAppear(animated: Bool) {
         self.highestScoreLabel.center = CGPoint(x:(view.frame.width * (2/3)) + ((view.frame.width * (1/3))/2),y: self.highestScoreLabel.frame.origin.y)
     }
+    override func viewDidAppear(animated: Bool) {
+        self.seasonPicker.hidden = true
+        var row = 0
+        for var i = 0; i < self.seasons.count; i++ {
+            if self.seasons[i] == self.team.season {
+                row = i
+            }
+        }
+        self.seasonPicker.selectRow(row, inComponent: 0, animated: true)
+    }
     
     var lineChart: LineChart!
     override func viewDidLoad() {
         
-        
-        
+        self.seasonPickerButton.setTitle(self.team.season, forState: .Normal)
+        var touch = UITapGestureRecognizer(target: self, action:"scrollTouchesBegan")
+        self.scrollView.addGestureRecognizer(touch)
+        self.seasonPicker.delegate = self
         self.drawBackground()
         self.findIfBookmarked()
         self.title = "Team Overview"
@@ -409,7 +434,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
                                         }
                                         self.team.awards.addObject(a)
                                         self.team.awardCount++
-                                        self.awardCircle.setText("\(self.team.awardCount)")
+                                        self.awardCircle.setText("\(self.team.awards.count)")
                                     }
                                 }
                             }
@@ -427,7 +452,7 @@ class OverviewTeamProfileViewController: HasTeamViewController {
     
     func updateLabels() {
         println("bleH")
-        self.compCircle.setText("\(self.team.compCount)")
+        self.compCircle.setText("\(self.team.competitions.count)")
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
             sumOfsp += (c as! Competition).spPointsSum
@@ -511,5 +536,42 @@ class OverviewTeamProfileViewController: HasTeamViewController {
         curEl.setObject(self.team.season, forKey: "Season")
         curEl.setObject(self.team.name, forKey: "Name")
         return curEl as NSDictionary
+    }
+    
+    func scrollTouchesBegan() {
+        self.seasonPicker.hidden = true
+        self.updateData()
+    }
+    
+    func updateData() {
+        var t = Team()
+        t.num = self.team.num
+        t.season = self.team.season
+        self.team = t
+        self.loadCompetitions()
+        var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
+        x.team = self.team as Team!
+        var y:HasTeamViewController = self.tabBarController?.viewControllers![2] as! HasTeamViewController!
+        y.team = self.team as Team!
+        var z:HasTeamViewController = self.tabBarController?.viewControllers![3] as! HasTeamViewController!
+        z.team = self.team as Team!
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return self.seasons[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.seasonPickerButton.setTitle( seasons[row], forState: .Normal)
+        self.team.season = seasons[row]
+        println(self.team.season)
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.seasons.count
     }
 }

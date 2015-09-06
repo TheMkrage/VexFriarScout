@@ -64,8 +64,7 @@ class SkillsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:self.curSeason)
         query.limit = 50
-        query.orderBySortDescriptor(NSSortDescriptor(key: "score", ascending: false, selector: "localizedStandardCompare"))
-        println("LOADING FOR \(self.curSeason)")
+        query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
                 println(error?.localizedDescription)

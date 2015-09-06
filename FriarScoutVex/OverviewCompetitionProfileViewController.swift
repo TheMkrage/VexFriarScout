@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 class OverviewCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var eventNameTitleLabel: UILabel!
     var name: String! = ""
     var season: String! = ""
@@ -100,6 +101,7 @@ class OverviewCompetitionProfileViewController: HasCompetitionViewController, UI
             self.comp.season = object!["season"] as! String
             self.comp.compID = object!.objectId
             self.seasonLabel.text = self.season
+            self.dateLabel.text = self.comp.date
             self.locLabel.text = self.comp.loc
              self.eventNameTitleLabel.text = self.comp.name
            // self.eventNameTitleLabel.

@@ -13,8 +13,6 @@
 		7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A461F1B3BD59C00AE63C3 /* helpMe.png */; };
 		7E6A46241B3BDE5000AE63C3 /* flames.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6A46231B3BDE5000AE63C3 /* flames.png */; };
 		7EB472E41B706C1600F29190 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB472E31B706C1600F29190 /* Colors.swift */; };
-		7EB472E61B709E8600F29190 /* FavoritedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB472E51B709E8600F29190 /* FavoritedIcon.png */; };
-		7EB472E81B709E8D00F29190 /* UnfavoritedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB472E71B709E8D00F29190 /* UnfavoritedIcon.png */; };
 		7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */; };
 		7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */; };
 		7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */; };
@@ -26,6 +24,8 @@
 		7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */; };
 		7EC0646C1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */; };
 		7EC0646E1B81727500A6BD64 /* MainMenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0646D1B81727500A6BD64 /* MainMenuTableCell.swift */; };
+		7EC0D90E1B9BF3F500ACA5F9 /* FavoritedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC0D90D1B9BF3F500ACA5F9 /* FavoritedIcon.png */; };
+		7EC0D9121B9BF4FB00ACA5F9 /* UnfavoritedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC0D9111B9BF4FB00ACA5F9 /* UnfavoritedIcon.png */; };
 		7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */; };
 		7EC1B0981B16C0CC00B3A7BA /* GraySquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1B0971B16C0CC00B3A7BA /* GraySquare.png */; };
 		7EC299191AD5920200A7E008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC299181AD5920200A7E008 /* Firebase.framework */; };
@@ -115,8 +115,6 @@
 		7E6A461F1B3BD59C00AE63C3 /* helpMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpMe.png; sourceTree = "<group>"; };
 		7E6A46231B3BDE5000AE63C3 /* flames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flames.png; sourceTree = "<group>"; };
 		7EB472E31B706C1600F29190 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		7EB472E51B709E8600F29190 /* FavoritedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FavoritedIcon.png; sourceTree = "<group>"; };
-		7EB472E71B709E8D00F29190 /* UnfavoritedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnfavoritedIcon.png; sourceTree = "<group>"; };
 		7EBE424B1B4CD1E30015D500 /* TeamBookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarksViewController.swift; sourceTree = "<group>"; };
 		7EBF07641B4DDADB00B965D1 /* TeamBookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBookmarkCell.swift; sourceTree = "<group>"; };
 		7EBF07661B4E1FC900B965D1 /* CompetitionBookmarkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionBookmarkController.swift; sourceTree = "<group>"; };
@@ -128,6 +126,8 @@
 		7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICheckBoxButton.swift; sourceTree = "<group>"; };
 		7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewControllerWithSearch.swift; sourceTree = "<group>"; };
 		7EC0646D1B81727500A6BD64 /* MainMenuTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableCell.swift; sourceTree = "<group>"; };
+		7EC0D90D1B9BF3F500ACA5F9 /* FavoritedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FavoritedIcon.png; sourceTree = "<group>"; };
+		7EC0D9111B9BF4FB00ACA5F9 /* UnfavoritedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnfavoritedIcon.png; sourceTree = "<group>"; };
 		7EC16D631AE738A60094A4B0 /* CompetitionForTeamProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionForTeamProfile.swift; sourceTree = "<group>"; };
 		7EC1B0971B16C0CC00B3A7BA /* GraySquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GraySquare.png; sourceTree = "<group>"; };
 		7EC299181AD5920200A7E008 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
@@ -464,14 +464,14 @@
 		7ECC92FF1B390E820082F128 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				7EC0D90D1B9BF3F500ACA5F9 /* FavoritedIcon.png */,
 				7E2BD8631B787DEB0077DAD0 /* chart.png */,
 				7E2BD8611B7874410077DAD0 /* teamBubble.png */,
-				7EB472E71B709E8D00F29190 /* UnfavoritedIcon.png */,
-				7EB472E51B709E8600F29190 /* FavoritedIcon.png */,
 				7E6A46231B3BDE5000AE63C3 /* flames.png */,
 				7E6A461F1B3BD59C00AE63C3 /* helpMe.png */,
 				7E6A461D1B3BC9A700AE63C3 /* launch.png */,
 				7EC354AD1B39DD4600829C3C /* wrenchSelected.png */,
+				7EC0D9111B9BF4FB00ACA5F9 /* UnfavoritedIcon.png */,
 				7ECC93241B3920CB0082F128 /* wrench.png */,
 				7ECC93201B391DF70082F128 /* gear.png */,
 				7ECC93101B3913870082F128 /* awards.png */,
@@ -581,7 +581,7 @@
 			files = (
 				7EC81E421AD30078008F0639 /* Main.storyboard in Resources */,
 				7ECC93171B3913870082F128 /* compOverview.png in Resources */,
-				7EB472E81B709E8D00F29190 /* UnfavoritedIcon.png in Resources */,
+				7EC0D9121B9BF4FB00ACA5F9 /* UnfavoritedIcon.png in Resources */,
 				7ECC93251B3920CB0082F128 /* wrench.png in Resources */,
 				7ECC930F1B3911330082F128 /* teamOverview.png in Resources */,
 				7ECC931D1B3917DC0082F128 /* vexLogo.png in Resources */,
@@ -597,9 +597,9 @@
 				7E6A46201B3BD59C00AE63C3 /* helpMe.png in Resources */,
 				7E6A461E1B3BC9A700AE63C3 /* launch.png in Resources */,
 				7ECC93211B391DF70082F128 /* gear.png in Resources */,
+				7EC0D90E1B9BF3F500ACA5F9 /* FavoritedIcon.png in Resources */,
 				7E2BD8621B7874410077DAD0 /* teamBubble.png in Resources */,
 				7EC354AE1B39DD4600829C3C /* wrenchSelected.png in Resources */,
-				7EB472E61B709E8600F29190 /* FavoritedIcon.png in Resources */,
 				7ECC931F1B391AE60082F128 /* friarbots white logo.png in Resources */,
 				7EC1B0981B16C0CC00B3A7BA /* GraySquare.png in Resources */,
 				7EC81E441AD30078008F0639 /* Images.xcassets in Resources */,

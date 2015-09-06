@@ -20,6 +20,10 @@ class StatsTeamProfileViewController: HasTeamViewController, UITableViewDataSour
     @IBOutlet var overallInElimsAverageLabel: UILabel!
     @IBOutlet var awardsTable: UITableView!
     
+    override func viewDidAppear(animated: Bool) {
+        self.awardsTable.reloadData()
+        self.updateTheLabels()
+    }
     override func viewDidLoad() {
         self.drawBackground()
         //self.title = "Team \(self.team.num)"
