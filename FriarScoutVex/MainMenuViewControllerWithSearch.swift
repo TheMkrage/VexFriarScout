@@ -521,12 +521,16 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Favorites"
                     cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
-                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 20, 90, 90), text: "STAR", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 20, 90, 90), text: " ", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                    var star: UIImageView = UIImageView(frame: CGRectMake(teamCircle.frame.origin.x + 5, teamCircle.frame.origin.y + 5, teamCircle.frame.width - 10, teamCircle.frame.height - 10) )
+                    star.image = UIImage(named: "UnFavoritedIcon.png")
                     cell.layer.shadowOffset = CGSizeMake(15, 15);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
                     cell.layer.shadowOpacity = 0.35
                     cell.addSubview(teamCircle)
+                    cell.addSubview(star)
+                    
                     circleAdded = true
                     if self.bookmarks.count == 0 {
                         cell.tableView.hidden = true

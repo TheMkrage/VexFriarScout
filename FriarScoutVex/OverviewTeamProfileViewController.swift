@@ -416,6 +416,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
                             var awardQuery = PFQuery(className:"Awards")
                             awardQuery.whereKey("compID", equalTo: compID)
                             awardQuery.whereKey("team", equalTo: self.team.num)
+                            self.awardCircle.setText("0")
                             awardQuery.findObjectsInBackgroundWithBlock { ( results: [AnyObject]?, error: NSError?
                                 ) -> Void in
                                 if let resultsArray = results {

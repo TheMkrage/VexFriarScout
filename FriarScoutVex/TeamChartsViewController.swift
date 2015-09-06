@@ -122,7 +122,7 @@ class TeamChartsViewController: HasTeamViewController {
             highestStatValue = maxCCWM
         }
         
-        if !xAverageLabels.isEmpty {
+        if xAverageLabels.count > 1 {
             // Average Chart setup
             var averageTitle: UILabel = UILabel()
             averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
@@ -153,7 +153,7 @@ class TeamChartsViewController: HasTeamViewController {
             self.scrollView.addSubview(averageChart)
         }
         
-        if !xStatsLabels.isEmpty {
+        if xStatsLabels.count > 1 {
             // Setup opr,dpr,ccwm chart
             // opr,dpr,ccwm Chart setup
             var statTitle: UILabel = UILabel()
