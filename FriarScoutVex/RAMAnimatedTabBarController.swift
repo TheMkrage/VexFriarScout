@@ -25,7 +25,7 @@ import UIKit
 class RAMAnimatedTabBarItem: UITabBarItem {
 
     @IBOutlet weak var animation: RAMItemAnimation!
-    @IBInspectable var textColor: UIColor = UIColor.blackColor()
+    @IBInspectable var textColor: UIColor = UIColor.grayColor()
 
     func playAnimation(icon: UIImageView, textLabel: UILabel) {
 
@@ -60,8 +60,7 @@ class RAMAnimatedTabBarController: UITabBarController {
         let containers = createViewContainers()
 
         createCustomIcons(containers)
-
-
+        tabBar.tintColor = UIColor.grayColor()
     }
 
 // MARK: create methods
@@ -80,13 +79,13 @@ class RAMAnimatedTabBarController: UITabBarController {
 
                 let icon = UIImageView(image: item.image)
                 icon.setTranslatesAutoresizingMaskIntoConstraints(false)
-                icon.tintColor = UIColor.clearColor()
+                icon.tintColor = UIColor.grayColor()
 
                 // text
                 let textLabel = UILabel()
                 textLabel.text = item.title
                 textLabel.backgroundColor = UIColor.clearColor()
-                textLabel.textColor = item.textColor
+                textLabel.textColor = UIColor.grayColor()
                 textLabel.font = UIFont.systemFontOfSize(10)
                 textLabel.textAlignment = NSTextAlignment.Center
                 textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -105,6 +104,8 @@ class RAMAnimatedTabBarController: UITabBarController {
                 }
 
                 let iconsAndLabels = (icon:icon, textLabel:textLabel)
+                iconsAndLabels.icon.tintColor = UIColor.grayColor()
+                
                 iconsView.append(iconsAndLabels)
 
                 if 0 == index { // selected first elemet
