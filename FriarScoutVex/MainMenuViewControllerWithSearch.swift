@@ -52,6 +52,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     }
     
     override func viewDidAppear(animated: Bool) {
+        bookmarks = NSMutableArray()
+        self.getBookmarks()
+        println(self.bookmarks)
+        self.getMainMenuCellForID("Favorites")?.tableView.reloadData()
         // Reload if changes in season or myTeam
         let defaults = NSUserDefaults.standardUserDefaults()
         if let stringOne = defaults.valueForKey(defaultsKeys.myTeam) as? String {
@@ -69,8 +73,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
-                bookmarks = NSMutableArray()
-                self.getBookmarks()
+                
                 self.getMainMenuCellForID("MyTeam")?.tableView.hidden = false
             }
         }

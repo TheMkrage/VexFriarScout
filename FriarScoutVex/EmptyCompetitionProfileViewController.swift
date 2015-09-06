@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Parse
 
 class EmptyCompetitionProfileViewController: HasCompetitionViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -15,6 +16,7 @@ class EmptyCompetitionProfileViewController: HasCompetitionViewController, UITab
     var season: String! = ""
     var teams:NSMutableArray = NSMutableArray()
     
+    @IBOutlet var eventNameTitleLabel: UILabel!
     @IBOutlet var seasonLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var locLabel: UILabel!
@@ -22,35 +24,41 @@ class EmptyCompetitionProfileViewController: HasCompetitionViewController, UITab
     @IBOutlet var teamTabel: UITableView!
     
     override func viewDidLoad() {
-         println("https://vexscoutcompetitions.firebaseio.com/\(self.comp.season)/\(self.comp.name)")
         self.teamTabel.delegate = self
         self.teamTabel.dataSource = self
         self.loadComp()
     }
     
     func loadComp() {
-        let ref = Firebase(url: "https://vexscoutcompetitions.firebaseio.com/\(self.comp.season)/\(self.comp.name)")
-        println("https://vexscoutcompetitions.firebaseio.com/\(self.comp.season)/\(self.comp.name)")
-        ref.observeSingleEventOfType( FEventType.Value, withBlock: { (snapshot: FDataSnapshot!) -> Void in
-            
-            self.comp.name = snapshot.value["name"] as! String
-            self.comp.date = snapshot.value["date"] as! String
-            self.comp.loc = snapshot.value["loc"] as! String
-            self.comp.season = snapshot.value["season"] as! String
-            self.seasonLabel.text = self.season
-            self.locLabel.text = self.comp.loc
-            self.dateLabel.text = self.comp.date
-            var running: Bool = true
-            for var i:Int = 0; running; i++ {
-                if UInt(i) < snapshot.childSnapshotForPath("teams").childrenCount {
-                    self.teams.addObject(snapshot.childSnapshotForPath("teams").value[i] as! String)
-                    self.teamTabel.reloadData()
-                    println(self.teams)
-                }else {
-                    running = false
-                }
+        var query = PFQuery(className:"Competitions")
+        println(self.comp.compID as String)
+        query.getObjectInBackgroundWithId(self.comp.compID as String) {
+            (object: PFObject?, error:NSError?) -> Void in
+            // reassurance
+            if let x = object!["name"] as? String {
+                self.comp.name = x
+            }else{
+                let alertController = UIAlertController(title: "Well, this is awkard!", message:
+                    "I can't seem to find this competition! It isn't in our database... Hey it happens" , preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+                return
             }
-        })
+            self.comp.name = object!["name"] as! String
+            self.comp.date = object!["date"] as! String
+            self.comp.loc = object!["loc"] as! String
+            self.comp.season = object!["season"] as! String
+            self.teams = object!["teams"] as! NSMutableArray
+            self.comp.compID = object!.objectId
+            self.seasonLabel.text = self.season
+            self.dateLabel.text = self.comp.date
+            self.locLabel.text = self.comp.loc
+            self.eventNameTitleLabel.text = self.comp.name
+            self.teamTabel.reloadData()
+        }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

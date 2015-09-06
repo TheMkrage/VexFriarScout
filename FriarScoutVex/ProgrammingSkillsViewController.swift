@@ -25,8 +25,6 @@ class ProgrammingSkillsViewController: UIViewController, UITableViewDelegate, UI
     }
     
     override func viewWillAppear(animated: Bool) {
-        var myTeamButton: UIBarButtonItem = UIBarButtonItem(title: "My Team", style: .Plain, target: self, action: "myTeam")
-        self.tabBarController?.navigationItem.rightBarButtonItem = myTeamButton
         self.skillsTable.reloadData()
     }
     
