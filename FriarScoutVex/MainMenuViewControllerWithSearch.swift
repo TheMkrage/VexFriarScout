@@ -77,6 +77,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 self.getMainMenuCellForID("MyTeam")?.tableView.hidden = false
             }
         }
+        
     }
     
     @IBOutlet var tableView: UITableView!

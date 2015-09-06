@@ -64,6 +64,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
             }
         }
         self.seasonPicker.selectRow(row, inComponent: 0, animated: true)
+        self.updateLabels()
     }
     
     var lineChart: LineChart!
