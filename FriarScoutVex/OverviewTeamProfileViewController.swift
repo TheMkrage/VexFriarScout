@@ -75,7 +75,6 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
         self.seasonPicker.delegate = self
         self.drawBackground()
         self.findIfBookmarked()
-        self.title = "Team Overview"
         self.loadCompetitions()
         var x:HasTeamViewController = self.tabBarController?.viewControllers![1] as! HasTeamViewController!
         x.team = self.team as Team!
@@ -177,6 +176,32 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
         }
         self.numLabel.text = teamDigits
         self.letterLabel.text = teamLetters
+        var skillsQuery = PFQuery(className: "rs")
+        skillsQuery.whereKey("team", equalTo: self.team.num)
+        skillsQuery.whereKey("season", equalTo: self.team.season)
+        skillsQuery.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
+            if let results = objects as? [PFObject] {
+                if !results.isEmpty {
+                    let pf = objects![0] as! PFObject
+                    var x = pf["score"] as! NSInteger!
+                    self.team.rs = "\(x)"
+                    self.updateLabels()
+                }
+            }
+        }
+        skillsQuery = PFQuery(className: "ps")
+        skillsQuery.whereKey("team", equalTo: self.team.num)
+        skillsQuery.whereKey("season", equalTo: self.team.season)
+        skillsQuery.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
+            if let results = objects as? [PFObject] {
+                if !results.isEmpty {
+                    let pf = objects![0] as! PFObject
+                    var x = pf["score"] as! NSInteger!
+                    self.team.ps = "\(x)"
+                    self.updateLabels()
+                }
+            }
+        }
         var query = PFQuery(className:"Teams")
         query.whereKey("num", equalTo:self.team.num)
         query.findObjectsInBackgroundWithBlock {

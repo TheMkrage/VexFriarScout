@@ -7,8 +7,19 @@
 //
 
 import UIKit
+extension Int {
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)d", self) as String
+    }
+}
 
+extension Double {
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)f", self) as String
+    }
+}
 class TeamChartsViewController: HasTeamViewController {
+    
     
     @IBOutlet var scrollView: UIScrollView!
     
@@ -181,24 +192,25 @@ class TeamChartsViewController: HasTeamViewController {
             oprDprCcwmChart.addLine(dprData)
             oprDprCcwmChart.addLine(ccwmData)
             oprDprCcwmChart.setTranslatesAutoresizingMaskIntoConstraints(false)
+            var roundingString = "3.3"
             var oprLabel: UILabel = UILabel()
             oprLabel.frame = CGRectMake(0, 500, self.view.frame.width, 30)
             oprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-            oprLabel.text = "OPR: Max: \(maxOPR) Avg: \(avgOPR)"
+            oprLabel.text = "OPR: Max: \(Double(maxOPR).format(roundingString)) Avg: \(Double(avgOPR).format(roundingString))"
             oprLabel.textColor = Colors.colorWithHexString("#5889DB")
             oprLabel.textAlignment = .Center
             self.scrollView.addSubview(oprLabel)
             var dprLabel: UILabel = UILabel()
             dprLabel.frame = CGRectMake(0, 530, self.view.frame.width, 30)
             dprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-            dprLabel.text = "DPR: Max: \(maxDPR) Avg: \(avgDPR)"
+            dprLabel.text = "DPR: Max: \(Double(maxDPR).format(roundingString)) Avg: \(Double(avgDPR).format(roundingString))"
             dprLabel.textColor = Colors.colorWithHexString("#ff00ff")
             dprLabel.textAlignment = .Center
             self.scrollView.addSubview(dprLabel)
             var ccwmLabel: UILabel = UILabel()
             ccwmLabel.frame = CGRectMake(0, 560, self.view.frame.width, 30)
             ccwmLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-            ccwmLabel.text = "CCWM: Max: \(maxCCWM) Avg: \(avgCCWM)"
+            ccwmLabel.text = "CCWM: Max: \(Double(maxCCWM).format(roundingString)) Avg: \(Double(avgCCWM).format(roundingString))"
             ccwmLabel.textColor = Colors.colorWithHexString("#FF7373")
             ccwmLabel.textAlignment = .Center
             self.scrollView.addSubview(ccwmLabel)
@@ -206,4 +218,6 @@ class TeamChartsViewController: HasTeamViewController {
             
         }
     }
+    
+ 
 }
