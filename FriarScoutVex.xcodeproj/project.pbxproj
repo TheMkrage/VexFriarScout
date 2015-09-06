@@ -41,7 +41,6 @@
 		7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE151AF6C0A4002071AC /* Team.swift */; };
 		7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2DE171AF6C0AF002071AC /* Competition.swift */; };
 		7EC354AE1B39DD4600829C3C /* wrenchSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC354AD1B39DD4600829C3C /* wrenchSelected.png */; };
-		7EC36A5B1B72C97D00675E1D /* CustomAnimationCompetitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */; };
 		7EC36A5E1B7333CA00675E1D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A5C1B7333CA00675E1D /* Bolts.framework */; };
 		7EC36A5F1B7333CA00675E1D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A5D1B7333CA00675E1D /* Parse.framework */; };
 		7EC36A611B7333F000675E1D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC36A601B7333EF00675E1D /* AudioToolbox.framework */; };
@@ -58,13 +57,6 @@
 		7EC5AB371B33561B0046250B /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB361B33561B0046250B /* Skills.swift */; };
 		7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5AB381B3356620046250B /* SkillsCell.swift */; };
 		7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */; };
-		7EC5CD011B71EF08003075BD /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFA1B71EF08003075BD /* RAMBounceAnimation.swift */; };
-		7EC5CD021B71EF08003075BD /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFB1B71EF08003075BD /* RAMFrameItemAnimation.swift */; };
-		7EC5CD031B71EF08003075BD /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFC1B71EF08003075BD /* RAMFumeAnimation.swift */; };
-		7EC5CD041B71EF08003075BD /* RAMRotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFD1B71EF08003075BD /* RAMRotationAnimation.swift */; };
-		7EC5CD051B71EF08003075BD /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFE1B71EF08003075BD /* RAMTransitionItemAnimation.swift */; };
-		7EC5CD061B71EF08003075BD /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CCFF1B71EF08003075BD /* RAMAnimatedTabBarController.swift */; };
-		7EC5CD071B71EF08003075BD /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5CD001B71EF08003075BD /* RAMItemAnimationProtocol.swift */; };
 		7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */; };
 		7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC81E3C1AD30078008F0639 /* AppDelegate.swift */; };
 		7EC81E421AD30078008F0639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC81E401AD30078008F0639 /* Main.storyboard */; };
@@ -144,7 +136,6 @@
 		7EC2DE151AF6C0A4002071AC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7EC2DE171AF6C0AF002071AC /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		7EC354AD1B39DD4600829C3C /* wrenchSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrenchSelected.png; sourceTree = "<group>"; };
-		7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnimationCompetitions.swift; sourceTree = "<group>"; };
 		7EC36A5C1B7333CA00675E1D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		7EC36A5D1B7333CA00675E1D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7EC36A601B7333EF00675E1D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -161,13 +152,6 @@
 		7EC5AB361B33561B0046250B /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
 		7EC5AB381B3356620046250B /* SkillsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsCell.swift; sourceTree = "<group>"; };
 		7EC5B8AF1B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCompetitionProfileViewController.swift; sourceTree = "<group>"; };
-		7EC5CCFA1B71EF08003075BD /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
-		7EC5CCFB1B71EF08003075BD /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
-		7EC5CCFC1B71EF08003075BD /* RAMFumeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFumeAnimation.swift; sourceTree = "<group>"; };
-		7EC5CCFD1B71EF08003075BD /* RAMRotationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMRotationAnimation.swift; sourceTree = "<group>"; };
-		7EC5CCFE1B71EF08003075BD /* RAMTransitionItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimation.swift; sourceTree = "<group>"; };
-		7EC5CCFF1B71EF08003075BD /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
-		7EC5CD001B71EF08003075BD /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		7EC772491B0EB20700FB1E48 /* RankingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingTableCell.swift; sourceTree = "<group>"; };
 		7EC81E371AD30078008F0639 /* FriarScoutVex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriarScoutVex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC81E3B1AD30078008F0639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -323,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				7EBFFB931AED68CA003597FE /* UICheckBoxButton.swift */,
-				7EC5CCEB1B71EEA3003075BD /* RAMA */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -334,21 +317,6 @@
 				7EC81E3C1AD30078008F0639 /* AppDelegate.swift */,
 			);
 			name = Delegates;
-			sourceTree = "<group>";
-		};
-		7EC5CCEB1B71EEA3003075BD /* RAMA */ = {
-			isa = PBXGroup;
-			children = (
-				7EC5CCFA1B71EF08003075BD /* RAMBounceAnimation.swift */,
-				7EC5CCFB1B71EF08003075BD /* RAMFrameItemAnimation.swift */,
-				7EC5CCFC1B71EF08003075BD /* RAMFumeAnimation.swift */,
-				7EC5CCFD1B71EF08003075BD /* RAMRotationAnimation.swift */,
-				7EC5CCFE1B71EF08003075BD /* RAMTransitionItemAnimation.swift */,
-				7EC5CCFF1B71EF08003075BD /* RAMAnimatedTabBarController.swift */,
-				7EC5CD001B71EF08003075BD /* RAMItemAnimationProtocol.swift */,
-				7EC36A5A1B72C97D00675E1D /* CustomAnimationCompetitions.swift */,
-			);
-			name = RAMA;
 			sourceTree = "<group>";
 		};
 		7EC81E2E1AD30078008F0639 = {
@@ -623,18 +591,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ECAEBDE1B090B4C0056733A /* OverviewCompetitionProfileViewController.swift in Sources */,
-				7EC5CD061B71EF08003075BD /* RAMAnimatedTabBarController.swift in Sources */,
 				7EC0646E1B81727500A6BD64 /* MainMenuTableCell.swift in Sources */,
 				7EC2DE161AF6C0A4002071AC /* Team.swift in Sources */,
 				7EC9B5F01B92415900696C77 /* TeamChartsViewController.swift in Sources */,
 				7ECCB04C1B79B6C3005D02F3 /* CircleView.swift in Sources */,
-				7EC5CD021B71EF08003075BD /* RAMFrameItemAnimation.swift in Sources */,
 				7ECAEBE01B090B9F0056733A /* MatchesCompetitionProfileViewController.swift in Sources */,
 				7EC7724A1B0EB20700FB1E48 /* RankingTableCell.swift in Sources */,
 				7EBF07651B4DDADB00B965D1 /* TeamBookmarkCell.swift in Sources */,
 				7EC0646C1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift in Sources */,
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
-				7EC5CD011B71EF08003075BD /* RAMBounceAnimation.swift in Sources */,
 				7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */,
 				7EC2C3791B918F2400CD7696 /* UISettingsViewController.swift in Sources */,
 				7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */,
@@ -644,14 +609,10 @@
 				7EC299271AD5C67400A7E008 /* MainMenuViewController.swift in Sources */,
 				7EBFE57B1B02E9A700E804BC /* Award.swift in Sources */,
 				7EC4CFDD1B830091006C916B /* StatisticsTableCell.swift in Sources */,
-				7EC5CD041B71EF08003075BD /* RAMRotationAnimation.swift in Sources */,
 				7EC2DE181AF6C0AF002071AC /* Competition.swift in Sources */,
 				7EBFFB941AED68CA003597FE /* UICheckBoxButton.swift in Sources */,
-				7EC5CD051B71EF08003075BD /* RAMTransitionItemAnimation.swift in Sources */,
-				7EC5CD031B71EF08003075BD /* RAMFumeAnimation.swift in Sources */,
 				7EC5AB351B3352400046250B /* SkillsViewController.swift in Sources */,
 				7EC5B8B01B2DEC7F0072815F /* EmptyCompetitionProfileViewController.swift in Sources */,
-				7EC36A5B1B72C97D00675E1D /* CustomAnimationCompetitions.swift in Sources */,
 				7EBE424C1B4CD1E30015D500 /* TeamBookmarksViewController.swift in Sources */,
 				7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
@@ -666,7 +627,6 @@
 				7ECC92FE1B3906A30082F128 /* ProgrammingSkillsViewController.swift in Sources */,
 				7EC5AB371B33561B0046250B /* Skills.swift in Sources */,
 				7EC81E3D1AD30078008F0639 /* AppDelegate.swift in Sources */,
-				7EC5CD071B71EF08003075BD /* RAMItemAnimationProtocol.swift in Sources */,
 				7EBFE57F1B02FC1900E804BC /* StatsTeamProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

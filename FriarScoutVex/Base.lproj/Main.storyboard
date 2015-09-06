@@ -17,10 +17,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Animated Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="vfr-Bh-Qg0">
             <objects>
-                <tabBarController storyboardIdentifier="skills" id="uKx-w1-wsl" customClass="RAMAnimatedTabBarController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="skills" id="uKx-w1-wsl" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="iuQ-OY-hmn">
@@ -59,7 +59,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0uF-lB-tEH" id="9iK-BR-CkM">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hX1-WS-AWf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hX1-WS-AWf">
                                                     <rect key="frame" x="281" y="8" width="38" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="0000">
@@ -128,17 +128,12 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Item" image="rs.png" id="dJI-vg-JMe" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="nlL-fv-U2p" id="jPj-08-0Ll"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Item" image="rs.png" id="dJI-vg-JMe"/>
                     <connections>
                         <outlet property="skillsTable" destination="nRz-CP-VXU" id="Fdk-z1-3M6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="595-xW-cbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="nlL-fv-U2p" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1367" y="-1671"/>
         </scene>
@@ -2165,7 +2160,7 @@
                                                                                         <exclude reference="JG2-E7-Xh6"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                                                                     <rect key="frame" x="8" y="11" width="116" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="JG2-E7-Xh6"/>
@@ -2185,7 +2180,7 @@
                                                                                         <exclude reference="IiP-0i-fGp"/>
                                                                                     </mask>
                                                                                 </variation>
-                                                                                <variation key="widthClass=compact" ambiguous="YES">
+                                                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                                                                     <rect key="frame" x="249" y="11" width="27" height="21"/>
                                                                                     <mask key="constraints">
                                                                                         <include reference="IiP-0i-fGp"/>
@@ -2833,17 +2828,12 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Awards" image="awards.png" id="eYE-ey-DdI" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="lCO-xK-ZFR" id="DNk-yP-XdS"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Awards" image="awards.png" id="eYE-ey-DdI" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target"/>
                     <connections>
                         <outlet property="awardTable" destination="xFU-gq-Adi" id="l2t-VP-5NR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="18m-dr-kfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="lCO-xK-ZFR" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="4329" y="-1340"/>
         </scene>
@@ -3233,11 +3223,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Overview" image="compOverview.png" id="1VO-Lf-e8v" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="aZw-Bx-pHH" id="07X-Qg-ezH"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Overview" image="compOverview.png" id="1VO-Lf-e8v"/>
                     <connections>
                         <outlet property="dateLabel" destination="C4i-C5-Xfl" id="Wtj-Q8-ITu"/>
                         <outlet property="disclaimer" destination="3Oi-sg-ag0" id="F8M-Bd-CCq"/>
@@ -3249,7 +3235,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGT-f0-SNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="aZw-Bx-pHH" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3853.5" y="-2849"/>
         </scene>
@@ -3748,11 +3733,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Matches" image="matchList.png" id="9SG-28-2ZN" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="1bF-rm-ciC" id="qGJ-P3-K78"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Matches" image="matchList.png" id="9SG-28-2ZN"/>
                     <connections>
                         <outlet property="avgLabel" destination="64K-qI-2gf" id="dgA-9f-0rI"/>
                         <outlet property="highestScoreLabel" destination="ygV-h7-2O1" id="n2y-uc-Wa8"/>
@@ -3761,14 +3742,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdn-Qn-pf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="1bF-rm-ciC" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="4329" y="-2008"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="DRG-Xh-mJj">
             <objects>
-                <tabBarController storyboardIdentifier="CompFullProfile" id="37U-wN-T5h" customClass="RAMAnimatedTabBarController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CompFullProfile" id="37U-wN-T5h" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="xNO-Bq-tRv">
@@ -4780,7 +4760,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5L-AM-ZwC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DA3A62FA-D3EF-42F0-89BC-05F12F749B34" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-1B-0lF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EE23B6F4-3A80-48BA-8721-A0E8C5425A72" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-1B-0lF">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="133" id="Baz-uh-qqg"/>
@@ -5556,11 +5536,7 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Overview" image="teamOverview.png" id="vvi-79-VhY" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="B7T-Y2-CHb" id="TCg-Yk-bwN"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Overview" image="teamOverview.png" id="vvi-79-VhY"/>
                     <connections>
                         <outlet property="favoriteButton" destination="WRI-T2-aqw" id="ddR-OK-EgM"/>
                         <outlet property="highestScoreLabel" destination="cXd-CL-rW6" id="Deb-12-hq2"/>
@@ -5579,7 +5555,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDz-WX-sfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="B7T-Y2-CHb" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3958.5" y="543"/>
         </scene>
@@ -5659,18 +5634,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Competitions" image="matchList.png" id="mDx-J9-i43" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="p54-T7-6iN" id="n6j-wI-foQ"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Competitions" image="matchList.png" id="mDx-J9-i43"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="competitionsTable" destination="IeX-AC-y8w" id="4wT-Gd-tLS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gr-Lc-M72" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="p54-T7-6iN" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3777" y="1325"/>
         </scene>
@@ -5720,17 +5690,12 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Graphs" image="moreStats.png" id="Ta0-9D-sgg" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="YTU-CF-uKD" id="nEd-fH-6pu"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Graphs" image="moreStats.png" id="Ta0-9D-sgg"/>
                     <connections>
                         <outlet property="scrollView" destination="ZKg-ev-VEg" id="7iS-mb-OHO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lg2-f4-Xs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="YTU-CF-uKD" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3777" y="1971"/>
         </scene>
@@ -6317,11 +6282,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Awards" image="awards.png" id="ltj-2G-7ul" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="djb-va-tjC" id="iIf-97-Upm"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Awards" image="awards.png" id="ltj-2G-7ul"/>
                     <connections>
                         <outlet property="awardsTable" destination="4Dq-XE-4j6" id="3L7-sv-Wws"/>
                         <outlet property="lostAverageLabel" destination="Urq-cO-WL2" id="pie-8a-bnF"/>
@@ -6336,7 +6297,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKa-lw-eUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="djb-va-tjC" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3777" y="2667"/>
         </scene>
@@ -6441,23 +6401,18 @@
                             <outlet property="delegate" destination="H3o-2e-zBf" id="vdT-EH-Kkh"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Teams" image="teamOverview.png" id="QlS-FN-KZR" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex">
-                        <connections>
-                            <outlet property="animation" destination="CTW-Dq-BDv" id="dh2-7a-AlK"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Teams" image="teamOverview.png" id="QlS-FN-KZR"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RH4-c7-oqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="CTW-Dq-BDv" customClass="RAMBounceAnimation" customModule="FriarScoutVex"/>
             </objects>
             <point key="canvasLocation" x="2260.5" y="599"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="vEI-5a-amE">
             <objects>
-                <tabBarController storyboardIdentifier="fav" automaticallyAdjustsScrollViewInsets="NO" id="SlG-iI-Uyr" customClass="RAMAnimatedTabBarController" customModule="FriarScoutVex" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="fav" automaticallyAdjustsScrollViewInsets="NO" id="SlG-iI-Uyr" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Av5-ae-36t">
@@ -6474,10 +6429,10 @@
             </objects>
             <point key="canvasLocation" x="1297.5" y="1060"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="lys-JS-owL">
             <objects>
-                <tabBarController storyboardIdentifier="TeamProfile" automaticallyAdjustsScrollViewInsets="NO" id="Ac1-qS-EvT" customClass="RAMAnimatedTabBarController" customModule="FriarScoutVex" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TeamProfile" automaticallyAdjustsScrollViewInsets="NO" id="Ac1-qS-EvT" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="fI5-nH-jLh">
@@ -6643,18 +6598,18 @@
                                 <exclude reference="tc0-cq-1KJ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="L7e-08-YOs"/>
+                                <exclude reference="wQr-ut-a8g"/>
                                 <exclude reference="Ge9-qw-btW"/>
                                 <exclude reference="mRC-Nw-qMM"/>
                                 <exclude reference="SaA-EH-uQk"/>
                                 <exclude reference="iZ4-a6-q9Y"/>
+                                <exclude reference="PTe-bc-q39"/>
+                                <exclude reference="hHm-Ha-CrU"/>
                                 <exclude reference="332-cw-jdf"/>
                                 <exclude reference="JnW-sR-GuT"/>
                                 <exclude reference="ZV9-gf-zUc"/>
                                 <exclude reference="u9Q-Il-C8z"/>
-                                <exclude reference="PTe-bc-q39"/>
-                                <exclude reference="hHm-Ha-CrU"/>
-                                <exclude reference="L7e-08-YOs"/>
-                                <exclude reference="wQr-ut-a8g"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -6665,20 +6620,20 @@
                                 <include reference="tc0-cq-1KJ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="L7e-08-YOs"/>
+                                <include reference="wQr-ut-a8g"/>
                                 <include reference="Ge9-qw-btW"/>
                                 <include reference="mRC-Nw-qMM"/>
                                 <include reference="SaA-EH-uQk"/>
                                 <include reference="iZ4-a6-q9Y"/>
+                                <include reference="PTe-bc-q39"/>
+                                <include reference="hHm-Ha-CrU"/>
                                 <include reference="332-cw-jdf"/>
                                 <exclude reference="GaP-CF-OrV"/>
                                 <include reference="JnW-sR-GuT"/>
                                 <include reference="ZV9-gf-zUc"/>
                                 <exclude reference="elB-Nf-CA6"/>
                                 <include reference="u9Q-Il-C8z"/>
-                                <include reference="PTe-bc-q39"/>
-                                <include reference="hHm-Ha-CrU"/>
-                                <include reference="L7e-08-YOs"/>
-                                <include reference="wQr-ut-a8g"/>
                                 <exclude reference="iEp-HW-MXN"/>
                             </mask>
                         </variation>
@@ -6734,7 +6689,7 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.17254902420000001" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ses-ri-Qis">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ses-ri-Qis">
                                                     <rect key="frame" x="281" y="8" width="38" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="0000">
@@ -6791,17 +6746,12 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Item" image="ps.png" id="wa3-ay-7x4" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="iD5-Yz-btv" id="5lZ-Tf-TQR"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Item" image="ps.png" id="wa3-ay-7x4"/>
                     <connections>
                         <outlet property="skillsTable" destination="twS-Bc-MgM" id="MuV-3w-zfi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28A-ZZ-qDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="iD5-Yz-btv" customClass="RAMBounceAnimation" customModule="FriarScoutVex" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1367" y="-906"/>
         </scene>
@@ -6906,16 +6856,11 @@
                             <outlet property="delegate" destination="yTM-EQ-jjX" id="6WP-v4-LP1"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Competitions" image="compOverview.png" id="ATj-nr-nac" customClass="RAMAnimatedTabBarItem" customModule="FriarScoutVex">
-                        <connections>
-                            <outlet property="animation" destination="r6h-WR-1Kp" id="Sko-Vm-121"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Competitions" image="compOverview.png" id="ATj-nr-nac"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ao4-Sg-jcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="r6h-WR-1Kp" customClass="RAMBounceAnimation" customModule="FriarScoutVex"/>
             </objects>
             <point key="canvasLocation" x="2260.5" y="1434"/>
         </scene>
@@ -6939,7 +6884,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DA3A62FA-D3EF-42F0-89BC-05F12F749B34" width="288" height="289">
+        <image name="EE23B6F4-3A80-48BA-8721-A0E8C5425A72" width="288" height="289">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

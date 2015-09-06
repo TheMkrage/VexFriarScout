@@ -479,6 +479,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
     func updateLabels() {
         println("bleH")
         self.compCircle.setText("\(self.team.competitions.count)")
+        self.awardCircle.setText("\(self.team.awards.count)")
         var sumOfsp: NSInteger = 0
         for c in self.team.competitions {
             sumOfsp += (c as! Competition).spPointsSum
@@ -581,6 +582,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
         y.team = self.team as Team!
         var z:HasTeamViewController = self.tabBarController?.viewControllers![3] as! HasTeamViewController!
         z.team = self.team as Team!
+        self.updateLabels()
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {

@@ -30,6 +30,10 @@ class TeamChartsViewController: HasTeamViewController {
         addCharts()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.team.orderCompetitions()
+        addCharts()
+    }
     override func viewDidLayoutSubviews() {
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 600)
     }
