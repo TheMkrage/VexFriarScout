@@ -84,8 +84,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 34)!]
         var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
+        var moreButton: UIBarButtonItem = UIBarButtonItem(title: "More", style: .Plain, target: self, action: "goToMore")
         self.title = self.curSeason
         self.navigationItem.rightBarButtonItem = settingsButton
+        self.navigationItem.leftBarButtonItem = moreButton
         self.getData()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -325,6 +327,12 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func goToSetting() {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("Settings") as! UISettingsViewController
+        vc.curSeason = self.curSeason
+        self.showViewController(vc, sender: vc)
+    }
+    
+    func goToMore() {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("More") as! MoreViewController
         vc.curSeason = self.curSeason
         self.showViewController(vc, sender: vc)
     }

@@ -86,6 +86,7 @@
 		7ECC93251B3920CB0082F128 /* wrench.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC93241B3920CB0082F128 /* wrench.png */; };
 		7ECCB04C1B79B6C3005D02F3 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCB04B1B79B6C3005D02F3 /* CircleView.swift */; };
 		7ECCB04E1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */; };
+		7EDC90A61B9D4D9700420F20 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
 /* End PBXBuildFile section */
@@ -184,6 +185,7 @@
 		7ECC93241B3920CB0082F128 /* wrench.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrench.png; sourceTree = "<group>"; };
 		7ECCB04B1B79B6C3005D02F3 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Thin.otf"; sourceTree = "<group>"; };
+		7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +248,7 @@
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */,
 				7EC2C3781B918F2400CD7696 /* UISettingsViewController.swift */,
+				7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */,
 				7EBE42491B4CD17E0015D500 /* Skills */,
 				7EBE424A1B4CD1BB0015D500 /* Bookmarks */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
@@ -617,6 +620,7 @@
 				7EC5AB391B3356620046250B /* SkillsCell.swift in Sources */,
 				7EC299291AD6548100A7E008 /* TeamListTableViewController.swift in Sources */,
 				7EC16D641AE738A60094A4B0 /* CompetitionForTeamProfile.swift in Sources */,
+				7EDC90A61B9D4D9700420F20 /* MoreViewController.swift in Sources */,
 				7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */,
 				7ECAEBE41B0913ED0056733A /* HasCompetitionViewController.swift in Sources */,
 				7EE78C991AED7FF8001ED13F /* Match.swift in Sources */,
