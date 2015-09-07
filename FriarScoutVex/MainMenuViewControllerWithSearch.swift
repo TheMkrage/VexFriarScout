@@ -332,8 +332,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     }
     
     func goToMore() {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("More") as! MoreViewController
+        let vc = MoreViewController()
         vc.curSeason = self.curSeason
+        self.title = "More"
         self.showViewController(vc, sender: vc)
     }
     

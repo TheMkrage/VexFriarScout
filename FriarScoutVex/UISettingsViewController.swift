@@ -92,8 +92,6 @@ class UISettingsViewController: UIViewController, UITextFieldDelegate, UIPickerV
         return true
     }
     
-    
-    
     // UIPicker Delegate and Datasource
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

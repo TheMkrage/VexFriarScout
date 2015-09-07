@@ -87,6 +87,7 @@
 		7ECCB04C1B79B6C3005D02F3 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCB04B1B79B6C3005D02F3 /* CircleView.swift */; };
 		7ECCB04E1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */; };
 		7EDC90A61B9D4D9700420F20 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */; };
+		7EDC90A91B9D52CA00420F20 /* MatchCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC90A81B9D52CA00420F20 /* MatchCalculatorViewController.swift */; };
 		7EE78C951AED789B001ED13F /* MatchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C941AED789B001ED13F /* MatchTableCell.swift */; };
 		7EE78C991AED7FF8001ED13F /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE78C981AED7FF8001ED13F /* Match.swift */; };
 /* End PBXBuildFile section */
@@ -186,6 +187,7 @@
 		7ECCB04B1B79B6C3005D02F3 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7ECCB04D1B79CBC2005D02F3 /* HelveticaNeue-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Thin.otf"; sourceTree = "<group>"; };
 		7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		7EDC90A81B9D52CA00420F20 /* MatchCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCalculatorViewController.swift; sourceTree = "<group>"; };
 		7EE78C941AED789B001ED13F /* MatchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableCell.swift; sourceTree = "<group>"; };
 		7EE78C981AED7FF8001ED13F /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,10 +247,10 @@
 		7EBFFB8C1AED66BA003597FE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7EDC90A71B9D526200420F20 /* More View Controller */,
 				7EC299261AD5C67400A7E008 /* MainMenuViewController.swift */,
 				7EC0646B1B816FD400A6BD64 /* MainMenuViewControllerWithSearch.swift */,
 				7EC2C3781B918F2400CD7696 /* UISettingsViewController.swift */,
-				7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */,
 				7EBE42491B4CD17E0015D500 /* Skills */,
 				7EBE424A1B4CD1BB0015D500 /* Bookmarks */,
 				7EBFFB8E1AED66EF003597FE /* Profiles */,
@@ -456,6 +458,15 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		7EDC90A71B9D526200420F20 /* More View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7EDC90A51B9D4D9700420F20 /* MoreViewController.swift */,
+				7EDC90A81B9D52CA00420F20 /* MatchCalculatorViewController.swift */,
+			);
+			name = "More View Controller";
+			sourceTree = "<group>";
+		};
 		7EE78C971AED7FE4001ED13F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +616,7 @@
 				7EBFA9E31AE60D2D00986361 /* CompetitionTableCell.swift in Sources */,
 				7EBF07671B4E1FC900B965D1 /* CompetitionBookmarkController.swift in Sources */,
 				7EC2C3791B918F2400CD7696 /* UISettingsViewController.swift in Sources */,
+				7EDC90A91B9D52CA00420F20 /* MatchCalculatorViewController.swift in Sources */,
 				7EC54D241B20F9A1009CEF3A /* AKPickerView.swift in Sources */,
 				7ECAEBE21B090BCB0056733A /* AwardsCompetitionProfileViewController.swift in Sources */,
 				7EC93BCB1B00328A00796251 /* HasTeamViewController.swift in Sources */,
