@@ -82,7 +82,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 34)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HelveticaNeue-Medium", size: 28)!]
         var settingsButton: UIBarButtonItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: "goToSetting")
         var moreButton: UIBarButtonItem = UIBarButtonItem(title: "More", style: .Plain, target: self, action: "goToMore")
         self.title = self.curSeason
@@ -91,6 +91,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.getData()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.searchDisplayController?.searchBar.barTintColor = Colors.colorWithHexString("#e1e1e1")
+        self.searchDisplayController?.searchBar.layer.borderColor = UIColor.whiteColor().CGColor
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
     }
     
     func clearCurrentData() {
@@ -133,7 +136,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         // Robot Skills
         var query = PFQuery(className:"rs")
         query.whereKey("season", equalTo:self.curSeason)
-        query.limit = 10
+        query.limit = 3
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
@@ -192,7 +195,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         
         query = PFQuery(className:"ps")
         query.whereKey("season", equalTo:self.curSeason)
-        query.limit = 10
+        query.limit = 3
         query.orderByDescending("score")
         query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
             if error != nil{
@@ -304,7 +307,6 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
         self.statistics.append(highScore)
         var events = Statistic(stat: "Events", value: "\(self.myTeam.compCount)")
         self.statistics.append(events)
-        println("UPDATE MY TEAM TABLE")
         dispatch_async(dispatch_get_main_queue()) {
             //self.getMainMenuCellForID("MyTeam")!.hidden = false
             self.getMainMenuCellForID("MyTeam")?.tableView.reloadData()
@@ -334,7 +336,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     func goToMore() {
         let vc = MoreViewController()
         vc.curSeason = self.curSeason
-        self.title = "More"
+        
         self.showViewController(vc, sender: vc)
     }
     
@@ -505,9 +507,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                         cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                         cell.titleLabel.text = "My Team"
-                        cell.titleLabel.backgroundColor = Colors.colorWithHexString("366999")
-                        var teamCircle:CircleView = CircleView(frame: CGRectMake(25, 20, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
-                        cell.layer.shadowOffset = CGSizeMake(15, 15);
+                        cell.titleLabel.backgroundColor = Colors.colorWithHexString("#487da7")
+                        var teamCircle:CircleView = CircleView(frame: CGRectMake(25, 20, 90, 90), text: self.myTeam.numOnly,bottom: self.myTeam.letterOnly, innerColor: Colors.colorWithHexString("#3d3d3d").CGColor, rimColor: UIColor.grayColor().CGColor)
+                        cell.layer.shadowOffset = CGSizeMake(0, 10);
                         cell.layer.shadowColor = UIColor.blackColor().CGColor;
                         cell.layer.shadowRadius = 10
                         cell.layer.shadowOpacity = 0.35
@@ -533,11 +535,12 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Favorites"
-                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("BBA020")
-                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 20, 90, 90), text: " ", innerColor: UIColor.blackColor().CGColor, rimColor: UIColor.grayColor().CGColor)
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("#c6ab3b")
+                    var teamCircle:CircleView = CircleView(frame: CGRectMake(self.view.frame.width - 110, 20, 90, 90), text: " ", innerColor: Colors.colorWithHexString("#3d3d3d").CGColor, rimColor: UIColor.grayColor().CGColor)
                     var star: UIImageView = UIImageView(frame: CGRectMake(teamCircle.frame.origin.x + 5, teamCircle.frame.origin.y + 5, teamCircle.frame.width - 10, teamCircle.frame.height - 10) )
-                    star.image = UIImage(named: "UnfavoritedIcon.png")
-                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    star.image = UIImage(named: "UnfavoritedIcon.png")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                    star.tintColor = UIColor.whiteColor()
+                    cell.layer.shadowOffset = CGSizeMake(0, 10);
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
                     cell.layer.shadowOpacity = 0.35
@@ -561,8 +564,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Robot Skills"
-                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("33774C")
-                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("#448660")
+                    cell.layer.shadowOffset = CGSizeMake(0, 10)
+                    
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
                     cell.layer.shadowOpacity = 0.35
@@ -577,8 +581,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     cell.backView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.tableView.backgroundColor = Colors.colorWithHexString("F0F0F0")
                     cell.titleLabel.text = "Programming Skills"
-                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("8F423E")
-                    cell.layer.shadowOffset = CGSizeMake(15, 15);
+                    cell.titleLabel.backgroundColor = Colors.colorWithHexString("#9f5752")
+                    cell.layer.shadowOffset = CGSizeMake(0, 10)
                     cell.layer.shadowColor = UIColor.blackColor().CGColor;
                     cell.layer.shadowRadius = 10
                     cell.layer.shadowOpacity = 0.35
@@ -609,9 +613,11 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     var cell = tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
                     cell.statisticLabel.text = self.statistics[indexPath.row].stat
                     cell.valueLabel.text = self.statistics[indexPath.row].value
+                    cell.selectionStyle = .None;
                     return cell
                 case "Favorites":
                     var cell = tableView.dequeueReusableCellWithIdentifier("favTeamCell") as! TeamBookmarkCell
+                    cell.selectionStyle = .None;
                     if let team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as? String {
                         cell.teamLabel.text = team
                     }else if let compName = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Name") as? String {
@@ -621,12 +627,14 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                     return cell
                 case "Robot Skills":
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
+                    cell.selectionStyle = .None;
                     cell.rankLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team
                     cell.scoreLabel.text = "\((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score)"
                     return cell
                 case "Programming Skills":
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
+                    cell.selectionStyle = .None;
                     cell.rankLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team
                     cell.scoreLabel.text = "\((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score)"
@@ -649,7 +657,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "My Team":
                     return self.statistics.count
                 case "Favorites":
-                    return self.bookmarks.count
+                    return 3
                 case "Robot Skills":
                     return self.robotSkills.count
                 case "Programming Skills":

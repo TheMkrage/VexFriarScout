@@ -11,6 +11,10 @@ import UIKit
 class MoreViewController: UITableViewController {
     var curSeason = ""
     var selections = ["Match Calculator", "NBN Rulebook", "Team 3309B Instagram"]
+    
+    override func viewDidLoad() {
+        self.title = "More"
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = UITableViewCell()
         cell.textLabel?.text = selections[indexPath.row]

@@ -39,7 +39,7 @@ class TeamProfileViewController: HasTeamViewController,UITableViewDataSource, UI
     }
     
     override func viewWillAppear(animated: Bool) {
-         self.team.orderCompetitions()
+        self.team.orderCompetitions()
         self.competitionsTable.reloadData()
     }
     

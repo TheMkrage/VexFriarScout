@@ -32,7 +32,7 @@ class CircleView: UIView {
             self.addSubview(label)
         }
     }
-    init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor: CGColor = UIColor.blueColor().CGColor, text:String = "", font:UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 30)!, fontColor:UIColor = UIColor.whiteColor(), bottom:String = "" ) {
+    init(frame: CGRect, innerColor: CGColor = Colors.colorWithHexString("#858585").CGColor, rimColor:CGColor = Colors.colorWithHexString("#007aff").CGColor , text:String = "", font:UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 30)!, fontColor:UIColor = UIColor.whiteColor(), bottom:String = "" ) {
         super.init(frame: frame)
         bottomLabel.text = bottom
         

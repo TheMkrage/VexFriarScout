@@ -58,7 +58,7 @@ class AwardsCompetitionProfileViewController: HasCompetitionViewController, UITa
         }else {
             color = Colors.colorWithHexString("#99E699").CGColor
         }
-        cell.contentView.addSubview(CircleView(frame: CGRectMake(10, 0, 61, 61), innerColor: color, rimColor: color, text: letter, font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!))
+        cell.contentView.addSubview(CircleView(frame: CGRectMake(5, 0, 61, 61), innerColor: color, rimColor: color, text: letter, font: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!))
         cell.awardNameLabel.text = a.award
         cell.compNameLabel.text = a.team.num
         if indexPath.row % 2 == 0 {

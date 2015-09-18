@@ -53,7 +53,7 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.highestScoreLabel.center = CGPoint(x:(view.frame.width * (2/3)) + ((view.frame.width * (1/3))/2),y: self.highestScoreLabel.frame.origin.y)
+        
     }
     override func viewDidAppear(animated: Bool) {
         self.seasonPicker.hidden = true
@@ -96,19 +96,19 @@ class OverviewTeamProfileViewController: HasTeamViewController, UIPickerViewDele
         self.scrollView.layer.addSublayer(chartRect)
         // 1
         chartRect.backgroundColor = UIColor.darkGrayColor().CGColor
-        chartRect.cornerRadius = 20
+        chartRect.cornerRadius = 5
         let rightDivider = CAShapeLayer()
-        rightDivider.bounds = CGRect(x: self.view.frame.width * (2/3), y: 200, width: 5, height: 55)
+        rightDivider.bounds = CGRect(x: self.view.frame.width * (2/3), y: 200, width: 2, height: 55)
         rightDivider.position = CGPoint(x: self.view.frame.width * (2/3), y: 200)
         self.scrollView.layer.addSublayer(rightDivider)
         rightDivider.backgroundColor = UIColor.whiteColor().CGColor
-        rightDivider.cornerRadius = 5
+        rightDivider.cornerRadius = 1
         let leftDivider = CAShapeLayer()
-        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/3), y: 200, width: 5, height: 55)
+        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/3), y: 200, width: 2, height: 55)
         leftDivider.position = CGPoint(x: self.view.frame.width * (1/3), y: 200)
         self.scrollView.layer.addSublayer(leftDivider)
         leftDivider.backgroundColor = UIColor.whiteColor().CGColor
-        leftDivider.cornerRadius = 5
+        leftDivider.cornerRadius = 1
         
         let seasonDivider = CAShapeLayer()
         seasonDivider.bounds = CGRect(x: self.view.frame.width/2, y: self.rankingsLabel.frame.origin.y, width: 160, height: 3)

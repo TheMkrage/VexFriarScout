@@ -7,17 +7,7 @@
 //
 
 import UIKit
-extension Int {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)d", self) as String
-    }
-}
 
-extension Double {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
-    }
-}
 class TeamChartsViewController: HasTeamViewController {
     
     
@@ -142,9 +132,9 @@ class TeamChartsViewController: HasTeamViewController {
             var averageTitle: UILabel = UILabel()
             averageTitle.frame = CGRectMake(0, 15, self.view.frame.width, 30)
             var attrStr = NSMutableAttributedString(string: "Average, Qual Average, Elim Average", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
-            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#9C5055"), range: NSRange(location:0,length:8))
-            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#F5A120"), range: NSRange(location:19,length:16))
-            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#83D6B7"), range: NSRange(location:9,length:13))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#93648d"), range: NSRange(location:0,length:8))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#f16745"), range: NSRange(location:19,length:16))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#7bc8a4"), range: NSRange(location:9,length:13))
             averageTitle.attributedText = attrStr
             averageTitle.textAlignment = .Center
             //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
@@ -154,12 +144,11 @@ class TeamChartsViewController: HasTeamViewController {
             averageChart.animation.enabled = true
             averageChart.area = false
             averageChart.x.labels.visible = true
-            println("FDSA KISS IS COSMIC \(xAverageLabels) \(xAverageLabels.count)")
             averageChart.x.grid.count = CGFloat(xAverageLabels.count)
             averageChart.y.grid.count = 5
             averageChart.x.labels.values = xAverageLabels
             averageChart.y.labels.visible = true
-            averageChart.colors = [Colors.colorWithHexString("#83D6B7"), Colors.colorWithHexString("#F5A120"), Colors.colorWithHexString("#9C5055")]
+            averageChart.colors = [Colors.colorWithHexString("#7bc8a4"), Colors.colorWithHexString("#f16745"), Colors.colorWithHexString("#93648d")]
             averageChart.addLine(averageQualsData)
             averageChart.addLine(averageElimsData)
             averageChart.addLine(averageData)
@@ -174,9 +163,9 @@ class TeamChartsViewController: HasTeamViewController {
             var statTitle: UILabel = UILabel()
             statTitle.frame = CGRectMake(0, 265, self.view.frame.width, 30)
             var statAttrStr = NSMutableAttributedString(string: "OPR, DPR, CCWM", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 18.0)!])
-            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#5889DB"), range: NSRange(location:0,length:5))
-            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#ff00ff"), range: NSRange(location:5,length:6))
-            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#FF7373"), range: NSRange(location:9,length:5))
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#ffc65d"), range: NSRange(location:0,length:5))
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#4cc3d9"), range: NSRange(location:5,length:6))
+            statAttrStr.addAttribute(NSForegroundColorAttributeName, value: Colors.colorWithHexString("#404040"), range: NSRange(location:9,length:5))
             statTitle.attributedText = statAttrStr
             statTitle.textAlignment = .Center
             //averageTitle.center = CGPoint(x: self.view.center.x, y: 50)
@@ -191,7 +180,7 @@ class TeamChartsViewController: HasTeamViewController {
             println( oprDprCcwmChart.y.grid.count)
             oprDprCcwmChart.x.labels.values = xStatsLabels
             oprDprCcwmChart.y.labels.visible = true
-            oprDprCcwmChart.colors = [Colors.colorWithHexString("#5889DB"),Colors.colorWithHexString("#ff00ff"), Colors.colorWithHexString("#FF7373")]
+            oprDprCcwmChart.colors = [Colors.colorWithHexString("#ffc65d"),Colors.colorWithHexString("#4cc3d9"), Colors.colorWithHexString("#404040")]
             oprDprCcwmChart.addLine(oprData)
             oprDprCcwmChart.addLine(dprData)
             oprDprCcwmChart.addLine(ccwmData)
@@ -201,21 +190,21 @@ class TeamChartsViewController: HasTeamViewController {
             oprLabel.frame = CGRectMake(0, 500, self.view.frame.width, 30)
             oprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
             oprLabel.text = "OPR: Max: \(Double(maxOPR).format(roundingString)) Avg: \(Double(avgOPR).format(roundingString))"
-            oprLabel.textColor = Colors.colorWithHexString("#5889DB")
+            oprLabel.textColor = Colors.colorWithHexString("#ffc65d")
             oprLabel.textAlignment = .Center
             self.scrollView.addSubview(oprLabel)
             var dprLabel: UILabel = UILabel()
             dprLabel.frame = CGRectMake(0, 530, self.view.frame.width, 30)
             dprLabel.font = UIFont(name: "HelveticaNeue", size: 18)
             dprLabel.text = "DPR: Max: \(Double(maxDPR).format(roundingString)) Avg: \(Double(avgDPR).format(roundingString))"
-            dprLabel.textColor = Colors.colorWithHexString("#ff00ff")
+            dprLabel.textColor = Colors.colorWithHexString("#4cc3d9")
             dprLabel.textAlignment = .Center
             self.scrollView.addSubview(dprLabel)
             var ccwmLabel: UILabel = UILabel()
             ccwmLabel.frame = CGRectMake(0, 560, self.view.frame.width, 30)
             ccwmLabel.font = UIFont(name: "HelveticaNeue", size: 18)
             ccwmLabel.text = "CCWM: Max: \(Double(maxCCWM).format(roundingString)) Avg: \(Double(avgCCWM).format(roundingString))"
-            ccwmLabel.textColor = Colors.colorWithHexString("#FF7373")
+            ccwmLabel.textColor = Colors.colorWithHexString("#404040")
             ccwmLabel.textAlignment = .Center
             self.scrollView.addSubview(ccwmLabel)
             self.scrollView.addSubview(oprDprCcwmChart)

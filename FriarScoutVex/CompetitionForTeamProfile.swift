@@ -53,25 +53,25 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
         chartRect.cornerRadius = 5
         
         let leftDivider = CAShapeLayer()
-        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/4), y: 172, width: 5, height: 55)
+        leftDivider.bounds = CGRect(x: self.view.frame.width * (1/4), y: 172, width: 2, height: 55)
         leftDivider.position = CGPoint(x: self.view.frame.width * (1/4), y: 172)
         self.view.layer.addSublayer(leftDivider)
         leftDivider.backgroundColor = UIColor.whiteColor().CGColor
-        leftDivider.cornerRadius = 5
+        leftDivider.cornerRadius = 1
         
         let rightDivider = CAShapeLayer()
-        rightDivider.bounds = CGRect(x: self.view.frame.width * (3/4), y: 172, width: 5, height: 55)
+        rightDivider.bounds = CGRect(x: self.view.frame.width * (3/4), y: 172, width: 2, height: 55)
         rightDivider.position = CGPoint(x: self.view.frame.width * (3/4), y: 172)
         self.view.layer.addSublayer(rightDivider)
         rightDivider.backgroundColor = UIColor.whiteColor().CGColor
-        rightDivider.cornerRadius = 5
+        rightDivider.cornerRadius = 1
 
         let midDivider = CAShapeLayer()
-        midDivider.bounds = CGRect(x: self.view.frame.width * (2/4), y: 172, width: 5, height: 55)
+        midDivider.bounds = CGRect(x: self.view.frame.width * (2/4), y: 172, width: 2, height: 55)
         midDivider.position = CGPoint(x: self.view.frame.width * (2/4), y: 172)
         self.view.layer.addSublayer(midDivider)
         midDivider.backgroundColor = UIColor.whiteColor().CGColor
-        midDivider.cornerRadius = 5
+        midDivider.cornerRadius = 1
         
         self.matchesTable.dataSource = self
         self.matchesTable.delegate = self

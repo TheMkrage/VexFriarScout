@@ -16,9 +16,10 @@ class MainMenuTableCell: UITableViewCell {
     @IBOutlet var nothingLabel: UILabel!
     func setUp() {
         self.backView.layer.masksToBounds = true
-        self.backView.layer.cornerRadius = 20
-        self.titleLabel.layer.cornerRadius = 20
+        self.backView.layer.cornerRadius = 10
+        self.titleLabel.layer.cornerRadius = 10
         self.titleLabel.layer.masksToBounds = true
+        self.tableView.scrollEnabled = false
         self.layoutSubviews()
         
     }

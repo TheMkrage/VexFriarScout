@@ -9,6 +9,18 @@
 import UIKit
 import Parse
 
+extension Int {
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)d", self) as String
+    }
+}
+
+extension Double {
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)f", self) as String
+    }
+}
+
 class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var predict: UIButton!
     @IBOutlet var blueTeam1TextField: UITextField!
@@ -40,6 +52,16 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func predictOut(sender: AnyObject) {
+        println("BEGAN CALC")
+        self.statsArray = []
+        self.teams = []
+        self.done = 0
+        self.blueOPRSum = 0.0
+        self.blueDPRSum = 0.0
+        self.redOPRSum = 0.0
+        self.redDPRSum = 0.0
+        self.totalDPR = 0.0
+        self.totalOPR = 0.0
         var blueTeam1 = Team()
         blueTeam1.num = self.blueTeam1TextField.text
         var blueTeam2 = Team()
@@ -51,9 +73,11 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
         self.teams = [blueTeam1, blueTeam2, redTeam1, redTeam2]
         for curTeam in self.teams {
             var query = PFQuery(className:"Teams")
-            query.whereKey("num", equalTo:curTeam.num)
+            println(curTeam.num.uppercaseString)
+            query.whereKey("num", equalTo:curTeam.num.uppercaseString)
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
+                println("beginning loaded team section")
                 if objects?.count == 0 {
                     // Alert the user and bring them back to the main menu
                     let alertController = UIAlertController(title: "Oh Dear!", message:
@@ -66,20 +90,27 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 if let newTeam: AnyObject = objects?[0] {
+                    println("THERE IS A RESULTS")
                     // Find and set simple values
                     var stats = newTeam["stats"] as! NSMutableArray
+                    
                     var query = PFQuery(className:"Competitions")
                     query.whereKey("season", equalTo: self.curSeason)
-                    query.whereKey("teams", equalTo: curTeam)
+                    println(curTeam.num)
+                    query.whereKey("teams", equalTo: curTeam.num.uppercaseString)
                     query.findObjectsInBackgroundWithBlock({ (results:[AnyObject]?, error:NSError?) -> Void in
+                        println(stats)
+                        //println(results)
                         if let x = results as? [PFObject] {
+                            println("COMP IS RESULTS")
                             for result in x {
                                 var comp: Competition = Competition()
                                 var compID = result.objectId!
-                             
+                                //println(stats)
                                 for str in stats {
                                     // right string with stats
-                                    if (str as! NSString).containsString(comp.compID) {
+                                    println("cur\(str)")
+                                    if (str as! NSString).containsString(compID) {
                                         println(str)
                                         var array: [String] = split(str as! String) {$0 == "+"}
                                         println(array)
@@ -93,15 +124,23 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
                                         if array[3] as NSString? != nil {
                                             comp.ccwm = CGFloat((array[3] as NSString).floatValue)
                                         }
+                                        println("adding \(array)")
                                         curTeam.statArray.addObject(array)
                                     }
                                 }
                             }
                         }
+                        self.done++
+                        println("done2:\(self.done)")
+                        if self.done == 8 {
+                            self.updateLabels()
+                        }
+
                     })
                 }
-            self.done++
-                if self.done == 4 {
+                self.done++
+                println("done2:\(self.done)")
+                if self.done == 8 {
                     self.updateLabels()
                 }
             }
@@ -113,12 +152,26 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
             var team = self.teams[i]
             var avgOPR = 0.0
             var avgDPR = 0.0
+            println(team.statArray)
             for curArr in (team.statArray) {
+                println(curArr[1].doubleValue)
                 avgOPR = avgOPR + curArr[1].doubleValue
                 avgDPR = avgDPR + curArr[2].doubleValue
             }
-            avgOPR /= Double(team.statArray.count)
-            avgDPR /= Double(team.statArray.count)
+            if team.statArray.count != 0 {
+                avgOPR /= Double(team.statArray.count)
+                avgDPR /= Double(team.statArray.count)
+            }else {
+                avgOPR = 0
+                avgDPR = 0
+                let alertController = UIAlertController(title: "Oh Dear!", message:
+                    "A team that you listed has not competed yet! For now, most of their stats will be 0.  This will affect predictions...", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Oh, Ok...", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion:  { () -> Void in
+                })
+
+            }
             if i == 0 || i == 1 {
                 self.blueDPRSum += avgDPR
                 self.blueOPRSum += avgOPR
@@ -130,9 +183,13 @@ class MatchCalculatorViewController: UIViewController, UITextFieldDelegate {
             self.totalDPR += avgOPR
             
         }
+        
         var totalOffset = (self.redOPRSum - self.blueDPRSum) + (self.blueOPRSum - self.redDPRSum)
-        self.bluePercent.text = "\((self.blueOPRSum - self.redDPRSum)/totalOffset)"
-        self.redPercent.text = "\((self.redOPRSum - self.blueDPRSum)/totalOffset)"
+        println("HELLSFDAF")
+        var bluePercent1 = Double(((self.blueOPRSum - self.redDPRSum)/totalOffset) * 100).format("3.2")
+        var redPercent1 = Double(((self.redOPRSum - self.blueDPRSum)/totalOffset) * 100).format("3.2")
+        self.bluePercent.text = "\(bluePercent1)%"
+        self.redPercent.text = "\(redPercent1)%"
         
     }
     

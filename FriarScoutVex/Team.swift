@@ -92,7 +92,7 @@ class Team: NSObject {
     var matches:NSMutableArray! = NSMutableArray()
     var statArray: NSMutableArray = NSMutableArray()
     
-    var wp: NSInteger = 0
+    var wp: NSInteger = 0 
     
     static func loadTeam(var team:Team) -> Team? {
         var query = PFQuery(className:"Teams")
