@@ -8,6 +8,6 @@
 
 import UIKit
 
-class CompetitionFinderViewController: UIViewController {
-    
+class CompetitionFinderViewController: UITableViewController {
+
 }
