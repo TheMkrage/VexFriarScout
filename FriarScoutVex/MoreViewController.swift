@@ -10,7 +10,7 @@ import UIKit
 
 class MoreViewController: UITableViewController {
     var curSeason = ""
-    var selections = ["Match Calculator", "NBN Rulebook", "Team 3309B Instagram"]
+    var selections = ["Match Calculator", "Competition Finder", "NBN Rulebook", "Team 3309B Instagram"]
     
     override func viewDidLoad() {
         self.title = "More"
@@ -35,6 +35,10 @@ class MoreViewController: UITableViewController {
             var vc: MatchCalculatorViewController = self.navigationController?.viewControllers[0].storyboard?!.instantiateViewControllerWithIdentifier("MatchCalculator") as! MatchCalculatorViewController
             vc.curSeason = self.curSeason
             self.showViewController(vc, sender: self)
+        case "Competition Finder" :
+            var vc: CompetitionFinderViewController = self.navigationController?.viewControllers[0].storyboard?!.instantiateViewControllerWithIdentifier("CompetitionFinder") as! CompetitionFinderViewController
+            vc.curSeason = self.curSEason
+
         case "NBN Rulebook" :
             var link:NSURL = NSURL(string: "http://content.vexrobotics.com/docs/vrc-nothing-but-net/VRC-Nothing-But-Net-Game-Manual-20150612.pdf")!
             if UIApplication.sharedApplication().canOpenURL(link) {

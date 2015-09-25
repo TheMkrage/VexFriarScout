@@ -608,9 +608,12 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 }
                 // PUT SEARCH RESULTS ROW HERE
             }else if let title:String = (tableView.superview?.superview?.superview as! MainMenuTableCell).titleLabel.text {
+                var col = Colors.colorWithHexString("#979797")
                 switch title {
                 case "My Team":
                     var cell = tableView.dequeueReusableCellWithIdentifier("statCell") as! StatisticsTableCell
+                    cell.statisticLabel.textColor = col
+                    cell.valueLabel.textColor = col
                     cell.statisticLabel.text = self.statistics[indexPath.row].stat
                     cell.valueLabel.text = self.statistics[indexPath.row].value
                     cell.selectionStyle = .None;
@@ -618,6 +621,8 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "Favorites":
                     var cell = tableView.dequeueReusableCellWithIdentifier("favTeamCell") as! TeamBookmarkCell
                     cell.selectionStyle = .None;
+                    cell.teamLabel.textColor = col
+                    cell.seasonLabel.textColor = col
                     if let team = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Num") as? String {
                         cell.teamLabel.text = team
                     }else if let compName = (self.bookmarks.objectAtIndex(indexPath.row) as! NSDictionary).objectForKey("Name") as? String {
@@ -628,6 +633,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "Robot Skills":
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.selectionStyle = .None;
+                    cell.rankLabel.textColor = col
+                    cell.teamLabel.textColor = col
+                    cell.scoreLabel.textColor = col
                     cell.rankLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.robotSkills.objectAtIndex(indexPath.row) as! Skills).team
                     cell.scoreLabel.text = "\((self.robotSkills.objectAtIndex(indexPath.row) as! Skills).score)"
@@ -635,6 +643,9 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "Programming Skills":
                     var cell = tableView.dequeueReusableCellWithIdentifier("skillsCell") as! SkillsCell
                     cell.selectionStyle = .None;
+                    cell.rankLabel.textColor = col
+                    cell.teamLabel.textColor = col
+                    cell.scoreLabel.textColor = col
                     cell.rankLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).rank
                     cell.teamLabel.text = (self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).team
                     cell.scoreLabel.text = "\((self.programmingSkills.objectAtIndex(indexPath.row) as! Skills).score)"
@@ -657,7 +668,10 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
                 case "My Team":
                     return self.statistics.count
                 case "Favorites":
-                    return 3
+                    if self.bookmarks.count > 3 {
+                        return 3
+                    }
+                    return self.bookmarks.count
                 case "Robot Skills":
                     return self.robotSkills.count
                 case "Programming Skills":
