@@ -37,8 +37,9 @@ class MoreViewController: UITableViewController {
             self.showViewController(vc, sender: self)
         case "Competition Finder" :
             var vc: CompetitionFinderViewController = self.navigationController?.viewControllers[0].storyboard?!.instantiateViewControllerWithIdentifier("CompetitionFinder") as! CompetitionFinderViewController
-            vc.curSeason = self.curSEason
-
+            vc.curSeason = self.curSeason
+            vc.title = "Competition Finder"
+            self.showViewController(vc, sender: self)
         case "NBN Rulebook" :
             var link:NSURL = NSURL(string: "http://content.vexrobotics.com/docs/vrc-nothing-but-net/VRC-Nothing-But-Net-Game-Manual-20150612.pdf")!
             if UIApplication.sharedApplication().canOpenURL(link) {

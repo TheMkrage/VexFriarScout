@@ -31,6 +31,7 @@ class CompetitionForTeamProfile: UIViewController, UITableViewDelegate, UITableV
     
     
     func alert(header:String!, withMemo memo:String!, withButtonText buttonText:String!) {
+        
         let alertController = UIAlertController(title: header, message:
             memo, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.Default,handler: nil))

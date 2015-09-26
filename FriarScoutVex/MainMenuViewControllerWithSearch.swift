@@ -418,7 +418,7 @@ class MainMenuViewControllerWithSearch: UIViewController, UITableViewDelegate, U
     
     func moveToFavorites() {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("fav") as! UITabBarController
-        vc.title = "Favorite"
+        vc.title = "Favorites"
         // Destintation ViewController, set season
         let dest: TeamBookmarksViewController = vc.viewControllers?.first as! TeamBookmarksViewController
         dest.title = "Team Favorites"
